@@ -70,14 +70,13 @@ body {
 .main-nav__item--cta--orange a {
 	color: white;
 	background: #F37324;
-	padding: 0.5rem 2rem;
+	padding: 0.4rem 1.5rem;
 	border-radius: 8px;
 }
 
 .main-nav__item--cta--orange a:hover {
 	color: #F37324;
 	background: white;
-	padding: 0.5rem 2rem;
 	border-radius: 8px;
 	border: 2px solid #F37324;
 	font-family: 'minimal_b', sans-serif;
@@ -85,7 +84,7 @@ body {
 
 .main-nav__item--cta--white a {
 	background: white;
-	padding: 0.5rem 1.5rem;
+	padding: 0.4rem 1.5rem;
 	border-radius: 8px;
 	border: 1px solid #F37324;
 	color: #F37324;

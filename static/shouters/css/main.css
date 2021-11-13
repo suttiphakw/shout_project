@@ -1,0 +1,123 @@
+/*------------------------ Font ------------------------*/
+@font-face {
+    src: url("../../src/fonts/FC Minimal Regular.ttf");
+    font-family: 'minimal';
+}
+
+@font-face {
+    src: url("../../src/fonts/FC Minimal Bold.ttf");
+    font-family: 'minimal_b';
+}
+
+/*------------------------ Main ------------------------*/
+html {
+	font-size: 20px;
+}
+
+body {
+	font-family: 'minimal', sans-serif;
+    color: #002257;
+}
+
+footer {
+    background: #2C2C2C;
+}
+
+footer img {
+    padding: 2rem;
+    width: 100vw;
+}
+
+.text-small {
+    font-size: 0.7rem;
+}
+
+.minimal-bold {
+    font-family: 'minimal_b', sans-serif;
+}
+
+.gradient-color {
+    background: -webkit-linear-gradient(180deg, #792D67 0%, #362156 100%);
+	-webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;
+}
+
+h1 {
+    font-size: 2.2rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+}
+
+h4 {
+    font-size: 1.2rem;
+}
+
+h5 {
+    font-size: 1.1rem;
+}
+
+.pl-2 {
+    padding-left: 2rem;
+}
+
+.text-violet {
+    color: #58285F;
+}
+
+.padding-1 {
+    padding: 0 2rem;
+}
+
+.primary-section {
+    padding: 2rem 0;
+}
+
+.secondary-section {
+    background: #F8F0F6;
+    padding: 2rem 0;
+}
+
+.violet-section {
+    background: #58285F;
+    padding: 2rem 0;
+}
+
+.main-header img {
+    height: 3rem;
+}
+
+.uvp-img img {
+    width: 100vw;
+}
+
+#padding-0 {
+    padding: 0;
+    padding-top: 3rem;
+}
+
+.line-button > a {
+    padding: 0.6rem 5rem;
+    color: white;
+    background: #00B900;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.line-button > p {
+    padding-top: 0.5rem;
+}
+
+.information img {
+    width: 100vw;
+    padding: 0 2rem;
+}
+
+nav img {
+    height: 3rem;
+}
+
+.offset-margin {
+    padding-top: 3rem;
+}
