@@ -33,7 +33,7 @@
                     <a href="#contact-us">Contact us</a>
                 </li>
                 <li class="main-nav__item main-nav__item--cta--white">
-                    <a href="#">เข้าสู่ระบบ</a>
+                    <a href="{% url 'login' %}">เข้าสู่ระบบ</a>
                 </li>
                 <li class="main-nav__item main-nav__item--cta--orange">
                     <a href="#">เริ่มเลย</a>
@@ -54,7 +54,7 @@
 					<a class="website-uvp__sub__extra" href="#">ดูเพิ่มเติม</a>
 				</div>
                 <p class="website-uvp__sub__shouter__top">ติดต่อเรา 087-560-4935 / contact@shoutsolution.com</p>
-                <p class="website-uvp__sub__shouter__bottom">หรือสนใจมาร่วมเป็น Shouter (ผู้บอกต่อ) กับเรา? <a href="">สมัครที่นี่</a></p>
+                <p class="website-uvp__sub__shouter__bottom">หรือสนใจมาร่วมเป็น Shouter (ผู้บอกต่อ) กับเรา? <a href="{% url 'landing-page' %}">สมัครที่นี่</a></p>
 			</div>
 			<div class="website-uvp__main__right">
                 <img src="{% static 'pages/images/UVP.png' %}" alt="">
