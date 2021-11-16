@@ -1,0 +1,265 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{% static 'src/logoV2/Shout_Logov2-07.png' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'shouters/css/main.css' %}">
+    <title>Shout | Register</title>
+</head>
+<body>
+    <section class="violet-background minimal-bold text-white padding-all-1 text-center">
+        <h5 class="mb-0"><span>&#128582;&#127995;</span> สมัครเป็น shouter กับเราง่ายๆแล้วรอรับงานได้เลย</h5>
+    </section>
+    <section class="img-width-100vw">
+        <img src="{% static 'shouters/images/Frame 3863.png' %}" alt="">
+    </section>
+    <section>
+        <div class="text-center pt-4 pb-2">
+            <h5 class="minimal-bold">โปรดกรอกข้อมูลส่วนตัวของคุณ</h5>
+            <p>* ข้อมูลนี้จะตรวจสอบเพื่อทำการอนุมัติ</p>
+        </div>
+        <div class="temp-photo">
+
+        </div>
+        <div class="container">
+            <form class="pt-2" action="">
+                <div class="row">
+
+                    <!-- Nickname -->
+                    <div class="col-sm-4 mb-2">
+                        <label for="nickname">ชื่อเล่น *</label>
+                        <input class="form-control" type="text" id="nickname" name="nickname" placeholder="Your nickname">
+                    </div>
+
+                    <!-- Fullname -->
+                    <div class="col-sm-4 mb-2">
+                        <label for="first_name">ชื่อจริง *</label>
+                        <input class="form-control" type="text" id="first_name" name="first_name" placeholder="Your firstname">
+                    </div>
+
+                    <!-- Fullname -->
+                    <div class="col-sm-4 mb-2">
+                        <label for="last_name">นามสกุล *</label>
+                        <input class="form-control" type="text" id="last_name" name="last_name" placeholder="Your lastname">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="col-sm-6 mb-2">
+                        <label for="email">Email ติดต่อ *</label>
+                        <input class="form-control" type="email" id="email" name="email" placeholder="shouter@shoutsolution.com">
+                    </div>
+
+                    <!-- Tel -->
+                    <div class="col-sm-6 mb-2">
+                        <label for="tel">เบอร์โทรติดต่อ *</label>
+                        <input class="form-control" type="tel" id="tel" name="tel" placeholder="000-000-0000">
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="col-sm-6 col-lg-4 mb-2">
+                        <p class="mb-0">เพศ *</p>
+                        <div class="row">
+                            <div class="col-3">
+                                <input class="form-check-input" type="radio" id="female" name="gender">
+                                <label class="form-check-label" for="female">หญิง</label>
+                            </div>
+                            <div class="col-3">
+                                <input class="form-check-input" type="radio" id="male" name="gender">
+                                <label class="form-check-label" for="female">ชาย</label>
+                            </div>
+                            <div class="col-6">
+                                <input class="form-check-input" type="radio" id="exist" name="gender">
+                                <label class="form-check-label" for="exist">เพศทางเลือก</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Birthday -->
+                    <div class="col-sm-6 col-lg-4 mb-2">
+                        <p class="mb-0">วัน/เดือน/ปี เกิด *</p>
+                        <div class="row">
+                            <div class="col-3 pr-05">
+                                <select class="pl-1 pr-1" name="birthday_date" id="birthday_date">
+                                    <option selected disabled>day</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="1">15</option>
+                                    <option value="1">16</option>
+                                    <option value="1">17</option>
+                                    <option value="1">18</option>
+                                    <option value="1">19</option>
+                                    <option value="1">20</option>
+                                    <option value="1">21</option>
+                                    <option value="1">22</option>
+                                    <option value="1">23</option>
+                                    <option value="1">24</option>
+                                    <option value="1">25</option>
+                                    <option value="1">26</option>
+                                    <option value="1">27</option>
+                                    <option value="1">28</option>
+                                    <option value="1">29</option>
+                                    <option value="1">30</option>
+                                    <option value="1">31</option>
+                                </select>
+                            </div>
+                            <div class="col-5 pl-05 pr-05">
+                                <select class="pl-2 pr-1" name="birthday_month" id="birthday_month">
+                                    <option selected disabled>month</option>
+                                    <option value="jan">January</option>
+                                    <option value="feb">February</option>
+                                    <option value="mar">March</option>
+                                    <option value="apr">April</option>
+                                    <option value="may">May</option>
+                                    <option value="jun">June</option>
+                                    <option value="jul">July</option>
+                                    <option value="aug">August</option>
+                                    <option value="sep">September</option>
+                                    <option value="oct">October</option>
+                                    <option value="nov">November</option>
+                                    <option value="dec">December</option>
+                                </select>
+                            </div>
+                            <div class="col-3 pl-0">
+                                <select class="pl-1 pr-1" name="birthday_year" id="birthday_year">
+                                    <option selected disabled>year</option>
+                                    <option value="1">1981</option>
+                                    <option value="2">1982</option>
+                                    <option value="3">1983</option>
+                                    <option value="4">1984</option>
+                                    <option value="5">1985</option>
+                                    <option value="6">1986</option>
+                                    <option value="7">1987</option>
+                                    <option value="8">1988</option>
+                                    <option value="9">1989</option>
+                                    <option value="10">1990</option>
+                                    <option value="11">1991</option>
+                                    <option value="12">1992</option>
+                                    <option value="13">1993</option>
+                                    <option value="14">1994</option>
+                                    <option value="1">1995</option>
+                                    <option value="1">1996</option>
+                                    <option value="1">1997</option>
+                                    <option value="1">1998</option>
+                                    <option value="1">1999</option>
+                                    <option value="1">2000</option>
+                                    <option value="1">2001</option>
+                                    <option value="1">2002</option>
+                                    <option value="1">2003</option>
+                                    <option value="1">2004</option>
+                                    <option value="1">2005</option>
+                                    <option value="1">2006</option>
+                                    <option value="1">2007</option>
+                                    <option value="1">2008</option>
+                                    <option value="1">2009</option>
+                                    <option value="1">2010</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="col-sm-6 col-lg-4 mb-4">
+                        <p class="mb-0">ที่อาศัยปัจจุบัน *</p>
+                            <select class="pl-3 pr-3" name="province" id="province">
+                                    <option selected disabled>เลือกจังหวัด</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="1">15</option>
+                                    <option value="1">16</option>
+                                    <option value="1">17</option>
+                                    <option value="1">18</option>
+                                    <option value="1">19</option>
+                                </select>
+                    </div>
+
+                    <hr>
+
+                    <!-- Education -->
+                    <div class="col-sm-6 col-lg-4 mb-4">
+                        <p class="mb-0">การศึกษาล่าสุด หรือ กำลังศึกษา *</p>
+                            <select class="education-dropdown" name="province" id="province">
+                                    <option selected disabled>เลือกระดับการศึกษา</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="1">15</option>
+                                    <option value="1">16</option>
+                                    <option value="1">17</option>
+                                    <option value="1">18</option>
+                                    <option value="1">19</option>
+                                </select>
+                    </div>
+
+                    <!-- College -->
+                    <div class="col-sm-6 col-lg-4 mb-4">
+                        <label for="college">สถานศึกษาล่าสุด *</label>
+                        <input class="form-control" type="text" id="college" name="college" placeholder="ระบุสถานศึกษา">
+                    </div>
+
+                    <hr>
+
+                    <!-- Interest -->
+
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+    </section>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+</body>
+</html>
