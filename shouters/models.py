@@ -29,37 +29,37 @@ class Shouter(models.Model):
     line_profile_picture = models.CharField(max_length=200)
 
     # # Facebook
-    fb_access_token = models.CharField(max_length=500)
+    fb_access_token = models.CharField(max_length=500, null=True, blank=True)
     fb_access_token_created = models.DateTimeField(default=now)
-    fb_page_id = models.CharField(max_length=120)
+    fb_page_id = models.CharField(max_length=120, null=True, blank=True)
     #
     # # Instagram
-    ig_business_account_id = models.CharField(max_length=120)
-    ig_username = models.CharField(max_length=120)
-    ig_follower_count = models.IntegerField()
-    ig_active_follower = models.IntegerField()
-    ig_active_follower_harmonic = models.IntegerField()
-    ig_estimated_reach = models.IntegerField()
+    ig_business_account_id = models.CharField(max_length=120, null=True, blank=True)
+    ig_username = models.CharField(max_length=120, null=True, blank=True)
+    ig_follower_count = models.IntegerField(null=True, blank=True)
+    ig_active_follower = models.IntegerField(null=True, blank=True)
+    ig_active_follower_harmonic = models.IntegerField(null=True, blank=True)
+    ig_estimated_reach = models.IntegerField(null=True, blank=True)
     # ig_profile_picture
     # ig_post_permalink
-    ig_total_like = models.IntegerField()
-    ig_average_total_like = models.IntegerField()
-    ig_like_engagement = models.IntegerField()
+    ig_total_like = models.IntegerField(null=True, blank=True)
+    ig_average_total_like = models.IntegerField(null=True, blank=True)
+    ig_like_engagement = models.IntegerField(null=True, blank=True)
     #
     # # Insight
-    ig_insight = models.JSONField()
-    ig_max_total_people = models.IntegerField()
-    ig_two_most_common_city = models.JSONField()
-    ig_two_most_common_country = models.JSONField()
-    ig_two_most_common_gender_age = models.JSONField()
-    ig_audience_male_percent = models.FloatField()
-    ig_audience_female_percent = models.FloatField()
-    ig_age_range_13_17 = models.FloatField()
-    ig_age_range_18_24 = models.FloatField()
-    ig_age_range_25_34 = models.FloatField()
-    ig_age_range_35_44 = models.FloatField()
-    ig_age_range_45_54 = models.FloatField()
-    ig_age_range_55_64 = models.FloatField()
+    ig_insight = models.JSONField(null=True, blank=True)
+    ig_max_total_people = models.IntegerField(null=True, blank=True)
+    ig_two_most_common_city = models.JSONField(null=True, blank=True)
+    ig_two_most_common_country = models.JSONField(null=True, blank=True)
+    ig_two_most_common_gender_age = models.JSONField(null=True, blank=True)
+    ig_audience_male_percent = models.FloatField(null=True, blank=True)
+    ig_audience_female_percent = models.FloatField(null=True, blank=True)
+    ig_age_range_13_17 = models.FloatField(null=True, blank=True)
+    ig_age_range_18_24 = models.FloatField(null=True, blank=True)
+    ig_age_range_25_34 = models.FloatField(null=True, blank=True)
+    ig_age_range_35_44 = models.FloatField(null=True, blank=True)
+    ig_age_range_45_54 = models.FloatField(null=True, blank=True)
+    ig_age_range_55_64 = models.FloatField(null=True, blank=True)
 
     #
     # # Dashboard

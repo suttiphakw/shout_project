@@ -7,3 +7,5 @@ def index(request):
 def privacy_policy(request):
     return render(request, 'pages/privacy_policy.html')
 
+def dev(request):
+    return render(request, 'pages/on_dev.html')

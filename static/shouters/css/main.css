@@ -54,6 +54,10 @@ h2 {
     font-size: 1.8rem;
 }
 
+h3 {
+    font-size: 1.5rem;
+}
+
 h4 {
     font-size: 1.2rem;
 }
@@ -66,7 +70,18 @@ h5 {
     color: #58285F;
 }
 
+.text-violet-bright {
+    color: #801B69;
+}
 
+.register-photo img {
+    height: 10rem;
+}
+
+.rectangle-blue-background {
+    background: rgba(77, 130, 243, 0.1);
+    padding: 1rem;
+}
 
 .ml-05 {
     margin-left: 0.5rem;
@@ -167,8 +182,7 @@ h5 {
 }
 
 #padding-0 {
-    padding: 0;
-    padding-top: 3rem;
+    padding: 3rem 0 0;
 }
 
 .line-button > a {
@@ -213,6 +227,98 @@ nav img {
     padding:0.5rem 6rem;
     text-align: left;
 }
+
+/*.interest-body {*/
+/*    display: flex;*/
+/*}*/
+
+.interest-body input[type='radio'] {
+    -webkit-appearance: none;
+}
+
+.interest-body label {
+    position: relative;
+    margin: auto auto 0.5rem;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    border: 1px solid #E9EBF1 ;
+}
+
+.interest-body input[type='radio']:checked + label {
+    background: #F8F0F6;
+    border: 1px solid #C382B4;
+}
+
+.contain-submit-button {
+    margin: 2rem 0;
+}
+
+.submit-button {
+    padding: 0.8rem 6rem;
+    background: #F37324;
+    color: white;
+    border-radius: 8px;
+    border: 0;
+    text-decoration: none;
+    margin-bottom: 1rem;
+}
+
+.contain-next-button {
+    margin: 2rem 0;
+
+}
+
+.next-button {
+    padding: 1rem 6rem;
+    background: white;
+    color: #801B69;
+    border-radius: 8px;
+    border: 0;
+    box-shadow: 0 3px 6px rgba(80, 53, 89, 0.1);
+    text-decoration: none;
+    font-family: minimal_b, sans-serif;
+}
+
+.next-button-2 {
+    padding: 1rem 2rem;
+    background: white;
+    color: #801B69;
+    border-radius: 8px;
+    border: 0;
+    box-shadow: 0 3px 6px rgba(80, 53, 89, 0.1);
+    text-decoration: none;
+    font-family: minimal_b, sans-serif;
+}
+
+/* ---------------------------------------------------------- */
+/*.select {*/
+/*  display: grid;*/
+/*  grid-template-columns: repeat(3, 1fr);*/
+/*  gap: 5px;*/
+/*}*/
+
+.select {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.select__item {
+  padding: 10px;
+    margin: 5px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 8px;
+  background: white;
+  transition: background 0.1s;
+    border: 1px solid #E9EBF1;
+}
+
+.select__item--selected {
+  background: #F8F0F6;
+    border: 1px solid #C382B4;
+}
+/* ---------------------------------------------------------- */
 
 @media screen and (min-width: 700px){
     .img-width-100vw img {

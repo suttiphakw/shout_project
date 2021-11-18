@@ -17,7 +17,7 @@ class LineAPI:
     line_url = 'https://access.line.me/oauth2/v2.1/authorize'
     line_client_id = settings.LINE_CLIENT_ID
     line_client_secret = settings.LINE_CLIENT_SECRET
-    line_redirect_uri = settings.TEMP_HOST + 'shouters/Oauth/'
+    line_redirect_uri = settings.TEMP_HOST + 'shouters/oauth/'
     line_response_type = 'code'
     line_scope = 'profile%20openid'
 
@@ -159,7 +159,7 @@ class FacebookAPI:
                                                    })
                 like_count = get_json(response=response_like_count, param='like_count')
                 total_likes += like_count
-        else:
+        elif len(media_objects) != 0:
             for item in media_objects[0:len(media_objects)]:
                 item_detail_url = self.basic_url + item['id']
                 response_like_count = requests.get(item_detail_url,

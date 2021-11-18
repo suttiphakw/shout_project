@@ -1,6 +1,8 @@
 import json
 import requests
 
+# from rest_framework_simplejwt.tokens import RefreshToken
+
 from django.utils.timezone import now
 from django.shortcuts import render, redirect, HttpResponse
 from django.middleware.csrf import get_token
@@ -8,75 +10,102 @@ from django.middleware.csrf import get_token
 from shouters.utils import LineAPI, FacebookAPI
 from shouters.models import Shouter
 # from orders.models import Order
+from shouters.lists import thailand_province
 
 # Create your views here.
 
 def landing_page(request):
     return render(request, 'shouters/landing.html')
 
+def register_info_1(request):
+    return render(request, 'shouters/regis-info-1.html')
+
+def register_info_2(request, _id):
+    context = {
+        'id': _id
+    }
+    return render(request, 'shouters/regis-info-2.html', context)
+
+def register_info_3(request, _id):
+    context = {
+        'id': _id
+    }
+    return render(request, 'shouters/regis-info-3.html', context)
+
+def register_info_4(request, _id):
+    context = {
+        'id': _id
+    }
+    return render(request, 'shouters/regis-info-4.html', context)
+
+def register_info_5(request, _id):
+    context = {
+        'id': _id
+    }
+    return render(request, 'shouters/regis-info-5.html', context)
+
+def register_info_6(request, _id):
+    context = {
+        'id': _id
+    }
+    return render(request, 'shouters/regis-info-6.html', context)
+
 def register(request, _id):
-    qs = Shouter.objects.filter(id=_id)
-    if request.method == 'POST':
+    context = {
+        'id': _id,
+        'objs': thailand_province(),
+    }
+
+    if Shouter.objects.filter(id=_id).exists():
+        shouter = Shouter.objects.filter(id=_id).first()
+        if shouter.first_name != '':
+            redirect('on_dev')
+        if request.method == 'GET':
+            return render(request, 'shouters/register.html', context)
         first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        gender = request.POST['gender']
-        email = request.POST['email']
-        age = request.POST['age']
-        phone = request.POST['phone']
-        interest = request.POST.getlist('interest')
+        shouter.first_name = first_name
+        shouter.save()
+        return redirect('/shouters/register/info-2/{}/'.format(_id))
+    else:
+        return redirect('on_dev')
 
-        if qs.exists() and qs.count() == 1:
-            user = qs.first()
-            user.first_name = first_name
-            user.last_name = last_name
-            user.gender = gender
-            user.email = email
-            user.age = age
-            user.phone = phone
-            user.interest = interest
-            user.is_register = True
-            user.save()
-
-            return HttpResponse('<a href="/shouters/{}/fb_login/">Connect IG</a>')
-
-    return render(request, 'shouters/register.html', context={'id': _id})
-
-def login(request):
+def line_login(request):
+    # /shouters/line-login?q=register/
+    # /shouters/line-login?q=work_management/
+    # /shouters/line-login?q=payment/
+    # /shouters/line-login?q=shouter_history/
     csrf_token = get_token(request)
     q = request.GET.get('q', None)
-    order_id = request.GET.get('order_id', None)
     state = {
         'token': csrf_token,
         'q': q,
-        'order_id': order_id
     }
     line_login_url = LineAPI().line_auth(state=state)
-
     return redirect(line_login_url)
 
-def fb_login(request, _id):
+def facebook_login(request, _id):
+    # check id is exist and not connect ig
     csrf_token = get_token(request)
     state = {
         'token': csrf_token,
-        '_id': _id
+        '_id': _id,
     }
     fb_login_url = FacebookAPI().fb_auth(state=state)
 
     return redirect(fb_login_url)
 
-def Oauth(request):
-
-    # Get Code from redirect url
+def oauth(request):
     code = request.GET.get('code')
+
+    """Get State of request"""
     state = request.GET.get('state')
     list_state = state.split(',')
     # Get q
     q = list_state[1]
     q = q[7:-2]
-    # Get Order ID
-    order_id = list_state[2]
 
-    # Get Access Token + ID Token
+    print(q)
+
     access_token, id_token = LineAPI().get_access_token(code=code)
 
     # Get User Information
@@ -102,25 +131,24 @@ def Oauth(request):
         # if user_id exist in the model but is_connect_ig = False -> go to ig_connect
         _id = qs.id
         if qs.is_register is False:
-            return redirect('/shouters/{}/register/'.format(_id))
+            return redirect('/shouters/register/{}/'.format(_id))
         else:
             if qs.is_connect_ig is False:
-                return redirect('/shouters/{}/fb_login/'.format(_id))
+                return redirect('/shouters/register/info-2/{}/'.format(_id))
             else:
                 # if user_id exist in the model and is_connect_ig = True -> go to main page ...
-                # if q = register
                 if q == 'accept_or_reject':
                     # return redirect('/orders/{}/choose/'.format(order_id))
-                    return HttpResponse('<h1>Accept Or Reject Page</h1>')
+                    return redirect('on_dev')
                 elif q == 'work_management':
                     # return redirect('/orders/{}/'.format(order_id))
-                    return HttpResponse('<h1>Work Management</h1>')
+                    return redirect('on_dev')
                 elif q == 'payment':
                     # return redirect('/shouters/{}/payment/'.format(_id))
-                    return HttpResponse('<h1>Payment</h1>')
+                    return redirect('on_dev')
                 elif q == 'shouter_history':
                     # return redirect('/shouters/{}/history'.format(_id))
-                    return HttpResponse('<h1>Shouter History</h1>')
+                    return redirect('on_dev')
 
     else:
         # Create new one
@@ -136,95 +164,18 @@ def Oauth(request):
         )
         shouter.save()
 
+        qs = Shouter.objects.filter(line_user_id=user_id).first()
+        _id = qs.id
+
         # if user_id not exist in the model and is_connect_ig = False -> go to registration form -> redirect to register
-        return redirect('shouters_register')
+        return redirect('/shouters/register/{}/'.format(_id))
 
-def Oauth2(request):
+    # """JWT Access Token and Refresh Token"""
+    # refresh = refresh = RefreshToken.for_user(shouter_save)
+    # data['token'] = {
+    #     'refresh': str(refresh),
+    #     'access': str(refresh.access_token),
+    # }
 
-    # Get Code from redirect url
-    code = request.GET.get('code')
-    state = request.GET.get('state')
-    list_state = state.split(',')
-    _id = list_state[1]
-    # Get Shouter ID
-    _id = int(_id[8:-1])
 
-    user = Shouter.objects.filter(id=_id).first()
 
-    # Get access token for facebook login
-    access_token = FacebookAPI().get_access_token(code=code)
-
-    # Get FB Page ID
-    page_id = FacebookAPI().get_facebook_page_id(access_token=access_token)
-
-    # Get IG Page ID
-    business_account_id = FacebookAPI().get_business_account_id(page_id=page_id, access_token=access_token)
-
-    # Save Access Token and Page ID to database
-    user.fb_access_token = access_token
-    user.fb_access_token_created = now()
-    user.fb_page_id = page_id
-    user.ig_business_account_id = business_account_id
-    user.save()
-
-    # Get Biography of User Instagram
-    biography = FacebookAPI().get_ig_biography(business_account_id=business_account_id,
-                                               access_token=access_token)
-
-    profile_picture_url = biography.get('profile_picture_url')
-
-    print(profile_picture_url)
-
-    user.ig_username = biography.get('username')
-    user.ig_follower_count = biography.get('followers')
-    user.save()
-
-    # Get Engagement Insight
-    media_objects = FacebookAPI().get_ig_media_objects(business_account_id=business_account_id,
-                                                       access_token=access_token)
-    engagement = FacebookAPI().get_engagement_insight(media_objects=media_objects,
-                                                      access_token=access_token,
-                                                      followers_count=biography.get('followers'))
-    total_likes = engagement.get('total_likes')
-    average_total_like = engagement.get('average_total_like')
-    like_engagement = engagement.get('like_engagement')
-
-    user.ig_total_like = total_likes
-    user.ig_average_total_like = average_total_like
-    user.ig_like_engagement = like_engagement
-
-    audience = FacebookAPI().get_audience_insight(business_account_id=business_account_id,
-                                                  access_token=access_token)
-
-    # Save IG Insight to Database
-    user.ig_insight = audience.get('insight')
-    user.ig_max_total_people = audience.get('max_total')
-    user.ig_two_most_common_city = audience.get('two_most_common_city')
-    user.ig_two_most_common_country = audience.get('two_most_common_country')
-    user.ig_two_most_common_gender_age = audience.get('two_most_common_gender_age')
-    user.ig_audience_male_percent = audience.get('audience_male_percentage')
-    user.ig_audience_female_percent = audience.get('audience_female_percentage')
-    user.ig_age_range_13_17 = audience.get('audience_age_13_17_percentage')
-    user.ig_age_range_18_24 = audience.get('audience_age_18_24_percentage')
-    user.ig_age_range_25_34 = audience.get('audience_age_25_34_percentage')
-    user.ig_age_range_35_44 = audience.get('audience_age_35_44_percentage')
-    user.ig_age_range_45_54 = audience.get('audience_age_45_54_percentage')
-    user.ig_age_range_55_64 = audience.get('audience_age_55_64_percentage')
-    user.save()
-
-    active_follower = FacebookAPI().get_active_follower(business_account_id=business_account_id,
-                                                        access_token=access_token)
-
-    user.ig_active_follower = active_follower.get('geometric_active_follower')
-    user.ig_active_follower_harmonic = active_follower.get('harmonic_active_follower')
-
-    return HttpResponse('test')
-
-def payment(request, _id):
-    return None
-
-def history(request, _id):
-    return None
-
-def setting(request, _id):
-    return None
