@@ -27,18 +27,19 @@
         <hr>
         <div class="container">
             <div class="row text-center">
-                <h3 class="minimal-bold text-violet-bright">2. กลับสู่ Shout! เพื่อ เชื่อมต่อ IG ผ่าน Facebook API</h3>
-                <p>เมื่อ IG เป็น Business หรือ Creator Account แล้ว IG ของคุณจะถูกผูกกับ Facebook Page ของคุณ (ตามนโยบายของ Facebook) </p>
-                <img src="{% static 'shouters/images/regis-info-4.png' %}" alt="">
-
-                <div class="col-6">
-                    <div class="contain-next-button">
-                        <a class="next-button-2" href="{% url 'info-3' %}">< ก่อนหน้า</a>
-                    </div>
+                <h3 class="minimal-bold text-violet-bright">1. ตรวจสอบ Instagram ของคุณ</h3>
+                <p>ว่าเป็น Business Account หรือ Creator Account หรือไม่ ดูวิธีตรวจสอบ ได้จากรูปด้านล่าง</p>
+                <img src="{% static 'shouters/images/regis-info-3.png' %}" alt="">
+                <div class="col-6 img-info-50">
+                    <p>✅   <span>หากเป็น</span> ตรวจสอบว่าเชื่อมต่อกับ Facebook Page อะไรอยู่ </p>
                 </div>
-                <div class="col-6">
+                <div class="col-6 img-info-50">
+                    <p>❌ <span>หากไม่เป็น</span> ให้ทำการเปิด IG Business Account ง่ายๆ ตามวิธินี้ </p>
+                </div>
+
+                <div class="col-12">
                     <div class="contain-next-button">
-                        <a class="next-button-2" href="{% url 'info-5' %}">ถัดไป ></a>
+                        <a class="next-button" href="/shouters/register/info-4/{{ id }}/">ถัดไป > </a>
                     </div>
                 </div>
             </div>

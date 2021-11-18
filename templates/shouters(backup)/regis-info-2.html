@@ -15,30 +15,39 @@
 </head>
 <body>
     <section class="violet-background minimal-bold text-white padding-all-1 text-center">
-        <h5 class="mb-0"><i class="fa fa-instagram"></i> Connect your Instagram!</h5>
+        <h5 class="mb-0"><i class="fa fa-instagram"></i> เชื่อมต่อ Instagram ของคุณผ่าน IG Business Account</h5>
     </section>
     <section class="img-width-100vw">
         <img src="{% static 'shouters/images/Frame 3863.png' %}" alt="">
     </section>
     <section>
         <div class="text-center pt-4 pb-2">
-            <h4 class="minimal-bold">วิธีเชื่อมต่อ Instagram ง่ายๆ เพียง 4 ขั้นตอน</h4>
+            <h5 class="minimal-bold">ทำไมเราต้องเชื่อมต่อ Instagram ของคุณ?</h5>
         </div>
         <hr>
         <div class="container">
             <div class="row text-center">
-                <h3 class="minimal-bold text-violet-bright">2. กลับสู่ Shout! เพื่อ เชื่อมต่อ IG ผ่าน Facebook API</h3>
-                <p>เมื่อ IG เป็น Business หรือ Creator Account แล้ว IG ของคุณจะถูกผูกกับ Facebook Page ของคุณ (ตามนโยบายของ Facebook) </p>
-                <img src="{% static 'shouters/images/regis-info-4.png' %}" alt="">
-
-                <div class="col-6">
-                    <div class="contain-next-button">
-                        <a class="next-button-2" href="{% url 'info-3' %}">< ก่อนหน้า</a>
-                    </div>
+                <div class="col-md-4 register-photo">
+                    <img class="mt-2 mb-4" src="{% static 'shouters/images/regis-info-2-1.png' %}" alt="">
+                    <h4 class="minimal-bold">Work Matching</h4>
+                    <p>เพื่อแมชท์งานและแบรนด์ที่ตรงกับคุณที่สุด</p>
                 </div>
-                <div class="col-6">
-                    <div class="contain-next-button">
-                        <a class="next-button-2" href="{% url 'info-5' %}">ถัดไป ></a>
+                <div class="col-md-4 register-photo">
+                    <img class="mt-2 mb-4" src="{% static 'shouters/images/regis-info-2-2.png' %}" alt="">
+                    <h4 class="minimal-bold">Work Matching</h4>
+                    <p>เพื่อแมชท์งานและแบรนด์ที่ตรงกับคุณที่สุด</p>
+                </div>
+                <div class="col-md-4 register-photo">
+                    <img class="mt-2 mb-4" src="{% static 'shouters/images/regis-info-2-3.png' %}" alt="">
+                    <h4 class="minimal-bold">Work Matching</h4>
+                    <p>เพื่อแมชท์งานและแบรนด์ที่ตรงกับคุณที่สุด</p>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-8">
+                    <div class="contain-submit-button">
+                        <a class="submit-button" href="/shouters/register/info-3/{{ id }}/">ถัดไป</a>
                     </div>
                 </div>
             </div>

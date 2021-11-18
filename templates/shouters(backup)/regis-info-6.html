@@ -32,80 +32,18 @@
                 <h3 class="minimal-bold text-violet-bright">4. เปิดการเข้าถึงทุกข้อ</h3>
                 <p>ตามนโยบายของ Facebook เราจำเป็นต้องให้คุณเปิด การเข้าถึงทุกข้อ ไม่เช่นนั้นจะไม่สามารถเชื่อมต่อบัญชีได้</p>
                 <img class="mb-4" src="{% static 'shouters/images/regis-info-6.png' %}" alt="">
-
+                <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
             </div>
-            <div style="text-align: center">
-                <a href="{% url 'facebook-login' %}"
-                   style="padding: 0.8rem 4rem; background: #1778F2; color: white; border-radius: 8px;
-                   font-family: minimal_b, sans-serif; text-decoration: none">
-                        เชื่อมต่อเลย!
-                </a>
-            </div>
-
         </div>
     </section>
 
     <!-- Optional JavaScript; choose one of the two! -->
-    <!--
-    <script>
-
-      function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
-        console.log('statusChangeCallback');
-        console.log(response);                   // The current login status of the person.
-        if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-          testAPI();
-        } else {                                 // Not logged into your webpage or we are unable to tell.
-          document.getElementById('status').innerHTML = 'Please log ' +
-            'into this webpage.';
-        }
-      }
-
-
-      function checkLoginState() {               // Called when a person is finished with the Login Button.
-        FB.getLoginStatus(function(response) {   // See the onlogin handler
-          statusChangeCallback(response);
-        });
-      }
-
-
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '297314161911860',
-          cookie     : true,                     // Enable cookies to allow the server to access the session.
-          xfbml      : true,                     // Parse social plugins on this webpage.
-          version    : 'v12.0'           // Use this Graph API version for this call.
-        });
-
-
-        FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
-          statusChangeCallback(response);        // Returns the login status.
-        });
-      };
-
-      function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-        console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', function(response) {
-          console.log('Successful login for: ' + response.name);
-          document.getElementById('status').innerHTML =
-            'Thanks for logging in, ' + response.name + '!';
-        });
-      }
-
-    </script>
-
-    -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="{% static 'shouters/js/main.js' %}"></script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
-
     <!--
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-    -->
-
-    <!--
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->

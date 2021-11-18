@@ -24,11 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(1o-psk&4db39^@ae8d@3!#$5hd!my#&o%@x1!%-&-#rx&2tb^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['dbfd-125-26-174-222.ngrok.io', '127.0.0.1']
+ALLOWED_HOSTS = ['9ba6-125-26-173-111.ngrok.io', '127.0.0.1']
 
-TEMP_HOST = 'https://dbfd-125-26-174-222.ngrok.io/'
+TEMP_HOST = 'https://9ba6-125-26-173-111.ngrok.io/'
 LINE_CLIENT_ID = '1656634729'
 LINE_CLIENT_SECRET = 'a9123c0aeec0fb3e37fbed8391411930'
 FB_CLIENT_ID = '297314161911860'

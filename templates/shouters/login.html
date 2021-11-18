@@ -28,7 +28,7 @@
 
             <!-- Heading -->
             <h1 class="mb-0 fw-bold text-center">
-              Sign up
+              Log In
             </h1>
 
             <!-- Text -->
@@ -37,9 +37,9 @@
             </p>
 
             <!-- Form -->
-            <form class="mb-6" method="post" action="{% url 'shouters-register' %}"> {% csrf_token %}
+            <form class="mb-6" method="post" action="{% url 'shouters-login' %}"> {% csrf_token %}
 
-              <!-- Email -->
+              <!-- Username -->
               <div class="form-group">
                 <label class="form-label" for="username">
                   Username
@@ -57,14 +57,14 @@
 
               <!-- Submit -->
               <button class="btn w-100 btn-primary" type="submit">
-                Sign up
+                Log In
               </button>
 
             </form>
 
             <!-- Text -->
             <p class="mb-0 fs-sm text-center text-muted">
-              Already have an account? <a href="{% url 'shouters-login' %}">Log in</a>.
+              Don't have an account? <a href="{% url 'shouters-register' %}">Register</a>.
             </p>
 
           </div>

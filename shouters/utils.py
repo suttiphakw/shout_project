@@ -75,7 +75,7 @@ class FacebookAPI:
     fb_url = 'https://www.facebook.com/v11.0/dialog/oauth'
     fb_client_id = settings.FB_CLIENT_ID
     fb_client_secret = settings.FB_CLIENT_SECRET
-    fb_redirect_uri = settings.TEMP_HOST + 'shouters/Oauth2/'
+    fb_redirect_uri = settings.TEMP_HOST + 'shouters/oauth2/'
     fb_scope = 'instagram_basic,' \
                'instagram_manage_insights,' \
                'pages_show_list,' \
