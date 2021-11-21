@@ -12,40 +12,94 @@
     />
     <meta property="og:image" content="{% static 'src/logoV2/Shout_Logov2-07.png' %}" />
     <link rel="shortcut icon" href="{% static 'src/logoV2/Shout_Logov2-07.png' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="{% static 'pages/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'pages/css/custom.css' %}">
 	<title>Shout | แพลตฟอร์มทำการตลาดบอกต่อผ่านคนตัวเล็กง่ายๆ</title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-md navbar-light">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'src/logoV2/Shout_Logov2-01.png' %}" height="50" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-	<header class="main-header">
-        <div>
-            <a href="#" class="main-header__brand">
-                <img src="{% static 'src/logoV2/Shout_Logov2-01.png' %}" alt="">
-            </a>
-        </div>
-        <nav class="main-nav">
-            <ul class="main-nav__items">
-                <li class="main-nav__item">
-                    <a href="#koc">What's KOC</a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#koc">What's KOC</a>
                 </li>
-                <li class="main-nav__item">
-                    <a href="#why-shout">Why Shout</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#why-shout">Why Shout</a>
                 </li>
-                <li class="main-nav__item">
-                    <a href="#our-solution">How it works</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#our-solution">How it works</a>
                 </li>
-                <li class="main-nav__item">
-                    <a href="#contact-us">Contact us</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact-us">Contact us</a>
                 </li>
-                <li class="main-nav__item main-nav__item--cta--white">
-                    <a href="{% url 'login' %}">เข้าสู่ระบบ</a>
-                </li>
-                <li class="main-nav__item main-nav__item--cta--orange">
-                    <a href="#">เริ่มเลย</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        </svg>
+                        <span>เข้าสู่ระบบ</span>
+                    </a>
                 </li>
             </ul>
-        </nav>
-    </header>
+        </div>
+    </nav>
+
+{#    <main>#}
+{#        <!-- Content #1 -> Heading UVP -->#}
+{#        <section id="headingContent" class="container-sm">#}
+{#            <div class="row align-items-center">#}
+{#                <div class="col-md-6 order-1 order-md-2 pr-0">#}
+{#                    <img src="{% static 'pages/images/UVP-3.png' %}" class="img-fluid">#}
+{#                </div>#}
+{#                <div id="headingUVP" class="col-md-6 order-2 order-md-1 p-md-5 text-center text-md-left">#}
+{#                    <h1 class="mt-4 mt-md-0 text-violet-gradient minimal_b">ทำการตลอดบอกต่อผ่าน</h1>#}
+{#                    <h1 class="mt-4 mt-md-0 mb-4 text-violet-gradient minimal_b">คนตัวเล็กจำนวนมากได้ง่ายๆ</h1>#}
+{#                    <p><span class="minimal_b">Shout - แพลตฟอร์ม</span> ที่ทำให้คุณเข้าถึงกลุ่มลูกค้าของคุณอย่างใกล้ชิด แม่นยำ</p>#}
+{#                    <p>และเพิ่มยอดขายได้ง่ายกว่าเดิม ตั้งแต่เริ่มจนจบทำได้ด้วยตัวคุณเอง</p>#}
+{#                    <div class="website-uvp__sub__button mb-5">#}
+{#					    <a class="website-uvp__sub__register" href="#">เริ่มเลย!</a>#}
+{#					    <a class="website-uvp__sub__extra" href="#">ดูเพิ่มเติม</a>#}
+{#				    </div>#}
+{#                    <p class="mb-0">ติดต่อเรา 087-560-4935 / contact@shoutsolution.com</p>#}
+{#                    <p class="">หรือสนใจมาร่วมเป็น Shouter (ผู้บอกต่อ) กับเรา? <a href="#">สมัครที่นี่</a></p>#}
+{#                </div>#}
+{#            </div>#}
+{#        </section> <!-- End Content #1 -->#}
+{#    </main>#}
+
+
+{#	<header class="main-header">#}
+{#        <div>#}
+{#            <a href="#" class="main-header__brand">#}
+{#                <img src="{% static 'src/logoV2/Shout_Logov2-01.png' %}" alt="">#}
+{#            </a>#}
+{#        </div>#}
+{#        <nav class="main-nav">#}
+{#            <ul class="main-nav__items">#}
+{#                <li class="main-nav__item">#}
+{#                    <a href="#koc">What's KOC</a>#}
+{#                </li>#}
+{#                <li class="main-nav__item">#}
+{#                    <a href="#why-shout">Why Shout</a>#}
+{#                </li>#}
+{#                <li class="main-nav__item">#}
+{#                    <a href="#our-solution">How it works</a>#}
+{#                </li>#}
+{#                <li class="main-nav__item">#}
+{#                    <a href="#contact-us">Contact us</a>#}
+{#                </li>#}
+
+{#            </ul>#}
+{#        </nav>#}
+{#    </header>#}
 
 	<main>
 		<section id="website-uvp">
@@ -240,5 +294,9 @@
 	</footer>
 
     <script src="{% static 'pages/js/main.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
