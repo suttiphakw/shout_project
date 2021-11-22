@@ -12,6 +12,7 @@ class Shouter(models.Model):
     fb_access_token = models.CharField(max_length=500, null=True, blank=True)
     fb_access_token_created = models.DateTimeField(default=now)
     fb_page_id = models.CharField(max_length=120, null=True, blank=True)
+    fb_is_connect = models.BooleanField(default=False)
     #
     # # Instagram
     ig_business_account_id = models.CharField(max_length=120, null=True, blank=True)

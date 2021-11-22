@@ -15,5 +15,8 @@ urlpatterns = [
     path('info-6/', views.register_info_6, name='info-6'),
     path('wfa/', views.waiting_for_approve, name='wfa'),
     path('facebook-login/', views.facebook_login, name='facebook-login'),
+    path('facebook-logout/', views.facebook_logout, name='facebook-logout'),
     path('oauth2/', views.oauth2, name='oauth2'),
+    path('menu/', views.menu, name='shouter-menu'),
+    path('menu/social-media/', views.social_media, name='shouter-social-media'),
 ]

@@ -1,0 +1,68 @@
+/*------------------------ Font ------------------------*/
+@font-face {
+    src: url("../../src/fonts/FC Minimal Regular.ttf");
+    font-family: 'minimal';
+}
+
+@font-face {
+    src: url("../../src/fonts/FC Minimal Bold.ttf");
+    font-family: 'minimal_b';
+}
+
+/*------------------------ Main ------------------------*/
+* {
+    box-sizing: border-box;
+}
+
+html {
+	font-size: 18px;
+    color: #002257;
+}
+
+body {
+	margin: 0;
+    font-family: 'minimal', sans-serif;
+}
+
+header {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    padding: 0.5rem;
+    background-color: #880017;
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+section {
+    width: 90%;
+    max-width: 40rem;
+    margin: auto;
+}
+
+h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    text-align: center;
+    padding: 0.5rem;
+    margin: 1rem auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 12px;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.container a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#header img {
+    border-radius: 50%;
+    padding: 2rem;
+}

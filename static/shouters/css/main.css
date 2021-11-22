@@ -25,7 +25,7 @@ footer {
 
 footer img {
     padding: 2rem;
-    width: 100vw;
+    width: 60%;
 }
 
 .text-small {
@@ -178,7 +178,7 @@ h5 {
 }
 
 .uvp-img img {
-    width: 100vw;
+    width: 100%;
 }
 
 #padding-0 {
@@ -198,7 +198,7 @@ h5 {
 }
 
 .information img {
-    width: 100vw;
+    width: 100%;
     padding: 0 2rem;
 }
 
@@ -211,7 +211,7 @@ nav img {
 }
 
 .img-width-100vw img {
-    width: 100vw;
+    width: 100%;
 }
 
 .temp-photo {
@@ -322,9 +322,9 @@ nav img {
 
 @media screen and (min-width: 700px){
     .img-width-100vw img {
-        width: 50vw;
+        width: 50%;
         position: relative;
-        left: calc(50% - 25vw);
+        left: calc(50% - 25%);
     }
     .img-width-100vw {
         background: #F8F8F8;
@@ -333,9 +333,9 @@ nav img {
 
 @media screen and (min-width: 1400px){
     .img-width-100vw img {
-        width: 30vw;
+        width: 30%;
         position: relative;
-        left: calc(50% - 15vw);
+        left: calc(50% - 15%);
     }
     .img-width-100vw {
         background: #F8F8F8;

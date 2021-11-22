@@ -1,3 +1,4 @@
+import requests
 from django.utils.timezone import now
 from django.shortcuts import render, redirect, HttpResponse
 from django.middleware.csrf import get_token
@@ -87,9 +88,28 @@ def facebook_login(request):
     return redirect(fb_login_url)
 
 @login_required(login_url='/shouters/login/')
+def facebook_logout(request):
+    user = request.user
+    shouter = Shouter.objects.filter(user=user).first()
+    access_token = shouter.fb_access_token
+    response = requests.delete('https://graph.facebook.com/v12.0/me/permissions/',
+                               params={
+                                   'access_token': access_token
+                               })
+    # Save Access Token and Page ID to database
+
+    if response.status_code == 200:
+        shouter.fb_access_token = ''
+        shouter.fb_is_connect = False
+        shouter.save()
+        return redirect('shouter-menu')
+    else:
+        print(response.status_code)
+        return HttpResponse('Failed')
+
+@login_required(login_url='/shouters/login/')
 def oauth2(request):
     code = request.GET.get('code')
-    print(request.user)
     if request.user is not None:
         shouter = Shouter.objects.create(user=request.user)
         shouter.save()
@@ -105,11 +125,30 @@ def oauth2(request):
         # Save Access Token and Page ID to database
         shouter.fb_access_token = access_token
         shouter.fb_access_token_created = now()
+        shouter.fb_is_connect = True
         shouter.fb_page_id = page_id
         shouter.ig_business_account_id = business_account_id
         shouter.save()
 
-        return redirect('wfa')
+        return redirect('shouter-menu')
 
     else:
         return redirect('on_dev')
+
+@login_required(login_url='/shouters/login/')
+def menu(request):
+    return render(request, 'shouters/menu.html')
+
+@login_required(login_url='/shouters/login/')
+def social_media(request):
+    user = request.user
+    shouter = Shouter.objects.filter(user=user).first()
+    if not shouter.fb_is_connect:
+        context = {
+            'is_connect': False,
+        }
+    else:
+        context = {
+            'is_connect': True,
+        }
+    return render(request, 'shouters/menu-social-media.html', context)
