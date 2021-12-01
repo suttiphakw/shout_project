@@ -7,38 +7,75 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static 'shouters/css/menu.css' %}">
-    <title>Shouter | Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static 'img/logo/Shout_Logov2-07.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Vue Framework -->
+<!--    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
+<!--    <script src="https://unpkg.com/vue@next" defer></script>-->
+<!--    <script src="js/main.js" defer></script>-->
+    <!-- Title -->
+    <title>Shout | Account</title>
 </head>
 <body>
-    <section id="header" class="container">
-        <img src="https://picsum.photos/100" alt="">
-        <h1 class="mt-4">Nickname</h1>
-        <p>Firstname</p>
+    <section class="container">
+        <section class="shouter-account__top">
+            <img class="shouter-account__top__image" src="{% static 'img/shouters/temp_user.JPG' %}"
+                 alt="" style="width: 25rem; height: 25rem; border-radius: 50%; border: 2px solid white">
+            <h2 class="shouter-account__top__main-text">
+                Man
+            </h2>
+            <h3 class="shouter-account__top__sub-text">
+                Suttiphak Wuttimongkolchai
+            </h3>
+
+        </section>
+
+        <main class="shouter-account__content">
+            <div class="shouter-account__content__block">
+                <p class="shouter-account__content__header">การทำงานของคุณ</p>
+            </div>
+
+            <a href="{% url 'shouter__menu__social-media' %}" class="shouter-account__content__block">
+                <div class="shouter-account__content__block__left">
+                    <svg class="shouter-account__icon">
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>
+                    </svg>
+                    <p class="shouter-account__content__text">บัญชี Social Media</p>
+                </div>
+                <svg class="shouter-account__content__block__right shouter-account__icon-next">
+                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-right"></use>
+                </svg>
+            </a>
+
+            <a href="" class="shouter-account__content__block">
+                <div class="shouter-account__content__block__left">
+                    <svg class="shouter-account__icon">
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>
+                    </svg>
+                    <p class="shouter-account__content__text">งานที่เปิดรับ</p>
+                </div>
+                <svg class="shouter-account__content__block__right shouter-account__icon-next">
+                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-right"></use>
+                </svg>
+            </a>
+
+            <a href="" class="shouter-account__content__block">
+                <div class="shouter-account__content__block__left">
+                    <svg class="shouter-account__icon">
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>
+                    </svg>
+                    <p class="shouter-account__content__text">บัญชีธนาคาร / บัตรประชาชน</p>
+                </div>
+                <svg class="shouter-account__content__block__right shouter-account__icon-next">
+                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-right"></use>
+                </svg>
+            </a>
+
+        </main>
+
     </section>
-    <section id="social-media" class="container text-left">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-        </svg>
-        <a href="{% url 'shouter-social-media' %}">บัญชี Social Media</a>
-    </section>
-    <section id="open-work" class="container text-left">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-        </svg>
-        <a href="">งานที่เปิดรับ</a>
-    </section>
-    <section id="bank-account" class="container text-left">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-        </svg>
-        <a href="">บัญชีธนาคาร / บัตรประชาชน</a>
-    </section>
-    <section id="payment-history" class="container text-left">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-        </svg>
-        <a href="">ประวัติการรับเงิน</a>
-    </section>
+
+
 </body>
 </html>

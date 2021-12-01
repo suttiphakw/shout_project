@@ -1,0 +1,214 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static 'img/logo/Shout_Logov2-07.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Vue Framework -->
+<!--    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="{% static 'js/main.js' %}" defer></script>
+    <!-- Title -->
+    <title>Shout | Register</title>
+</head>
+<body>
+    <section class="container" id="choose_social">
+        <section class="top">
+            <h1 class="top__logo">&#128242;</h1>
+            <h1 class="top__header">Work Selection</h1>
+        </section>
+
+        <section class="stage">
+            <div class="stage__block">
+                <div class="stage__number">
+                    <svg class="stage__icon">
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                    </svg>
+                </div>
+                <p class="stage__text">ข้อมูลส่วนตัว</p>
+            </div>
+
+            <div class="stage__block">
+                <div class="stage__number">
+                    <p>2</p>
+                </div>
+                <p class="stage__text">เชื่อมต่อ Social Media</p>
+            </div>
+
+            <div class="stage__block">
+                <div class="stage__number stage__number__disable">
+                    <p>3</p>
+                </div>
+                <p class="stage__text stage__text__disable">ยืนยันบัญชี</p>
+            </div>
+        </section>
+
+        <main class="content-2">
+            <div class="content-2__header">
+                <h2>เลือกประเภทงานที่คุณต้องการเปิดรับ เราคำนวณราคาต่องานให้คุณแล้ว 😊</h2>
+            </div>
+
+            <div class="content-2__body">
+                <div class="social-card">
+                    <div class="social-card__header">
+                        <div class="social-card__name">
+                            <svg class="social-card__icon">
+                                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
+                            </svg>
+                            <h3>Instagram</h3>
+                        </div>
+                        <label class="social-card__switch">
+                            <input type="checkbox" checked>
+                            <span @click="instagramToggle" class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="social-card__detail" v-if="instagramIsVisible">
+                        <div class="social-card__detail__block">
+                            <div class="social-card__detail__name">
+                                <p>Instagram Story</p>
+                                <p class="social-card__detail__sub">000 - 000 บาท ต่อ 1 Story</p>
+                            </div>
+                            <div class="social-card__detail__checkbox">
+                                <input type="checkbox" checked>
+                            </div>
+                        </div>
+                        <div class="social-card__detail__block">
+                            <div class="social-card__detail__name">
+                                <p>Instagram Post</p>
+                                <p class="social-card__detail__sub">000 - 000 บาท ต่อ 1 Post</p>
+                            </div>
+                            <div class="social-card__detail__checkbox">
+                                <input type="checkbox" checked>
+                            </div>
+                        </div>
+                        <div class="social-card__detail__block">
+                            <div class="social-card__detail__name">
+                                <p>Instagram Post + Story</p>
+                                <p class="social-card__detail__sub">000 - 000 บาท ต่อ 1 Post + Story</p>
+                            </div>
+                            <div class="social-card__detail__checkbox">
+                                <input type="checkbox" checked>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-card">
+                    <div class="social-card__header">
+                        <div class="social-card__name">
+                            <svg class="social-card__icon">
+                                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
+                            </svg>
+                            <svg class="social-card__icon">
+                                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-facebook"></use>
+                            </svg>
+                            <h3>IG + FB Share</h3>
+                        </div>
+                        <label class="social-card__switch">
+                            <input type="checkbox" checked>
+                            <span @click="igFbShareToggle" class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="social-card__detail" v-if="igFbShareIsVisible">
+                        <div class="social-card__detail__block">
+                            <div class="social-card__detail__name">
+                                <p>IG Story + แชร์ลง FB Story</p>
+                                <p class="social-card__detail__sub">000 - 000 บาท</p>
+                            </div>
+                            <div class="social-card__detail__checkbox">
+                                <input type="checkbox" checked>
+                            </div>
+                        </div>
+                        <div class="social-card__detail__block">
+                            <div class="social-card__detail__name">
+                                <p>IG Post + แชร์ลง FB Post </p>
+                                <p class="social-card__detail__sub">000 - 000 บาท</p>
+                            </div>
+                            <div class="social-card__detail__checkbox">
+                                <input type="checkbox" checked>
+                            </div>
+                        </div>
+                        <div class="social-card__detail__block">
+                            <div class="social-card__detail__name">
+                                <p>IG Post + Story และ แชร์ลง FB Post + FB Story</p>
+                                <p class="social-card__detail__sub">000 - 000 บาท</p>
+                            </div>
+                            <div class="social-card__detail__checkbox">
+                                <input type="checkbox" checked>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-card">
+                    <div class="social-card__header">
+                        <div class="social-card__name">
+                            <svg class="social-card__icon">
+                                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-tiktok"></use>
+                            </svg>
+                            <h3>Tiktok</h3>
+                        </div>
+                        <label class="social-card__switch">
+                            <input type="checkbox" checked>
+                            <span @click="tiktokToggle" class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="social-card__detail" v-if="tiktokIsVisible">
+                        <div class="social-card__detail__block-2">
+                            <label for="tiktokAccount">Tiktok Account</label>
+                            <input type="text" id="tiktokAccount" placeholder="@Your Tiktok Name"/>
+                        </div>
+
+                        <div class="social-card__detail__block-2">
+                            <label for="tiktokPrice">ราคาขั้นต่ำต่องาน</label>
+                            <input type="number" id="tiktokPrice" placeholder="100 บาท"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-card">
+                    <div class="social-card__header">
+                        <div class="social-card__name">
+                            <svg class="social-card__icon">
+                                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-twitter"></use>
+                            </svg>
+                            <h3>Twitter</h3>
+                        </div>
+                        <label class="social-card__switch">
+                            <input type="checkbox" checked>
+                            <span @click="twitterToggle" class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="social-card__detail" v-if="twitterIsVisible">
+                        <div class="social-card__detail__block-2">
+                            <label for="twitterAccount">Twitter Account</label>
+                            <input type="text" id="twitterAccount" placeholder="@Your Twitter Name"/>
+                        </div>
+
+                        <div class="social-card__detail__block-2">
+                            <label for="twitterPrice">ราคาขั้นต่ำต่องาน</label>
+                            <input type="number" id="twitterPrice" placeholder="100 บาท"/>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="btn btn-main btn-shouter" href="{% url 'register__account_summary' %}" style="text-align: center">
+                    ถัดไป
+                </a>
+
+            </div>
+
+
+        </main>
+
+    </section>
+
+
+</body>
+</html>

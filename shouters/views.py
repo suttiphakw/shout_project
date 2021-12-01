@@ -19,23 +19,23 @@ def landing_page(request):
 def waiting_for_approve(request):
     return render(request, 'shouters/wfa.html')
 
-def register_info_1(request):
-    return render(request, 'shouters/regis-info-1.html')
+def register__info_1(request):
+    return render(request, 'shouters/register__info-1.html')
 
-def register_info_2(request):
-    return render(request, 'shouters/regis-info-2.html')
+def register__info_2(request):
+    return render(request, 'shouters/register__info-2.html')
 
-def register_info_3(request):
-    return render(request, 'shouters/regis-info-3.html')
+def register__info_3(request):
+    return render(request, 'shouters/register__info-3.html')
 
-def register_info_4(request):
-    return render(request, 'shouters/regis-info-4.html')
+def register__info_4(request):
+    return render(request, 'shouters/register__info-4.html')
 
-def register_info_5(request):
-    return render(request, 'shouters/regis-info-5.html')
+def register__info_5(request):
+    return render(request, 'shouters/register__info-5.html')
 
-def register_info_6(request):
-    return render(request, 'shouters/regis-info-6.html')
+def register__info_6(request):
+    return render(request, 'shouters/register__info-6.html')
 
 def register(request):
     if request.method == 'POST':
@@ -56,6 +56,17 @@ def register(request):
     else:
         return render(request, 'shouters/register.html')
 
+def register__account_summary(request):
+    if request.method == 'POST':
+        redirect('register__account_summary')
+    return render(request, 'shouters/register__account-summary.html')
+
+def register__work_selection(request):
+    return render(request, 'shouters/register__work-selection.html')
+
+def register__finished(request):
+    return render(request, 'shouters/register__finished.html')
+
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -65,7 +76,7 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('info-2')
+            return redirect('register__info-2')
         else:
             return redirect('shouters-login')
 
@@ -130,7 +141,7 @@ def oauth2(request):
         shouter.ig_business_account_id = business_account_id
         shouter.save()
 
-        return redirect('shouter-menu')
+        return redirect('register__work_selection')
 
     else:
         return redirect('on_dev')
@@ -142,13 +153,15 @@ def menu(request):
 @login_required(login_url='/shouters/login/')
 def social_media(request):
     user = request.user
-    shouter = Shouter.objects.filter(user=user).first()
-    if not shouter.fb_is_connect:
-        context = {
-            'is_connect': False,
-        }
-    else:
-        context = {
-            'is_connect': True,
-        }
-    return render(request, 'shouters/menu-social-media.html', context)
+    if Shouter.objects.filter(user=user).exists():
+        shouter = Shouter.objects.filter(user=user).first()
+        if not shouter.fb_is_connect:
+            context = {
+                'is_connect': False,
+            }
+        else:
+            context = {
+                'is_connect': True,
+            }
+        return render(request, 'shouters/menu__social-media.html', context)
+    return redirect('on_dev')
