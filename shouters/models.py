@@ -17,11 +17,13 @@ class Shouter(models.Model):
     # # Instagram
     ig_business_account_id = models.CharField(max_length=120, null=True, blank=True)
     ig_username = models.CharField(max_length=120, null=True, blank=True)
+    ig_media_count = models.IntegerField(null=True, blank=True)
     ig_follower_count = models.IntegerField(null=True, blank=True)
+    ig_following_count = models.IntegerField(null=True, blank=True)
     ig_active_follower = models.IntegerField(null=True, blank=True)
     ig_active_follower_harmonic = models.IntegerField(null=True, blank=True)
     ig_estimated_reach = models.IntegerField(null=True, blank=True)
-    # ig_profile_picture
+    ig_profile_picture = models.URLField(max_length=300, null=True, blank=True)
     # ig_post_permalink
     ig_total_like = models.IntegerField(null=True, blank=True)
     ig_average_total_like = models.IntegerField(null=True, blank=True)

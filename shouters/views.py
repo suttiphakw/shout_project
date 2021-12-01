@@ -56,14 +56,32 @@ def register(request):
     else:
         return render(request, 'shouters/register.html')
 
+@login_required(login_url='/shouters/login/')
 def register__account_summary(request):
-    if request.method == 'POST':
-        redirect('register__account_summary')
-    return render(request, 'shouters/register__account-summary.html')
+    # if request.method == 'POST':
+    #     redirect('register__account_summary')
+    user = request.user
+    if Shouter.objects.filter(user=user).exists():
+        shouter = Shouter.objects.filter(user=user).first()
 
+        context = {
+            'ig_username': shouter.ig_username,
+            'ig_media_count': shouter.ig_media_count,
+            'ig_followers': shouter.ig_follower_count,
+            'ig_followings': shouter.ig_following_count,
+            'ig_active_follower': shouter.ig_active_follower,
+            'ig_active_follower_percent': shouter.ig_active_follower/shouter.ig_follower_count,
+            'ig_like_engagement': shouter.ig_like_engagement,
+            'ig_like_engagement_percent': shouter.ig_like_engagement/shouter.ig_active_follower,
+        }
+        return render(request, 'shouters/register__account-summary.html', context)
+    return redirect('on_dev')
+
+@login_required(login_url='/shouters/login/')
 def register__work_selection(request):
     return render(request, 'shouters/register__work-selection.html')
 
+@login_required(login_url='/shouters/login/')
 def register__finished(request):
     return render(request, 'shouters/register__finished.html')
 
@@ -101,22 +119,31 @@ def facebook_login(request):
 @login_required(login_url='/shouters/login/')
 def facebook_logout(request):
     user = request.user
-    shouter = Shouter.objects.filter(user=user).first()
-    access_token = shouter.fb_access_token
-    response = requests.delete('https://graph.facebook.com/v12.0/me/permissions/',
-                               params={
-                                   'access_token': access_token
-                               })
-    # Save Access Token and Page ID to database
+    if Shouter.objects.filter(user=user).exists():
+        shouter = Shouter.objects.filter(user=user).first()
+        access_token = shouter.fb_access_token
+        response = requests.delete('https://graph.facebook.com/v12.0/me/permissions/',
+                                   params={
+                                       'access_token': access_token
+                                   })
+        # Save Access Token and Page ID to database
 
-    if response.status_code == 200:
-        shouter.fb_access_token = ''
-        shouter.fb_is_connect = False
-        shouter.save()
-        return redirect('shouter-menu')
-    else:
-        print(response.status_code)
-        return HttpResponse('Failed')
+        if response.status_code == 200:
+            shouter.fb_access_token = ''
+            shouter.fb_is_connect = False
+            shouter.ig_username = ''
+            shouter.ig_media_count = ''
+            shouter.ig_follower_count = ''
+            shouter.ig_following_count = ''
+            shouter.ig_active_follower = ''
+            shouter.ig_like_engagement = ''
+
+            shouter.save()
+            return redirect('shouter__menu__social-media')
+        else:
+            print(response.status_code)
+            return HttpResponse('Failed')
+    return redirect('on_dev')
 
 @login_required(login_url='/shouters/login/')
 def oauth2(request):
@@ -141,7 +168,40 @@ def oauth2(request):
         shouter.ig_business_account_id = business_account_id
         shouter.save()
 
-        return redirect('register__work_selection')
+        # Get Bio
+        context__ig_biography = FacebookAPI().get_ig_biography(business_account_id=business_account_id,
+                                                               access_token=access_token)
+
+        shouter.ig_username = context__ig_biography.get('username')
+        shouter.ig_media_count = context__ig_biography.get('media_count')
+        shouter.ig_follower_count = context__ig_biography.get('followers')
+        shouter.ig_following_count = context__ig_biography.get('followings')
+        shouter.ig_profile_picture = context__ig_biography.get('profile_picture_url')
+        shouter.save()
+
+        # Get Media Objects
+        media_objects = FacebookAPI().get_ig_media_objects(business_account_id=business_account_id,
+                                                           access_token=access_token)
+
+        # Get Engagement
+        context__engagement = FacebookAPI().get_engagement_insight(media_objects=media_objects,
+                                                                   access_token=access_token,
+                                                                   followers_count=context__ig_biography.get('followers'))
+
+        shouter.ig_total_like = context__engagement.get('total_likes')
+        shouter.ig_average_total_like = context__engagement.get('average_total_like')
+        shouter.ig_like_engagement = context__engagement.get('like_engagement')
+        shouter.save()
+
+        # Get Active Follower
+        context__active_follower = FacebookAPI().get_active_follower(business_account_id=business_account_id,
+                                                                     access_token=access_token)
+
+        shouter.ig_active_follower = context__active_follower.get('geometric_active_follower')
+        shouter.ig_active_follower_harmonic = context__active_follower.get('harmonic_active_follower')
+        shouter.save()
+
+        return  redirect('register__work_selection')
 
     else:
         return redirect('on_dev')
@@ -151,17 +211,20 @@ def menu(request):
     return render(request, 'shouters/menu.html')
 
 @login_required(login_url='/shouters/login/')
-def social_media(request):
+def menu__social_media(request):
     user = request.user
     if Shouter.objects.filter(user=user).exists():
         shouter = Shouter.objects.filter(user=user).first()
-        if not shouter.fb_is_connect:
-            context = {
-                'is_connect': False,
-            }
-        else:
-            context = {
-                'is_connect': True,
-            }
+
+        context = {
+            'ig_username': shouter.ig_username,
+            'ig_media_count': shouter.ig_media_count,
+            'ig_followers': shouter.ig_follower_count,
+            'ig_followings': shouter.ig_following_count,
+            'ig_active_follower': shouter.ig_active_follower,
+            'ig_active_follower_percent': shouter.ig_active_follower / shouter.ig_follower_count,
+            'ig_like_engagement': shouter.ig_like_engagement,
+            'ig_like_engagement_percent': shouter.ig_like_engagement / shouter.ig_active_follower,
+        }
         return render(request, 'shouters/menu__social-media.html', context)
     return redirect('on_dev')

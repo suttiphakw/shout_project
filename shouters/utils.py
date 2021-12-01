@@ -82,7 +82,7 @@ class FacebookAPI:
                'pages_read_engagement'
 
     # SCOPE
-    scope_list = ['biography', 'followers_count', 'username', 'profile_picture_url']
+    scope_list = ['biography', 'followers_count', 'follows_count', 'media_count', 'username', 'profile_picture_url']
     audience_scope = ['audience_city', 'audience_country', 'audience_gender_age', 'audience_locale', 'online_followers']
 
     # API URL
@@ -129,13 +129,17 @@ class FacebookAPI:
                                             'access_token': access_token})
 
         username = get_json(response=response_bio, param='username')
+        media_count = get_json(response=response_bio, param='media_count')
         followers = get_json(response=response_bio, param='followers_count')
+        followings = get_json(response=response_bio, param='follows_count')
         profile_picture_url = get_json(response=response_bio, param='profile_picture_url')
 
         context = {
             'username': username,
+            'media_count': media_count,
             'followers': followers,
-            'profile_picture_url': profile_picture_url
+            'followings': followings,
+            'profile_picture_url': profile_picture_url,
         }
 
         return context
@@ -175,7 +179,7 @@ class FacebookAPI:
         context = {
             'total_likes': total_likes,
             'average_total_like': average_total_like,
-            'like_engagement': like_engagement
+            'like_engagement': like_engagement,
         }
         return context
 

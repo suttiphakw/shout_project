@@ -30,7 +30,7 @@ urlpatterns = [
     path('oauth2/', views.oauth2, name='oauth2'),
     # Shouter Menu
     path('menu/', views.menu, name='shouter__menu'),
-    path('menu/social-media/', views.social_media, name='shouter__menu__social-media'),
+    path('menu/social-media/', views.menu__social_media, name='shouter__menu__social-media'),
 
 
 ]
