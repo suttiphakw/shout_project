@@ -69,26 +69,26 @@
                     </div>
                     <div class="social-card__detail">
                         <div class="social-card__container__top">
-                            <img src="{% static 'img/shouters/temp_user.JPG' %}" alt="" style="width: 15rem; height: 15rem; border-radius: 50%">
+                            <img src="{{ ig_profile_picture_url }}" alt="" style="width: 15rem; height: 15rem; border-radius: 50%">
                             <div class="social-card__container__top__detail">
-                                <p class="social-card__container__top__detail__main">@manhoolay</p>
+                                <p class="social-card__container__top__detail__main">@{{ ig_username }}</p>
                                 <p>IG Business Account</p>
                             </div>
                         </div>
 
                         <div class="social-card__container__middle">
                             <div class="social-card__container__middle__detail">
-                                <p class="social-card__container__middle__detail__main">553</p>
+                                <p class="social-card__container__middle__detail__main">{{ ig_media_count }}</p>
                                 <p>Posts</p>
                             </div>
 
                             <div class="social-card__container__middle__detail">
-                                <p class="social-card__container__middle__detail__main">2000</p>
+                                <p class="social-card__container__middle__detail__main">{{ ig_followers }}</p>
                                 <p>Followers</p>
                             </div>
 
                             <div class="social-card__container__middle__detail">
-                                <p class="social-card__container__middle__detail__main">1200</p>
+                                <p class="social-card__container__middle__detail__main">{{ ig_followings }}</p>
                                 <p>Followings</p>
                             </div>
                         </div>
@@ -98,11 +98,11 @@
                         <div class="social-card__container__bottom">
                             <div class="social-card__container__bottom__block">
                                 <p>Active Follower <span>(Rate)</span></p>
-                                <p>1,690 <span>(69.4%)</span></p>
+                                <p>{{ ig_active_follower }} <span>({{ ig_active_follower_percent }}%)</span></p>
                             </div>
                             <div class="social-card__container__bottom__block">
                                 <p>Engagement <span>(Rate)</span></p>
-                                <p>320 <span>(12.3%)</span></p>
+                                <p>{{ ig_engagement }} <span>({{ ig_engagement_percent }}%)</span></p>
                             </div>
                         </div>
 
@@ -120,7 +120,7 @@
                     </div>
                     <div class="social-card__detail">
                         <div class="social-card__container__top">
-                            <img src="{% static 'img/shouters/temp_user.JPG' %}" alt="" style="width: 15rem; height: 15rem; border-radius: 50%">
+                            <img src="{{ ig_profile_picture_url }}" alt="" style="width: 15rem; height: 15rem; border-radius: 50%">
                             <div class="social-card__container__top__detail">
                                 <p class="social-card__container__top__detail__main">* Facebook Name *</p>
                                 <p>Facebook Account</p>

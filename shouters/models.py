@@ -14,6 +14,7 @@ class Shouter(models.Model):
     fb_page_id = models.CharField(max_length=120, null=True, blank=True)
     fb_is_connect = models.BooleanField(default=False)
     #
+
     # # Instagram
     ig_business_account_id = models.CharField(max_length=120, null=True, blank=True)
     ig_username = models.CharField(max_length=120, null=True, blank=True)
@@ -22,12 +23,27 @@ class Shouter(models.Model):
     ig_following_count = models.IntegerField(null=True, blank=True)
     ig_active_follower = models.IntegerField(null=True, blank=True)
     ig_active_follower_harmonic = models.IntegerField(null=True, blank=True)
+    ig_active_follower_percent = models.FloatField(null=True, blank=True)
     ig_estimated_reach = models.IntegerField(null=True, blank=True)
     ig_profile_picture = models.URLField(max_length=300, null=True, blank=True)
+
     # ig_post_permalink
     ig_total_like = models.IntegerField(null=True, blank=True)
     ig_average_total_like = models.IntegerField(null=True, blank=True)
-    ig_like_engagement = models.IntegerField(null=True, blank=True)
+    ig_engagement_percent = models.FloatField(null=True, blank=True)
+    ig_story_view = models.FloatField(null=True, blank=True)
+    ig_average_post_reach = models.FloatField(null=True, blank=True)
+    # ig_like_engagement = models.IntegerField(null=True, blank=True)
+
+    # # Pricing
+    ig_price_story_fc = models.FloatField(null=True, blank=True)
+    ig_price_story_ugc = models.FloatField(null=True, blank=True)
+    ig_price_post_fc = models.FloatField(null=True, blank=True)
+    ig_price_post_ugc = models.FloatField(null=True, blank=True)
+
+    ig_price_story_post_fc = models.FloatField(null=True, blank=True)
+    ig_price_story_post_ugc = models.FloatField(null=True, blank=True)
+
     #
     # # Insight
     ig_insight = models.JSONField(null=True, blank=True)

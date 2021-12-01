@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from shouters.utils import LineAPI, FacebookAPI
 from shouters.models import Shouter
 # from orders.models import Order
+
+from utils.cal_price import IGStoryFc, IGStoryUgc, IGPostFc, IGPostUgc
 from shouters.lists import thailand_province
 
 
@@ -67,19 +69,35 @@ def register__account_summary(request):
         context = {
             'ig_username': shouter.ig_username,
             'ig_media_count': shouter.ig_media_count,
+            'ig_profile_picture_url': shouter.ig_profile_picture,
             'ig_followers': shouter.ig_follower_count,
             'ig_followings': shouter.ig_following_count,
             'ig_active_follower': shouter.ig_active_follower,
-            'ig_active_follower_percent': shouter.ig_active_follower/shouter.ig_follower_count,
-            'ig_like_engagement': shouter.ig_like_engagement,
-            'ig_like_engagement_percent': shouter.ig_like_engagement/shouter.ig_active_follower,
+            'ig_active_follower_percent': shouter.ig_active_follower_percent,
+            'ig_engagement': shouter.ig_average_total_like,
+            'ig_engagement_percent': shouter.ig_engagement_percent,
         }
+
         return render(request, 'shouters/register__account-summary.html', context)
     return redirect('on_dev')
 
 @login_required(login_url='/shouters/login/')
 def register__work_selection(request):
-    return render(request, 'shouters/register__work-selection.html')
+    user = request.user
+    if Shouter.objects.filter(user=user).exists():
+        shouter = Shouter.objects.filter(user=user).first()
+
+        context = {
+            'ig_price_story_fc': shouter.ig_price_story_fc,
+            'ig_price_story_ugc': shouter.ig_price_story_ugc,
+            'ig_price_post_fc': shouter.ig_price_post_fc,
+            'ig_price_post_ugc': shouter.ig_price_post_ugc,
+            'ig_price_story_post_fc': shouter.ig_price_story_post_fc,
+            'ig_price_story_post_ugc': shouter.ig_price_story_post_ugc,
+        }
+
+        return render(request, 'shouters/register__work-selection.html', context)
+    return redirect('on_dev')
 
 @login_required(login_url='/shouters/login/')
 def register__finished(request):
@@ -132,11 +150,17 @@ def facebook_logout(request):
             shouter.fb_access_token = ''
             shouter.fb_is_connect = False
             shouter.ig_username = ''
-            shouter.ig_media_count = ''
-            shouter.ig_follower_count = ''
-            shouter.ig_following_count = ''
-            shouter.ig_active_follower = ''
-            shouter.ig_like_engagement = ''
+            shouter.ig_media_count = 0
+            shouter.ig_follower_count = 0
+            shouter.ig_following_count = 0
+            shouter.ig_active_follower = 0
+            shouter.ig_active_follower_harmonic = 0
+            shouter.ig_active_follower_percent = 0
+            shouter.ig_profile_picture = ''
+            # shouter.ig_like_engagement = ''
+            # shouter.ig_total_like = 0
+            shouter.ig_average_total_like = 0
+            shouter.ig_engagement_percent = 0
 
             shouter.save()
             return redirect('shouter__menu__social-media')
@@ -149,6 +173,9 @@ def facebook_logout(request):
 def oauth2(request):
     code = request.GET.get('code')
     if request.user is not None:
+        if Shouter.objects.filter(user=request.user).exists():
+            Shouter.objects.filter(user=request.user).delete()
+
         shouter = Shouter.objects.create(user=request.user)
         shouter.save()
 
@@ -179,6 +206,17 @@ def oauth2(request):
         shouter.ig_profile_picture = context__ig_biography.get('profile_picture_url')
         shouter.save()
 
+        # Get Active Follower
+        context__active_follower = FacebookAPI().get_active_follower(business_account_id=business_account_id,
+                                                                     access_token=access_token)
+
+        shouter.ig_active_follower = context__active_follower.get('geometric_active_follower')
+        shouter.ig_active_follower_harmonic = context__active_follower.get('harmonic_active_follower')
+        ig_active_follower_percent = (shouter.ig_active_follower / shouter.ig_follower_count) * 100
+        ig_active_follower_percent = round(ig_active_follower_percent, 2)
+        shouter.ig_active_follower_percent = ig_active_follower_percent
+        shouter.save()
+
         # Get Media Objects
         media_objects = FacebookAPI().get_ig_media_objects(business_account_id=business_account_id,
                                                            access_token=access_token)
@@ -186,29 +224,53 @@ def oauth2(request):
         # Get Engagement
         context__engagement = FacebookAPI().get_engagement_insight(media_objects=media_objects,
                                                                    access_token=access_token,
-                                                                   followers_count=context__ig_biography.get('followers'))
+                                                                   followers=shouter.ig_follower_count)
 
-        shouter.ig_total_like = context__engagement.get('total_likes')
         shouter.ig_average_total_like = context__engagement.get('average_total_like')
-        shouter.ig_like_engagement = context__engagement.get('like_engagement')
+
+        ig_engagement_percent = (shouter.ig_average_total_like / shouter.ig_active_follower) * 100
+        ig_engagement_percent = round(ig_engagement_percent, 2)
+
+        shouter.ig_engagement_percent = ig_engagement_percent
+        shouter.ig_story_view = context__engagement.get('story_view')
+        shouter.ig_average_post_reach = context__engagement.get('average_post_reach')
+        # shouter.ig_like_engagement = context__engagement.get('like_engagement')
         shouter.save()
 
-        # Get Active Follower
-        context__active_follower = FacebookAPI().get_active_follower(business_account_id=business_account_id,
-                                                                     access_token=access_token)
+        shouter.ig_price_story_fc = round(IGStoryFc().cal_price(shouter.ig_story_view), 2)
+        shouter.ig_price_story_ugc = round(IGStoryUgc().cal_price(shouter.ig_story_view), 2)
+        shouter.ig_price_post_fc = round(IGPostFc().cal_price(shouter.ig_story_view), 2)
+        shouter.ig_price_post_ugc = round(IGPostUgc().cal_price(shouter.ig_story_view), 2)
 
-        shouter.ig_active_follower = context__active_follower.get('geometric_active_follower')
-        shouter.ig_active_follower_harmonic = context__active_follower.get('harmonic_active_follower')
+        ig_price_story_post_fc = (IGStoryFc().cal_price(shouter.ig_story_view) +
+                                  IGPostFc().cal_price(shouter.ig_story_view)) * 0.9
+        ig_price_story_post_fc = round(ig_price_story_post_fc, 2)
+
+        ig_price_story_post_ugc = (IGStoryUgc().cal_price(shouter.ig_story_view) +
+                                   IGPostUgc().cal_price(shouter.ig_story_view)) * 0.9
+        ig_price_story_post_ugc = round(ig_price_story_post_ugc, 2)
+
+        shouter.ig_price_story_post_fc = ig_price_story_post_fc
+        shouter.ig_price_story_post_ugc = ig_price_story_post_ugc
         shouter.save()
 
-        return  redirect('register__work_selection')
+        return redirect('register__work_selection')
 
     else:
         return redirect('on_dev')
 
 @login_required(login_url='/shouters/login/')
 def menu(request):
-    return render(request, 'shouters/menu.html')
+    user = request.user
+    if Shouter.objects.filter(user=user).exists():
+        shouter = Shouter.objects.filter(user=user).first()
+
+        context = {
+            'ig_profile_picture_url': shouter.ig_profile_picture,
+        }
+
+        return render(request, 'shouters/menu.html', context)
+    return redirect('on_dev')
 
 @login_required(login_url='/shouters/login/')
 def menu__social_media(request):
@@ -222,9 +284,11 @@ def menu__social_media(request):
             'ig_followers': shouter.ig_follower_count,
             'ig_followings': shouter.ig_following_count,
             'ig_active_follower': shouter.ig_active_follower,
-            'ig_active_follower_percent': shouter.ig_active_follower / shouter.ig_follower_count,
-            'ig_like_engagement': shouter.ig_like_engagement,
-            'ig_like_engagement_percent': shouter.ig_like_engagement / shouter.ig_active_follower,
+            'ig_active_follower_percent': shouter.ig_active_follower_percent,
+            'ig_engagement': shouter.ig_average_total_like,
+            'ig_engagement_percent': shouter.ig_engagement_percent,
+            'ig_profile_picture_url': shouter.ig_profile_picture,
+            'fb_connect_status': shouter.fb_is_connect,
         }
         return render(request, 'shouters/menu__social-media.html', context)
     return redirect('on_dev')

@@ -6,6 +6,9 @@ import numpy as np
 from collections import OrderedDict
 from django.conf import settings
 
+from utils.predicted_value import PredictedIG, check_is_predicted
+from utils.outliers_cut import outlier_cut
+
 
 def get_json(response, param):
     response_json = response.json()
@@ -151,36 +154,93 @@ class FacebookAPI:
         media_objects = get_json(response=response_media_objects, param='data')
         return media_objects
 
-    def get_engagement_insight(self, media_objects, access_token, followers_count):
-        total_likes = 0
-        if len(media_objects) >= 9:
-            for item in media_objects[0:9]:
+    def get_engagement_insight(self, media_objects, access_token, followers):
+        list_like = []
+        list_reach = []
+        if len(media_objects) >= 20:
+            for item in media_objects[0:20]:
                 item_detail_url = self.basic_url + item['id']
+                item_insight_url = item_detail_url + '/insights'
                 response_like_count = requests.get(item_detail_url,
                                                    params={
                                                        'fields': 'like_count',
                                                        'access_token': access_token
                                                    })
-                like_count = get_json(response=response_like_count, param='like_count')
-                total_likes += like_count
+                if response_like_count.status_code != 200:
+                    list_like.append(0)
+                else:
+                    list_like.append(get_json(response=response_like_count, param='like_count'))
+
+                response_reach_count = requests.get(item_insight_url,
+                                                    params={
+                                                        'metric': 'reach',
+                                                        'access_token': access_token
+                                                    })
+                if response_reach_count.status_code != 200:
+                    list_reach.append(0)
+                else:
+                    data = response_reach_count.json()
+                    reach = data['data'][0]['values']
+                    list_reach.append(reach)
+
         elif len(media_objects) != 0:
             for item in media_objects[0:len(media_objects)]:
                 item_detail_url = self.basic_url + item['id']
+                item_insight_url = item_detail_url + '/insights'
                 response_like_count = requests.get(item_detail_url,
                                                    params={
                                                        'fields': 'like_count',
                                                        'access_token': access_token
                                                    })
-                like_count = get_json(response=response_like_count, param='like_count')
-                total_likes += like_count
+                if response_like_count.status_code != 200:
+                    list_like.append(0)
+                else:
+                    list_like.append(get_json(response=response_like_count, param='like_count'))
 
-        average_total_like = total_likes*100/9
-        like_engagement = round(average_total_like/followers_count, 2)
+                response_reach_count = requests.get(item_insight_url,
+                                                    params={
+                                                        'metric': 'reach',
+                                                        'access_token': access_token
+                                                    })
+                if response_reach_count.status_code != 200:
+                    list_reach.append(0)
+                else:
+                    data = response_reach_count.json()
+                    reach = data['data'][0]['values']
+                    list_reach.append(reach)
+
+        # Calculation Like
+        if check_is_predicted(list_like):
+            average_total_like = PredictedIG().like(followers)
+            story_view = PredictedIG().story_view(likes=average_total_like, followers=followers)
+            average_post_reach = PredictedIG().post_reach(average_total_like, story_view)
+        else:
+            outlier = outlier_cut(list_like)
+            average_total_like = outlier.get('mean')
+            index = outlier.get('used_idx')
+
+            # Calculation Story View
+            story_view = PredictedIG().story_view(likes=average_total_like, followers=followers)
+
+            # Calculation Post Reach
+            if check_is_predicted(list_reach):
+                average_post_reach = PredictedIG().post_reach(average_total_like, story_view)
+            else:
+                final_list = []
+                for idx, value in enumerate(list_reach):
+                    if idx not in index:
+                        continue
+                    else:
+                        final_list.append(value)
+
+                average_post_reach = statistics.mean(final_list)
+
         context = {
-            'total_likes': total_likes,
             'average_total_like': average_total_like,
-            'like_engagement': like_engagement,
+            'story_view': story_view,
+            'average_post_reach': average_post_reach
         }
+
         return context
 
     @staticmethod
@@ -320,17 +380,21 @@ class FacebookAPI:
     def get_active_follower(self, business_account_id, access_token):
         my_list = []
         my_list_2 = []
-        unix_time = time.time()
+        unix_time = round(time.time())
         _9_days_before = unix_time - 9*86400
         _2_days_before = unix_time - 2*86400
+
         active_follower_url = self.basic_url + business_account_id + '/insights'
         response_active_follower = requests.get(active_follower_url,
                                                 params={'metric': 'online_followers',
                                                         'period': 'lifetime',
                                                         'access_token': access_token,
-                                                        'since': _2_days_before,
-                                                        'until': _9_days_before})
+                                                        'since': _9_days_before,
+                                                        'until': _2_days_before})
+
         data = response_active_follower.json()
+        print(data)
+
         for value in data['data'][0]['values']:
             mean_1 = sum([value['value']['0'], value['value']['1'], value['value']['2']])
             mean_2 = sum([value['value']['3'], value['value']['4'], value['value']['5']])

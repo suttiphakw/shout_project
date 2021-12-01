@@ -20,3 +20,15 @@ class PredictedIG:
             return likes * self.nano_story_view_per_like
         return likes * self.micro_story_view_per_like
 
+def check_is_predicted(list_reach):
+    final_list = []
+    for value in list_reach:
+        if value is not 0:
+            final_list.append(value)
+        else:
+            continue
+
+    if len(final_list) > 3:
+        return False
+    else:
+        return True
