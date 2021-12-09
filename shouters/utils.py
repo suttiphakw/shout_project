@@ -378,41 +378,53 @@ class FacebookAPI:
         return np.exp(a.mean())
 
     def get_active_follower(self, business_account_id, access_token):
-        my_list = []
-        my_list_2 = []
-        unix_time = round(time.time())
-        _9_days_before = unix_time - 9*86400
-        _2_days_before = unix_time - 2*86400
+        try:
+            my_list = []
+            my_list_2 = []
+            unix_time = round(time.time())
+            _9_days_before = unix_time - 9*86400
+            _2_days_before = unix_time - 2*86400
 
-        active_follower_url = self.basic_url + business_account_id + '/insights'
-        response_active_follower = requests.get(active_follower_url,
-                                                params={'metric': 'online_followers',
-                                                        'period': 'lifetime',
-                                                        'access_token': access_token,
-                                                        'since': _9_days_before,
-                                                        'until': _2_days_before})
+            active_follower_url = self.basic_url + business_account_id + '/insights'
+            response_active_follower = requests.get(active_follower_url,
+                                                    params={'metric': 'online_followers',
+                                                            'period': 'lifetime',
+                                                            'access_token': access_token,
+                                                            'since': _9_days_before,
+                                                            'until': _2_days_before})
 
-        data = response_active_follower.json()
-        print(data)
+            data = response_active_follower.json()
+            print(data)
 
-        for value in data['data'][0]['values']:
-            mean_1 = sum([value['value']['0'], value['value']['1'], value['value']['2']])
-            mean_2 = sum([value['value']['3'], value['value']['4'], value['value']['5']])
-            mean_3 = sum([value['value']['6'], value['value']['7'], value['value']['8']])
-            mean_4 = sum([value['value']['9'], value['value']['10'], value['value']['11']])
-            mean_5 = sum([value['value']['12'], value['value']['13'], value['value']['14']])
-            mean_6 = sum([value['value']['15'], value['value']['16'], value['value']['17']])
-            mean_7 = sum([value['value']['18'], value['value']['19'], value['value']['20']])
-            mean_8 = sum([value['value']['21'], value['value']['22'], value['value']['23']])
-            avg = self.geo_mean_overflow([mean_1, mean_2, mean_3, mean_4, mean_5, mean_6, mean_7, mean_8])
-            avg_2 = statistics.harmonic_mean([mean_1, mean_2, mean_3, mean_4, mean_5, mean_6, mean_7, mean_8])
-            my_list.append(avg)
-            my_list_2.append(avg_2)
+            for value in data['data'][0]['values']:
+                mean_1 = sum([value['value']['0'], value['value']['1'], value['value']['2']])
+                mean_2 = sum([value['value']['3'], value['value']['4'], value['value']['5']])
+                mean_3 = sum([value['value']['6'], value['value']['7'], value['value']['8']])
+                mean_4 = sum([value['value']['9'], value['value']['10'], value['value']['11']])
+                mean_5 = sum([value['value']['12'], value['value']['13'], value['value']['14']])
+                mean_6 = sum([value['value']['15'], value['value']['16'], value['value']['17']])
+                mean_7 = sum([value['value']['18'], value['value']['19'], value['value']['20']])
+                mean_8 = sum([value['value']['21'], value['value']['22'], value['value']['23']])
+                avg = self.geo_mean_overflow([mean_1, mean_2, mean_3, mean_4, mean_5, mean_6, mean_7, mean_8])
+                avg_2 = statistics.harmonic_mean([mean_1, mean_2, mean_3, mean_4, mean_5, mean_6, mean_7, mean_8])
+                my_list.append(avg)
+                my_list_2.append(avg_2)
 
-        geometric_active_follower = statistics.mean(my_list)
-        harmonic_active_follower = statistics.mean(my_list_2)
-        context = {
-            'geometric_active_follower': geometric_active_follower,
-            'harmonic_active_follower': harmonic_active_follower
-        }
-        return context
+            geometric_active_follower = statistics.mean(my_list)
+            harmonic_active_follower = statistics.mean(my_list_2)
+            context = {
+                'geometric_active_follower': geometric_active_follower,
+                'harmonic_active_follower': harmonic_active_follower
+            }
+            return context
+        except:
+            response_bio = requests.get(self.basic_url_v3_2 + business_account_id,
+                                        params={'fields': ','.join(self.scope_list),
+                                                'access_token': access_token})
+            followers = get_json(response=response_bio, param='followers_count')
+            predicted_active_followers = 0.7 * followers
+            context = {
+                'geometric_active_follower': predicted_active_followers,
+                'harmonic_active_follower': predicted_active_followers
+            }
+            return context

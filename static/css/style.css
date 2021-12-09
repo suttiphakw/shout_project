@@ -22,9 +22,11 @@
   --color-text-white: #fff;
   --color-text-black: #000;
   --color-background-pink: rgba(248, 240, 246, 0.3);
+  --color-background-pink-light: #F8F0F6;
   --border-grey-light: 1px solid #E9EBF1;
   --border-neutral-light: 1px solid rgba(101, 108, 131, 0.5);
-  --background-facebook-button: #1778F2; }
+  --background-facebook-button: #1778F2;
+  --background-yellow-warning: rgba(255, 223, 137, 0.2); }
 
 * {
   margin: 0;
@@ -76,10 +78,14 @@ body {
   padding: 3rem 0;
   border: none;
   border-radius: 8px;
-  font-size: 4rem; }
+  font-size: 4rem;
+  font-family: minimal_bold, sans-serif; }
 
 .logo {
   height: 7rem; }
+
+.logo__mobile {
+  height: 12rem; }
 
 .user-nav__items {
   display: flex;
@@ -400,7 +406,8 @@ body {
   .social-media-list__icon-back {
     height: 8rem;
     width: 8rem;
-    fill: white; }
+    fill: white;
+    margin-right: 3rem; }
   .social-media-list__header {
     color: white;
     padding: 4rem 0;
@@ -417,6 +424,51 @@ body {
     background-color: var(--background-facebook-button);
     color: white;
     font-size: 3rem; }
+
+.register__worry-free {
+  background-image: var(--color-main-gradient);
+  padding: 10rem 0;
+  display: flex;
+  flex-direction: column; }
+  .register__worry-free__header {
+    text-align: center;
+    color: var(--color-text-white); }
+    .register__worry-free__header__main {
+      font-size: 10rem;
+      font-family: minimal_bold, sans-serif;
+      line-height: 1.2; }
+    .register__worry-free__header__sub {
+      font-size: 5rem; }
+  .register__worry-free__content {
+    padding: 10rem 3rem 5rem; }
+    .register__worry-free__content__header {
+      font-size: 5rem;
+      font-family: minimal_bold, sans-serif;
+      color: white; }
+    .register__worry-free__content__box {
+      background-color: var(--color-background-pink-light);
+      border-radius: 10px;
+      padding: 3rem;
+      margin: 4rem 0;
+      display: flex; }
+      .register__worry-free__content__box__body {
+        font-size: 5rem; }
+        .register__worry-free__content__box__body__main {
+          color: var(--color-primary);
+          font-family: minimal_bold, sans-serif;
+          font-size: 5rem; }
+        .register__worry-free__content__box__body__text {
+          font-size: 4rem; }
+        .register__worry-free__content__box__body__extra {
+          color: var(--color-primary);
+          font-size: 3.5rem;
+          margin-top: 3rem; }
+  .register__worry-free__icon {
+    height: 7rem;
+    width: 7rem;
+    fill: var(--color-primary);
+    margin-right: 5rem;
+    flex: 0 0 15%; }
 
 .top {
   background-image: var(--color-main-gradient);
@@ -483,7 +535,7 @@ body {
   flex-direction: column; }
 
 .social-card {
-  margin: 4rem 3rem;
+  margin: 4rem 3rem 2rem;
   border: var(--border-grey-light);
   border-radius: 2rem;
   padding: 3rem;
@@ -537,10 +589,17 @@ body {
       .social-card__detail__block-2 > input[type=number]::placeholder {
         color: var(--color-neutral-light); }
   .social-card__detail__name {
-    padding-right: 5rem; }
+    padding-right: 5rem;
+    flex: 0 0 60%; }
   .social-card__detail__sub {
     color: var(--color-neutral-light);
     font-size: 3.5rem; }
+    .social-card__detail__sub > span {
+      color: var(--color-primary); }
+  .social-card__detail__checkbox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; }
   .social-card__detail__checkbox input {
     width: 5rem;
     height: 5rem; }
@@ -628,6 +687,58 @@ input:checked + .slider:before {
   .confirm_account__content__text {
     font-size: 4rem; }
 
+.register__account-summary__text-grey {
+  color: var(--color-neutral-light); }
+
+.register__account-summary__body__header {
+  margin: 4rem 3rem 0;
+  font-size: 3rem;
+  font-family: minimal_bold, sans-serif; }
+
+.register__account-summary__shouter-account {
+  margin: 4rem 3rem 2rem;
+  border: var(--border-grey-light);
+  border-radius: 2rem;
+  padding: 3rem;
+  font-size: 4rem;
+  display: flex;
+  flex-direction: column; }
+  .register__account-summary__shouter-account__top {
+    display: flex;
+    padding: 1rem 0 3rem;
+    border-bottom: var(--border-grey-light);
+    margin-bottom: 3rem; }
+    .register__account-summary__shouter-account__top__right {
+      margin-left: 6rem; }
+  .register__account-summary__shouter-account__detail {
+    display: flex;
+    justify-content: space-between;
+    line-height: 1.8; }
+  .register__account-summary__shouter-account__interest {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+    .register__account-summary__shouter-account__interest__box {
+      padding: 2rem;
+      border: 1px solid var(--color-primary);
+      border-radius: 8px;
+      color: var(--color-primary);
+      background-color: var(--color-background-pink-light);
+      margin: 1rem; }
+
+.register__account-summary__warning {
+  border: none;
+  background-color: var(--background-yellow-warning);
+  padding: 3rem;
+  border-radius: 2rem;
+  margin: 2rem 3rem;
+  display: flex; }
+  .register__account-summary__warning__icon {
+    font-size: 10rem;
+    margin-right: 4rem; }
+  .register__account-summary__warning__text {
+    font-size: 4rem; }
+
 .register-finished {
   display: flex;
   justify-content: center;
@@ -642,3 +753,83 @@ input:checked + .slider:before {
     text-align: center;
     font-size: 4rem;
     padding: 5rem; }
+
+.register__choose-ig__header {
+  text-align: center;
+  font-family: minimal_bold, sans-serif;
+  font-size: 3.5rem;
+  border-bottom: var(--border-grey-light);
+  padding: 4rem; }
+
+.register__choose-ig__body {
+  display: flex;
+  flex-direction: column; }
+
+.register__choose-ig__card {
+  flex: 0 0 50%; }
+
+.register__choose-ig__radio-btn {
+  margin: 4rem 3rem;
+  border: var(--border-grey-light);
+  border-radius: 2rem;
+  padding: 3rem;
+  font-size: 4rem;
+  display: flex;
+  flex-direction: column; }
+  .register__choose-ig__radio-btn__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+  .register__choose-ig__radio-btn__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0; }
+    .register__choose-ig__radio-btn__body__main {
+      margin-top: 3rem;
+      font-family: minimal_bold, sans-serif;
+      font-size: 5rem; }
+    .register__choose-ig__radio-btn__body__info {
+      display: flex; }
+      .register__choose-ig__radio-btn__body__info__left {
+        flex: 0 0 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; }
+      .register__choose-ig__radio-btn__body__info__right {
+        flex: 0 0 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; }
+      .register__choose-ig__radio-btn__body__info__main {
+        font-family: minimal_bold, sans-serif;
+        font-size: 5rem; }
+
+.register__choose-ig__custom-radio input {
+  display: none; }
+
+.register__choose-ig__instagram-icon {
+  height: 6rem;
+  width: 6rem; }
+
+.register__choose-ig__check-icon {
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  padding: 1rem;
+  background-color: var(--color-primary);
+  fill: white;
+  opacity: 0; }
+
+.register__choose-ig__custom-radio input:checked + .register__choose-ig__radio-btn {
+  border: 2px solid var(--color-primary-dark);
+  background-color: var(--color-background-pink-light); }
+
+.register__choose-ig__custom-radio input:checked +
+.register__choose-ig__radio-btn >
+.register__choose-ig__radio-btn__top >
+.register__choose-ig__check-icon {
+  opacity: 1; }
