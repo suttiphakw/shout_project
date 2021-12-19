@@ -636,7 +636,6 @@ def oauth2(request):
         return HttpResponse('Failed by business account id')
 
     # Save Access Token and Page ID to database
-    shouter.fb_is_connect = True
     shouter.save()
 
     # Get Bio
@@ -721,6 +720,8 @@ def oauth2(request):
     context__audience_insight = FacebookAPI().get_audience_insight(business_account_id=business_account_id,
                                                                    access_token=access_token)
     shouter.ig_response_audience_insight = context__audience_insight.get('data')
+
+    shouter.fb_is_connect = True
     shouter.save()
 
     redirect_url = '/shouters/register/work_selection/{}/'.format(token)
