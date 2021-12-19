@@ -17,7 +17,7 @@ LINE_CHANNEL_ACCESS_TOKEN = '2vlk1sbdeB/YgPsZlUzFxq647gDOeVBhs+swmUG1XOGFol9YCN4
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'shout_prod',
+        'NAME': 'shout_mvp',
         'USERNAME': 'shoutadmin',
         'PASSWORD': 'password',
         'HOST': 'localhost',
