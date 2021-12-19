@@ -1,0 +1,112 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static 'img/logo/Shout_Logov2-07.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/main.js' %}"></script>
+    <!-- Vue Framework -->
+<!--    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
+<!--    <script src="https://unpkg.com/vue@next" defer></script>-->
+<!--    <script src="js/main.js" defer></script>-->
+    <!-- Title -->
+    <title>Shout | Account</title>
+</head>
+<body>
+    <section class="container">
+        <section class="social-media-list">
+            <a href="">
+                <svg class="social-media-list__icon-back">
+                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-left"></use>
+                </svg>
+            </a>
+            <div class="social-media-list__header">
+                <p>บัญชีธนาคาร / บัตรประชาชน</p>
+            </div>
+        </section>
+
+        <main class="bank-account__content">
+            <form action="">
+                <h3 style="text-align: center; color: red; font-size: 30px; font-family: minimal_bold, sans-serif; margin-top: 15px">** ขณะนี้ยังไม่เปิดให้บริการ **</h3>
+                <div class="social-card">
+                    <div class="social-card__header">
+                        <div class="social-card__name">
+                            <h3>สำเนาบัตรประชาชน</h3>
+                        </div>
+                    </div>
+                    <div class="bank-account__detail">
+                        <div class="bank-account__form-input">
+                            <div class="bank-account__preview">
+                                <img id="file-ip-1-preview">
+                            </div>
+                            <label for="file-ip-1">อัพโหลดใหม่</label>
+                            <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview1(event);">
+                        </div>
+                    </div>
+
+                    <div class="social-media-list__space"></div>
+
+                    <div class="social-card__header">
+                        <div class="social-card__name">
+                            <h3>บัญชีธนาคาร</h3>
+                        </div>
+                    </div>
+                    <div class="bank-account__detail">
+                        <div class="bank-account__form-input">
+                            <div class="bank-account__preview">
+                                <img id="file-ip-2-preview">
+                            </div>
+                            <label for="file-ip-2">อัพโหลดใหม่</label>
+                            <input type="file" id="file-ip-2" accept="image/*" onchange="showPreview2(event);">
+                        </div>
+                    </div>
+
+                    <ul class="bank-account__list">
+                        <li>
+                            <p class="bank-account__list__text">โปรดถ่ายรูปให้เห็นข้อมูลบนบัตรประชาชนและสมุดบัญชีได้อย่างชัดเจน</p>
+                        </li>
+                        <li>
+                            <p class="bank-account__list__text">แนะนำให้วางเอกสารบนพื้นราบ อย่าวางนิ้วมือบดบังข้อมูล</p>
+                        </li>
+                    </ul>
+
+                    <div class="social-media-list__space"></div>
+
+                    <div class="bank-account__text-input">
+                        <label for="bank_account">เลขบัญชีธนาคาร <span>*</span> </label>
+                        <input type="text" id="bank_account" name="bank_account" value="000-0000-00-0"/>
+
+                        <label for="bank_name">ชื่อธนาคาร <span>*</span> </label>
+                        <input type="text" id="bank_name" name="bank_name" value="Siam Commercial Bank"/>
+
+                        <label for="bank_username">ชื่อเจ้าของบัญชี <span>*</span> </label>
+                        <input type="text" id="bank_username" name="bank_username" value="นาย พิม ยอดเยี่ยม"/>
+
+                    </div>
+
+                    <div class="bank-account__consent">
+                        <svg class="bank-account__consent__icon">
+                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-shield"></use>
+                        </svg>
+
+                        <p class="bank-account__consent__text">ข้อมูลของคุณจะถูกจัดเก็บอย่างปลอดภัย และเป็นความลับ ในระบบของเรา
+                            คุณสามารถเข้าถึงข้อมูลนี้ ได้แต่เพียงผู้เดียว</p>
+                    </div>
+
+                    <input class="btn-shouter btn-main" type="submit" value="บันทึก">
+
+                </div>
+            </form>
+        </main>
+
+    </section>
+
+
+</body>
+</html>

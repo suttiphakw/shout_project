@@ -109,50 +109,118 @@ class FacebookAPI:
 
     def get_access_token(self, code):
         response_auth = requests.get(self.access_token_url, params=self.fb_auth_form(code))
-        access_token = get_json(response=response_auth, param='access_token')
-        return access_token
+        if not response_auth.status_code == 200:
+            return None
+
+        data = response_auth.json()
+        try:
+            access_token = get_json(response=response_auth, param='access_token')
+        except:
+            access_token = ''
+
+        context = {
+            'data': data,
+            'access_token': access_token
+        }
+        return context
 
     def get_facebook_page_id(self, access_token):
         response_page_id = requests.get(self.page_id_url, params={'access_token': access_token})
+        if not response_page_id.status_code == 200:
+            return None
+
         data = response_page_id.json()
-        page_id = data['data'][0]['id']
-        return page_id
+        try:
+            page_id = data['data'][0]['id']
+        except:
+            page_id = ''
+
+        context = {
+            'data': data,
+            'page_id': page_id
+        }
+        return context
 
     def get_business_account_id(self, page_id, access_token):
         response_business_account_id = requests.get(self.basic_url + page_id,
                                                     params={'fields': 'instagram_business_account',
                                                             'access_token': access_token})
+        if not response_business_account_id.status_code == 200:
+            return None
+
         data = response_business_account_id.json()
-        business_account_id = data['instagram_business_account']['id']
-        return business_account_id
+        try:
+            business_account_id = data['instagram_business_account']['id']
+        except:
+            business_account_id = ''
+
+        context = {
+            'data': data,
+            'business_account_id': business_account_id
+        }
+        return context
 
     def get_ig_biography(self, business_account_id, access_token):
         response_bio = requests.get(self.basic_url_v3_2 + business_account_id,
                                     params={'fields': ','.join(self.scope_list),
                                             'access_token': access_token})
+        if not response_bio.status_code == 200:
+            return None
 
-        username = get_json(response=response_bio, param='username')
-        media_count = get_json(response=response_bio, param='media_count')
-        followers = get_json(response=response_bio, param='followers_count')
-        followings = get_json(response=response_bio, param='follows_count')
-        profile_picture_url = get_json(response=response_bio, param='profile_picture_url')
+        data = response_bio.json()
+
+        try:
+            username = get_json(response=response_bio, param='username')
+        except:
+            username = ''
+
+        try:
+            media_count = get_json(response=response_bio, param='media_count')
+        except:
+            media_count = 0
+
+        try:
+            followers = get_json(response=response_bio, param='followers_count')
+        except:
+            followers = 0
+
+        try:
+            followings = get_json(response=response_bio, param='follows_count')
+        except:
+            followings = 0
+
+        try:
+            profile_picture_url = get_json(response=response_bio, param='profile_picture_url')
+        except:
+            profile_picture_url = ''
 
         context = {
+            'data': data,
             'username': username,
             'media_count': media_count,
             'followers': followers,
             'followings': followings,
             'profile_picture_url': profile_picture_url,
         }
-
         return context
 
     def get_ig_media_objects(self, business_account_id, access_token):
         media_object_url = self.basic_url + business_account_id + '/media'
-
         response_media_objects = requests.get(media_object_url, {'access_token': access_token})
-        media_objects = get_json(response=response_media_objects, param='data')
-        return media_objects
+
+        if not response_media_objects.status_code == 200:
+            return None
+
+        data = response_media_objects.json()
+        try:
+            media_objects = get_json(response=response_media_objects, param='data')
+        except:
+            media_objects = ''
+
+        context = {
+            'data': data,
+            'media_objects': media_objects
+        }
 
     def get_engagement_insight(self, media_objects, access_token, followers):
         list_like = []
@@ -273,104 +341,105 @@ class FacebookAPI:
                                                          'period': 'lifetime',
                                                          'access_token': access_token})
         data = response_audience_insight.json()
+        return data
 
-        # Get Data -> Audience City
-        key_audience_city = self.get_key_audience(data, 0)
-        item_audience_city = self.get_item_audience(data, 0)
-        total_audience_city = sum(item_audience_city.values())
-
-        # Get Data -> Audience Country
-        key_audience_country = self.get_key_audience(data, 1)
-        item_audience_country = self.get_item_audience(data, 1)
-        total_audience_country = sum(item_audience_country.values())
-
-        # Get Data -> Audience Gender in Age range
-        key_audience_gender_age = self.get_key_audience(data, 2)
-        item_audience_gender_age = self.get_item_audience(data, 2)
-        total_audience_gender_age = sum(item_audience_gender_age.values())
-
-        # Calculate Max Total
-        max_total = max(total_audience_city, total_audience_country, total_audience_gender_age)
-
-        # Get Data -> Only Male Gender
-        audience_male_gender = self.get_gender_count(item_audience_gender_age, 'M')
-        total_audience_male_gender = sum(audience_male_gender.values())
-
-        # Get Data -> Only Female Gender
-        audience_female_gender = self.get_gender_count(item_audience_gender_age, 'F')
-        total_audience_female_gender = sum(audience_female_gender.values())
-
-        # Get Data -> Only Undefined Gender
-        audience_undefined_gender = self.get_gender_count(item_audience_gender_age, 'U')
-        total_audience_undefined_gender = sum(audience_undefined_gender.values())
-
-        # Get Data -> Age Range 13-17
-        audience_13_to_17_age = self.get_age_count(item_audience_gender_age, '13')
-        total_audience_13_to_17_age = sum(audience_13_to_17_age.values())
-
-        # Get Data -> Age Range 18-24
-        audience_18_to_24_age = self.get_age_count(item_audience_gender_age, '18')
-        total_audience_18_to_24_age = sum(audience_18_to_24_age.values())
-
-        # Get Data -> Age Range 25-34
-        audience_25_to_34_age = self.get_age_count(item_audience_gender_age, '25')
-        total_audience_25_to_34_age = sum(audience_25_to_34_age.values())
-
-        # Get Data -> Age Range 35-44
-        audience_35_to_44_age = self.get_age_count(item_audience_gender_age, '35')
-        total_audience_35_to_44_age = sum(audience_35_to_44_age.values())
-
-        # Get Data -> Age Range 45-54
-        audience_45_to_54_age = self.get_age_count(item_audience_gender_age, '45')
-        total_audience_45_to_54_age = sum(audience_45_to_54_age.values())
-
-        # Get Data -> Age Range 55-64
-        audience_55_to_64_age = self.get_age_count(item_audience_gender_age, '55')
-        total_audience_55_to_64_age = sum(audience_55_to_64_age.values())
-
-        # Get Data -> Age Range 65+
-        audience_65_up_age = self.get_age_count(item_audience_gender_age, '65')
-        total_audience_65_up_age = sum(audience_65_up_age.values())
-
-        # Get Dict for see Ordered Audience_city
-        value_audience_city = self.get_percentage_audience(item_audience_city, max_total)
-        value_audience_country = self.get_percentage_audience(item_audience_country, max_total)
-        value_audience_gender_age = self.get_percentage_audience(item_audience_gender_age, max_total)
-
-        two_most_common_city = {key_audience_city: list(value_audience_city.items())[:2]}
-        two_most_common_country = {key_audience_country: list(value_audience_country.items())[:2]}
-        two_most_common_gender_age = {key_audience_gender_age: list(value_audience_gender_age.items())[:2]}
-
-        audience_male_percentage = round(
-            total_audience_male_gender * 100 / (max_total - total_audience_undefined_gender), 1)
-        audience_female_percentage = round(
-            total_audience_female_gender * 100 / (max_total - total_audience_undefined_gender), 1)
-        audience_age_13_17_percentage = round(total_audience_13_to_17_age * 100 / max_total, 1)
-        audience_age_18_24_percentage = round(total_audience_18_to_24_age * 100 / max_total, 1)
-        audience_age_25_34_percentage = round(total_audience_25_to_34_age * 100 / max_total, 1)
-        audience_age_35_44_percentage = round(total_audience_35_to_44_age * 100 / max_total, 1)
-        audience_age_45_54_percentage = round(total_audience_45_to_54_age * 100 / max_total, 1)
-        audience_age_55_64_percentage = round(total_audience_55_to_64_age * 100 / max_total, 1)
-        audience_age_65_up_percentage = round(total_audience_65_up_age * 100 / max_total, 1)
-
-        context = {
-            'insight': data,
-            'max_total': max_total,
-            'two_most_common_city': two_most_common_city,
-            'two_most_common_country': two_most_common_country,
-            'two_most_common_gender_age': two_most_common_gender_age,
-            'audience_male_percentage': audience_male_percentage,
-            'audience_female_percentage': audience_female_percentage,
-            'audience_age_13_17_percentage': audience_age_13_17_percentage,
-            'audience_age_18_24_percentage': audience_age_18_24_percentage,
-            'audience_age_25_34_percentage': audience_age_25_34_percentage,
-            'audience_age_35_44_percentage': audience_age_35_44_percentage,
-            'audience_age_45_54_percentage': audience_age_45_54_percentage,
-            'audience_age_55_64_percentage': audience_age_55_64_percentage,
-            'audience_age_65_up_percentage': audience_age_65_up_percentage,
-        }
-
-        return context
+        # # Get Data -> Audience City
+        # key_audience_city = self.get_key_audience(data, 0)
+        # item_audience_city = self.get_item_audience(data, 0)
+        # total_audience_city = sum(item_audience_city.values())
+        #
+        # # Get Data -> Audience Country
+        # key_audience_country = self.get_key_audience(data, 1)
+        # item_audience_country = self.get_item_audience(data, 1)
+        # total_audience_country = sum(item_audience_country.values())
+        #
+        # # Get Data -> Audience Gender in Age range
+        # key_audience_gender_age = self.get_key_audience(data, 2)
+        # item_audience_gender_age = self.get_item_audience(data, 2)
+        # total_audience_gender_age = sum(item_audience_gender_age.values())
+        #
+        # # Calculate Max Total
+        # max_total = max(total_audience_city, total_audience_country, total_audience_gender_age)
+        #
+        # # Get Data -> Only Male Gender
+        # audience_male_gender = self.get_gender_count(item_audience_gender_age, 'M')
+        # total_audience_male_gender = sum(audience_male_gender.values())
+        #
+        # # Get Data -> Only Female Gender
+        # audience_female_gender = self.get_gender_count(item_audience_gender_age, 'F')
+        # total_audience_female_gender = sum(audience_female_gender.values())
+        #
+        # # Get Data -> Only Undefined Gender
+        # audience_undefined_gender = self.get_gender_count(item_audience_gender_age, 'U')
+        # total_audience_undefined_gender = sum(audience_undefined_gender.values())
+        #
+        # # Get Data -> Age Range 13-17
+        # audience_13_to_17_age = self.get_age_count(item_audience_gender_age, '13')
+        # total_audience_13_to_17_age = sum(audience_13_to_17_age.values())
+        #
+        # # Get Data -> Age Range 18-24
+        # audience_18_to_24_age = self.get_age_count(item_audience_gender_age, '18')
+        # total_audience_18_to_24_age = sum(audience_18_to_24_age.values())
+        #
+        # # Get Data -> Age Range 25-34
+        # audience_25_to_34_age = self.get_age_count(item_audience_gender_age, '25')
+        # total_audience_25_to_34_age = sum(audience_25_to_34_age.values())
+        #
+        # # Get Data -> Age Range 35-44
+        # audience_35_to_44_age = self.get_age_count(item_audience_gender_age, '35')
+        # total_audience_35_to_44_age = sum(audience_35_to_44_age.values())
+        #
+        # # Get Data -> Age Range 45-54
+        # audience_45_to_54_age = self.get_age_count(item_audience_gender_age, '45')
+        # total_audience_45_to_54_age = sum(audience_45_to_54_age.values())
+        #
+        # # Get Data -> Age Range 55-64
+        # audience_55_to_64_age = self.get_age_count(item_audience_gender_age, '55')
+        # total_audience_55_to_64_age = sum(audience_55_to_64_age.values())
+        #
+        # # Get Data -> Age Range 65+
+        # audience_65_up_age = self.get_age_count(item_audience_gender_age, '65')
+        # total_audience_65_up_age = sum(audience_65_up_age.values())
+        #
+        # # Get Dict for see Ordered Audience_city
+        # value_audience_city = self.get_percentage_audience(item_audience_city, max_total)
+        # value_audience_country = self.get_percentage_audience(item_audience_country, max_total)
+        # value_audience_gender_age = self.get_percentage_audience(item_audience_gender_age, max_total)
+        #
+        # two_most_common_city = {key_audience_city: list(value_audience_city.items())[:2]}
+        # two_most_common_country = {key_audience_country: list(value_audience_country.items())[:2]}
+        # two_most_common_gender_age = {key_audience_gender_age: list(value_audience_gender_age.items())[:2]}
+        #
+        # audience_male_percentage = round(
+        #     total_audience_male_gender * 100 / (max_total - total_audience_undefined_gender), 1)
+        # audience_female_percentage = round(
+        #     total_audience_female_gender * 100 / (max_total - total_audience_undefined_gender), 1)
+        # audience_age_13_17_percentage = round(total_audience_13_to_17_age * 100 / max_total, 1)
+        # audience_age_18_24_percentage = round(total_audience_18_to_24_age * 100 / max_total, 1)
+        # audience_age_25_34_percentage = round(total_audience_25_to_34_age * 100 / max_total, 1)
+        # audience_age_35_44_percentage = round(total_audience_35_to_44_age * 100 / max_total, 1)
+        # audience_age_45_54_percentage = round(total_audience_45_to_54_age * 100 / max_total, 1)
+        # audience_age_55_64_percentage = round(total_audience_55_to_64_age * 100 / max_total, 1)
+        # audience_age_65_up_percentage = round(total_audience_65_up_age * 100 / max_total, 1)
+        #
+        # context = {
+        #     'insight': data,
+        #     'max_total': max_total,
+        #     'two_most_common_city': two_most_common_city,
+        #     'two_most_common_country': two_most_common_country,
+        #     'two_most_common_gender_age': two_most_common_gender_age,
+        #     'audience_male_percentage': audience_male_percentage,
+        #     'audience_female_percentage': audience_female_percentage,
+        #     'audience_age_13_17_percentage': audience_age_13_17_percentage,
+        #     'audience_age_18_24_percentage': audience_age_18_24_percentage,
+        #     'audience_age_25_34_percentage': audience_age_25_34_percentage,
+        #     'audience_age_35_44_percentage': audience_age_35_44_percentage,
+        #     'audience_age_45_54_percentage': audience_age_45_54_percentage,
+        #     'audience_age_55_64_percentage': audience_age_55_64_percentage,
+        #     'audience_age_65_up_percentage': audience_age_65_up_percentage,
+        # }
+        #
+        # return context
 
     @staticmethod
     def geo_mean_overflow(iterable):
@@ -378,24 +447,24 @@ class FacebookAPI:
         return np.exp(a.mean())
 
     def get_active_follower(self, business_account_id, access_token):
+        my_list = []
+        my_list_2 = []
+        unix_time = round(time.time())
+        _9_days_before = unix_time - 9 * 86400
+        _2_days_before = unix_time - 2 * 86400
+        active_follower_url = self.basic_url + business_account_id + '/insights'
+        response_active_follower = requests.get(active_follower_url,
+                                                params={'metric': 'online_followers',
+                                                        'period': 'lifetime',
+                                                        'access_token': access_token,
+                                                        'since': _9_days_before,
+                                                        'until': _2_days_before})
+
+        if not response_active_follower.status_code == 200:
+            return None
+
+        data = response_active_follower.json()
         try:
-            my_list = []
-            my_list_2 = []
-            unix_time = round(time.time())
-            _9_days_before = unix_time - 9*86400
-            _2_days_before = unix_time - 2*86400
-
-            active_follower_url = self.basic_url + business_account_id + '/insights'
-            response_active_follower = requests.get(active_follower_url,
-                                                    params={'metric': 'online_followers',
-                                                            'period': 'lifetime',
-                                                            'access_token': access_token,
-                                                            'since': _9_days_before,
-                                                            'until': _2_days_before})
-
-            data = response_active_follower.json()
-            print(data)
-
             for value in data['data'][0]['values']:
                 mean_1 = sum([value['value']['0'], value['value']['1'], value['value']['2']])
                 mean_2 = sum([value['value']['3'], value['value']['4'], value['value']['5']])
@@ -412,19 +481,18 @@ class FacebookAPI:
 
             geometric_active_follower = statistics.mean(my_list)
             harmonic_active_follower = statistics.mean(my_list_2)
-            context = {
-                'geometric_active_follower': geometric_active_follower,
-                'harmonic_active_follower': harmonic_active_follower
-            }
-            return context
         except:
             response_bio = requests.get(self.basic_url_v3_2 + business_account_id,
                                         params={'fields': ','.join(self.scope_list),
                                                 'access_token': access_token})
             followers = get_json(response=response_bio, param='followers_count')
             predicted_active_followers = 0.7 * followers
-            context = {
-                'geometric_active_follower': predicted_active_followers,
-                'harmonic_active_follower': predicted_active_followers
-            }
-            return context
+            geometric_active_follower = predicted_active_followers
+            harmonic_active_follower = predicted_active_followers
+
+        context = {
+            'data': data,
+            'geometric_active_follower': geometric_active_follower,
+            'harmonic_active_follower': harmonic_active_follower
+        }
+        return context

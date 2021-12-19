@@ -19,35 +19,35 @@
 </head>
 <body>
     <section class="container">
-        <section class="top">
-            <h1 class="top__logo">&#9989;</h1>
-            <h1 class="top__header">ตรวจสอบข้อมูลบัญชี Shouter ของคุณให้ถูกต้อง</h1>
+        <section class="register__top">
+            <h1 class="register__top__logo">&#9989;</h1>
+            <h1 class="register__top__header">ตรวจสอบข้อมูลบัญชี Shouter ของคุณให้ถูกต้อง</h1>
         </section>
 
-        <section class="stage">
-            <div class="stage__block">
-                <div class="stage__number">
-                    <svg class="stage__icon">
+        <section class="register__stage">
+            <div class="register__stage__block">
+                <div class="register__stage__number">
+                    <svg class="register__stage__icon">
                         <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
                     </svg>
                 </div>
-                <p class="stage__text">ข้อมูลส่วนตัว</p>
+                <p class="register__stage__text">ข้อมูลส่วนตัว</p>
             </div>
 
-            <div class="stage__block">
-                <div class="stage__number">
-                    <svg class="stage__icon">
+            <div class="register__stage__block">
+                <div class="register__stage__number">
+                    <svg class="register__stage__icon">
                         <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
                     </svg>
                 </div>
-                <p class="stage__text">เชื่อมต่อ Social Media</p>
+                <p class="register__stage__text">เชื่อมต่อ Social Media</p>
             </div>
 
-            <div class="stage__block">
-                <div class="stage__number">
+            <div class="register__stage__block">
+                <div class="register__stage__number">
                     <p>3</p>
                 </div>
-                <p class="stage__text">ยืนยันบัญชี</p>
+                <p class="register__stage__text">ยืนยันบัญชี</p>
             </div>
         </section>
 
@@ -55,7 +55,6 @@
             <div class="content-2__header">
                 <h2>Your Social Media</h2>
             </div>
-
 
             <div class="content-2__body">
                 <div class="social-card">
@@ -122,33 +121,186 @@
                         <div class="social-card__container__top">
                             <img src="{{ ig_profile_picture_url }}" alt="" style="width: 15rem; height: 15rem; border-radius: 50%">
                             <div class="social-card__container__top__detail">
-                                <p class="social-card__container__top__detail__main">* Facebook Name *</p>
+                                <p class="social-card__container__top__detail__main">{{ first_name }} {{ last_name }}</p>
                                 <p>Facebook Account</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="social-card">
-                    <div class="social-card__header">
-                        <div class="social-card__name">
-                            <svg class="social-card__icon">
-                                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-tiktok"></use>
-                            </svg>
-                            <h3>Tiktok</h3>
+                {% if is_check_tiktok %}
+                    <div class="social-card">
+                        <div class="social-card__header">
+                            <div class="social-card__name">
+                                <svg class="social-card__icon">
+                                    <use xlink:href="img/shouters/sprite.svg#icon-tiktok"></use>
+                                </svg>
+                                <h3>Tiktok</h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="social-card__detail">
-                        <div class="social-card__container__top">
-                            <div class="social-card__container__top__detail">
-                                <p class="social-card__container__top__detail__main">* Tiktok Name *</p>
-                                <p>Tiktok Account</p>
+                        <div class="social-card__detail">
+                            <div class="social-card__container__top">
+                                <div class="social-card__container__top__detail">
+                                    <p class="social-card__container__top__detail__main">{{ tiktok_name }}</p>
+                                    <p>Tiktok Account</p>
+                                </div>
                             </div>
                         </div>
                     </div>
+                {% endif %}
+
+                {% if is_check_twitter %}
+                    <div class="social-card">
+                        <div class="social-card__header">
+                            <div class="social-card__name">
+                                <svg class="social-card__icon">
+                                    <use xlink:href="img/shouters/sprite.svg#icon-twitter"></use>
+                                </svg>
+                                <h3>Twitter</h3>
+                            </div>
+                        </div>
+                        <div class="social-card__detail">
+                            <div class="social-card__container__top">
+                                <div class="social-card__container__top__detail">
+                                    <p class="social-card__container__top__detail__main">* Twitter Name *</p>
+                                    <p>Twitter Account</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="register__account-summary__body__header">
+                    <h2>งานที่เปิดรับ</h2>
                 </div>
 
-                <div class="social-card">
+                {% if is_check_ig %}
+                    <div class="social-card">
+                        <div class="social-card__header">
+                            <div class="social-card__name">
+                                <svg class="social-card__icon">
+                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
+                                </svg>
+                                <h3>Instagram</h3>
+                            </div>
+                        </div>
+                        <div class="social-card__detail">
+                            {% if is_check_ig_story %}
+                                <div class="social-card__detail__block">
+                                    <div class="social-card__detail__name">
+                                        <p>Instagram Story</p>
+                                    </div>
+                                    <div class="social-card__detail__checkbox">
+                                        <p class="social-card__detail__sub"><span>{{ ig_price_story_fc }} - {{ ig_price_story_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub">ต่อ 1 Story</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if is_check_ig_post %}
+                                <div class="social-card__detail__block">
+                                    <div class="social-card__detail__name">
+                                        <p>Instagram Post</p>
+                                    </div>
+                                    <div class="social-card__detail__checkbox">
+                                        <p class="social-card__detail__sub"><span>{{ ig_price_post_fc }} - {{ ig_price_post_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub">ต่อ 1 Post</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if is_check_ig_story_post %}
+                                <div class="social-card__detail__block">
+                                    <div class="social-card__detail__name">
+                                        <p>Instagram Post + Story</p>
+                                    </div>
+                                    <div class="social-card__detail__checkbox">
+                                        <p class="social-card__detail__sub"><span>{{ ig_price_story_post_fc }} - {{ ig_price_story_post_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub">ต่อ 1 Post + Story</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if is_check_ig_fb %}
+                    <div class="social-card">
+                        <div class="social-card__header">
+                            <div class="social-card__name">
+                                <svg class="social-card__icon">
+                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
+                                </svg>
+                                <svg class="social-card__icon">
+                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-facebook"></use>
+                                </svg>
+                                <h3>IG + FB Share</h3>
+                            </div>
+                        </div>
+                        <div class="social-card__detail">
+                            {% if is_check_ig_fb_story %}
+                                <div class="social-card__detail__block">
+                                    <div class="social-card__detail__name">
+                                        <p>IG Story + แชร์ลง FB Story</p>
+                                    </div>
+                                    <div class="social-card__detail__checkbox">
+                                        <p class="social-card__detail__sub"><span>{{ ig_fb_price_story_fc }} - {{ ig_fb_price_story_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub">ต่อ 1 Story</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            {% if is_check_ig_fb_post %}
+                                <div class="social-card__detail__block">
+                                    <div class="social-card__detail__name">
+                                        <p>IG Post + แชร์ลง FB Post </p>
+                                    </div>
+                                    <div class="social-card__detail__checkbox">
+                                        <p class="social-card__detail__sub"><span>{{ ig_fb_price_post_fc }} - {{ ig_fb_price_post_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub">ต่อ 1 Post</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            {% if is_check_ig_fb_story_post %}
+                                <div class="social-card__detail__block">
+                                    <div class="social-card__detail__name">
+                                        <p>IG Post + Story และ แชร์ลง FB Post + FB Story</p>
+                                    </div>
+                                    <div class="social-card__detail__checkbox">
+                                        <p class="social-card__detail__sub"><span>{{ ig_fb_price_story_post_fc }} - {{ ig_fb_price_story_post_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub">ต่อ 1 Post + Story</p>
+                                    </div>
+                                </div>
+                            {%  endif %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if is_check_tiktok %}
+                    <div class="social-card">
+                        <div class="social-card__header">
+                            <div class="social-card__name">
+                                <svg class="social-card__icon">
+                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-tiktok"></use>
+                                </svg>
+                                <h3>Tiktok</h3>
+                            </div>
+                        </div>
+                        <div class="social-card__detail">
+                            <div class="social-card__detail__block">
+                                <div class="social-card__detail__name">
+                                    <p>@{{ tiktok_name }}</p>
+                                </div>
+                                <div class="social-card__detail__checkbox">
+                                    <p class="social-card__detail__sub"><span>{{ tiktok_price }} บาท</span></p>
+                                    <p class="social-card__detail__sub">ต่อ 1 Video</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if is_check_twitter %}
+                    <div class="social-card">
                     <div class="social-card__header">
                         <div class="social-card__name">
                             <svg class="social-card__icon">
@@ -158,18 +310,72 @@
                         </div>
                     </div>
                     <div class="social-card__detail">
-                        <div class="social-card__container__top">
-                            <div class="social-card__container__top__detail">
-                                <p class="social-card__container__top__detail__main">* Twitter Name *</p>
-                                <p>Twitter Account</p>
+                        <div class="social-card__detail__block">
+                            <div class="social-card__detail__name">
+                                <p>@{{ twitter_name }}</p>
+                            </div>
+                            <div class="social-card__detail__checkbox">
+                                <p class="social-card__detail__sub"><span>{{ twitter_price }} บาท</span></p>
+                                <p class="social-card__detail__sub">ต่อ 1 Tweet</p>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endif %}
 
-                <a class="btn btn-main btn-shouter" href="{% url 'register__finished' token %}" style="text-align: center">
+
+                <div class="register__account-summary__warning">
+                    <p class="register__account-summary__warning__icon">⭐️</p>
+                    <p class="register__account-summary__warning__text">ราคาจะมีการปรับเปลี่ยนอยู่ตลอดเวลา ตามข้อมูล Instagram และผลลัพธ์การ ทำงานของคุณ</p>
+                </div>
+
+                <div class="register__account-summary__body__header">
+                    <h2>Your Shouter Account</h2>
+                </div>
+
+                <div class="register__account-summary__shouter-account">
+                    <div class="register__account-summary__shouter-account__top">
+                        <img src="{{ ig_profile_picture_url }}" alt="" style="width: 15rem; height: 15rem; border-radius: 50%">
+                        <div class="register__account-summary__shouter-account__top__right">
+                            <p class="register__account-summary__text-grey">ชื่อจริง - นามสกุล</p>
+                            <p>{{ first_name }} {{ last_name }}</p>
+                            <p class="register__account-summary__text-grey">Email ติดต่อ</p>
+                            <p>{{ email }}</p>
+                            <p class="register__account-summary__text-grey">เบอร์โทรติดต่อ</p>
+                            <p>{{ tel }}</p>
+                        </div>
+                    </div>
+                    <div class="register__account-summary__shouter-account__detail">
+                        <p class="register__account-summary__text-grey">เพศ</p>
+                        <p>{{ gender }}</p>
+                    </div>
+                    <div class="register__account-summary__shouter-account__detail">
+                        <p class="register__account-summary__text-grey">วัน/เดือน/ปี เกิด</p>
+                        <p>{{ birthday_date }}/{{ birthday_month }}/{{ birthday_year }}</p>
+                    </div>
+                    <div class="register__account-summary__shouter-account__detail">
+                        <p class="register__account-summary__text-grey">จังหวัดที่อาศัยปัจจุบัน</p>
+                        <p>{{ province }}</p>
+                    </div>
+                    <div class="register__account-summary__shouter-account__detail">
+                        <p class="register__account-summary__text-grey">การศึกษาล่าสุด</p>
+                        <p>{{ college }}</p>
+                    </div>
+{#                    <div class="register__account-summary__shouter-account__detail">#}
+{#                        <p class="register__account-summary__text-grey">หมวดหมู่ความสนใจ</p>#}
+{#                    </div>#}
+{#                    <div class="register__account-summary__shouter-account__interest">#}
+{#                        {% for foo in interest %}#}
+{#                            <p class="register__account-summary__shouter-account__interest__box">#}
+{#                                {{ foo }}#}
+{#                            </p>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+                </div>
+                <a href="{% url 'shouter__register__finished' token %}" class="btn btn-main btn-shouter">
                     Complete Registration
                 </a>
+
 
                 <div class="confirm_account__content">
                     <p class="confirm_account__content__text">By completing registration, you are agreed to our
@@ -181,6 +387,7 @@
 
 
             </div>
+
 
         </main>
 

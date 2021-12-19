@@ -34,6 +34,8 @@ LINE_CLIENT_SECRET = 'a9123c0aeec0fb3e37fbed8391411930'
 FB_CLIENT_ID = '297314161911860'
 FB_CLIENT_SECRET = '547446266f6d182113682944f1f57a26'
 
+LINE_CHANNEL_ACCESS_TOKEN = '2vlk1sbdeB/YgPsZlUzFxq647gDOeVBhs+swmUG1XOGFol9YCN48D9I+XD/6gBXqi1j+aSwUcwTS42j1XcDgb2nK0OofFGPyjqHtrC+a/qD0nadY3KGqnvOMBgiEE0Aku/l19AcDAQYgO3V2WnLMZAdB04t89/1O/w1cDnyilFU='
+
 
 # Application definition
 
@@ -139,3 +141,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass

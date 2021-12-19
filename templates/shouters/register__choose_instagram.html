@@ -1,0 +1,103 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static 'img/logo/Shout_Logov2-07.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Vue Framework -->
+<!--    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="{% static 'js/main.js' %}" defer></script>
+    <!-- Title -->
+    <title>Shout | Choose Instagram</title>
+</head>
+<body>
+    <section class="container">
+        <section class="register__top">
+            <h1 class="register__top__logo">&#128526;</h1>
+            <h1 class="register__top__header">โปรดเลือด Instagram ที่ต้องการเชื่อมต่อกับ Shout ในการรับงาน</h1>
+        </section>
+
+        <section class="register__stage">
+            <div class="register__stage__block">
+                <div class="register__stage__number">
+                    <svg class="register__stage__icon">
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                    </svg>
+                </div>
+                <p class="register__stage__text">ข้อมูลส่วนตัว</p>
+            </div>
+
+            <div class="register__stage__block">
+                <div class="register__stage__number">
+                    <p>2</p>
+                </div>
+                <p class="register__stage__text">เชื่อมต่อ Social Media</p>
+            </div>
+
+            <div class="register__stage__block">
+                <div class="register__stage__number register__stage__number__disable">
+                    <p>3</p>
+                </div>
+                <p class="register__stage__text register__stage__text__disable">ยืนยันบัญชี</p>
+            </div>
+        </section>
+
+        <main class="register__choose-ig">
+            <div class="register__choose-ig__header">
+                <h2>เลือก 1 บัญชี Instagram</h2>
+            </div>
+
+            <div class="register__choose-ig__body">
+                <div class="register__choose-ig__card">
+                    <label for="instagram_1" class="register__choose-ig__custom-radio">
+                        <input type="radio" id="instagram_1" name="instagram">
+                        <span class="register__choose-ig__radio-btn">
+                            <div class="register__choose-ig__radio-btn__top">
+                                <svg class="register__choose-ig__instagram-icon">
+                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
+                                </svg>
+                                <svg class="register__choose-ig__check-icon">
+                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                                </svg>
+                            </div>
+
+                            <div class="register__choose-ig__radio-btn__body">
+                                <img src="{{ ig_profile_picture_url }}" alt="" style="width: 20rem; height: 20rem; border-radius: 50%">
+                                <p class="register__choose-ig__radio-btn__body__main">@{{ ig_username }}</p>
+                                <p>Page : {{ fb_page_id }}</p>
+                            </div>
+                            <div class="register__choose-ig__radio-btn__body__info">
+                                <div class="register__choose-ig__radio-btn__body__info__left">
+                                    <h2>{{ ig_followers }}</h2>
+                                    <p>Followers</p>
+                                </div>
+                                <div class="register__choose-ig__radio-btn__body__info__right">
+                                    <h2>{{ ig_followings }}</h2>
+                                    <p>Followings</p>
+                                </div>
+                            </div>
+                        </span>
+                    </label>
+                </div>
+
+                <a href="{% url 'shouter__register__work_selection' token %}" class="btn btn-main btn-shouter">
+                    ยืนยันเชื่อมต่อเลย
+                </a>
+
+            </div>
+
+
+        </main>
+
+    </section>
+
+
+</body>
+</html>

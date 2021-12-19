@@ -7,55 +7,79 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="{% static 'src/logoV2/Shout_Logov2-07.png' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'shouters/css/main.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static 'img/logo/Shout_Logov2-07.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Vue Framework -->
+<!--    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
+    <script src="{% static 'js/main.js' %}" defer></script>
+    <!-- Title -->
     <title>Shout | Register</title>
 </head>
 <body>
-    <section class="violet-background minimal-bold text-white padding-all-1 text-center">
-        <h5 class="mb-0"><i class="fa fa-instagram"></i> Connect your Instagram!</h5>
-    </section>
-    <section class="img-width-100vw">
-        <img src="{% static 'shouters/images/Frame 3863.png' %}" alt="">
-    </section>
-    <section>
-        <div class="text-center pt-4 pb-2">
-            <h4 class="minimal-bold">วิธีเชื่อมต่อ Instagram ง่ายๆ เพียง 4 ขั้นตอน</h4>
-        </div>
-        <hr>
-        <div class="container">
-            <div class="row text-center">
-                <h3 class="minimal-bold text-violet-bright">2. กลับสู่ Shout! เพื่อ เชื่อมต่อ IG ผ่าน Facebook API</h3>
-                <p>เมื่อ IG เป็น Business หรือ Creator Account แล้ว IG ของคุณจะถูกผูกกับ Facebook Page ของคุณ (ตามนโยบายของ Facebook) </p>
-                <img src="{% static 'shouters/images/regis-info-4.png' %}" alt="">
+    <section class="container">
+        <section class="register__top">
+            <svg class="register__top__icon">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
+            </svg>
+            <h1 class="register__top__header">Connect Your Instagram!</h1>
+        </section>
 
-                <div class="col-6">
-                    <div class="contain-next-button">
-                        <a class="next-button-2" href="{% url 'register__info-3' token %}">< ก่อนหน้า</a>
-                    </div>
+        <section class="register__stage">
+            <div class="register__stage__block">
+                <div class="register__stage__number">
+                    <svg class="register__stage__icon">
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                    </svg>
                 </div>
-                <div class="col-6">
-                    <div class="contain-next-button">
-                        <a class="next-button-2" href="{% url 'register__info-5' token %}">ถัดไป ></a>
+                <p class="register__stage__text">ข้อมูลส่วนตัว</p>
+            </div>
+
+            <div class="register__stage__block">
+                <div class="register__stage__number">
+                    <p>2</p>
+                </div>
+                <p class="register__stage__text">เชื่อมต่อ Social Media</p>
+            </div>
+
+            <div class="register__stage__block">
+                <div class="register__stage__number register__stage__number__disable">
+                    <p>3</p>
+                </div>
+                <p class="register__stage__text register__stage__text__disable">ยืนยันบัญชี</p>
+            </div>
+        </section>
+
+        <main class="register__info">
+            <div class="register__info__header">
+                <h1 class="register__info__header__text">วิธีการเชื่อมต่อ Instagram ง่ายๆ เพียง 4 ขั้นตอน</h1>
+            </div>
+
+            <div class="register__info__body">
+                <div class="register__info__block">
+                    <div class="register__info__body__text">
+                        <h1 class="register__info__body__text__main">2. กลับสู่ Shout! เพื่อเชื่อมต่อ IG ผ่าน Facebook API</h1>
+                        <h2 class="register__info__body__text__sub">
+                            เมื่อ IG เป็น Business หรือ Creator Account แล้ว IG ของคุณจะถูกผูกกับ Facebook Page ของคุณ (ตามนโยบายของ Facebook)
+                        </h2>
                     </div>
+                    <img src="{% static 'img/shouters/register__info-4-1.png' %}" alt="" class="register__info__image-full">
+                    <div class="register__info__btn__container">
+                        <a href="{% url 'shouter__register__info-3' token %}" class="register__info__btn register__info__btn__next-2">
+                            ย้อนกลับ
+                        </a>
+                        <a href="{% url 'shouter__register__info-5' token %}" class="register__info__btn register__info__btn__next-2">
+                            ถัดไป
+                        </a>
+                    </div>
+
                 </div>
             </div>
-        </div>
 
+        </main>
 
     </section>
 
-    <!-- Optional JavaScript; choose one of the two! -->
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="{% static 'shouters/js/main.js' %}"></script>
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    -->
 </body>
 </html>

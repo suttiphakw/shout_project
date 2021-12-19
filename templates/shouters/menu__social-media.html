@@ -20,7 +20,7 @@
 <body>
     <section class="container">
         <section class="social-media-list">
-            <a href="{% url 'shouter__menu' %}">
+            <a href="{% url 'shouter__menu' token %}">
                 <svg class="social-media-list__icon-back">
                     <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-left"></use>
                 </svg>
@@ -95,21 +95,15 @@
                     <div class="social-card__container__top">
                         <img src="{{ ig_profile_picture_url }}" alt="" style="width: 15rem; height: 15rem; border-radius: 50%">
                         <div class="social-card__container__top__detail">
-                            <p class="social-card__container__top__detail__main">* Facebook Name *</p>
+                            <p class="social-card__container__top__detail__main">{{ shouter.first_name}} {{ shouter.last_name }}</p>
                             <p>Facebook Account</p>
                         </div>
                     </div>
                 </div>
 
-                {% if not fb_connect_status %}
-                    <a class="social-media-list__button" href="{% url 'facebook-login' %}" style="font-size: 5rem; text-align: center; text-decoration: none">
-                        Connect Facebook
-                    </a>
-                {% else %}
-                    <a class="social-media-list__button" href="{% url 'facebook-logout' %}" style="font-size: 5rem; text-align: center; background-color: grey; text-decoration: none">
-                        Logout From Facebook
-                    </a>
-                {% endif %}
+                <button class="social-media-list__button">
+                    Logout From Facebook
+                </button>
 
             </div>
 
@@ -155,6 +149,8 @@
 
     </section>
 
+    <script>
 
+    </script>
 </body>
 </html>

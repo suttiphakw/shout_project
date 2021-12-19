@@ -15,41 +15,42 @@
 <!--    <script src="https://unpkg.com/vue@next" defer></script>-->
 <!--    <script src="js/main.js" defer></script>-->
     <!-- Title -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <title>Shout | Finished Registration</title>
 </head>
 <body>
     <section class="container">
-        <section class="top">
-            <h1 class="top__logo">&#127881;</h1>
-            <h1 class="top__header">Finished!!</h1>
+        <section class="register__top">
+            <h1 class="register__top__logo">&#127881;</h1>
+            <h1 class="register__top__header">Finished!!</h1>
         </section>
 
-        <section class="stage">
-            <div class="stage__block">
-                <div class="stage__number">
-                    <svg class="stage__icon">
+        <section class="register__stage">
+            <div class="register__stage__block">
+                <div class="register__stage__number">
+                    <svg class="register__stage__icon">
                         <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
                     </svg>
                 </div>
-                <p class="stage__text">ข้อมูลส่วนตัว</p>
+                <p class="register__stage__text">ข้อมูลส่วนตัว</p>
             </div>
 
-            <div class="stage__block">
-                <div class="stage__number">
-                    <svg class="stage__icon">
+            <div class="register__stage__block">
+                <div class="register__stage__number">
+                    <svg class="register__stage__icon">
                         <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
                     </svg>
                 </div>
-                <p class="stage__text">เชื่อมต่อ Social Media</p>
+                <p class="register__stage__text">เชื่อมต่อ Social Media</p>
             </div>
 
-            <div class="stage__block">
-                <div class="stage__number">
-                    <svg class="stage__icon">
+            <div class="register__stage__block">
+                <div class="register__stage__number">
+                    <svg class="register__stage__icon">
                         <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
                     </svg>
                 </div>
-                <p class="stage__text">ยืนยันบัญชี</p>
+                <p class="register__stage__text">ยืนยันบัญชี</p>
             </div>
         </section>
 
@@ -62,7 +63,8 @@
             <div class="content-2__body">
 
                 <div class="register-finished">
-                    <div class="register-finished__icon"></div>
+{#                    <div class="register-finished__icon"></div>#}
+                    <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_pqszqqle.json"  background="transparent"  speed="1"  style="width: 250px; height: 250px;"  loop  autoplay></lottie-player>
                 </div>
 
                 <p class="register-finished__text">
@@ -70,17 +72,14 @@
                     ท่านสามารถปิดหน้าต่างนี้ได้เลย
                 </p>
 
-                <a href="{% url 'shouter__menu' token %}" style="text-align: center; font-size: 4rem">
+                <a href="{% url 'shouter__menu' token %}" class="register-finished__link">
                     Back to Shouter Menu
                 </a>
 
             </div>
 
 
-
         </main>
-
-
 
     </section>
 

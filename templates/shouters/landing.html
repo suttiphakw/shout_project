@@ -12,162 +12,233 @@
     />
     <meta property="og:image" content="{% static 'shouters/images/UVP-2.png' %}" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="{% static 'src/logoV2/Shout_Logov2-07.png' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'shouters/css/main.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/logo/Shout_Logov2-07.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Shout | Follower เท่าไหร่ก็รับงานได้ แค่ลง IG Story ง่ายๆก็ได้เงิน สมัครเลย</title>
 </head>
+
 <body>
-    <nav class="navbar navbar-light bg-light fixed-top">
-        <div class="container-fluid">
-            <img src="{% static 'src/logoV2/Shout_Logov2-01.png' %}" alt="">
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Shout</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
+    <section class="container">
+        <header class="header">
+            <img src="{% static 'img/logo/Shout_Logov2-01.png' %}" alt="logo" class="logo">
+            <nav class="user-nav">
+                <ul class="user-nav__items">
+                    <li class="user-nav__item">
+                        <a class="user-nav__link" href="#shouter__why-shout">Why Shout</a>
+                    </li>
+                    <li class="user-nav__item">
+                        <a class="user-nav__link" href="#shouter__start">How to start</a>
+                    </li>
+                    <li class="user-nav__item">
+                        <a class="user-nav__link shouter-landing__nav-link" href="{% url 'index' %}">👩🏻‍💻 เป็นนักการตลาด? คลิกที่นี่</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section id="shouter__uvp" class="shouter__uvp">
+                <div class="shouter__uvp__left">
+                    <div>
+                        <h1 class="shouter__uvp__left__main-text">Follower เท่าไหร่</h1>
+                        <h1 class="shouter__uvp__left__main-text">ก็รับงานได้!</h1>
+                        <p class="shouter__uvp__left__sub-text">เริ่มต้นแค่ลง Story ง่ายๆก็ได้เงิน</p>
+                    </div>
+                    <div class="shouter__uvp__left__qr">
+                        <img src="{% static 'img/shouters/line_qr_code__M.png' %}" alt="">
+                        <div class="shouter__uvp__left__add-line">
+                            <a href="https://lin.ee/Cmwz1WK" class="btn__line__add-friend">
+                                <img src="{% static 'img/shouters/line_oa_logo.png' %}" alt="">
+                                Add Line สมัครเลย!
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+                    <p class="shouter__uvp__left__text">
+                        เป็นนักการตลาด ต้องการสร้างแคมเปญ? <a href="{% url 'index' %}">คลิกที่นี่</a>
+                    </p>
+                </div>
+                <div class="shouter__uvp__right">
+                    <img class="shouter__uvp__right__image" src="{% static 'img/shouters/UVP.png' %}" alt="">
+                    <img class="shouter__uvp__right__image-mobile" src="{% static 'img/shouters/UVP-mobile.png' %}" alt="">
+                </div>
+                <div class="shouter__uvp__left__mobile">
+                    <div class="shouter__uvp__left__add-line-mobile">
+                        <a href="https://lin.ee/Cmwz1WK" class="btn__line__add-friend">
+                            <img src="{% static 'img/shouters/line_oa_logo.png' %}" alt="">
+                            Add Line สมัครเลย!
+                        </a>
+                    </div>
+                    <p class="shouter__uvp__left__text-mobile">หรือแอด Line OA : @shouter</p>
+                    <p class="shouter__uvp__left__text-mobile">เป็นนักการตลาด ต้องการสร้างแคมเปญ? <a href="{% url 'index' %}">คลิกที่นี่</a></p>
+                </div>
+            </section>
+
+            <section id="shouter__why-shout" class="shouter__why-shout">
+                <h2 class="shouter__why-shout__header">ทำไมต้องสมัคร Shout?</h2>
+                <div class="shouter__why-shout__content">
+
+                    <div class="shouter__why-shout__content__item">
+                        <div class="shouter__why-shout__content__item-1">
+                            <img src="{% static 'img/shouters/shouter__why-shout-1.png' %}" alt="KOC Photo 1" class="shouter__why-shout__content__photo">
+                            <div class="shouter__why-shout__content__detail">
+                                <h2 class="shouter__why-shout__content__detail__header">ใครๆก็สมัครได้ ไม่ต้องมี Follower เยอะ</h2>
+                                <p class="shouter__why-shout__content__detail__text">
+                                    เพราะเราเชื่อในพลังของคนตัวเล็ก ทุกคนก็รับงานได้ อยากรู้ว่า Social Media คุณทำเงินได้เท่าไหร่ Shout
+                                    คํานวณให้ ลองสมัครเลย
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shouter__why-shout__content__item">
+                        <div class="shouter__why-shout__content__item-1">
+                            <img src="{% static 'img/shouters/shouter__why-shout-2.png' %}" alt="KOC Photo 2" class="shouter__why-shout__content__photo">
+                            <div class="shouter__why-shout__content__detail">
+                                <h2 class="shouter__why-shout__content__detail__header">เริ่มต้นรับงานแค่ลง Story ง่ายๆก็รับได้</h2>
+                                <p class="shouter__why-shout__content__detail__text">
+                                    มีรูปแบบงานให้เลือกรับหลากหลาย เลือกได้ตามใจคุณ
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shouter__why-shout__content__item">
+                        <div class="shouter__why-shout__content__item-2">
+                            <div class="shouter__why-shout__content__detail">
+                                <h2 class="shouter__why-shout__content__detail__header">แค่แอด Line ก็เริ่มได้เลย ไม่ต้องโหลดแอป</h2>
+                                <p class="shouter__why-shout__content__detail__text">
+                                    ตั้งแต่สมัคร รอรับงาน ทำงาน ส่งงาน รับเงิน ง่ายๆ จบบน Line! ไม่ต้องคุยกับคนให้วุ่นวาย
+                                </p>
+                            </div>
+                            <img src="{% static 'img/shouters/shouter__why-shout-3.png' %}" alt="KOC Photo 3" class="shouter__why-shout__content__photo">
+                        </div>
+                    </div>
+
+                    <div class="shouter__why-shout__content__item">
+                        <div class="shouter__why-shout__content__item-2">
+                            <div class="shouter__why-shout__content__detail">
+                                <h2 class="shouter__why-shout__content__detail__header">ไม่มีแจ้งเตือนให้น่ารำคาญ "งานเด้ง = งานได้"</h2>
+                                <p class="shouter__why-shout__content__detail__text">
+                                    ระบบจะแจ้งเตือน <span>เมื่อคุณได้รับงาน และถูกคัดเลือก จากแบรนด์แล้วเท่านั้น</span> แค่รอรับงานอย่างเดียว
+                                </p>
+                            </div>
+                            <img src="{% static 'img/shouters/shouter__why-shout-4.png' %}" alt="KOC Photo 4" class="shouter__why-shout__content__photo">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="shouter__start" class="shouter__start">
+                <h2 class="shouter__start__header">เริ่มต้นเป็น Shouter</h2>
+                <h2 class="shouter__start__header">กับเราได้ง่ายๆ</h2>
+                <div class="shouter__start__content">
+                    <div class="shouter__start__content__block">
+                        <img src="{% static 'img/shouters/shouter__start-1.png' %}" alt="" class="shouter__start__content__image">
+                        <h1 class="shouter__start__content__header">Easy Register</h1>
+                        <p class="shouter__start__content__text">แค่แอดไลน์ก็สมัครได้เลยง่ายๆ ไม่ต้องโหลดแอป</p>
+                    </div>
+                    <div class="shouter__start__content__block">
+                        <img src="{% static 'img/shouters/shouter__start-2.png' %}" alt="" class="shouter__start__content__image">
+                        <h1 class="shouter__start__content__header">Fair Price Calculation</h1>
+                        <p class="shouter__start__content__text">เชื่อมต่อ Social Media เพื่อคำนวณราคาที่คุณจะได้รับ ระบบคำนวณอย่างเท่าเทียม ไม่ได้ขึ้นอยู่กับแค่ Follower</p>
+                    </div>
+                </div>
+                <div class="shouter__start__content">
+                    <div class="shouter__start__content__block">
+                        <img src="{% static 'img/shouters/shouter__start-3.png' %}" alt="" class="shouter__start__content__image">
+                        <h1 class="shouter__start__content__header">Just Wait for work</h1>
+                        <p class="shouter__start__content__text">หลังจากสมัครเสร็จ เพียงแค่รอรับงานผ่าน Line (แบรนด์เลือกคุณแล้ว) จากนั้นแค่ตอบรับหรือไม่รับงาน</p>
+                    </div>
+                    <div class="shouter__start__content__block">
+                        <img src="{% static 'img/shouters/shouter__start-4.png' %}" alt="" class="shouter__start__content__image">
+                        <h1 class="shouter__start__content__header">Easy Work Management</h1>
+                        <p class="shouter__start__content__text">อ่านรายละเอียด ทำงาน ส่งดราฟท์ ส่งงานหลังโพสท์ จบบน Line ง่ายๆ เป็น Step by Step</p>
+                    </div>
+                </div>
+                <div class="shouter__start__content-one">
+                    <div class="shouter__start__content__block">
+                        <img src="{% static 'img/shouters/shouter__start-5.png' %}" alt="" class="shouter__start__content__image">
+                        <h1 class="shouter__start__content__header">Secure Payment</h1>
+                        <p class="shouter__start__content__text">เมื่องานเสร็จสิ้น รอรับเงินภายใน 15 วันได้เลยไม่ต้องกังวล</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="shouter__start-now" class="shouter__start-now">
+                <div class="shouter__start-now__content">
+                    <div class="shouter__start-now__content__left">
+                        <h1 class="shouter__start-now__content__main">เริ่ม Shout! เลยวันนี้</h1>
+                        <h3 class="shouter__start-now__content__sub">สร้าง Earned media ผ่าน Shouter (ผู้บอกต่อ) ได้ง่ายๆด้วยตัวคุณเอง</h3>
+                    </div>
+                    <div class="shouter__start-now__content__right">
+                        <div class="shouter__uvp__left__add-line">
+                            <a href="https://lin.ee/Cmwz1WK" class="btn__line__add-friend">
+                                <img src="{% static 'img/shouters/line_oa_logo.png' %}" alt="">
+                                Add Line สมัครเลย!
+                            </a>
+                        </div>
+                        <p class="shouter__start-now__text">หรือแอด Line OA : @shouter</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+
+            <div class="footer__left">
+                <img src="{% static 'img/logo/Shout_Logov2-02.png' %}" alt="" class="footer__brand-logo">
+                <div class="footer__info">
+                    <svg class="footer__icon">
+                        <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-location-pin"></use>
+                    </svg>
+                    <div class="footer__info__container">
+                        <p class="footer__text-main">บริษัท เชาท์ พีทูพี จำกัด / Shout P2P Company Limited</p>
+                        <p class="footer__text-sub">29 ซอยเพชรเกษม 60/3 บางด้วน ภาษีเจริญ 10160 ประเทศไทย</p>
+                    </div>
+                </div>
+                <div class="footer__info">
+                    <svg class="footer__icon">
+                        <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-mobile"></use>
+                    </svg>
+                    <p class="footer__text-sub">087-560-4935</p>
+                </div>
+                <div class="footer__info">
+                    <svg class="footer__icon">
+                        <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-mail"></use>
+                    </svg>
+                    <p class="footer__text-sub">contact.shoutsolution@gmail.com</p>
+                </div>
+                <p class="footer__text-sub">© 2021 Shout Solution. All rights reserved.</p>
+            </div>
+
+            <div class="footer__right">
+                <div class="footer__link">
+                    <a href="#shouter__uvp">What’s Shouter</a>
+                    <a href="#shouter__why-shout">Why Shouter</a>
+                    <a href="#shouter__start">How Shouter works</a>
+                </div>
+
+                <div class="footer__social-media">
+                    <svg class="footer__icon-white">
+                        <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-facebook"></use>
+                    </svg>
+                    <svg class="footer__icon-white">
+                        <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-instagram"></use>
+                    </svg>
+                    <svg class="footer__icon-white">
+                        <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-twitter"></use>
+                    </svg>
+                </div>
+
+                <div class="footer__term-policy">
+                    <a href="#">Terms and Conditions</a>
+                    <span> | </span>
+                    <a href="#">Privacy Policy</a>
                 </div>
             </div>
-        </div>
-    </nav>
-    <section class="container-fluid" id="padding-0">
-        <div class="row row-cols-1 row-cols-sm-2 mt-4">
-            <div class="col-lg-6 pl-2 gradient-color">
-                <h1 class="minimal-bold">Follower เท่าไหร่</h1>
-                <h1 class="minimal-bold">ก็รับงานได้!</h1>
-                <h5>เริ่มต้นแค่ลง Story ง่ายๆก็ได้เงิน</h5>
-            </div>
-            <div class="col-lg-6 uvp-img">
-                <img src="{% static 'shouters/images/UVP-2.png' %}" alt="">
-            </div>
-            <div class="col secondary-section text-center line-button">
-                <a class="minimal-bold" href="https://lin.ee/Cmwz1WK">
-                    <img src="{% static 'shouters/images/lineOALogo.png' %}" style="width: 1.5rem" alt="">
-                    Add Line สมัครเลย !
-                </a>
-                <p class="mb-0">หรือแอด Line OA : @shouter</p>
-            </div>
-            <div class="col primary-section text-center">
-                <h2 class="minimal-bold mt-4 mb-4">ทำไมต้องสมัคร Shout!</h2>
-                <div class="information">
-                    <img src="{% static 'shouters/images/Sec2_01.png' %}" alt="">
-                    <h4 class="minimal-bold mt-4 mb-2">ใครๆก็สมัครได้ ไม่ต้องมี Follower เยอะ</h4>
-                    <p class="padding-1 mb-4">เพราะเราเชื่อในพลังของคนตัวเล็ก ทุกคนก็รับงานได้ อยากรู้ว่า Social Media คุณทำเงินได้เท่าไหร่ Shout คํานวณให้
-                        <a class="text-violet" href="">ลองสมัครเลย</a></p>
-                </div>
-                <div class="information">
-                    <img src="{% static 'shouters/images/Sec2_02.png' %}" alt="">
-                    <h4 class="minimal-bold mt-4 mb-2">เริ่มต้นรับงานแค่ลง Story ง่ายๆก็รับได้</h4>
-                    <p class="padding-1 mb-4">มีรูปแบบงานให้เลือกรับหลากหลาย เลือกได้ตามใจคุณ</p>
-                </div>
-                <div class="information">
-                    <img src="{% static 'shouters/images/Sec2_03.png' %}" alt="">
-                    <h4 class="minimal-bold mt-4 mb-2">แค่แอด Line ก็เริ่มได้เลย ไม่ต้องโหลดแอป</h4>
-                    <p class="padding-1 mb-4">ตั้งแต่สมัคร รอรับงาน ทำงาน ส่งงาน รับเงิน ง่ายๆ จบบน Line! ไม่ต้องคุยกับคนให้วุ่นวาย</p>
-                </div>
-                <div class="information">
-                    <img src="{% static 'shouters/images/Sec2_04.png' %}" alt="">
-                    <h4 class="minimal-bold mt-4 mb-2">ไม่มีแจ้งเตือนให้น่ารำคาญ "งานเด้ง = งานได้"</h4>
-                    <p class="padding-1 mb-4">ระบบจะแจ้งเตือน <span class="minimal-bold text-violet">เมื่อคุณได้รับงานและถูกคัดเลือก จากแบรนด์แล้วเท่านั้น</span> แค่รอรับงานอย่างเดียว</p>
-                </div>
-            </div>
-            <div class="col secondary-section text-center">
-                <h2 class="minimal-bold mt-4">เริ่มต้นเป็น Shouter</h2>
-                <h2 class="minimal-bold mb-4">กับเราได้ง่ายๆ</h2>
-                <div class="information">
-                    <img src="{% static 'shouters/images/Sec3_01.png' %}" alt="">
-                    <h4 class="minimal-bold mt-4 mb-2">Easy Register</h4>
-                    <p class="padding-1 mb-4"> แค่แอดไลน์ก็สมัครได้เลยง่ายๆ ไม่ต้องโหลดแอป</p>
-                </div>
-                <div class="information">
-                    <img src="{% static 'shouters/images/Sec3_02.png' %}" alt="">
-                    <h4 class="minimal-bold mt-4 mb-2">Fair Price Calculation</h4>
-                    <p class="padding-1 mb-4">เชื่อมต่อ Social Media เพื่อคำนวณราคาที่คุณจะได้รับ ระบบคำนวณอย่างเท่าเทียม ไม่ได้ขึ้นอยู่กับแค่ Follower</p>
-                </div>
-                <div class="information">
-                    <img src="{% static 'shouters/images/Sec3_03.png' %}" alt="">
-                    <h4 class="minimal-bold mt-4 mb-2">Just Wait for work</h4>
-                    <p class="padding-1 mb-4">หลังจากสมัครเสร็จ เพียงแค่รอรับงานผ่าน Line (แบรนด์เลือกคุณแล้ว) จากนั้นแค่ตอบรับหรือไม่รับงาน</p>
-                </div>
-                <div class="information">
-                    <img src="{% static 'shouters/images/Sec3_04.png' %}" alt="">
-                    <h4 class="minimal-bold mt-4 mb-2">Easy Work Management</h4>
-                    <p class="padding-1 mb-4">อ่านรายละเอียด ทำงาน ส่งดราฟท์ ส่งงานหลังโพสท์ จบบน Line ง่ายๆ เป็น Step by Step</p>
-                </div>
-                <div class="information">
-                    <img src="{% static 'shouters/images/Sec3_05.png' %}" alt="">
-                    <h4 class="minimal-bold mt-4 mb-2">Secure Payment</h4>
-                    <p class="padding-1 mb-4">เมื่องานเสร็จสิ้น รอรับเงินภายใน 15 วันได้เลยไม่ต้องกังวล</p>
-                </div>
-            </div>
-            <div class="col violet-section text-center">
-                <h2 class="text-white minimal-bold">เริ่ม Shout! เลยวันนี้</h2>
-                <p class="text-white mb-4">เพิ่มเพื่อนบนไลน์ @shouter เพื่อสมัครรับงานได้ทันที</p>
-                <div class="text-center line-button">
-                    <a class="minimal-bold" href="https://lin.ee/Cmwz1WK">
-                        <img src="{% static 'shouters/images/lineOALogo.png' %}" style="width: 1.5rem" alt="">
-                        Add Line สมัครเลย !
-                    </a>
-                    <p class="mt-2 mb-0 text-white">หรือแอด Line OA : @shouter</p>
-                </div>
-            </div>
-        </div>
-        <footer class="pb-4">
-            <img src="{% static 'src/logoV2/Shout_Logov2-02.png' %}" alt="">
-            <div class="text-white padding-1 text-small mb-4 pb-4">
-                <p class="mb-1 minimal-bold">บริษัท เชาท์ พีทูพี จำกัด / Shout P2P Company Limited</p>
-                <p>29 ซอยเพชรเกษม 60/3 บางด้วน ภาษีเจริญ 10160 ประเทศไทย</p>
-                <p>087-560-4935</p>
-                <p>contact.shoutsolution@gmail.com</p>
-            </div>
-            <div class="text-white padding-1 mb-4 pb-4">
-                <p>Why us</p>
-                <p>What's KOC</p>
-                <p>Our Solution</p>
-            </div>
-            <div class="text-center text-white">
-                <p class="mb-0">© 2021 Shout Solution. All rights reserved.</p>
-                <a class="mb-0 text-white" href="https://drive.google.com/file/d/1Rm1Te3h2vVEPhnaIbsSrBWNRjj1UA_8U/view?usp=sharing">Terms and Conditions</a>
-                <span> | </span>
-                <a class="mb-0 text-white" href="{% url 'privacy_policy' %}">Privacy Policy</a>
-            </div>
+
         </footer>
     </section>
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    -->
 </body>
+
 </html>

@@ -15,18 +15,18 @@
 <!--    <script src="https://unpkg.com/vue@next" defer></script>-->
 <!--    <script src="js/main.js" defer></script>-->
     <!-- Title -->
-    <title>Shout | Account</title>
+    <title>Shout | Menu</title>
 </head>
 <body>
     <section class="container">
         <section class="shouter-account__top">
-            <img class="shouter-account__top__image" src="{{ ig_profile_picture_url }}"
+            <img class="shouter-account__top__image" src="{{ shouter.ig_profile_picture }}"
                  alt="" style="width: 25rem; height: 25rem; border-radius: 50%; border: 2px solid white">
             <h2 class="shouter-account__top__main-text">
-                Man
+                {{ shouter.nickname }}
             </h2>
             <h3 class="shouter-account__top__sub-text">
-                Suttiphak Wuttimongkolchai
+                {{ shouter.first_name }}  {{ shouter.last_name }}
             </h3>
 
         </section>
@@ -36,7 +36,7 @@
                 <p class="shouter-account__content__header">การทำงานของคุณ</p>
             </div>
 
-            <a href="{% url 'shouter__menu__social-media' %}" class="shouter-account__content__block">
+            <a href="{% url 'shouter__menu__social-media' token %}" class="shouter-account__content__block">
                 <div class="shouter-account__content__block__left">
                     <svg class="shouter-account__icon">
                         <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>

@@ -1,25 +1,25 @@
 {% load static %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       property="og:description"
       content="แพลตฟอร์มทำการตลาดบอกต่อผ่านคนตัวเล็กง่ายๆ"
     />
-    <meta property="og:image" content="{% static 'src/logoV2/Shout_Logov2-07.png' %}" />
-    <link rel="shortcut icon" href="{% static 'src/logoV2/Shout_Logov2-07.png' %}">
-	<link rel="stylesheet" href="{% static 'css/style.css' %}">
-	<title>Shout | แพลตฟอร์มทำการตลาดบอกต่อผ่านคนตัวเล็กง่ายๆ</title>
+    <link rel="shortcut icon" href="{% static 'img/logo/Shout_Logov2-07.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Shout | แพลตฟอร์มทำการตลาดบอกต่อผ่านคนตัวเล็กง่ายๆ</title>
 </head>
-
 <body>
     <section class="container">
         <header class="header">
-            <img src="{% static 'src/logoV2/Shout_Logov2-01.png' %}" alt="logo" class="logo">
+            <img src="{% static 'img/logo/Shout_Logov2-01.png' %}" alt="logo" class="logo">
             <nav class="user-nav">
                 <ul class="user-nav__items">
                     <li class="user-nav__item">
@@ -35,9 +35,9 @@
                         <a class="user-nav__link" href="#start-now">Contact us</a>
                     </li>
                     <li class="user-nav__item">
-                        <a class="user-nav__link" href="#">
+                        <a class="user-nav__link" href="{% url 'on_dev' %}">
                             <svg class="user-nav__icon">
-                                <use xlink:href="{% static 'pages/images/sprite.svg' %}#icon-user"></use>
+                                <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-user"></use>
                             </svg>
                             <span>Log In</span>
                         </a>
@@ -56,21 +56,24 @@
                             <p class="uvp__content__left__main__bottom"><span>Shout - แพลตฟอร์ม</span> ที่ทำให้คุณเข้าถึงกลุ่มลูกค้าอย่างใกล้ชิด แม่นยำ</p>
                             <p class="uvp__content__left__main__bottom">และ เพิ่มยอดขายได้ง่ายกว่าเดิม ตั้งแต่เริ่มจนจบทำได้ด้วยตัวคุณเอง</p>
                             <div class="uvp__button">
-                                <a href="#" class="btn btn-main">เริ่มเลย</a>
-                                <a href="#" class="btn btn-sub">ดูเพิ่มเติม</a>
+                                <a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
+                                <a href="{% url 'on_dev' %}" class="btn btn-sub btn__brand-page">ดูเพิ่มเติม</a>
                             </div>
 
                         </div>
                         <div class="uvp__content__left__sub">
                             <p class="uvp__content__left__sub__info">ติดต่อเรา <span>087-560-4935</span> / <span>contact.shoutsolution@gmail.com</span></p>
                             <p class="uvp__content__left__sub__info">หรือสนใจมาร่วมเป็น Shouter (ผู้บอกต่อ) กับเรา?
-                                <a href="{% url 'landing-page' %}" class="uvp__content__left__sub__link">สมัครที่นี่</a>
+                                <a href="{% url 'shouter__index' %}" class="uvp__content__left__sub__link">สมัครที่นี่</a>
                             </p>
                         </div>
                     </div>
 
                     <div class="uvp__content__right">
-                        <img src="{% static 'pages/images/UVP.png' %}" alt="" class="uvp__content__right__photo">
+                        <img src="{% static 'img/pages/UVP.png' %}" alt="" class="uvp__content__right__photo">
+                    </div>
+                    <div class="uvp__content__right-mobile">
+                        <img src="{% static 'img/pages/UVP-mobile.png' %}" alt="" class="uvp__content__right-mobile__photo">
                     </div>
                 </div>
 
@@ -84,7 +87,7 @@
 
                         <div class="koc__content__item">
                             <div class="koc__content__item-1">
-                                <img src="{% static 'pages/images/Sec2_01.png' %}" alt="KOC Photo 1" class="koc__content__photo">
+                                <img src="{% static 'img/pages/Sec2_01.png' %}" alt="KOC Photo 1" class="koc__content__photo">
                                 <div class="koc__content__detail">
                                     <h2 class="koc__content__detail__header">ผู้บริโภคไม่ได้เชื่อ Influencer อีกต่อไป</h2>
                                     <p class="koc__content__detail__text">
@@ -99,7 +102,7 @@
 
                         <div class="koc__content__item">
                             <div class="koc__content__item-1">
-                                <img src="{% static 'pages/images/Sec2_02.png' %}" alt="KOC Photo 2" class="koc__content__photo">
+                                <img src="{% static 'img/pages/Sec2_02.png' %}" alt="KOC Photo 2" class="koc__content__photo">
                                 <div class="koc__content__detail">
                                     <h2 class="koc__content__detail__header">Cost Effective</h2>
                                     <p class="koc__content__detail__text">
@@ -119,7 +122,7 @@
                                         ส่งผลต่อการที่ทำให้เกิด Trending ที่ดึงดูดความสนใจผู้บริโภคมากขึ้น ด้วยงบการตลาดที่เท่ากัน
                                     </p>
                                 </div>
-                                <img src="{% static 'pages/images/Sec2_03.png' %}" alt="KOC Photo 3" class="koc__content__photo">
+                                <img src="{% static 'img/pages/Sec2_03.png' %}" alt="KOC Photo 3" class="koc__content__photo">
                             </div>
                         </div>
 
@@ -132,7 +135,7 @@
                                         ไม่สูง ทำให้มักจะไม่เกิดเรื่องดราม่าต่างๆ เมื่อเทียบกับ KOL
                                     </p>
                                 </div>
-                                <img src="{% static 'pages/images/Sec2_04.png' %}" alt="KOC Photo 4" class="koc__content__photo">
+                                <img src="{% static 'img/pages/Sec2_04.png' %}" alt="KOC Photo 4" class="koc__content__photo">
                             </div>
                         </div>
 
@@ -144,7 +147,7 @@
                     <div class="why-shout__content">
 
                         <div class="why-shout__content__item">
-                            <img src="{% static 'pages/images/Sec3_01.png' %}" alt="" class="why-shout__content__item__photo">
+                            <img src="{% static 'img/pages/Sec3_01.png' %}" alt="" class="why-shout__content__item__photo">
                             <h3 class="why-shout__content__item__header">เริ่มต้น ยัน วัดผล จบในที่เดียว!</h3>
                             <p class="why-shout__content__item__text">
                                 วางแผน - เลือกคน - จัดการ - ตรวจงาน - วัดผลแคมเปญครบบนแพลตฟอร์มง่ายๆ ด้วย
@@ -153,7 +156,7 @@
                         </div>
 
                         <div class="why-shout__content__item">
-                            <img src="{% static 'pages/images/Sec3_03.png' %}" alt="" class="why-shout__content__item__photo">
+                            <img src="{% static 'img/pages/Sec3_02.png' %}" alt="" class="why-shout__content__item__photo">
                             <h3 class="why-shout__content__item__header">No Agency Fees, No Management Fees</h3>
                             <p class="why-shout__content__item__text">
                                 ไม่มีค่าธรรมเนียมเอเจนซี่, ไม่มีค่าธรรมเนียมการ จัดการ, ทุกบาท ทุกสตางค์ ถูกใช้ไปกับการสร้าง
@@ -162,7 +165,7 @@
                         </div>
 
                         <div class="why-shout__content__item">
-                            <img src="{% static 'pages/images/Sec3_02.png' %}" alt="" class="why-shout__content__item__photo">
+                            <img src="{% static 'img/pages/Sec3_03.png' %}" alt="" class="why-shout__content__item__photo">
                             <h3 class="why-shout__content__item__header">KPI Guaranteed</h3>
                             <p class="why-shout__content__item__text">
                                 การันตียอดการเข้าถึงกลุ่มลุกค้า (Organic Reach) ตามงบการตลาด ให้คุณได้หมดห่วง
@@ -177,7 +180,7 @@
                     <div class="how-shout__content">
 
                         <div class="how-shout__content__item">
-                            <img src="{% static 'pages/images/Sec4_01.png' %}" alt="How Shout Photo 1" class="how-shout__content__photo">
+                            <img src="{% static 'img/pages/Sec4_01.png' %}" alt="How Shout Photo 1" class="how-shout__content__photo">
                             <div class="how-shout__content__detail">
                                 <h3 class="how-shout__content__header">Campaign Planning</h3>
                                 <p class="how-shout__content__text">
@@ -186,7 +189,7 @@
                                     ประเภทงานที่ต้องการ (Content Type), และรายละเอียดงานต่างๆ (Brief)
                                     ตามรูปแบบที่แพลตฟอร์มได้ออกแบบเตรียมไว้ให้ เพื่อประสิทธิภาพในการบอกต่อสูงสุด
                                 </p>
-                                <a href="#" class="btn btn-main">เริ่มเลย</a>
+                                <a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
                             </div>
                         </div>
 
@@ -201,21 +204,20 @@
                                     <li>มี Media Performance ที่ดีและสูง</li>
                                     <li>เหมาะสมกับแคมเปญของคุณที่สุด จากระบบ Shouter Matching Score ที่คำนวณมาจากข้อมูลเชิงลึก (Insight)</li>
                                 </ul>
-
-                                <a href="#" class="btn btn-main">เริ่มเลย</a>
+                                <a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
                             </div>
-                            <img src="{% static 'pages/images/Sec4_02.png' %}" alt="How Shout Photo 2" class="how-shout__content__photo">
+                            <img src="{% static 'img/pages/Sec4_02.png' %}" alt="How Shout Photo 2" class="how-shout__content__photo">
                         </div>
 
                         <div class="how-shout__content__item">
-                            <img src="{% static 'pages/images/Sec4_03.png' %}" alt="How Shout Photo 3" class="how-shout__content__photo">
+                            <img src="{% static 'img/pages/Sec4_03.png' %}" alt="How Shout Photo 3" class="how-shout__content__photo">
                             <div class="how-shout__content__detail">
                                 <h3 class="how-shout__content__header">Campaign Management</h3>
                                 <p class="how-shout__content__text">
                                     บริหารจัดการแคมเปญได้อย่างง่ายดาย ตรวจสอบภาพรวม สถานะการทำงานต่างๆของ Shouter (ผู้บอกต่อ)
                                     และตรวจงาน Approve งานผ่านระบบโดยไม่ต้องพูดคุยให้ยุ่งยาก
                                 </p>
-                                <a href="#" class="btn btn-main">เริ่มเลย</a>
+                                <a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
                             </div>
                         </div>
 
@@ -227,9 +229,9 @@
                                     ยอดการเข้าถึง (Organic Reach), การมีส่วนร่วม (Engagement), จำนวนครั้งการมองเห็น (Impression),
                                     จำนวนครั้งการคลิ๊ก (Traffic) และอื่นๆได้อย่างง่ายดาย ไม่ต้องขอและรอ Report เป็นเดือนๆให้เสียเวลา
                                 </p>
-                                <a href="#" class="btn btn-main">เริ่มเลย</a>
+                                <a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
                             </div>
-                            <img src="{% static 'pages/images/Sec4_04.png' %}" alt="How Shout Photo 4" class="how-shout__content__photo">
+                            <img src="{% static 'img/pages/Sec4_04.png' %}" alt="How Shout Photo 4" class="how-shout__content__photo">
                         </div>
 
                     </div>
@@ -242,8 +244,8 @@
                             <h3 class="start-now__content__sub">สร้าง Earned media ผ่าน Shouter (ผู้บอกต่อ) ได้ง่ายๆด้วยตัวคุณเอง</h3>
                         </div>
                         <div class="start-now__content__right">
-                            <a href="#" class="btn btn-main">เริ่มเลย</a>
-                            <a href="#" class="btn btn-sub">ดูเพิ่มเติม</a>
+                            <a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
+                            <a href="{% url 'on_dev' %}" class="btn btn-sub btn__brand-page">ดูเพิ่มเติม</a>
                         </div>
                     </div>
                 </section>
@@ -255,10 +257,10 @@
         <footer class="footer">
 
             <div class="footer__left">
-                <img src="{% static 'src/logoV2/Shout_Logov2-02.png' %}" alt="" class="footer__brand-logo">
+                <img src="{% static 'img/logo/Shout_Logov2-02.png' %}" alt="" class="footer__brand-logo">
                 <div class="footer__info">
                     <svg class="footer__icon">
-                        <use xlink:href="{% static 'pages/images/sprite.svg' %}#icon-location-pin"></use>
+                        <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-location-pin"></use>
                     </svg>
                     <div class="footer__info__container">
                         <p class="footer__text-main">บริษัท เชาท์ พีทูพี จำกัด / Shout P2P Company Limited</p>
@@ -267,13 +269,13 @@
                 </div>
                 <div class="footer__info">
                     <svg class="footer__icon">
-                        <use xlink:href="{% static 'pages/images/sprite.svg' %}#icon-mobile"></use>
+                        <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-mobile"></use>
                     </svg>
                     <p class="footer__text-sub">087-560-4935</p>
                 </div>
                 <div class="footer__info">
                     <svg class="footer__icon">
-                        <use xlink:href="{% static 'pages/images/sprite.svg' %}#icon-mail"></use>
+                        <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-mail"></use>
                     </svg>
                     <p class="footer__text-sub">contact.shoutsolution@gmail.com</p>
                 </div>
@@ -282,20 +284,20 @@
 
             <div class="footer__right">
                 <div class="footer__link">
-                    <a href="">What’s KOC</a>
-                    <a href="">Why Shout</a>
-                    <a href="">How it works</a>
+                    <a href="#koc">What’s KOC</a>
+                    <a href="#why-shout">Why Shout</a>
+                    <a href="#how-shout">How it works</a>
                 </div>
 
                 <div class="footer__social-media">
                     <svg class="footer__icon-white">
-                        <use xlink:href="{% static 'pages/images/sprite.svg' %}#icon-facebook"></use>
+                        <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-facebook"></use>
                     </svg>
                     <svg class="footer__icon-white">
-                        <use xlink:href="{% static 'pages/images/sprite.svg' %}#icon-instagram"></use>
+                        <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-instagram"></use>
                     </svg>
                     <svg class="footer__icon-white">
-                        <use xlink:href="{% static 'pages/images/sprite.svg' %}#icon-twitter"></use>
+                        <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-twitter"></use>
                     </svg>
                 </div>
 
