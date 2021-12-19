@@ -621,15 +621,15 @@ def oauth2(request):
     # Get IG Page ID
     context__business_account_id = FacebookAPI().get_business_account_id(page_id=page_id, access_token=access_token)
     if context__business_account_id:
-        business_account_id = context__page_id.get('business_account_id')
+        business_account_id = context__business_account_id.get('business_account_id')
 
         if business_account_id == '':
-            shouter.fb_response_business_account_id = context__page_id.get('data')
+            shouter.fb_response_business_account_id = context__business_account_id.get('data')
             shouter.ig_business_account_id = business_account_id
             shouter.save()
             return HttpResponse('Failed by business account id')
 
-        shouter.fb_response_business_account_id = context__page_id.get('data')
+        shouter.fb_response_business_account_id = context__business_account_id.get('data')
         shouter.ig_business_account_id = business_account_id
         shouter.save()
     else:

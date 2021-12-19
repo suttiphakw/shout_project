@@ -110,7 +110,7 @@ class FacebookAPI:
     def get_access_token(self, code):
         response_auth = requests.get(self.access_token_url, params=self.fb_auth_form(code))
         if not response_auth.status_code == 200:
-            return None
+            return False
 
         data = response_auth.json()
         try:
@@ -127,7 +127,7 @@ class FacebookAPI:
     def get_facebook_page_id(self, access_token):
         response_page_id = requests.get(self.page_id_url, params={'access_token': access_token})
         if not response_page_id.status_code == 200:
-            return None
+            return False
 
         data = response_page_id.json()
         try:
@@ -146,7 +146,7 @@ class FacebookAPI:
                                                     params={'fields': 'instagram_business_account',
                                                             'access_token': access_token})
         if not response_business_account_id.status_code == 200:
-            return None
+            return False
 
         data = response_business_account_id.json()
         try:
@@ -165,7 +165,7 @@ class FacebookAPI:
                                     params={'fields': ','.join(self.scope_list),
                                             'access_token': access_token})
         if not response_bio.status_code == 200:
-            return None
+            return False
 
         data = response_bio.json()
 
@@ -209,7 +209,7 @@ class FacebookAPI:
         response_media_objects = requests.get(media_object_url, {'access_token': access_token})
 
         if not response_media_objects.status_code == 200:
-            return None
+            return False
 
         data = response_media_objects.json()
         try:
@@ -461,7 +461,7 @@ class FacebookAPI:
                                                         'until': _2_days_before})
 
         if not response_active_follower.status_code == 200:
-            return None
+            return False
 
         data = response_active_follower.json()
         try:
