@@ -709,12 +709,12 @@ def oauth2(request):
     shouter.ig_price_story_post_ugc = ig_price_story_post_ugc
     shouter.save()
 
-    shouter.ig_fb_price_story_fc = shouter.ig_price_story_fc * 1.1
-    shouter.ig_fb_price_story_ugc = shouter.ig_price_story_ugc * 1.1
-    shouter.ig_fb_price_post_fc = shouter.ig_price_post_fc * 1.1
-    shouter.ig_fb_price_post_ugc = shouter.ig_fb_price_post_ugc * 1.1
-    shouter.ig_fb_price_story_post_fc = shouter.ig_price_story_post_fc * 1.1
-    shouter.ig_fb_price_story_post_ugc = shouter.ig_fb_price_story_post_ugc * 1.1
+    shouter.ig_fb_price_story_fc = round(shouter.ig_price_story_fc * 1.1, 2)
+    shouter.ig_fb_price_story_ugc = round(shouter.ig_price_story_ugc * 1.1, 2)
+    shouter.ig_fb_price_post_fc = round(shouter.ig_price_post_fc * 1.1, 2)
+    shouter.ig_fb_price_post_ugc = round(shouter.ig_price_post_ugc * 1.1, 2)
+    shouter.ig_fb_price_story_post_fc = round(shouter.ig_price_story_post_fc * 1.1, 2)
+    shouter.ig_fb_price_story_post_ugc = round(shouter.ig_price_story_post_ugc * 1.1, 2)
     shouter.save()
 
     context__audience_insight = FacebookAPI().get_audience_insight(business_account_id=business_account_id,
@@ -724,7 +724,7 @@ def oauth2(request):
     shouter.fb_is_connect = True
     shouter.save()
 
-    redirect_url = '/shouters/register/work_selection/{}/'.format(token)
+    redirect_url = '/shouters/register/work-selection/{}/'.format(token)
 
     return redirect(redirect_url)
 

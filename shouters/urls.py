@@ -29,7 +29,7 @@ urlpatterns = [
 
     # Facebook Login + Logout and oauth
     path('facebook-login/<str:token>/', views.facebook_login, name='shouter__facebook-login'),
-    path('facebook-logout/', views.facebook_logout, name='shouter__facebook-logout'),
+    path('facebook-logout/<str:token>/', views.facebook_logout, name='shouter__facebook-logout'),
     path('oauth2/', views.oauth2, name='shouter__oauth2'),
 
     # Shouter Menu

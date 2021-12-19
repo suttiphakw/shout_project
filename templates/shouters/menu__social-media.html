@@ -101,9 +101,17 @@
                     </div>
                 </div>
 
-                <button class="social-media-list__button">
-                    Logout From Facebook
-                </button>
+                {% if shouter.fb_is_connect %}
+                    <a href="{% url 'shouter__facebook-login' token %}" class="social-media-list__button" style="text-align: center; font-size: 20px; text-decoration: none;">
+                        Login Facebook
+                    </a>
+                {% else %}
+                    <a href="{% url 'shouter__facebook-logout' token %}" class="social-media-list__button" style="text-align: center; font-size: 20px; text-decoration: none; background-color: grey;">
+                        Logout From Facebook
+                    </a>
+                {% endif %}
+
+
 
             </div>
 
