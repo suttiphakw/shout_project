@@ -206,7 +206,8 @@ class FacebookAPI:
 
     def get_ig_media_objects(self, business_account_id, access_token):
         media_object_url = self.basic_url + business_account_id + '/media'
-        response_media_objects = requests.get(media_object_url, {'access_token': access_token})
+        response_media_objects = requests.get(media_object_url,
+                                              params={'access_token': access_token})
 
         if not response_media_objects.status_code == 200:
             return False
