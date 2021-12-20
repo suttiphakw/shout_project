@@ -449,12 +449,14 @@ def oauth(request):
                 # /shouters/line-login?q=work_management/
                 # /shouters/line-login?q=payment/
                 # /shouters/line-login?q=shouter_history/
-                if q == 'menu':
-                    redirect_url = '/shouters/menu/{}/'.format(encoded_token)
-                elif q == 'bank_account':
-                    redirect_url = '/shouters/menu/bank-account/{}/'.format(encoded_token)
-                else:
-                    redirect_url = '/dev/'
+                redirect_url = '/shouters/menu/{}/'.format(encoded_token)
+                return redirect_url
+                # if q == 'menu':
+                #     redirect_url = '/shouters/menu/{}/'.format(encoded_token)
+                # elif q == 'bank_account':
+                #     redirect_url = '/shouters/menu/bank-account/{}/'.format(encoded_token)
+                # else:
+                #     redirect_url = '/dev/'
                 # # if user_id exist in the model and is_connect_ig = True -> go to main page ...
                 # if q == 'accept_or_reject':
                 #     # return redirect('/orders/{}/choose/'.format(order_id))
