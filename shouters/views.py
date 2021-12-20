@@ -450,7 +450,6 @@ def oauth(request):
                 # /shouters/line-login?q=payment/
                 # /shouters/line-login?q=shouter_history/
                 redirect_url = '/shouters/menu/{}/'.format(encoded_token)
-                return redirect_url
                 # if q == 'menu':
                 #     redirect_url = '/shouters/menu/{}/'.format(encoded_token)
                 # elif q == 'bank_account':
