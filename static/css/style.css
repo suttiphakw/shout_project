@@ -43,13 +43,13 @@ html {
   font-size: 62.5%; }
   @media screen and (max-width: 90.625em) {
     html {
-      font-size: 55%; } }
+      font-size: 9px; } }
   @media screen and (max-width: 78.125em) {
     html {
-      font-size: 42%; } }
+      font-size: 7px; } }
   @media screen and (max-width: 56.25em) {
     html {
-      font-size: 30%; } }
+      font-size: 5px; } }
 
 body {
   font-family: 'minimal', sans-serif;
@@ -924,10 +924,11 @@ body {
   flex-direction: column; }
   .register__worry-free__header {
     text-align: center;
+    font-family: "minimal_bold", sans-serif;
     color: var(--color-text-white); }
     .register__worry-free__header__main {
       font-size: 10rem;
-      font-family: minimal_bold, sans-serif;
+      font-family: "minimal_bold", sans-serif;
       line-height: 1.2; }
     .register__worry-free__header__sub {
       font-size: 5rem; }
@@ -935,7 +936,7 @@ body {
     padding: 10rem 3rem 5rem; }
     .register__worry-free__content__header {
       font-size: 5rem;
-      font-family: minimal_bold, sans-serif;
+      font-family: "minimal_bold", sans-serif;
       color: white; }
     .register__worry-free__content__box {
       background-color: var(--color-background-pink-light);
@@ -947,8 +948,8 @@ body {
         font-size: 5rem; }
         .register__worry-free__content__box__body__main {
           color: var(--color-primary);
-          font-family: minimal_bold, sans-serif;
-          font-size: 5rem; }
+          font-size: 5rem;
+          font-family: "minimal_bold", sans-serif; }
         .register__worry-free__content__box__body__text {
           font-size: 4rem; }
         .register__worry-free__content__box__body__extra {
@@ -956,8 +957,7 @@ body {
           font-size: 3.5rem;
           margin-top: 3rem; }
   .register__worry-free__icon {
-    height: 7rem;
-    width: 7rem;
+    height: 40px;
     fill: var(--color-primary);
     margin-right: 5rem;
     flex: 0 0 15%; }
@@ -1281,10 +1281,8 @@ input:checked + .slider:before {
   text-align: center;
   border-bottom: var(--border-grey-light); }
   .register__info__header__text {
-    font-family: minimal_bold, sans-serif;
     font-size: 5rem; }
   .register__info__header__subtext {
-    font-family: minimal, sans-serif;
     font-size: 4rem; }
 
 .register__info__body__text {
