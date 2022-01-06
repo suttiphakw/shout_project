@@ -695,19 +695,12 @@ def oauth2(request):
 
     shouter.ig_price_story_fc = round(IGStoryFc().cal_price(shouter.ig_story_view), 2)
     shouter.ig_price_story_ugc = round(IGStoryUgc().cal_price(shouter.ig_story_view), 2)
-    shouter.ig_price_post_fc = round(IGPostFc().cal_price(shouter.ig_story_view), 2)
-    shouter.ig_price_post_ugc = round(IGPostUgc().cal_price(shouter.ig_story_view), 2)
+    shouter.ig_price_post_fc = round(IGPostFc().cal_price(shouter.ig_average_post_reach), 2)
+    shouter.ig_price_post_ugc = round(IGPostUgc().cal_price(shouter.ig_average_post_reach), 2)
+    shouter.save()
 
-    ig_price_story_post_fc = (IGStoryFc().cal_price(shouter.ig_story_view) +
-                              IGPostFc().cal_price(shouter.ig_story_view)) * 0.9
-    ig_price_story_post_fc = round(ig_price_story_post_fc, 2)
-
-    ig_price_story_post_ugc = (IGStoryUgc().cal_price(shouter.ig_story_view) +
-                               IGPostUgc().cal_price(shouter.ig_story_view)) * 0.9
-    ig_price_story_post_ugc = round(ig_price_story_post_ugc, 2)
-
-    shouter.ig_price_story_post_fc = ig_price_story_post_fc
-    shouter.ig_price_story_post_ugc = ig_price_story_post_ugc
+    shouter.ig_price_story_post_fc = (shouter.ig_price_story_fc + shouter.ig_price_post_fc) * 0.9
+    shouter.ig_price_story_post_ugc = (shouter.ig_price_post_fc + shouter.ig_price_post_ugc) * 0.9
     shouter.save()
 
     shouter.ig_fb_price_story_fc = round(shouter.ig_price_story_fc * 1.1, 2)
