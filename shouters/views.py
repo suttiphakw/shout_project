@@ -292,6 +292,7 @@ def register__work_selection(request, token):
         'ig_fb_price_post_ugc': shouter.ig_fb_price_post_ugc,
         'ig_fb_price_story_post_fc': shouter.ig_fb_price_story_post_fc,
         'ig_fb_price_story_post_ugc': shouter.ig_fb_price_story_post_ugc,
+        'shouter': shouter,
         # Token
         'token': token,
     }
