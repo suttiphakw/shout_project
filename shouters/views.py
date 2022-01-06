@@ -143,7 +143,7 @@ def register(request, token):
             return HttpResponse('404Error')
 
         # Save to database
-        shouter = Shouter.objects.filter().first()
+        shouter = Shouter.objects.filter(id=_id).first()
         shouter.nickname = nickname
         shouter.first_name = first_name
         shouter.last_name = last_name

@@ -249,7 +249,7 @@ class FacebookAPI:
                     list_reach.append(0)
                 else:
                     data = response_reach_count.json()
-                    reach = data['data'][0]['values']
+                    reach = data['data'][0]['values'][0]['value']
                     list_reach.append(reach)
 
         elif len(media_objects) != 0:
@@ -275,7 +275,7 @@ class FacebookAPI:
                     list_reach.append(0)
                 else:
                     data = response_reach_count.json()
-                    reach = data['data'][0]['values']
+                    reach = data['data'][0]['values'][0]['value']
                     list_reach.append(reach)
 
         # Calculation Like
