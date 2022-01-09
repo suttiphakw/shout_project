@@ -9,6 +9,7 @@ from django.middleware.csrf import get_token
 # from django.contrib.auth.decorators import login_required
 
 from shouters.utils import LineAPI, FacebookAPI
+from shouters.shouter_interests import shouter_interest
 from shouters.models import Shouter
 # from orders.models import Order
 
@@ -121,24 +122,6 @@ def register(request, token):
             }
             return render(request, 'shouters/register.html', context=context)
 
-        # context = {
-        #     'nickname': nickname,
-        #     'first_name': first_name,
-        #     'last_name': last_name,
-        #     'email': email,
-        #     'tel': tel,
-        #     'gender': gender,
-        #     'birthday_date': birthday_date,
-        #     'birthday_month': birthday_month,
-        #     'birthday_year': birthday_year,
-        #     'province': province,
-        #     'education': education,
-        #     'college': college,
-        #     'interest': interest
-        # }
-        #
-        # print(context)
-
         if not Shouter.objects.filter(id=_id).exists():
             return HttpResponse('404Error')
 
@@ -178,6 +161,7 @@ def register__choose_instagram(request, token):
         return redirect('on_dev')
     shouter = Shouter.objects.filter(id=_id).first()
     context = {
+        'shouter': shouter,
         'fb_page_id': shouter.fb_page_id,
         'ig_username': shouter.ig_username,
         'ig_media_count': shouter.ig_media_count,
@@ -205,58 +189,21 @@ def register__account_summary(request, token):
         return redirect('on_dev')
     shouter = Shouter.objects.filter(id=_id).first()
 
+    interest = shouter.interest
+    interest = interest.replace("'", "")
+    interest = interest.replace("[", "")
+    interest = interest.replace("]", "")
+    interest = interest.replace(" ", "")
+    interest_list = interest.split(',')
+
+    print(interest_list)
+    # Change text of interest_list
+    interest = shouter_interest(interest_list=interest_list)
+    print(interest)
+
     context = {
-        # User Info
-        'first_name': shouter.first_name,
-        'last_name': shouter.last_name,
-        'email': shouter.email,
-        'tel': shouter.tel,
-        'gender': shouter.gender,
-        'birthday_date': shouter.birthday_date,
-        'birthday_month': shouter.birthday_month,
-        'birthday_year': shouter.birthday_year,
-        'province': shouter.province,
-        'college': shouter.college,
-        'interest': shouter.interest,
-        # IG Bio
-        'ig_username': shouter.ig_username,
-        'ig_media_count': shouter.ig_media_count,
-        'ig_profile_picture_url': shouter.ig_profile_picture,
-        'ig_followers': shouter.ig_follower_count,
-        'ig_followings': shouter.ig_following_count,
-        'ig_active_follower': shouter.ig_active_follower,
-        'ig_active_follower_percent': shouter.ig_active_follower_percent,
-        'ig_engagement': shouter.ig_average_total_like,
-        'ig_engagement_percent': shouter.ig_engagement_percent,
-        # Work Selection
-        'is_check_ig': shouter.is_check_ig,
-        'is_check_ig_story': shouter.is_check_ig_story,
-        'is_check_ig_post': shouter.is_check_ig_post,
-        'is_check_ig_story_post': shouter.is_check_ig_story_post,
-        'is_check_ig_fb': shouter.is_check_ig_fb,
-        'is_check_ig_fb_story': shouter.is_check_ig_fb_story,
-        'is_check_ig_fb_post': shouter.is_check_ig_fb_post,
-        'is_check_ig_fb_story_post': shouter.is_check_ig_fb_story_post,
-        'is_check_tiktok': shouter.is_check_tiktok,
-        'tiktok_name': shouter.tiktok_name,
-        'tiktok_price': shouter.tiktok_price,
-        'is_check_twitter': shouter.is_check_twitter,
-        'twitter_name': shouter.twitter_name,
-        'twitter_price': shouter.twitter_price,
-        # IG Only
-        'ig_price_story_fc': shouter.ig_price_story_fc,
-        'ig_price_story_ugc': shouter.ig_price_story_ugc,
-        'ig_price_post_fc': shouter.ig_price_post_fc,
-        'ig_price_post_ugc': shouter.ig_price_post_ugc,
-        'ig_price_story_post_fc': shouter.ig_price_story_post_fc,
-        'ig_price_story_post_ugc': shouter.ig_price_story_post_ugc,
-        # IG + FB
-        'ig_fb_price_story_fc': shouter.ig_fb_price_story_fc,
-        'ig_fb_price_story_ugc': shouter.ig_fb_price_story_ugc,
-        'ig_fb_price_post_fc': shouter.ig_fb_price_post_fc,
-        'ig_fb_price_post_ugc': shouter.ig_fb_price_post_ugc,
-        'ig_fb_price_story_post_fc': shouter.ig_fb_price_story_post_fc,
-        'ig_fb_price_story_post_ugc': shouter.ig_fb_price_story_post_ugc,
+        'shouter': shouter,
+        'interest': interest,
         # Token
         'token': token,
     }
@@ -370,6 +317,8 @@ def register__finished(request, token):
         return redirect('on_dev')
 
     shouter = Shouter.objects.filter(id=_id).first()
+    shouter.is_finished_regis = True
+    shouter.save()
     response_text = LineApiMessage().api__wait_for_approve_text_message(line_user_id=shouter.line_user_id)
     response_flex = LineApiMessage().api__wait_for_approve_flex_message(line_user_id=shouter.line_user_id)
 
@@ -440,11 +389,13 @@ def oauth(request):
             algorithm='HS256'
         )
 
-        if qs.is_register is False:
+        if not qs.is_register:
             redirect_url = '/shouters/register/info-1/{}/'.format(encoded_token)
         else:
-            if qs.fb_is_connect is False:
+            if not qs.fb_is_connect:
                 redirect_url = '/shouters/register/info-2/{}/'.format(encoded_token)
+            elif not qs.is_finished_regis:
+                redirect_url = '/shouters/register/work_selection'.format(encoded_token)
             else:
                 # /shouters/line-login?q=register/
                 # /shouters/line-login?q=work_management/
@@ -687,29 +638,45 @@ def oauth2(request):
 
     ig_engagement_percent = (shouter.ig_average_total_like / shouter.ig_active_follower) * 100
     ig_engagement_percent = round(ig_engagement_percent, 2)
+    ig_story_view = context__engagement.get('story_view')
+    ig_average_post_reach = context__engagement.get('average_post_reach')
 
     shouter.ig_engagement_percent = ig_engagement_percent
-    shouter.ig_story_view = context__engagement.get('story_view')
-    shouter.ig_average_post_reach = context__engagement.get('average_post_reach')
+    shouter.ig_story_view = ig_story_view
+    shouter.ig_average_post_reach = ig_average_post_reach
+
+    # Cal Ads Post Reach
+    predicted_ad_post_reach = ig_story_view * 3
+    ig_ad_post_reach = (ig_average_post_reach + predicted_ad_post_reach) / 2
+
+    shouter.ig_predicted_ad_post_reach = predicted_ad_post_reach
+    shouter.ig_ad_post_reach = ig_ad_post_reach
     # shouter.ig_like_engagement = context__engagement.get('like_engagement')
     shouter.save()
 
-    shouter.ig_price_story_fc = round(IGStoryFc().cal_price(shouter.ig_story_view), 2)
-    shouter.ig_price_story_ugc = round(IGStoryUgc().cal_price(shouter.ig_story_view), 2)
-    shouter.ig_price_post_fc = round(IGPostFc().cal_price(shouter.ig_average_post_reach), 2)
-    shouter.ig_price_post_ugc = round(IGPostUgc().cal_price(shouter.ig_average_post_reach), 2)
+    # Cal Price
+    ig_price_story_fc = round(IGStoryFc().cal_price(ig_story_view), 2)
+    ig_price_story_ugc = round(IGStoryUgc().cal_price(ig_story_view), 2)
+    ig_price_post_fc = round(IGPostFc().cal_price(ig_ad_post_reach), 2)
+    ig_price_post_ugc = round(IGPostUgc().cal_price(ig_ad_post_reach), 2)
+    shouter.ig_price_story_fc = ig_price_story_fc
+    shouter.ig_price_story_ugc = ig_price_story_ugc
+    shouter.ig_price_post_fc = ig_price_post_fc
+    shouter.ig_price_post_ugc = ig_price_post_ugc
     shouter.save()
 
-    shouter.ig_price_story_post_fc = (shouter.ig_price_story_fc + shouter.ig_price_post_fc) * 0.9
-    shouter.ig_price_story_post_ugc = (shouter.ig_price_post_fc + shouter.ig_price_post_ugc) * 0.9
+    ig_price_story_post_fc = (ig_price_story_fc + ig_price_post_fc) * 0.9
+    ig_price_story_post_ugc = (ig_price_story_ugc + ig_price_post_ugc) * 0.9
+    shouter.ig_price_story_post_fc = round(ig_price_story_post_fc, 2)
+    shouter.ig_price_story_post_ugc = round(ig_price_story_post_ugc, 2)
     shouter.save()
 
-    shouter.ig_fb_price_story_fc = round(shouter.ig_price_story_fc * 1.1, 2)
-    shouter.ig_fb_price_story_ugc = round(shouter.ig_price_story_ugc * 1.1, 2)
-    shouter.ig_fb_price_post_fc = round(shouter.ig_price_post_fc * 1.1, 2)
-    shouter.ig_fb_price_post_ugc = round(shouter.ig_price_post_ugc * 1.1, 2)
-    shouter.ig_fb_price_story_post_fc = round(shouter.ig_price_story_post_fc * 1.1, 2)
-    shouter.ig_fb_price_story_post_ugc = round(shouter.ig_price_story_post_ugc * 1.1, 2)
+    shouter.ig_fb_price_story_fc = round(ig_price_story_fc * 1.1, 2)
+    shouter.ig_fb_price_story_ugc = round(ig_price_story_ugc * 1.1, 2)
+    shouter.ig_fb_price_post_fc = round(ig_price_post_fc * 1.1, 2)
+    shouter.ig_fb_price_post_ugc = round(ig_price_post_ugc * 1.1, 2)
+    shouter.ig_fb_price_story_post_fc = round(ig_price_story_post_fc * 1.1, 2)
+    shouter.ig_fb_price_story_post_ugc = round(ig_price_story_post_ugc * 1.1, 2)
     shouter.save()
 
     context__audience_insight = FacebookAPI().get_audience_insight(business_account_id=business_account_id,

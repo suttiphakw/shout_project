@@ -29,6 +29,7 @@ class Shouter(models.Model):
     register_created = models.DateTimeField(default=now)
 
     is_register = models.BooleanField(default=False)
+    is_finished_regis = models.BooleanField(default=False)
     is_approve = models.BooleanField(default=False)
     is_already_approve = models.BooleanField(default=False)
 
@@ -77,6 +78,9 @@ class Shouter(models.Model):
     ig_engagement_percent = models.FloatField(null=True, blank=True)
     ig_story_view = models.FloatField(null=True, blank=True)
     ig_average_post_reach = models.FloatField(null=True, blank=True)
+    ig_predicted_ad_post_reach = models.FloatField(null=True, blank=True)
+    ig_ad_post_reach = models.FloatField(null=True, blank=True)
+
     # ig_like_engagement = models.IntegerField(null=True, blank=True)
 
     # # Pricing
@@ -136,8 +140,8 @@ class Shouter(models.Model):
     #
     # # History Work
 
-    def __str__(self):
-        return self.first_name
+    # def __str__(self):
+    #     return self.first_name
 
 
 # Function approve from admin
@@ -147,16 +151,16 @@ def article_pre_save(sender, instance, *args, **kwargs):
         # Get Init Data
         first_name = instance.first_name
         line_user_id = instance.line_user_id
-        line_profile_picture = instance.line_profile_picture
         ig_username = instance.ig_username
+        ig_profile_picture = instance.ig_profile_picture
         ig_follower_count = instance.ig_follower_count
         ig_follower_count = str(ig_follower_count)
 
-        print(first_name, line_user_id, line_profile_picture, ig_username, ig_follower_count)
+        print(first_name, line_user_id, ig_profile_picture, ig_username, ig_follower_count)
 
         response_text = api__admin_approve_text_message(line_user_id=line_user_id)
         response_flex = api__admin_approve_flex_message(line_user_id=line_user_id,
-                                                        line_profile_picture=line_profile_picture,
+                                                        ig_profile_picture=ig_profile_picture,
                                                         first_name=first_name,
                                                         ig_username=ig_username,
                                                         ig_follower_count=ig_follower_count)

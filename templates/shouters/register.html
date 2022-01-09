@@ -11,7 +11,79 @@
     <link rel="shortcut icon" href="{% static 'img/logo/Shout_Logov2-07.png' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- Vue Framework -->
-<!--    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <!-- J query -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("form[name='registration']").submit(function (e) {
+          const tel = $('#tel').val();
+          const interest = $('#interest').val();
+          console.log(tel)
+          console.log(interest);
+          if (interest.length > 5) {
+            alert('Only 5 interest you can choose, Please choose again.');
+            e.preventDefault(e);
+          }
+        });
+      });
+
+      $(function () {
+        $("form[name='registration']").validate({
+          rules: {
+            first_name: "required",
+            last_name: "required",
+            nickname: "required",
+            email: "required",
+            tel: "required",
+            gender: "required",
+            birthday_date: "required",
+            birthday_month: "required",
+            birthday_year: "required",
+            province: "required",
+            education: "required",
+            college: "required",
+          },
+          errorPlacement: function (error, element) {
+            if (element.attr('name') == 'gender') {
+              error.appendTo('#errorGender');
+            } else if (
+              element.attr('name') == 'birthday_date' ||
+              element.attr('name') == 'birthday_month' ||
+              element.attr('name') == 'birthday_year' ||
+              element.attr('name') == 'province' ||
+              element.attr('name') == 'education') {
+              error.appendTo('#nonetext');
+            } else {
+              error.insertBefore(element);
+            }
+          },
+          messages: {
+            first_name: "** Please enter your Firstname **",
+            last_name: "** Please enter your Lastname **",
+            nickname: "** Please enter your Nickname **",
+            email: "** Please enter your Email **",
+            tel: "** Please enter your Telephone Number **",
+            gender: "** Please select your Gender **",
+            birthday_date: "** Please select your Birthday **",
+            birthday_month: "** Please select your Birthday **",
+            birthday_year: "** Please select your Birthday **",
+            province: "** Please select your province **",
+            education: "** Please select your province **",
+            college: "** Please select your college **",
+          },
+          submitHandler: function (form) {
+            form.submit();
+          }
+        });
+      });
+    </script>
+    <style>
+      form .error {
+          color: #ff0000;
+      }
+    </style>
     <!-- Title -->
     <title>Shout | Register</title>
 </head>
@@ -54,34 +126,40 @@
                 {% endif %} 
             </div>
 
-            <section class="register__form">
+            <section class="register__form" id="register">
                 <div class="register__form__header">
                     <p>รูปโปรไฟล์</p>
                     <img src="{{ line_profile_picture }}" alt="" class="register__form__image">
                 </div>
-                <form action="{% url 'shouter__register' token %}" method="POST" class="register__form__input"> {% csrf_token %}
-                    <!-- Nickname -->
-                    <label for="nickname">ชื่อเล่น <span>*</span></label>
-                    <input type="text" id="nickname" name="nickname" placeholder="Your nickname">
-
+                <form action="{% url 'shouter__register' token %}" method="POST" class="register__form__input" name="registration"> {% csrf_token %}
                     <!-- Firstname -->
                     <label for="first_name">ชื่อจริง <span>*</span></label>
+                    <div id="messageBox"></div>
                     <input type="text" id="first_name" name="first_name" placeholder="Your firstname">
 
                     <!-- Lastname -->
                     <label for="last_name">นามสกุล <span>*</span></label>
+                    <div id="messageBox"></div>
                     <input type="text" id="last_name" name="last_name" placeholder="Your surname">
+
+                    <!-- Nickname -->
+                    <label for="nickname">ชื่อเล่น <span>*</span></label>
+                    <div id="messageBox"></div>
+                    <input type="text" id="nickname" name="nickname" placeholder="Your nickname">
 
                     <!-- Email -->
                     <label for="email">Email ติดต่อ <span>*</span></label>
+                    <div id="messageBox"></div>
                     <input type="email" id="email" name="email" placeholder="contact.shoutsolution@gmail.com">
 
                     <!-- Tel -->
                     <label for="tel">เบอร์โทรติดต่อ <span>*</span></label>
-                    <input type="text" id="tel" name="tel" placeholder="000-000-0000">
+                    <div id="messageBox"></div>
+                    <input type="tel" id="tel" name="tel" placeholder="000-000-0000">
 
                     <!-- Gender -->
                     <p>เพศ <span>*</span></p>
+                    <div id="errorGender"></div>
                     <div class="register__form__input__radio">
                         <div class="register__form__input__radio__choice">
                             <input type="radio" id="female" name="gender" value="female">
@@ -92,8 +170,8 @@
                             <label for="male">ชาย</label>
                         </div>
                         <div class="register__form__input__radio__choice register__form__input__radio__choice__last">
-                            <input type="radio" id="exist" name="gender" value="exist">
-                            <label for="exist">ไม่ระบุเพศ</label>
+                            <input type="radio" id="alternative" name="gender" value="alternative">
+                            <label for="alternative">เพศทางเลือก</label>
                         </div>
                     </div>
 
@@ -101,24 +179,22 @@
                     <p>วัน/เดือน/ปี เกิด <span>*</span></p>
                     <div class="register__form__input__select">
                         <select name="birthday_date">
-                            <option value="none" selected disabled>วันที่</option>
+                            <option value="" selected disabled>วันที่</option>
                             {% for date_list in date_lists %}
                                 <option value={{ date_list }}>{{ date_list }}</option>
                             {% endfor %}
-
                         </select>
                         <select name="birthday_month">
-                            <option value="none" selected disabled>เดือน</option>
+                            <option value="" selected disabled>เดือน</option>
                             {% for month_list in month_lists %}
                                 <option value={{ month_list }}>{{ month_list }}</option>
                             {% endfor %}
                         </select>
                         <select name="birthday_year">
-                            <option value="none" selected disabled>ปี</option>
+                            <option value="" selected disabled>ปี</option>
                             {% for year_list in year_lists %}
                                 <option value={{ year_list }}>{{ year_list }}</option>
                             {% endfor %}
-
                         </select>
                     </div>
 
@@ -126,7 +202,7 @@
                     <p>จังหวัดที่อาศัยอยู่ปัจจุบัน <span>*</span></p>
                     <div class="register__form__input__province">
                         <svg class="register__form__input__province__icon">
-                            <use xlink:href="img/shouters/sprite.svg#icon-location"></use>
+                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-location"></use>
                         </svg>
                         <p class="register__form__input__province__text">Thailand</p>
                         <select name="province">
@@ -134,7 +210,6 @@
                             {% for foo in thailand_provinces %}
                                 <option value={{ foo.province }}>{{ foo.province }}</option>
                             {% endfor %}
-
                         </select>
                     </div>
 
@@ -146,7 +221,6 @@
                             {% for foo in education_lists %}
                                 <option value={{ foo }}>{{ foo }}</option>
                             {% endfor %}
-
                         </select>
                     </div>
 
@@ -157,18 +231,18 @@
                     <!-- Interest -->
                     <p class="register__form__input__interest__text">หมวดหมู่ความสนใจ (มากสุด 5) <span>*</span></p>
                     <select id="interest" name="interest" class="custom-select" multiple>
-                        <option value="technology">📱Technology & Gadget</option>
-                        <option value="social">⭐️ Social & CSR</option>
-                        <option value="entertainment">🎸Entertainment</option>
-                        <option value="finance">💰 Finance & Investment</option>
+                        <option value="technology_gadget">📱 Technology & Gadget</option>
+                        <option value="social_csr">⭐️ Social & CSR</option>
+                        <option value="entertainment">🎸 Entertainment</option>
+                        <option value="finance_investment">💰 Finance & Investment</option>
                         <option value="lifestyle">🌻 Lifestyle</option>
                         <option value="fashion">👗 Fashion</option>
                         <option value="automobile">🚘 Automobile</option>
-                        <option value="food">🍔 Food & Drink</option>
+                        <option value="food_drink">🍔 Food & Drink</option>
                         <option value="beauty">💄 Beauty</option>
                         <option value="travel">✈️ Travel</option>
-                        <option value="health">🏀 Health & Sport</option>
-                        <option value="design">🎨 Design & Art</option>
+                        <option value="health_sport">🏀 Health & Sport</option>
+                        <option value="design_art">🎨 Design & Art</option>
                         <option value="luxury">👜 Luxury</option>
                     </select>
 

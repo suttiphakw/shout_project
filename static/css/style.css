@@ -1393,6 +1393,15 @@ input:checked + .slider:before {
     .register__form__input input[type=text]::placeholder {
       color: black;
       opacity: 0.2; }
+  .register__form__input input[type=tel] {
+    border: var(--border-grey-light);
+    padding: 2rem;
+    font-size: 3.2rem;
+    margin-bottom: 4rem;
+    border-radius: 6px; }
+    .register__form__input input[type=tel]::placeholder {
+      color: black;
+      opacity: 0.2; }
   .register__form__input input[type=email] {
     border: var(--border-grey-light);
     padding: 2rem;
@@ -1420,7 +1429,9 @@ input:checked + .slider:before {
     margin-bottom: 4rem; }
     .register__form__input__select select {
       flex: 0 0 30%;
-      padding: 3rem 0;
+      /*padding: 3rem 0;*/
+      /*text-indent:3rem;*/
+      height: 40px;
       text-align: center;
       border: var(--border-grey-light);
       border-radius: 6px;
@@ -1442,7 +1453,8 @@ input:checked + .slider:before {
       margin-right: 4rem; }
     .register__form__input__province select {
       flex: 0 0 50%;
-      padding: 3rem 1rem;
+      /*padding: 3rem 1rem;*/
+      height: 40px;
       border: var(--border-grey-light);
       border-radius: 6px;
       color: var(--color-text-main); }
@@ -1451,7 +1463,8 @@ input:checked + .slider:before {
     margin-bottom: 4rem; }
     .register__form__input__education select {
       flex: 0 0 100%;
-      padding: 3rem 1rem;
+      /*padding: 3rem 1rem;*/
+      height: 40px;
       border: var(--border-grey-light);
       border-radius: 6px;
       color: var(--color-text-main); }
