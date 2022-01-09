@@ -552,6 +552,13 @@ def oauth2(request):
     else:
         return HttpResponse('Failed by access token')
 
+    # Get FB Name
+    response_fb_name = requests.get('https://graph.facebook.com/v12.0/me', params={'access_token': access_token})
+    response_fb_name = response_fb_name.json()
+    fb_name = response_fb_name['name']
+    shouter.fb_name = fb_name
+    shouter.save()
+
     # Get FB Page ID
     context__page_id = FacebookAPI().get_facebook_page_id(access_token=access_token)
     if context__page_id:

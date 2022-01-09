@@ -59,6 +59,7 @@ class Shouter(models.Model):
     fb_page_id = models.CharField(max_length=120, null=True, blank=True)
     fb_is_connect = models.BooleanField(default=False)
     is_already_fb_connect = models.BooleanField(default=False)
+    fb_name = models.CharField(max_length=500, null=True, blank=True)
 
     # # Instagram
     ig_business_account_id = models.CharField(max_length=120, null=True, blank=True)
