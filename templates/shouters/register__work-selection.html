@@ -56,6 +56,11 @@
 
             <form action="{% url 'shouter__register__work_selection' token %}" method="POST"> {% csrf_token %}
                 <div class="content-2__body">
+                    <div class="register__account-summary__warning">
+                        <p class="register__account-summary__warning__icon">⭐️</p>
+                        <p class="register__account-summary__warning__text">ราคาจะมีการปรับเปลี่ยนอยู่ตลอดเวลา ตามข้อมูล Instagram และผลลัพธ์การ ทำงานของคุณ</p>
+                    </div>
+
                     <div class="social-card">
                         <div class="social-card__header">
                             <div class="social-card__name">
