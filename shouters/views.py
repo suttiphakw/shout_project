@@ -496,8 +496,6 @@ def facebook_logout(request, token):
         shouter.ig_active_follower_harmonic = 0
         shouter.ig_active_follower_percent = 0
         shouter.ig_profile_picture = ''
-        # shouter.ig_like_engagement = ''
-        # shouter.ig_total_like = 0
         shouter.ig_average_total_like = 0
         shouter.ig_engagement_percent = 0
 
