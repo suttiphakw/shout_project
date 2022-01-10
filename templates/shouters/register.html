@@ -16,74 +16,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script>
-      $(document).ready(function () {
-        $("form[name='registration']").submit(function (e) {
-          const tel = $('#tel').val();
-          const interest = $('#interest').val();
-          console.log(tel)
-          console.log(interest);
-          if (interest.length > 5) {
-            alert('Only 5 interest you can choose, Please choose again.');
-            e.preventDefault(e);
-          }
-        });
-      });
+      function submitForm() {
+        {#const form = document.getElementById("#registration")#}
+        const first_name = $('#first_name').val();
+        const last_name = $('#last_name').val();
+        const nickname = $('#nickname').val();
+        const email = $('#email').val();
+        const tel = $('#tel').val();
+        const gender = $("input[type='radio'][name='gender']:checked").val();
+        const birthday_date = $('#birthday_date').val();
+        const birthday_month = $('#birthday_month').val();
+        const birthday_year = $('#birthday_year').val();
+        const province = $('#province').val();
+        const education = $('#education').val();
+        const college = $('#college').val();
+        const interest = $('#interest').val();
 
-      $(function () {
-        $("form[name='registration']").validate({
-          rules: {
-            first_name: "required",
-            last_name: "required",
-            nickname: "required",
-            email: "required",
-            tel: "required",
-            gender: "required",
-            birthday_date: "required",
-            birthday_month: "required",
-            birthday_year: "required",
-            province: "required",
-            education: "required",
-            college: "required",
-          },
-          errorPlacement: function (error, element) {
-            if (element.attr('name') == 'gender') {
-              error.appendTo('#errorGender');
-            } else if (
-              element.attr('name') == 'birthday_date' ||
-              element.attr('name') == 'birthday_month' ||
-              element.attr('name') == 'birthday_year' ||
-              element.attr('name') == 'province' ||
-              element.attr('name') == 'education') {
-              error.appendTo('#nonetext');
-            } else {
-              error.insertBefore(element);
-            }
-          },
-          messages: {
-            first_name: "** Please enter your Firstname **",
-            last_name: "** Please enter your Lastname **",
-            nickname: "** Please enter your Nickname **",
-            email: "** Please enter your Email **",
-            tel: "** Please enter your Telephone Number **",
-            gender: "** Please select your Gender **",
-            birthday_date: "** Please select your Birthday **",
-            birthday_month: "** Please select your Birthday **",
-            birthday_year: "** Please select your Birthday **",
-            province: "** Please select your province **",
-            education: "** Please select your province **",
-            college: "** Please select your college **",
-          },
-          submitHandler: function (form) {
-            form.submit();
+        if (first_name.trim() === '' || last_name.trim() === '' ||
+          nickname.trim() === '' || email.trim() === '' || tel.trim() === '' || gender.trim() === '' ||
+          birthday_date.trim() === '' || birthday_month.trim() === '' || birthday_year.trim() === '' ||
+          province.trim() === '' || education.trim() === '' || college.trim() === '' || interest.length === 0) {
+          alert('Please fill in all information.');
+        } else {
+          if(interest.length > 5) {
+            alert('Please choose max to 5 interest');
+          } else {
+            $("#registration").submit();
           }
-        });
-      });
-    </script>
-    <style>
-      form .error {
-          color: #ff0000;
+        }
       }
-    </style>
+
+    </script>
     <!-- Title -->
     <title>Shout | Register</title>
 </head>
@@ -131,7 +94,7 @@
                     <p>รูปโปรไฟล์</p>
                     <img src="{{ line_profile_picture }}" alt="" class="register__form__image">
                 </div>
-                <form action="{% url 'shouter__register' token %}" method="POST" class="register__form__input" name="registration"> {% csrf_token %}
+                <form action="{% url 'shouter__register' token %}" method="POST" class="register__form__input" name="registration" id="registration"> {% csrf_token %}
                     <!-- Firstname -->
                     <label for="first_name">ชื่อจริง <span>*</span></label>
                     <div id="messageBox"></div>
@@ -178,19 +141,19 @@
                     <!-- Birthday -->
                     <p>วัน/เดือน/ปี เกิด <span>*</span></p>
                     <div class="register__form__input__select">
-                        <select name="birthday_date">
+                        <select name="birthday_date" id="birthday_date">
                             <option value="" selected disabled>วันที่</option>
                             {% for date_list in date_lists %}
                                 <option value={{ date_list }}>{{ date_list }}</option>
                             {% endfor %}
                         </select>
-                        <select name="birthday_month">
+                        <select name="birthday_month" id="birthday_month">
                             <option value="" selected disabled>เดือน</option>
                             {% for month_list in month_lists %}
                                 <option value={{ month_list }}>{{ month_list }}</option>
                             {% endfor %}
                         </select>
-                        <select name="birthday_year">
+                        <select name="birthday_year" id="birthday_year">
                             <option value="" selected disabled>ปี</option>
                             {% for year_list in year_lists %}
                                 <option value={{ year_list }}>{{ year_list }}</option>
@@ -205,7 +168,7 @@
                             <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-location"></use>
                         </svg>
                         <p class="register__form__input__province__text">Thailand</p>
-                        <select name="province">
+                        <select name="province" id="province">
                             <option value="none" selected disabled>เลือกจังหวัด</option>
                             {% for foo in thailand_provinces %}
                                 <option value={{ foo.province }}>{{ foo.province }}</option>
@@ -216,7 +179,7 @@
                     <!-- Education -->
                     <p>การศึกษาล่าสุด หรือ กำลังศึกษา <span>*</span></p>
                     <div class="register__form__input__education">
-                        <select name="education">
+                        <select name="education" id="education">
                             <option value="none" selected disabled>เลือกระดับการศึกษา</option>
                             {% for foo in education_lists %}
                                 <option value={{ foo }}>{{ foo }}</option>
@@ -229,8 +192,8 @@
                     <input type="text" id="college" name="college" placeholder="ระบุสถานศึกษา">
 
                     <!-- Interest -->
-                    <p class="register__form__input__interest__text">หมวดหมู่ความสนใจ (มากสุด 5) <span>*</span></p>
-                    <select id="interest" name="interest" class="custom-select" multiple>
+                    <label class="register__form__input__interest__text" >หมวดหมู่ความสนใจ (มากสุด 5) <span>*</span></label>
+                    <select id="interest" name="interest[]" class="custom-select" multiple>
                         <option value="technology_gadget">📱 Technology & Gadget</option>
                         <option value="social_csr">⭐️ Social & CSR</option>
                         <option value="entertainment">🎸 Entertainment</option>
@@ -246,7 +209,7 @@
                         <option value="luxury">👜 Luxury</option>
                     </select>
 
-                    <button class="btn-main btn-shouter" type="submit">ถัดไป</button>
+                  <input class="btn-main btn-shouter" type="button" value="ถัดไป" onclick="submitForm()">
                 </form>
             </section>
         </main>

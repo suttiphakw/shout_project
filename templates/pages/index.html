@@ -55,6 +55,9 @@
                             <p class="uvp__content__left__main__top">คนตัวเล็กจำนวนมากได้ง่ายๆ</p>
                             <p class="uvp__content__left__main__bottom"><span>Shout - แพลตฟอร์ม</span> ที่ทำให้คุณเข้าถึงกลุ่มลูกค้าอย่างใกล้ชิด แม่นยำ</p>
                             <p class="uvp__content__left__main__bottom">และ เพิ่มยอดขายได้ง่ายกว่าเดิม ตั้งแต่เริ่มจนจบทำได้ด้วยตัวคุณเอง</p>
+                            <p class="uvp__content__left__main__bottom-mobile">
+                              <span>Shout - แพลตฟอร์ม</span> ที่ทำให้คุณเข้าถึงกลุ่มลูกค้าอย่างใกล้ชิด แม่นยำ และ เพิ่มยอดขายได้ง่ายกว่าเดิม ตั้งแต่เริ่มจนจบทำได้ด้วยตัวคุณเอง
+                            </p>
                             <div class="uvp__button">
                                 <a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
                                 <a href="{% url 'on_dev' %}" class="btn btn-sub btn__brand-page">ดูเพิ่มเติม</a>
@@ -62,7 +65,7 @@
 
                         </div>
                         <div class="uvp__content__left__sub">
-                            <p class="uvp__content__left__sub__info">ติดต่อเรา <span>087-560-4935</span> / <span>contact.shoutsolution@gmail.com</span></p>
+                            <p class="uvp__content__left__sub__info">ติดต่อเรา <span>087-560-4935</span> / <span>contact@shoutsolution.com</span></p>
                             <p class="uvp__content__left__sub__info">หรือสนใจมาร่วมเป็น Shouter (ผู้บอกต่อ) กับเรา?
                                 <a href="{% url 'shouter__index' %}" class="uvp__content__left__sub__link">สมัครที่นี่</a>
                             </p>
@@ -277,9 +280,8 @@
                     <svg class="footer__icon">
                         <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-mail"></use>
                     </svg>
-                    <p class="footer__text-sub">contact.shoutsolution@gmail.com</p>
+                    <p class="footer__text-sub">contact@shoutsolution.com</p>
                 </div>
-                <p class="footer__text-sub">© 2021 Shout Solution. All rights reserved.</p>
             </div>
 
             <div class="footer__right">
@@ -306,6 +308,7 @@
                     <span> | </span>
                     <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
                 </div>
+                <p class="footer__text-reserved">© 2021 Shout Solution. All rights reserved.</p>
             </div>
 
         </footer>
