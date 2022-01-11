@@ -378,7 +378,7 @@ def oauth(request):
             if not qs.fb_is_connect:
                 redirect_url = '/shouters/register/info-2/{}/'.format(encoded_token)
             elif not qs.is_finished_regis:
-                redirect_url = '/shouters/register/work_selection'.format(encoded_token)
+                redirect_url = '/shouters/register/choose-instagram/{}/'.format(encoded_token)
             else:
                 # /shouters/line-login?q=register/
                 # /shouters/line-login?q=work_management/
