@@ -126,6 +126,7 @@ def register(request, token):
             return HttpResponse('404Error')
 
         # Save to database
+        print(interest)
         shouter = Shouter.objects.filter(id=_id).first()
         shouter.nickname = nickname
         shouter.first_name = first_name
@@ -188,18 +189,10 @@ def register__account_summary(request, token):
     if not Shouter.objects.filter(id=_id).exists():
         return redirect('on_dev')
     shouter = Shouter.objects.filter(id=_id).first()
-
-    interest = shouter.interest
-    interest = interest.replace("'", "")
-    interest = interest.replace("[", "")
-    interest = interest.replace("]", "")
-    interest = interest.replace(" ", "")
-    interest_list = interest.split(',')
-
+    interest_list = shouter.interest
     print(interest_list)
-    # Change text of interest_list
+
     interest = shouter_interest(interest_list=interest_list)
-    print(interest)
 
     context = {
         'shouter': shouter,

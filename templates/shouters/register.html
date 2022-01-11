@@ -33,7 +33,7 @@
         const interest = $('#interest').val();
 
         if (first_name.trim() === '' || last_name.trim() === '' ||
-          nickname.trim() === '' || email.trim() === '' || tel.trim() === '' || gender.trim() === '' ||
+          nickname.trim() === '' || email.trim() === '' || tel.trim() === '' || gender === undefined ||
           birthday_date.trim() === '' || birthday_month.trim() === '' || birthday_year.trim() === '' ||
           province.trim() === '' || education.trim() === '' || college.trim() === '' || interest.length === 0) {
           alert('Please fill in all information.');
@@ -193,7 +193,7 @@
 
                     <!-- Interest -->
                     <label class="register__form__input__interest__text" >หมวดหมู่ความสนใจ (มากสุด 5) <span>*</span></label>
-                    <select id="interest" name="interest[]" class="custom-select" multiple>
+                    <select id="interest" name="interest" class="custom-select" multiple>
                         <option value="technology_gadget">📱 Technology & Gadget</option>
                         <option value="social_csr">⭐️ Social & CSR</option>
                         <option value="entertainment">🎸 Entertainment</option>
