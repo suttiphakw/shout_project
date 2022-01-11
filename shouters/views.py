@@ -163,16 +163,6 @@ def register__choose_instagram(request, token):
     shouter = Shouter.objects.filter(id=_id).first()
     context = {
         'shouter': shouter,
-        'fb_page_id': shouter.fb_page_id,
-        'ig_username': shouter.ig_username,
-        'ig_media_count': shouter.ig_media_count,
-        'ig_profile_picture_url': shouter.ig_profile_picture,
-        'ig_followers': shouter.ig_follower_count,
-        'ig_followings': shouter.ig_following_count,
-        'ig_active_follower': shouter.ig_active_follower,
-        'ig_active_follower_percent': shouter.ig_active_follower_percent,
-        'ig_engagement': shouter.ig_average_total_like,
-        'ig_engagement_percent': shouter.ig_engagement_percent,
         'token': token,
     }
     return render(request, 'shouters/register__choose_instagram.html', context=context)
@@ -684,7 +674,7 @@ def oauth2(request):
     shouter.fb_is_connect = True
     shouter.save()
 
-    redirect_url = '/shouters/register/work-selection/{}/'.format(token)
+    redirect_url = '/shouters/register/choose-instagram/{}/'.format(token)
 
     return redirect(redirect_url)
 

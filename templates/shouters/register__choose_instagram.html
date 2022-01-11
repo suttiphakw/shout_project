@@ -69,17 +69,17 @@
                             </div>
 
                             <div class="register__choose-ig__radio-btn__body">
-                                <img src="{{ ig_profile_picture_url }}" alt="" style="width: 20rem; height: 20rem; border-radius: 50%">
-                                <p class="register__choose-ig__radio-btn__body__main">@{{ ig_username }}</p>
-                                <p>Page : {{ fb_page_id }}</p>
+                                <img src="{{ shouter.ig_profile_picture }}" alt="" style="width: 20rem; height: 20rem; border-radius: 50%">
+                                <p class="register__choose-ig__radio-btn__body__main">@{{ shouter.ig_username }}</p>
+                                <p>Page : {{ shouter.fb_page_id }}</p>
                             </div>
                             <div class="register__choose-ig__radio-btn__body__info">
                                 <div class="register__choose-ig__radio-btn__body__info__left">
-                                    <h2>{{ ig_followers }}</h2>
+                                    <h2>{{ shouter.ig_followers }}</h2>
                                     <p>Followers</p>
                                 </div>
                                 <div class="register__choose-ig__radio-btn__body__info__right">
-                                    <h2>{{ ig_followings }}</h2>
+                                    <h2>{{ shouter.ig_followings }}</h2>
                                     <p>Followings</p>
                                 </div>
                             </div>

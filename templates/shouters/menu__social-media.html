@@ -101,7 +101,7 @@
                     </div>
                 </div>
 
-                {% if shouter.fb_is_connect %}
+                {% if not shouter.fb_is_connect %}
                     <a href="{% url 'shouter__facebook-login' token %}" class="social-media-list__button" style="text-align: center; font-size: 20px; text-decoration: none;">
                         Login Facebook
                     </a>
