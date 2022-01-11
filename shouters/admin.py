@@ -8,7 +8,7 @@ class ShouterAdmin(admin.ModelAdmin):
 
     readonly_fields = (
         # Status
-        'is_register', 'is_already_approve', 'is_already_fb_connect',
+        'is_register', 'is_already_approve', 'is_already_fb_connect', 'is_finished_regis',
         # Personal Info
         'nickname', 'first_name', 'last_name', 'email', 'tel', 'gender',
         'birthday_date', 'birthday_month', 'birthday_year', 'province', 'education', 'college', 'interest',
@@ -38,7 +38,7 @@ class ShouterAdmin(admin.ModelAdmin):
     )
 
     fieldsets = (
-        ('Status', {'fields': ('is_approve', 'is_register', 'fb_is_connect')}),
+        ('Status', {'fields': ('is_approve', 'is_register', 'fb_is_connect', 'is_finished_regis')}),
         ('Personal Info', {'fields': ('nickname', 'first_name', 'last_name', 'email', 'tel', 'gender',
                                       'birthday_date', 'birthday_month', 'birthday_year', 'province', 'education',
                                       'college', 'interest',)}),
