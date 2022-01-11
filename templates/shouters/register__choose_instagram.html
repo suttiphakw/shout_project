@@ -14,6 +14,21 @@
 <!--    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
     <script src="https://unpkg.com/vue@next" defer></script>
     <script src="{% static 'js/main.js' %}" defer></script>
+    <!-- J query -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script>
+      function submitForm() {
+        const instagram = $("input[type='radio'][name='instagram']:checked").val();
+
+        if (instagram === undefined) {
+          alert('Please choose at least 1 instagram.');
+        } else {
+          $("#choose-instagram").submit();
+        }
+      }
+
+    </script>
     <!-- Title -->
     <title>Shout | Choose Instagram</title>
 </head>
@@ -50,54 +65,69 @@
         </section>
 
         <main class="register__choose-ig">
-            <div class="register__choose-ig__header">
-                <h2>เลือก 1 บัญชี Instagram</h2>
-            </div>
-
-            <div class="register__choose-ig__body">
-                <div class="register__choose-ig__card">
-                    <label for="instagram_1" class="register__choose-ig__custom-radio">
-                        <input type="radio" id="instagram_1" name="instagram">
-                        <span class="register__choose-ig__radio-btn">
-                            <div class="register__choose-ig__radio-btn__top">
-                                <svg class="register__choose-ig__instagram-icon">
-                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
-                                </svg>
-                                <svg class="register__choose-ig__check-icon">
-                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                                </svg>
-                            </div>
-
-                            <div class="register__choose-ig__radio-btn__body">
-                                <img src="{{ shouter.ig_profile_picture }}" alt="" style="width: 20rem; height: 20rem; border-radius: 50%">
-                                <p class="register__choose-ig__radio-btn__body__main">@{{ shouter.ig_username }}</p>
-                                <p>Page : {{ shouter.fb_page_id }}</p>
-                            </div>
-                            <div class="register__choose-ig__radio-btn__body__info">
-                                <div class="register__choose-ig__radio-btn__body__info__left">
-                                    <h2>{{ shouter.ig_follower_count }}</h2>
-                                    <p>Followers</p>
-                                </div>
-                                <div class="register__choose-ig__radio-btn__body__info__right">
-                                    <h2>{{ shouter.ig_following_count }}</h2>
-                                    <p>Followings</p>
-                                </div>
-                            </div>
-                        </span>
-                    </label>
+            {% if list_obj %}
+                <div class="register__choose-ig__header">
+                    <h2>เลือก 1 บัญชี Instagram</h2>
                 </div>
 
-                <a href="{% url 'shouter__register__work_selection' token %}" class="btn btn-main btn-shouter">
-                    ยืนยันเชื่อมต่อเลย
-                </a>
+                <form action="{% url 'shouter__register__choose_instagram' token %}" method="post" id="choose-instagram"> {% csrf_token %}
+                    <div class="register__choose-ig__body">
+                        {% for obj in list_obj %}
+                            <div class="register__choose-ig__card">
+                                <label for="{{ obj.encoded_token }}" class="register__choose-ig__custom-radio">
+                                    <input type="radio" id="{{ obj.encoded_token }}" value="{{ obj.encoded_token }}" name="instagram">
+                                    <span class="register__choose-ig__radio-btn">
+                                        <div class="register__choose-ig__radio-btn__top">
+                                            <svg class="register__choose-ig__instagram-icon">
+                                                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
+                                            </svg>
+                                            <svg class="register__choose-ig__check-icon">
+                                                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                                            </svg>
+                                        </div>
 
-            </div>
+                                        <div class="register__choose-ig__radio-btn__body">
+                                            <img src="{{ obj.ig_profile_picture }}" alt="" style="width: 20rem; height: 20rem; border-radius: 50%">
+                                            <p class="register__choose-ig__radio-btn__body__main">@{{ obj.ig_username }}</p>
+                                            <p>Facebook : {{ obj.fb_name }}</p>
+                                            <p>Page : {{ obj.page_name }}</p>
+                                        </div>
+                                        <div class="register__choose-ig__radio-btn__body__info">
+                                            <div class="register__choose-ig__radio-btn__body__info__left">
+                                                <h2>{{ obj.ig_follower_count }}</h2>
+                                                <p>Followers</p>
+                                            </div>
+                                            <div class="register__choose-ig__radio-btn__body__info__right">
+                                                <h2>{{ obj.ig_following_count }}</h2>
+                                                <p>Followings</p>
+                                            </div>
+                                        </div>
+                                    </span>
+                                </label>
+                            </div>
+                        {% endfor %}
 
+                        <span style="text-align: center; font-size: 12px; color: #F37324;">หน้าถัดไปอาจใช้ระยะเวลาในการดำเนินการสักครู่ โปรดรอประมาณ 15 วินาที</span>
+
+                        <span onclick="submitForm()" class="btn btn-main btn-shouter" style="text-align: center">
+                            ยืนยันเชื่อมต่อเลย
+                        </span>
+                    </div>
+                </form>
+
+            {% else %}
+                <div class="register__choose-ig__header">
+                    <h2>ไม่มีบัญชีที่เชื่อมต่อกัน</h2>
+                </div>
+                <div class="register__info__block">
+                    <a href="{% url 'shouter__facebook-login' token %}" class="register__info__btn register__info__btn__facebook" style="text-align: center">
+                        เชื่อมต่อใหม่อีกครั้ง
+                    </a>
+                </div>
+            {% endif %}
 
         </main>
-
     </section>
-
 
 </body>
 </html>

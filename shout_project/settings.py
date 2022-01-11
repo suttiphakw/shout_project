@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-(1o-psk&4db39^@ae8d@3!#$5hd!my#&o%@x1!%-&-#rx&2tb^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['b331-2001-fb1-db-9aa5-15ea-2f2f-31f9-ad7f.ngrok.io', '127.0.0.1']
+ALLOWED_HOSTS = ['17ed-124-122-141-6.ngrok.io', '127.0.0.1']
 
-TEMP_HOST = 'https://b331-2001-fb1-db-9aa5-15ea-2f2f-31f9-ad7f.ngrok.io/'
+TEMP_HOST = 'https://17ed-124-122-141-6.ngrok.io/'
 LINE_CLIENT_ID = '1656634729'
 LINE_CLIENT_SECRET = 'a9123c0aeec0fb3e37fbed8391411930'
 FB_CLIENT_ID = '297314161911860'

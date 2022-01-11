@@ -22,6 +22,8 @@ urlpatterns = [
     path('register/account-summary/<str:token>/', views.register__account_summary, name='shouter__register__account_summary'),
     path('register/finished/<str:token>/', views.register__finished, name='shouter__register__finished'),
     path('wfa/', views.waiting_for_approve, name='wfa'),
+    # IG API => Get Data
+    path('register/ig-api/<str:token>/', views.register__get_ig_data, name='shouter__register__get-ig-data'),
 
     # Line Login and oauth
     path('line-login/', views.line_login, name='shouter__line-login'),

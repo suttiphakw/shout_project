@@ -126,7 +126,6 @@ def register(request, token):
             return HttpResponse('404Error')
 
         # Save to database
-        print(interest)
         shouter = Shouter.objects.filter(id=_id).first()
         shouter.nickname = nickname
         shouter.first_name = first_name
@@ -160,6 +159,14 @@ def register__choose_instagram(request, token):
 
     if not Shouter.objects.filter(id=_id).exists():
         return redirect('on_dev')
+
+    if request.method == 'POST':
+        encoded_token = request.POST['instagram']
+
+        redirect_url = '/shouters/register/ig-api/{}/'.format(encoded_token)
+
+        return redirect(redirect_url)
+
     shouter = Shouter.objects.filter(id=_id).first()
     context = {
         'shouter': shouter,
@@ -498,7 +505,6 @@ def oauth2(request):
     # Get token
     state = request.GET.get('state')
     list_state = state.split(',')
-    print('list_state :', list_state)
     # Get q (query string)
     token = list_state[1]
     # print('token :', token)
@@ -514,7 +520,9 @@ def oauth2(request):
     if not Shouter.objects.filter(id=_id).exists():
         return HttpResponse('404Error')
 
-    shouter = Shouter.objects.filter(id=_id).first()
+    context = {
+        'token': token
+    }
 
     # Get Access Token
     context__access_token = FacebookAPI().get_access_token(code=code)
@@ -522,80 +530,139 @@ def oauth2(request):
         access_token = context__access_token.get('access_token')
 
         if access_token == '':
-            shouter.fb_response_access_token = context__access_token.get('data')
-            shouter.fb_access_token = access_token
-            shouter.fb_access_token_created = now()
-            shouter.save()
             return HttpResponse('Failed by access token')
 
-        shouter.fb_response_access_token = context__access_token.get('data')
-        shouter.fb_access_token = access_token
-        shouter.fb_access_token_created = now()
-        shouter.save()
     else:
         return HttpResponse('Failed by access token')
 
-    # Get FB Name
-    response_fb_name = requests.get('https://graph.facebook.com/v12.0/me', params={'access_token': access_token})
-    response_fb_name = response_fb_name.json()
-    fb_name = response_fb_name['name']
-    shouter.fb_name = fb_name
-    shouter.save()
-
     # Get FB Page ID
     context__page_id = FacebookAPI().get_facebook_page_id(access_token=access_token)
+    is_found = False
     if context__page_id:
-        page_id = context__page_id.get('page_id')
+        objs = context__page_id['data']['data']
+        list_obj = []
+        for obj in objs:
+            obj__access_token = obj.get('access_token')
+            obj__page_name = obj.get('name')
+            obj__page_id = obj.get('id')
 
-        if page_id == '':
-            shouter.fb_response_page_id = context__page_id.get('data')
-            shouter.fb_page_id = page_id
-            shouter.save()
-            return HttpResponse('Failed by page id')
+            context__business_account_id = FacebookAPI().get_business_account_id(page_id=obj__page_id,
+                                                                                 access_token=obj__access_token)
 
-        shouter.fb_response_page_id = context__page_id.get('data')
-        shouter.fb_page_id = page_id
-        shouter.save()
+            print(context__business_account_id)
+            if context__business_account_id:
+                business_account_id = context__business_account_id.get('business_account_id')
+
+                if not business_account_id == '':
+                    is_found = True
+                    # return render(request, 'shouters/register__choose_instagram.html', context)
+                else:
+                    continue
+
+            else:
+                return render(request, 'shouters/register__choose_instagram.html', context)
+
+            if is_found:
+                # Get FB Name
+                response_fb_name = requests.get('https://graph.facebook.com/v12.0/me',
+                                                params={'access_token': access_token})
+                response_fb_name = response_fb_name.json()
+                fb_name = response_fb_name['name']
+
+                # Get Bio
+                context__ig_biography = FacebookAPI().get_ig_biography(business_account_id=business_account_id,
+                                                                       access_token=access_token)
+                if context__ig_biography:
+                    ig_username = context__ig_biography.get('username')
+                    ig_media_count = context__ig_biography.get('media_count')
+                    ig_follower_count = context__ig_biography.get('followers')
+                    ig_following_count = context__ig_biography.get('followings')
+                    ig_profile_picture = context__ig_biography.get('profile_picture_url')
+                else:
+                    return HttpResponse('Failed by ig biography')
+
+                data = {
+                    'exp': datetime.datetime.now() + datetime.timedelta(days=1),
+                    '_id': _id,
+                    'access_token': obj__access_token,
+                    'page_name': obj__page_name,
+                    'page_id': obj__page_id,
+                    'fb_name': fb_name,
+                    'ig_business_account_id': business_account_id,
+                    'ig_username': ig_username,
+                    'ig_media_count': ig_media_count,
+                    'ig_follower_count': ig_follower_count,
+                    'ig_following_count': ig_following_count,
+                    'ig_profile_picture': ig_profile_picture,
+                }
+
+                encoded_token = jwt.encode(data, 'SHOUTER_JWT_TOKEN', algorithm='HS256')
+
+                # encode token
+                data = {
+                    'page_name': obj__page_name,
+                    'fb_name': fb_name,
+                    'ig_username': ig_username,
+                    'ig_follower_count': ig_follower_count,
+                    'ig_following_count': ig_following_count,
+                    'ig_profile_picture': ig_profile_picture,
+                    'encoded_token': encoded_token,
+                }
+
+                list_obj.append(data)
+
+        context = {
+            'list_obj': list_obj,
+            'token': token,
+        }
+    if is_found:
+        return render(request, 'shouters/register__choose_instagram.html', context)
     else:
-        return HttpResponse('Failed by page id')
+        context = {
+            'token': token
+        }
+        return render(request, 'shouters/register__choose_instagram.html', context)
 
-    # Get IG Page ID
-    context__business_account_id = FacebookAPI().get_business_account_id(page_id=page_id, access_token=access_token)
-    if context__business_account_id:
-        business_account_id = context__business_account_id.get('business_account_id')
 
-        if business_account_id == '':
-            shouter.fb_response_business_account_id = context__business_account_id.get('data')
-            shouter.ig_business_account_id = business_account_id
-            shouter.save()
-            return HttpResponse('Failed by business account id')
+def register__get_ig_data(request, token):
+    try:
+        decoded_token = jwt.decode(token, 'SHOUTER_JWT_TOKEN', algorithms='HS256')
+        _id = decoded_token.get('_id')
+        fb_access_token = decoded_token.get('access_token')
+        fb_page_name = decoded_token.get('page_name')
+        fb_page_id = decoded_token.get('page_id')
+        fb_name = decoded_token.get('fb_name')
+        ig_business_account_id = decoded_token.get('ig_business_account_id')
+        ig_username = decoded_token.get('ig_username')
+        ig_media_count = decoded_token.get('ig_media_count')
+        ig_follower_count = decoded_token.get('ig_follower_count')
+        ig_following_count = decoded_token.get('ig_following_count')
+        ig_profile_picture = decoded_token.get('ig_profile_picture')
+        pass
+    except:
+        return HttpResponse('404Error')
 
-        shouter.fb_response_business_account_id = context__business_account_id.get('data')
-        shouter.ig_business_account_id = business_account_id
-        shouter.save()
-    else:
-        return HttpResponse('Failed by business account id')
+    if not Shouter.objects.filter(id=_id).exists():
+        return redirect('on_dev')
 
-    # Save Access Token and Page ID to database
+    shouter = Shouter.objects.filter(id=_id).first()
+    # Get Info
+    shouter.fb_access_token = fb_access_token
+    shouter.fb_access_token_created = now()
+    shouter.fb_page_name = fb_page_name
+    shouter.fb_page_id = fb_page_id
+    shouter.fb_name = fb_name
+    shouter.ig_business_account_id = ig_business_account_id
+    shouter.ig_username = ig_username
+    shouter.ig_media_count = ig_media_count
+    shouter.ig_follower_count = ig_follower_count
+    shouter.ig_following_count = ig_following_count
+    shouter.ig_profile_picture = ig_profile_picture
     shouter.save()
 
-    # Get Bio
-    context__ig_biography = FacebookAPI().get_ig_biography(business_account_id=business_account_id,
-                                                           access_token=access_token)
-    if context__ig_biography:
-        shouter.ig_response_bio = context__ig_biography.get('data')
-        shouter.ig_username = context__ig_biography.get('username')
-        shouter.ig_media_count = context__ig_biography.get('media_count')
-        shouter.ig_follower_count = context__ig_biography.get('followers')
-        shouter.ig_following_count = context__ig_biography.get('followings')
-        shouter.ig_profile_picture = context__ig_biography.get('profile_picture_url')
-        shouter.save()
-    else:
-        return HttpResponse('Failed by ig biography')
-
     # Get Active Follower
-    context__active_follower = FacebookAPI().get_active_follower(business_account_id=business_account_id,
-                                                                 access_token=access_token)
+    context__active_follower = FacebookAPI().get_active_follower(business_account_id=ig_business_account_id,
+                                                                 access_token=fb_access_token)
     if context__active_follower:
         shouter.ig_response_active_follower = context__active_follower.get('data')
         shouter.ig_active_follower = context__active_follower.get('geometric_active_follower')
@@ -608,8 +675,8 @@ def oauth2(request):
         return HttpResponse('Failed by ig active follower')
 
     # Get Media Objects
-    context__media_objects = FacebookAPI().get_ig_media_objects(business_account_id=business_account_id,
-                                                                access_token=access_token)
+    context__media_objects = FacebookAPI().get_ig_media_objects(business_account_id=ig_business_account_id,
+                                                                access_token=fb_access_token)
     if context__media_objects:
         shouter.ig_response_media_objects = context__media_objects.get('data')
         shouter.save()
@@ -619,7 +686,7 @@ def oauth2(request):
 
     # Get Engagement
     context__engagement = FacebookAPI().get_engagement_insight(media_objects=media_objects,
-                                                               access_token=access_token,
+                                                               access_token=fb_access_token,
                                                                followers=shouter.ig_follower_count)
 
     shouter.ig_average_total_like = context__engagement.get('average_total_like')
@@ -667,14 +734,14 @@ def oauth2(request):
     shouter.ig_fb_price_story_post_ugc = round(ig_price_story_post_ugc * 1.1, 2)
     shouter.save()
 
-    context__audience_insight = FacebookAPI().get_audience_insight(business_account_id=business_account_id,
-                                                                   access_token=access_token)
+    context__audience_insight = FacebookAPI().get_audience_insight(business_account_id=ig_business_account_id,
+                                                                   access_token=fb_access_token)
     shouter.ig_response_audience_insight = context__audience_insight.get('data')
 
     shouter.fb_is_connect = True
     shouter.save()
 
-    redirect_url = '/shouters/register/choose-instagram/{}/'.format(token)
+    redirect_url = '/shouters/register/work-selection/{}/'.format(token)
 
     return redirect(redirect_url)
 
@@ -746,3 +813,5 @@ def menu__bank_account(request, token):
     #     'token': token
     # }
     # return render(request, 'shouters/menu__bank-account.html', context)
+
+
