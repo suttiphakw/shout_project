@@ -757,7 +757,9 @@ def menu__bank_account(request, token):
         return redirect('on_dev')
 
     shouter = Shouter.objects.filter(id=_id).first()
-    context = {
-        'token': token
-    }
-    return render(request, 'shouters/menu__bank-account.html', context)
+    return redirect('on_dev')
+
+    # context = {
+    #     'token': token
+    # }
+    # return render(request, 'shouters/menu__bank-account.html', context)

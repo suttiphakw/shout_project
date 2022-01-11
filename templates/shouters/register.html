@@ -90,8 +90,8 @@
             </div>
 
             <section class="register__form" id="register">
+                <p class="register__form__header__text">รูปโปรไฟล์</p>
                 <div class="register__form__header">
-                    <p>รูปโปรไฟล์</p>
                     <img src="{{ line_profile_picture }}" alt="" class="register__form__image">
                 </div>
                 <form action="{% url 'shouter__register' token %}" method="POST" class="register__form__input" name="registration" id="registration"> {% csrf_token %}

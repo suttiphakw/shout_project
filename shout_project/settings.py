@@ -90,8 +90,11 @@ WSGI_APPLICATION = 'shout_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'shout_test',
+        'USERNAME': 'postgres',
+        'PASSWORD': 'Hotmail001',
+        'HOST': 'localhost',
     }
 }
 

@@ -1,6 +1,5 @@
-import requests
-
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 from django.utils.timezone import now
 from django.db.models.signals import pre_save, post_save
 from shouters.lineMessagingApi.adminApproveApi import (api__admin_approve_text_message,
@@ -24,7 +23,7 @@ class Shouter(models.Model):
     province = models.CharField(max_length=120, null=True, blank=True)
     education = models.CharField(max_length=120, null=True, blank=True)
     college = models.CharField(max_length=120, null=True, blank=True)
-    interest = models.CharField(max_length=200, null=True, blank=True)
+    interest = ArrayField(models.CharField(max_length=200, null=True, blank=True), null=True, blank=True)
 
     register_created = models.DateTimeField(default=now)
 
