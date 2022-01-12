@@ -22,7 +22,7 @@
         const instagram = $("input[type='radio'][name='instagram']:checked").val();
 
         if (instagram === undefined) {
-          alert('Please choose at least 1 instagram.');
+          alert('โปรดเลือก 1 บัญชี Instagram');
         } else {
           $("#choose-instagram").submit();
         }
@@ -76,7 +76,7 @@
         <main class="register__choose-ig">
             {% if list_obj %}
                 <div class="register__choose-ig__header">
-                    <h2>เลือก 1 บัญชี Instagram</h2>
+                    <h2>โปรดเลือก 1 บัญชี Instagram</h2>
                 </div>
 
                 <form action="{% url 'shouter__register__choose_instagram' token %}" method="post" id="choose-instagram"> {% csrf_token %}

@@ -187,7 +187,6 @@ def register__account_summary(request, token):
         return redirect('on_dev')
     shouter = Shouter.objects.filter(id=_id).first()
     interest_list = shouter.interest
-    print(interest_list)
 
     interest = shouter_interest(interest_list=interest_list)
 
@@ -295,7 +294,6 @@ def register__work_selection(request, token):
 
         # Tiktok
         is_check_tiktok = request.POST.getlist('is_check_tiktok')
-        print(is_check_tiktok)
         if len(is_check_tiktok) != 0:
             try:
                 tiktok_name = request.POST['tiktok_name']
@@ -401,7 +399,6 @@ def oauth(request):
     # Get q (query string)
     q = list_state[1]
     q = q[7:-2]
-    # print(q)
 
     access_token, id_token = LineAPI().get_access_token(code=code)
 
@@ -473,7 +470,6 @@ def oauth(request):
 
     else:
         # Create new one
-        # print(access_token, now, id_token, user_id, user_id, profile_picture)
         shouter = Shouter.objects.create(
             line_access_token=access_token,
             line_access_token_updated=now(),
@@ -525,11 +521,8 @@ def facebook_logout(request, token):
         return redirect('on_dev')
 
     shouter = Shouter.objects.filter(id=_id).first()
-    access_token = shouter.fb_access_token
-    response = requests.delete('https://graph.facebook.com/v12.0/me/permissions/',
-                               params={
-                                   'access_token': access_token
-                               })
+    access_token = shouter.fb_main_access_token
+    response = requests.delete('https://graph.facebook.com/v12.0/me/permissions/', params={'access_token': access_token})
     # Save Access Token and Page ID to database
 
     if response.status_code == 200:
@@ -553,7 +546,6 @@ def facebook_logout(request, token):
         return redirect(redirect_url)
 
     else:
-        print(response.status_code)
         return HttpResponse('Failed')
 
 
@@ -564,7 +556,6 @@ def oauth2(request):
     list_state = state.split(',')
     # Get q (query string)
     token = list_state[1]
-    # print('token :', token)
     token = token[11:-2]
 
     try:
@@ -576,6 +567,7 @@ def oauth2(request):
 
     if not Shouter.objects.filter(id=_id).exists():
         return HttpResponse('404Error')
+    shouter = Shouter.objects.filter(id=_id).first()
 
     context = {
         'token': token
@@ -592,6 +584,9 @@ def oauth2(request):
     else:
         return HttpResponse('Failed by access token')
 
+    shouter.fb_main_access_token = access_token
+    shouter.save()
+
     # Get FB Page ID
     context__page_id = FacebookAPI().get_facebook_page_id(access_token=access_token)
     is_found = False
@@ -606,7 +601,6 @@ def oauth2(request):
             context__business_account_id = FacebookAPI().get_business_account_id(page_id=obj__page_id,
                                                                                  access_token=obj__access_token)
 
-            print(context__business_account_id)
             if context__business_account_id:
                 business_account_id = context__business_account_id.get('business_account_id')
 

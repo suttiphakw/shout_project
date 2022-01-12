@@ -53,6 +53,7 @@ class Shouter(models.Model):
     ig_response_active_follower = models.JSONField(null=True, blank=True)
 
     # # Facebook
+    fb_main_access_token = models.CharField(max_length=500, null=True, blank=True)
     fb_access_token = models.CharField(max_length=500, null=True, blank=True)
     fb_access_token_created = models.DateTimeField(default=now)
     fb_page_id = models.CharField(max_length=120, null=True, blank=True)
