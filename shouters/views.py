@@ -243,7 +243,7 @@ def register__work_selection(request, token):
             else:
                 is_check_ig_story_post = False
 
-            if not is_check_ig_story and is_check_ig_post and is_check_ig_story_post:
+            if not is_check_ig_story and not is_check_ig_post and not is_check_ig_story_post:
                 shouter.is_check_ig = False
 
             shouter.is_check_ig_story = is_check_ig_story
@@ -279,7 +279,7 @@ def register__work_selection(request, token):
             else:
                 is_check_ig_fb_story_post = False
 
-            if not is_check_ig_fb_story and is_check_ig_fb_post and is_check_ig_fb_story_post:
+            if not is_check_ig_fb_story and not is_check_ig_fb_post and not is_check_ig_fb_story_post:
                 shouter.is_check_ig_fb = False
 
             shouter.is_check_ig_fb_story = is_check_ig_fb_story
