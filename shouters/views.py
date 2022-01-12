@@ -295,7 +295,8 @@ def register__work_selection(request, token):
 
         # Tiktok
         is_check_tiktok = request.POST.getlist('is_check_tiktok')
-        if not is_check_tiktok == []:
+        print(is_check_tiktok)
+        if len(is_check_tiktok) != 0:
             try:
                 tiktok_name = request.POST['tiktok_name']
                 tiktok_price = request.POST['tiktok_price']
@@ -311,10 +312,14 @@ def register__work_selection(request, token):
                 shouter.is_check_tiktok = True
                 shouter.tiktok_name = tiktok_name
                 shouter.tiktok_price = tiktok_price
+        else:
+            shouter.is_check_tiktok = False
+            shouter.tiktok_name = None
+            shouter.tiktok_price = None
 
         # Twitter
         is_check_twitter = request.POST.getlist('is_check_twitter')
-        if not is_check_twitter == []:
+        if len(is_check_twitter) != 0:
             try:
                 twitter_name = request.POST['twitter_name']
                 twitter_price = request.POST['twitter_price']
@@ -330,6 +335,10 @@ def register__work_selection(request, token):
                 shouter.is_check_twitter = True
                 shouter.twitter_name = twitter_name
                 shouter.twitter_price = twitter_price
+        else:
+            shouter.is_check_twitter = False
+            shouter.twitter_name = None
+            shouter.twitter_price = None
 
         shouter.save()
 
@@ -602,7 +611,11 @@ def oauth2(request):
                 business_account_id = context__business_account_id.get('business_account_id')
 
                 if not business_account_id == '':
-                    is_found = True
+                    context__active_follower = FacebookAPI().get_active_follower(business_account_id=business_account_id, access_token=obj__access_token)
+                    if not context__active_follower:
+                        continue
+                    else:
+                        is_found = True
                     # return render(request, 'shouters/register__choose_instagram.html', context)
                 else:
                     continue
@@ -711,6 +724,7 @@ def register__get_ig_data(request, token):
     # Get Active Follower
     context__active_follower = FacebookAPI().get_active_follower(business_account_id=ig_business_account_id,
                                                                  access_token=fb_access_token)
+
     if context__active_follower:
         shouter.ig_response_active_follower = context__active_follower.get('data')
         shouter.ig_active_follower = context__active_follower.get('geometric_active_follower')

@@ -52,11 +52,191 @@
         </section>
 
         <main class="content-2">
-            <div class="content-2__header">
-                <h2>Your Social Media</h2>
-            </div>
 
             <div class="content-2__body">
+                <div class="register__account-summary__warning" style="background-color: #F8F0F6; justify-content: center; margin-top: 20px">
+                    <p class="register__account-summary__warning__text" style="font-weight: 700; color: #2C2C2C; font-size: 20px">Work Selected</p>
+                </div>
+
+                <div class="register__account-summary__warning">
+                    <p class="register__account-summary__warning__icon">⭐️</p>
+                    <p class="register__account-summary__warning__text">ราคาจะมีการปรับเปลี่ยนอยู่ตลอดเวลา ตามข้อมูล Instagram และผลลัพธ์การ ทำงานของคุณ</p>
+                </div>
+
+                {% if not shouter.is_check_ig and not shouter.is_check_ig_fb and not shouter.is_check_tiktok and not shouter.is_check_twitter %}
+
+                    <div class="social-card">
+                        <div class="social-card__header" style="display: flex; justify-content: center; color: #801B69;">
+                            <div class="social-card__name">
+                                <h3 style="font-size: 24px;">ยังไม่เปิดรับงาน</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                {% else %}
+
+                    <div class="social-card">
+                        <div class="social-card__header">
+                            <div class="social-card__name">
+                                <svg class="social-card__icon">
+                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
+                                </svg>
+                                <h3>Instagram</h3>
+                            </div>
+                        </div>
+                        {% if not shouter.is_check_ig %}
+                            <p style="text-align: center">ยังไม่เปิดรับงาน</p>
+                        {% else %}
+                            <div class="social-card__detail">
+                            {% if shouter.is_check_ig_story %}
+                                <div class="social-card__detail__block">
+                                    <div class="social-card__detail__name">
+                                        <p>Instagram Story</p>
+                                    </div>
+                                    <div class="social-card__detail__checkbox">
+                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_price_story_fc }} - {{ shouter.ig_price_story_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub">ต่อ 1 Story</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if shouter.is_check_ig_post %}
+                                <div class="social-card__detail__block">
+                                    <div class="social-card__detail__name">
+                                        <p>Instagram Post</p>
+                                    </div>
+                                    <div class="social-card__detail__checkbox">
+                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_price_post_fc }} - {{ shouter.ig_price_post_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub">ต่อ 1 Post</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if shouter.is_check_ig_story_post %}
+                                <div class="social-card__detail__block">
+                                    <div class="social-card__detail__name">
+                                        <p>Instagram Post + Story</p>
+                                    </div>
+                                    <div class="social-card__detail__checkbox">
+                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_price_story_post_fc }} - {{ shouter.ig_price_story_post_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub">ต่อ 1 Post + Story</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="social-card">
+                        <div class="social-card__header">
+                            <div class="social-card__name">
+                                <svg class="social-card__icon">
+                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
+                                </svg>
+                                <svg class="social-card__icon">
+                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-facebook"></use>
+                                </svg>
+                                <h3>IG + FB Share</h3>
+                            </div>
+                        </div>
+                        {% if not shouter.is_check_ig_fb %}
+                            <p style="text-align: center">ยังไม่เปิดรับงาน</p>
+                        {% else %}
+                            <div class="social-card__detail">
+                            {% if shouter.is_check_ig_fb_story %}
+                                <div class="social-card__detail__block">
+                                    <div class="social-card__detail__name">
+                                        <p>IG Story + แชร์ลง FB Story</p>
+                                    </div>
+                                    <div class="social-card__detail__checkbox">
+                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_fb_price_story_fc }} - {{ shouter.ig_fb_price_story_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub">ต่อ 1 Story</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            {% if shouter.is_check_ig_fb_post %}
+                                <div class="social-card__detail__block">
+                                    <div class="social-card__detail__name">
+                                        <p>IG Post + แชร์ลง FB Post </p>
+                                    </div>
+                                    <div class="social-card__detail__checkbox">
+                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_fb_price_post_fc }} - {{ shouter.ig_fb_price_post_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub">ต่อ 1 Post</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            {% if shouter.is_check_ig_fb_story_post %}
+                                <div class="social-card__detail__block">
+                                    <div class="social-card__detail__name">
+                                        <p>IG Post + Story และ แชร์ลง FB Post + FB Story</p>
+                                    </div>
+                                    <div class="social-card__detail__checkbox">
+                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_fb_price_story_post_fc }} - {{ shouter.ig_fb_price_story_post_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub">ต่อ 1 Post + Story</p>
+                                    </div>
+                                </div>
+                            {%  endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="social-card">
+                        <div class="social-card__header">
+                            <div class="social-card__name">
+                                <svg class="social-card__icon">
+                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-tiktok"></use>
+                                </svg>
+                                <h3>Tiktok</h3>
+                            </div>
+                        </div>
+                        {% if not shouter.is_check_tiktok %}
+                            <p style="text-align: center">ยังไม่เปิดรับงาน</p>
+                        {% else %}
+                            <div class="social-card__detail">
+                            <div class="social-card__detail__block">
+                                <div class="social-card__detail__name">
+                                    <p>@{{ shouter.tiktok_name }}</p>
+                                </div>
+                                <div class="social-card__detail__checkbox">
+                                    <p class="social-card__detail__sub"><span>{{ shouter.tiktok_price }} บาท</span></p>
+                                    <p class="social-card__detail__sub">ต่อ 1 Video</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="social-card">
+                        <div class="social-card__header">
+                            <div class="social-card__name">
+                                <svg class="social-card__icon">
+                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-twitter"></use>
+                                </svg>
+                                <h3>Twitter</h3>
+                            </div>
+                        </div>
+                        {% if not shouter.is_check_twitter %}
+                            <p style="text-align: center">ยังไม่เปิดรับงาน</p>
+                        {% else %}
+                            <div class="social-card__detail">
+                            <div class="social-card__detail__block">
+                                <div class="social-card__detail__name">
+                                    <p>@{{ shouter.twitter_name }}</p>
+                                </div>
+                                <div class="social-card__detail__checkbox">
+                                    <p class="social-card__detail__sub"><span>{{ shouter.twitter_price }} บาท</span></p>
+                                    <p class="social-card__detail__sub">ต่อ 1 Tweet</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                {% endif %}
+
+                <div class="register__account-summary__warning" style="background-color: #F8F0F6; justify-content: center; margin-top: 20px">
+                    <p class="register__account-summary__warning__text" style="font-weight: 700; color: #2C2C2C; font-size: 20px">Your Social Media</p>
+                </div>
                 <div class="social-card">
                     <div class="social-card__header">
                         <div class="social-card__name">
@@ -133,7 +313,7 @@
                         <div class="social-card__header">
                             <div class="social-card__name">
                                 <svg class="social-card__icon">
-                                    <use xlink:href="img/shouters/sprite.svg#icon-tiktok"></use>
+                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-tiktok"></use>
                                 </svg>
                                 <h3>Tiktok</h3>
                             </div>
@@ -154,7 +334,7 @@
                         <div class="social-card__header">
                             <div class="social-card__name">
                                 <svg class="social-card__icon">
-                                    <use xlink:href="img/shouters/sprite.svg#icon-twitter"></use>
+                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-twitter"></use>
                                 </svg>
                                 <h3>Twitter</h3>
                             </div>
@@ -170,183 +350,10 @@
                     </div>
                 {% endif %}
 
-                <div class="register__account-summary__body__header">
-                    <h2>งานที่เปิดรับ</h2>
-                </div>
-
-                {% if not shouter.is_check_ig and not shouter.is_check_ig_fb and not shouter.is_check_tiktok and not shouter.is_check_twitter %}
-
-                    <div class="social-card">
-                        <div class="social-card__header" style="display: flex; justify-content: center; color: #801B69;">
-                            <div class="social-card__name">
-                                <h3>ไม่มีงานที่เปิดรับ</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                {% else %}
-
-                    {% if shouter.is_check_ig %}
-                        <div class="social-card">
-                            <div class="social-card__header">
-                                <div class="social-card__name">
-                                    <svg class="social-card__icon">
-                                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
-                                    </svg>
-                                    <h3>Instagram</h3>
-                                </div>
-                            </div>
-                            <div class="social-card__detail">
-                                {% if shouter.is_check_ig_story %}
-                                    <div class="social-card__detail__block">
-                                        <div class="social-card__detail__name">
-                                            <p>Instagram Story</p>
-                                        </div>
-                                        <div class="social-card__detail__checkbox">
-                                            <p class="social-card__detail__sub"><span>{{ shouter.ig_price_story_fc }} - {{ shouter.ig_price_story_ugc }} บาท</span></p>
-                                            <p class="social-card__detail__sub">ต่อ 1 Story</p>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                                {% if shouter.is_check_ig_post %}
-                                    <div class="social-card__detail__block">
-                                        <div class="social-card__detail__name">
-                                            <p>Instagram Post</p>
-                                        </div>
-                                        <div class="social-card__detail__checkbox">
-                                            <p class="social-card__detail__sub"><span>{{ shouter.ig_price_post_fc }} - {{ shouter.ig_price_post_ugc }} บาท</span></p>
-                                            <p class="social-card__detail__sub">ต่อ 1 Post</p>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                                {% if shouter.is_check_ig_story_post %}
-                                    <div class="social-card__detail__block">
-                                        <div class="social-card__detail__name">
-                                            <p>Instagram Post + Story</p>
-                                        </div>
-                                        <div class="social-card__detail__checkbox">
-                                            <p class="social-card__detail__sub"><span>{{ shouter.ig_price_story_post_fc }} - {{ shouter.ig_price_story_post_ugc }} บาท</span></p>
-                                            <p class="social-card__detail__sub">ต่อ 1 Post + Story</p>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    {% if shouter.is_check_ig_fb %}
-                        <div class="social-card">
-                            <div class="social-card__header">
-                                <div class="social-card__name">
-                                    <svg class="social-card__icon">
-                                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
-                                    </svg>
-                                    <svg class="social-card__icon">
-                                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-facebook"></use>
-                                    </svg>
-                                    <h3>IG + FB Share</h3>
-                                </div>
-                            </div>
-                            <div class="social-card__detail">
-                                {% if shouter.is_check_ig_fb_story %}
-                                    <div class="social-card__detail__block">
-                                        <div class="social-card__detail__name">
-                                            <p>IG Story + แชร์ลง FB Story</p>
-                                        </div>
-                                        <div class="social-card__detail__checkbox">
-                                            <p class="social-card__detail__sub"><span>{{ shouter.ig_fb_price_story_fc }} - {{ shouter.ig_fb_price_story_ugc }} บาท</span></p>
-                                            <p class="social-card__detail__sub">ต่อ 1 Story</p>
-                                        </div>
-                                    </div>
-                                {% endif %}
-
-                                {% if shouter.is_check_ig_fb_post %}
-                                    <div class="social-card__detail__block">
-                                        <div class="social-card__detail__name">
-                                            <p>IG Post + แชร์ลง FB Post </p>
-                                        </div>
-                                        <div class="social-card__detail__checkbox">
-                                            <p class="social-card__detail__sub"><span>{{ shouter.ig_fb_price_post_fc }} - {{ shouter.ig_fb_price_post_ugc }} บาท</span></p>
-                                            <p class="social-card__detail__sub">ต่อ 1 Post</p>
-                                        </div>
-                                    </div>
-                                {% endif %}
-
-                                {% if shouter.is_check_ig_fb_story_post %}
-                                    <div class="social-card__detail__block">
-                                        <div class="social-card__detail__name">
-                                            <p>IG Post + Story และ แชร์ลง FB Post + FB Story</p>
-                                        </div>
-                                        <div class="social-card__detail__checkbox">
-                                            <p class="social-card__detail__sub"><span>{{ shouter.ig_fb_price_story_post_fc }} - {{ shouter.ig_fb_price_story_post_ugc }} บาท</span></p>
-                                            <p class="social-card__detail__sub">ต่อ 1 Post + Story</p>
-                                        </div>
-                                    </div>
-                                {%  endif %}
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    {% if shouter.is_check_tiktok %}
-                        <div class="social-card">
-                            <div class="social-card__header">
-                                <div class="social-card__name">
-                                    <svg class="social-card__icon">
-                                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-tiktok"></use>
-                                    </svg>
-                                    <h3>Tiktok</h3>
-                                </div>
-                            </div>
-                            <div class="social-card__detail">
-                                <div class="social-card__detail__block">
-                                    <div class="social-card__detail__name">
-                                        <p>@{{ shouter.tiktok_name }}</p>
-                                    </div>
-                                    <div class="social-card__detail__checkbox">
-                                        <p class="social-card__detail__sub"><span>{{ shouter.tiktok_price }} บาท</span></p>
-                                        <p class="social-card__detail__sub">ต่อ 1 Video</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    {% if shouter.is_check_twitter %}
-                        <div class="social-card">
-                        <div class="social-card__header">
-                            <div class="social-card__name">
-                                <svg class="social-card__icon">
-                                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-twitter"></use>
-                                </svg>
-                                <h3>Twitter</h3>
-                            </div>
-                        </div>
-                        <div class="social-card__detail">
-                            <div class="social-card__detail__block">
-                                <div class="social-card__detail__name">
-                                    <p>@{{ shouter.twitter_name }}</p>
-                                </div>
-                                <div class="social-card__detail__checkbox">
-                                    <p class="social-card__detail__sub"><span>{{ shouter.twitter_price }} บาท</span></p>
-                                    <p class="social-card__detail__sub">ต่อ 1 Tweet</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endif %}
-
-                {% endif %}
 
 
-
-
-                <div class="register__account-summary__warning">
-                    <p class="register__account-summary__warning__icon">⭐️</p>
-                    <p class="register__account-summary__warning__text">ราคาจะมีการปรับเปลี่ยนอยู่ตลอดเวลา ตามข้อมูล Instagram และผลลัพธ์การ ทำงานของคุณ</p>
-                </div>
-
-                <div class="register__account-summary__body__header">
-                    <h2>Your Shouter Account</h2>
+                <div class="register__account-summary__warning" style="background-color: #F8F0F6; justify-content: center; margin-top: 20px">
+                    <p class="register__account-summary__warning__text" style="font-weight: 700; color: #2C2C2C; font-size: 20px">Your Shouter Account</p>
                 </div>
 
                 <div class="register__account-summary__shouter-account">
