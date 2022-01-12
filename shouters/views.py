@@ -624,7 +624,7 @@ def oauth2(request):
                                                 'fields': 'name,picture'})
                 context__basic_fb = response.json()
                 fb_name = context__basic_fb['name']
-                fb_profile_picture = context__basic_fb['picture']['url']
+                fb_profile_picture = context__basic_fb['picture']['data']['url']
 
                 # Get Bio
                 context__ig_biography = FacebookAPI().get_ig_biography(business_account_id=business_account_id,
