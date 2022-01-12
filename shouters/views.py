@@ -215,20 +215,6 @@ def register__work_selection(request, token):
     shouter = Shouter.objects.filter(id=_id).first()
 
     context = {
-        # IG Only
-        'ig_price_story_fc': shouter.ig_price_story_fc,
-        'ig_price_story_ugc': shouter.ig_price_story_ugc,
-        'ig_price_post_fc': shouter.ig_price_post_fc,
-        'ig_price_post_ugc': shouter.ig_price_post_ugc,
-        'ig_price_story_post_fc': shouter.ig_price_story_post_fc,
-        'ig_price_story_post_ugc': shouter.ig_price_story_post_ugc,
-        # IG + FB
-        'ig_fb_price_story_fc': shouter.ig_fb_price_story_fc,
-        'ig_fb_price_story_ugc': shouter.ig_fb_price_story_ugc,
-        'ig_fb_price_post_fc': shouter.ig_fb_price_post_fc,
-        'ig_fb_price_post_ugc': shouter.ig_fb_price_post_ugc,
-        'ig_fb_price_story_post_fc': shouter.ig_fb_price_story_post_fc,
-        'ig_fb_price_story_post_ugc': shouter.ig_fb_price_story_post_ugc,
         'shouter': shouter,
         # Token
         'token': token,
@@ -241,14 +227,35 @@ def register__work_selection(request, token):
             shouter.is_check_ig = True
 
             is_check_ig_story = request.POST.getlist('is_check_ig_story')
-            if is_check_ig_story[0] == 'on':
-                shouter.is_check_ig_story = True
+            if len(is_check_ig_story) != 0:
+                is_check_ig_story = True
+            else:
+                is_check_ig_story = False
+
             is_check_ig_post = request.POST.getlist('is_check_ig_post')
-            if is_check_ig_post[0] == 'on':
-                shouter.is_check_ig_post = True
+            if len(is_check_ig_post) != 0:
+                is_check_ig_post = True
+            else:
+                is_check_ig_post = False
+
             is_check_ig_story_post = request.POST.getlist('is_check_ig_story_post')
-            if is_check_ig_story_post[0] == 'on':
-                shouter.is_check_ig_story_post = True
+            if len(is_check_ig_story_post) != 0:
+                is_check_ig_story_post = True
+            else:
+                is_check_ig_story_post = False
+
+            if not is_check_ig_story and is_check_ig_post and is_check_ig_story_post:
+                shouter.is_check_ig = False
+
+            shouter.is_check_ig_story = is_check_ig_story
+            shouter.is_check_ig_post = is_check_ig_post
+            shouter.is_check_ig_story_post = is_check_ig_story_post
+
+        else:
+            shouter.is_check_ig = False
+            shouter.is_check_ig_story = False
+            shouter.is_check_ig_post = False
+            shouter.is_check_ig_story_post = False
 
         # IG + FB
         is_check_ig_fb = request.POST.getlist('is_check_ig_fb')
@@ -256,32 +263,73 @@ def register__work_selection(request, token):
             shouter.is_check_ig_fb = True
 
             is_check_ig_fb_story = request.POST.getlist('is_check_ig_fb_story')
-            if is_check_ig_fb_story[0] == 'on':
-                shouter.is_check_ig_fb_story = True
-            is_check_ig_fb_post = request.POST.getlist('is_check_ig_fb_post')
-            if is_check_ig_fb_post[0] == 'on':
-                shouter.is_check_ig_fb_post = True
-            is_check_ig_fb_story_post = request.POST.getlist('is_check_ig_fb_story_post')
-            if is_check_ig_fb_story_post[0] == 'on':
-                shouter.is_check_ig_fb_story_post = True
+            if len(is_check_ig_fb_story) != 0:
+                is_check_ig_fb_story = True
+            else:
+                is_check_ig_fb_story = False
 
+            is_check_ig_fb_post = request.POST.getlist('is_check_ig_fb_post')
+            if len(is_check_ig_fb_post) != 0:
+                is_check_ig_fb_post = True
+            else:
+                is_check_ig_fb_post = False
+
+            is_check_ig_fb_story_post = request.POST.getlist('is_check_ig_fb_story_post')
+            if len(is_check_ig_fb_story_post) != 0:
+                is_check_ig_fb_story_post = True
+            else:
+                is_check_ig_fb_story_post = False
+
+            if not is_check_ig_fb_story and is_check_ig_fb_post and is_check_ig_fb_story_post:
+                shouter.is_check_ig_fb = False
+
+            shouter.is_check_ig_fb_story = is_check_ig_fb_story
+            shouter.is_check_ig_fb_post = is_check_ig_fb_post
+            shouter.is_check_ig_fb_story_post = is_check_ig_fb_story_post
+
+        else:
+            shouter.is_check_ig_fb = False
+            shouter.is_check_ig_fb_story = False
+            shouter.is_check_ig_fb_post = False
+            shouter.is_check_ig_fb_story_post = False
+
+        # Tiktok
         is_check_tiktok = request.POST.getlist('is_check_tiktok')
         if not is_check_tiktok == []:
-            shouter.is_check_tiktok = True
             try:
-                shouter.tiktok_name = request.POST['tiktok_name']
-                shouter.tiktok_price = request.POST['tiktok_price']
+                tiktok_name = request.POST['tiktok_name']
+                tiktok_price = request.POST['tiktok_price']
             except:
                 shouter.is_check_tiktok = False
+                tiktok_name = None
+                tiktok_price = None
+            if tiktok_name == '' or tiktok_price == '':
+                shouter.is_check_tiktok = False
+                shouter.tiktok_name = None
+                shouter.tiktok_price = None
+            else:
+                shouter.is_check_tiktok = True
+                shouter.tiktok_name = tiktok_name
+                shouter.tiktok_price = tiktok_price
 
+        # Twitter
         is_check_twitter = request.POST.getlist('is_check_twitter')
         if not is_check_twitter == []:
-            shouter.is_check_twitter = True
             try:
-                shouter.twitter_name = request.POST['twitter_name']
-                shouter.twitter_price = request.POST['twitter_price']
+                twitter_name = request.POST['twitter_name']
+                twitter_price = request.POST['twitter_price']
             except:
                 shouter.is_check_twitter = False
+                twitter_name = None
+                twitter_price = None
+            if twitter_name == '' or twitter_price == '':
+                shouter.is_check_twitter = False
+                shouter.twitter_name = None
+                shouter.twitter_price = None
+            else:
+                shouter.is_check_twitter = True
+                shouter.twitter_name = twitter_name
+                shouter.twitter_price = twitter_price
 
         shouter.save()
 
