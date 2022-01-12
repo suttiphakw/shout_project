@@ -619,10 +619,12 @@ def oauth2(request):
 
             if is_found:
                 # Get FB Name
-                response_fb_name = requests.get('https://graph.facebook.com/v12.0/me',
-                                                params={'access_token': access_token})
-                response_fb_name = response_fb_name.json()
-                fb_name = response_fb_name['name']
+                response = requests.get('https://graph.facebook.com/v12.0/me',
+                                        params={'access_token': access_token ,
+                                                'fields': 'name,picture'})
+                context__basic_fb = response.json()
+                fb_name = context__basic_fb['name']
+                fb_profile_picture = context__basic_fb['picture']['url']
 
                 # Get Bio
                 context__ig_biography = FacebookAPI().get_ig_biography(business_account_id=business_account_id,
@@ -643,6 +645,7 @@ def oauth2(request):
                     'page_name': obj__page_name,
                     'page_id': obj__page_id,
                     'fb_name': fb_name,
+                    'fb_profile_picture': fb_profile_picture,
                     'ig_business_account_id': business_account_id,
                     'ig_username': ig_username,
                     'ig_media_count': ig_media_count,
@@ -687,6 +690,7 @@ def register__get_ig_data(request, token):
         fb_page_name = decoded_token.get('page_name')
         fb_page_id = decoded_token.get('page_id')
         fb_name = decoded_token.get('fb_name')
+        fb_profile_picture = decoded_token.get('fb_profile_picture')
         ig_business_account_id = decoded_token.get('ig_business_account_id')
         ig_username = decoded_token.get('ig_username')
         ig_media_count = decoded_token.get('ig_media_count')
@@ -707,6 +711,7 @@ def register__get_ig_data(request, token):
     shouter.fb_page_name = fb_page_name
     shouter.fb_page_id = fb_page_id
     shouter.fb_name = fb_name
+    shouter.fb_profile_picture = fb_profile_picture
     shouter.ig_business_account_id = ig_business_account_id
     shouter.ig_username = ig_username
     shouter.ig_media_count = ig_media_count
