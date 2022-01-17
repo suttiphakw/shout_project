@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 
 <!doctype html>
 <html lang="en">
@@ -94,7 +95,7 @@
                                         <p>Instagram Story</p>
                                     </div>
                                     <div class="social-card__detail__checkbox">
-                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_price_story_fc }} - {{ shouter.ig_price_story_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_price_story_fc|intcomma }} - {{ shouter.ig_price_story_ugc|intcomma }} บาท</span></p>
                                         <p class="social-card__detail__sub">ต่อ 1 Story</p>
                                     </div>
                                 </div>
@@ -105,7 +106,7 @@
                                         <p>Instagram Post</p>
                                     </div>
                                     <div class="social-card__detail__checkbox">
-                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_price_post_fc }} - {{ shouter.ig_price_post_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_price_post_fc|intcomma }} - {{ shouter.ig_price_post_ugc|intcomma }} บาท</span></p>
                                         <p class="social-card__detail__sub">ต่อ 1 Post</p>
                                     </div>
                                 </div>
@@ -116,7 +117,7 @@
                                         <p>Instagram Post + Story</p>
                                     </div>
                                     <div class="social-card__detail__checkbox">
-                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_price_story_post_fc }} - {{ shouter.ig_price_story_post_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_price_story_post_fc|intcomma }} - {{ shouter.ig_price_story_post_ugc|intcomma }} บาท</span></p>
                                         <p class="social-card__detail__sub">ต่อ 1 Post + Story</p>
                                     </div>
                                 </div>
@@ -147,7 +148,7 @@
                                         <p>IG Story + แชร์ลง FB Story</p>
                                     </div>
                                     <div class="social-card__detail__checkbox">
-                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_fb_price_story_fc }} - {{ shouter.ig_fb_price_story_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_fb_price_story_fc|intcomma }} - {{ shouter.ig_fb_price_story_ugc|intcomma }} บาท</span></p>
                                         <p class="social-card__detail__sub">ต่อ 1 Story</p>
                                     </div>
                                 </div>
@@ -159,7 +160,7 @@
                                         <p>IG Post + แชร์ลง FB Post </p>
                                     </div>
                                     <div class="social-card__detail__checkbox">
-                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_fb_price_post_fc }} - {{ shouter.ig_fb_price_post_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_fb_price_post_fc|intcomma }} - {{ shouter.ig_fb_price_post_ugc|intcomma }} บาท</span></p>
                                         <p class="social-card__detail__sub">ต่อ 1 Post</p>
                                     </div>
                                 </div>
@@ -171,7 +172,7 @@
                                         <p>IG Post + Story และ แชร์ลง FB Post + FB Story</p>
                                     </div>
                                     <div class="social-card__detail__checkbox">
-                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_fb_price_story_post_fc }} - {{ shouter.ig_fb_price_story_post_ugc }} บาท</span></p>
+                                        <p class="social-card__detail__sub"><span>{{ shouter.ig_fb_price_story_post_fc|intcomma }} - {{ shouter.ig_fb_price_story_post_ugc|intcomma }} บาท</span></p>
                                         <p class="social-card__detail__sub">ต่อ 1 Post + Story</p>
                                     </div>
                                 </div>
@@ -198,7 +199,7 @@
                                     <p>@{{ shouter.tiktok_name }}</p>
                                 </div>
                                 <div class="social-card__detail__checkbox">
-                                    <p class="social-card__detail__sub"><span>{{ shouter.tiktok_price }} บาท</span></p>
+                                    <p class="social-card__detail__sub"><span>{{ shouter.tiktok_price|intcomma }} บาท</span></p>
                                     <p class="social-card__detail__sub">ต่อ 1 Video</p>
                                 </div>
                             </div>
@@ -224,7 +225,7 @@
                                     <p>@{{ shouter.twitter_name }}</p>
                                 </div>
                                 <div class="social-card__detail__checkbox">
-                                    <p class="social-card__detail__sub"><span>{{ shouter.twitter_price }} บาท</span></p>
+                                    <p class="social-card__detail__sub"><span>{{ shouter.twitter_price|intcomma }} บาท</span></p>
                                     <p class="social-card__detail__sub">ต่อ 1 Tweet</p>
                                 </div>
                             </div>
@@ -257,17 +258,17 @@
 
                         <div class="social-card__container__middle">
                             <div class="social-card__container__middle__detail">
-                                <p class="social-card__container__middle__detail__main">{{ shouter.ig_media_count }}</p>
+                                <p class="social-card__container__middle__detail__main">{{ shouter.ig_media_count|intcomma }}</p>
                                 <p>Posts</p>
                             </div>
 
                             <div class="social-card__container__middle__detail">
-                                <p class="social-card__container__middle__detail__main">{{ shouter.ig_follower_count }}</p>
+                                <p class="social-card__container__middle__detail__main">{{ shouter.ig_follower_count|intcomma }}</p>
                                 <p>Followers</p>
                             </div>
 
                             <div class="social-card__container__middle__detail">
-                                <p class="social-card__container__middle__detail__main">{{ shouter.ig_following_count }}</p>
+                                <p class="social-card__container__middle__detail__main">{{ shouter.ig_following_count|intcomma }}</p>
                                 <p>Followings</p>
                             </div>
                         </div>
@@ -277,11 +278,11 @@
                         <div class="social-card__container__bottom">
                             <div class="social-card__container__bottom__block">
                                 <p>Active Follower <span>(Rate)</span></p>
-                                <p>{{ shouter.ig_active_follower }} <span>({{ shouter.ig_active_follower_percent }}%)</span></p>
+                                <p>{{ shouter.ig_active_follower|intcomma }} <span>({{ shouter.ig_active_follower_percent }}%)</span></p>
                             </div>
                             <div class="social-card__container__bottom__block">
                                 <p>Engagement <span>(Rate)</span></p>
-                                <p>{{ shouter.ig_average_total_like }} <span>({{ shouter.ig_engagement_percent }}%)</span></p>
+                                <p>{{ shouter.ig_average_total_like|intcomma }} <span>({{ shouter.ig_engagement_percent }}%)</span></p>
                             </div>
                         </div>
 
