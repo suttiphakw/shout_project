@@ -870,9 +870,77 @@ def menu__bank_account(request, token):
     shouter = Shouter.objects.filter(id=_id).first()
     return redirect('on_dev')
 
-    # context = {
-    #     'token': token
-    # }
-    # return render(request, 'shouters/menu__bank-account.html', context)
 
+def menu__edit_profile(request, token):
+    try:
+        decoded_token = jwt.decode(token, 'SHOUTER_JWT_TOKEN', algorithms='HS256')
+        _id = decoded_token.get('_id')
+        pass
+    except:
+        return HttpResponse('404Error')
 
+    if not Shouter.objects.filter(id=_id).exists():
+        return redirect('on_dev')
+
+    shouter = Shouter.objects.filter(id=_id).first()
+
+    context = {
+        'shouter': shouter,
+        'thailand_provinces': thailand_province(),
+        'date_lists': date_lists,
+        'month_lists': month_lists,
+        'year_lists': year_lists,
+        'education_lists': education_lists,
+        'token': token
+    }
+
+    if request.method == 'POST':
+        # Get User information
+        try:
+            nickname = request.POST['nickname']
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            email = request.POST['email']
+            tel = request.POST['tel']
+            gender = request.POST['gender']
+            birthday_date = request.POST['birthday_date']
+            birthday_month = request.POST['birthday_month']
+            birthday_year = request.POST['birthday_year']
+            province = request.POST['province']
+            education = request.POST['education']
+            college = request.POST['college']
+            interest = request.POST.getlist('interest')
+        except:
+            context = {
+                'warning': 'Please Fulfill the information',
+                'shouter': shouter,
+                'thailand_provinces': thailand_province(),
+                'date_lists': date_lists,
+                'month_lists': month_lists,
+                'year_lists': year_lists,
+                'education_lists': education_lists,
+                'token': token,
+            }
+            return render(request, 'shouters/menu__edit-profile.html', context=context)
+
+        # Save to database
+        shouter.nickname = nickname
+        shouter.first_name = first_name
+        shouter.last_name = last_name
+        shouter.email = email
+        shouter.tel = tel
+        shouter.gender = gender
+        shouter.birthday_date = birthday_date
+        shouter.birthday_month = birthday_month
+        shouter.birthday_year = birthday_year
+        shouter.province = province
+        shouter.education = education
+        shouter.college = college
+        shouter.interest = interest
+        shouter.is_register = True
+        shouter.save()
+
+        redirect_url = '/shouters/menu/{}/'.format(token)
+        return redirect(redirect_url)
+
+    return render(request, 'shouters/menu__edit-profile.html', context)

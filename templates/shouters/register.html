@@ -113,12 +113,12 @@
                     <!-- Email -->
                     <label for="email">Email ติดต่อ <span>*</span></label>
                     <div id="messageBox"></div>
-                    <input type="email" id="email" name="email" placeholder="contact.shoutsolution@gmail.com">
+                    <input type="email" id="email" name="email" placeholder="contact@shoutsolution.com" style="font-size: 16px">
 
                     <!-- Tel -->
                     <label for="tel">เบอร์โทรติดต่อ <span>*</span></label>
                     <div id="messageBox"></div>
-                    <input type="tel" id="tel" name="tel" placeholder="000-000-0000">
+                    <input type="tel" id="tel" name="tel" placeholder="000-000-0000" style="font-size: 16px">
 
                     <!-- Gender -->
                     <p>เพศ <span>*</span></p>
@@ -164,10 +164,10 @@
                     <!-- Province -->
                     <p>จังหวัดที่อาศัยอยู่ปัจจุบัน <span>*</span></p>
                     <div class="register__form__input__province">
-                        <svg class="register__form__input__province__icon">
-                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-location"></use>
-                        </svg>
-                        <p class="register__form__input__province__text">Thailand</p>
+{#                        <svg class="register__form__input__province__icon">#}
+{#                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-location"></use>#}
+{#                        </svg>#}
+{#                        <p class="register__form__input__province__text">Thailand</p>#}
                         <select name="province" id="province">
                             <option value="none" selected disabled>เลือกจังหวัด</option>
                             {% for foo in thailand_provinces %}

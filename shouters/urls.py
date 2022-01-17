@@ -38,4 +38,5 @@ urlpatterns = [
     path('menu/<str:token>/', views.menu, name='shouter__menu'),
     path('menu/social-media/<str:token>/', views.menu__social_media, name='shouter__menu__social-media'),
     path('menu/bank-account/<str:token>/', views.menu__bank_account, name='shouter__menu__bank-account'),
+    path('menu/edit-profile/<str:token>/', views.menu__edit_profile, name='shouter__menu__edit-profile'),
 ]
