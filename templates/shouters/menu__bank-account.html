@@ -15,6 +15,29 @@
 <!--    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
 <!--    <script src="https://unpkg.com/vue@next" defer></script>-->
 <!--    <script src="js/main.js" defer></script>-->
+    <script>
+        function showPreview1(event){
+          if(event.target.files.length > 0){
+            var src = URL.createObjectURL(event.target.files[0]);
+            var preview = document.getElementById("file-ip-1-preview");
+            var text = document.getElementById("text-file-ip-1");
+            preview.src = src;
+            preview.style.display = "block";
+            text.remove();
+          }
+        }
+
+        function showPreview2(event){
+          if(event.target.files.length > 0){
+            var src = URL.createObjectURL(event.target.files[0]);
+            var preview = document.getElementById("file-ip-2-preview");
+            var text = document.getElementById("text-file-ip-2");
+            preview.src = src;
+            preview.style.display = "block";
+            text.remove();
+          }
+        }
+    </script>
     <!-- Title -->
     <title>Shout | Account</title>
 </head>
@@ -45,7 +68,7 @@
                             <div class="bank-account__preview">
                                 <img id="file-ip-1-preview">
                             </div>
-                            <label for="file-ip-1">อัพโหลดใหม่</label>
+                            <label id="text-file-ip-1" for="file-ip-1">อัพโหลดใหม่</label>
                             <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview1(event);">
                         </div>
                     </div>
@@ -62,7 +85,7 @@
                             <div class="bank-account__preview">
                                 <img id="file-ip-2-preview">
                             </div>
-                            <label for="file-ip-2">อัพโหลดใหม่</label>
+                            <label id="text-file-ip-1" for="file-ip-2">อัพโหลดใหม่</label>
                             <input type="file" id="file-ip-2" accept="image/*" onchange="showPreview2(event);">
                         </div>
                     </div>
@@ -80,13 +103,13 @@
 
                     <div class="bank-account__text-input">
                         <label for="bank_account">เลขบัญชีธนาคาร <span>*</span> </label>
-                        <input type="text" id="bank_account" name="bank_account" value="000-0000-00-0"/>
+                        <input type="text" id="bank_account" name="bank_account" placeholder="000-0000-00-0"/>
 
                         <label for="bank_name">ชื่อธนาคาร <span>*</span> </label>
-                        <input type="text" id="bank_name" name="bank_name" value="Siam Commercial Bank"/>
+                        <input type="text" id="bank_name" name="bank_name" placeholder="Siam Commercial Bank"/>
 
                         <label for="bank_username">ชื่อเจ้าของบัญชี <span>*</span> </label>
-                        <input type="text" id="bank_username" name="bank_username" value="นาย พิม ยอดเยี่ยม"/>
+                        <input type="text" id="bank_username" name="bank_username" placeholder="นางสาว พิม ยอดเยี่ยม"/>
 
                     </div>
 

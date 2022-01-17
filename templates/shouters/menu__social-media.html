@@ -43,26 +43,26 @@
                 </div>
                 <div class="social-card__detail">
                     <div class="social-card__container__top">
-                        <img src="{{ ig_profile_picture_url }}" alt="" style="width: 15rem; height: 15rem; border-radius: 50%">
+                        <img src="{{ shouter.ig_profile_picture }}" alt="" style="width: 15rem; height: 15rem; border-radius: 50%">
                         <div class="social-card__container__top__detail">
-                            <p class="social-card__container__top__detail__main" style="font-weight: 600">@{{ ig_username }}</p>
+                            <p class="social-card__container__top__detail__main" style="font-weight: 600">@{{ shouter.ig_username }}</p>
                             <p>IG Business Account</p>
                         </div>
                     </div>
 
                     <div class="social-card__container__middle">
                         <div class="social-card__container__middle__detail">
-                            <p class="social-card__container__middle__detail__main">{{ ig_media_count|intcomma }}</p>
+                            <p class="social-card__container__middle__detail__main">{{ shouter.ig_media_count|intcomma }}</p>
                             <p>Posts</p>
                         </div>
 
                         <div class="social-card__container__middle__detail">
-                            <p class="social-card__container__middle__detail__main">{{ ig_followers|intcomma }}</p>
+                            <p class="social-card__container__middle__detail__main">{{ shouter.ig_follower_count|intcomma }}</p>
                             <p>Followers</p>
                         </div>
 
                         <div class="social-card__container__middle__detail">
-                            <p class="social-card__container__middle__detail__main">{{ ig_followings|intcomma }}</p>
+                            <p class="social-card__container__middle__detail__main">{{ shouter.ig_following_count|intcomma }}</p>
                             <p>Followings</p>
                         </div>
                     </div>
@@ -72,11 +72,11 @@
                     <div class="social-card__container__bottom">
                         <div class="social-card__container__bottom__block">
                             <p>Active Follower <span>(Rate)</span></p>
-                            <p>{{ ig_active_follower|intcomma }} <span>({{ ig_active_follower_percent }}%)</span></p>
+                            <p>{{ shouter.ig_active_follower|intcomma }} <span>({{ shouter.ig_active_follower_percent }}%)</span></p>
                         </div>
                         <div class="social-card__container__bottom__block">
                             <p>Engagement <span>(Rate)</span></p>
-                            <p>{{ ig_engagement|intcomma }} <span>({{ ig_engagement_percent }}%)</span></p>
+                            <p>{{ shouter.ig_average_total_like|intcomma }} <span>({{ shouter.ig_engagement_percent }}%)</span></p>
                         </div>
                     </div>
 
@@ -114,43 +114,47 @@
 
             </div>
 
-            <div class="social-card">
-                <div class="social-card__header">
-                    <div class="social-card__name">
-                        <svg class="social-card__icon">
-                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-tiktok"></use>
-                        </svg>
-                        <h3>Tiktok</h3>
+            {% if shouter.is_check_tiktok %}
+                <div class="social-card">
+                    <div class="social-card__header">
+                        <div class="social-card__name">
+                            <svg class="social-card__icon">
+                                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-tiktok"></use>
+                            </svg>
+                            <h3>Tiktok</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="social-card__detail">
-                    <div class="social-card__container__top">
-                        <div class="social-card__container__top__detail">
-                            <p class="social-card__container__top__detail__main">* Tiktok Name *</p>
-                            <p>Tiktok Account</p>
+                    <div class="social-card__detail">
+                        <div class="social-card__container__top">
+                            <div class="social-card__container__top__detail">
+                                <p class="social-card__container__top__detail__main">{{ shouter.tiktok_name }}</p>
+                                <p>Tiktok Account</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
 
-            <div class="social-card">
-                <div class="social-card__header">
-                    <div class="social-card__name">
-                        <svg class="social-card__icon">
-                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-twitter"></use>
-                        </svg>
-                        <h3>Twitter</h3>
+            {% if shouter.is_check_twitter %}
+                <div class="social-card">
+                    <div class="social-card__header">
+                        <div class="social-card__name">
+                            <svg class="social-card__icon">
+                                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-twitter"></use>
+                            </svg>
+                            <h3>Twitter</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="social-card__detail">
-                    <div class="social-card__container__top">
-                        <div class="social-card__container__top__detail">
-                            <p class="social-card__container__top__detail__main">* Twitter Name *</p>
-                            <p>Twitter Account</p>
+                    <div class="social-card__detail">
+                        <div class="social-card__container__top">
+                            <div class="social-card__container__top__detail">
+                                <p class="social-card__container__top__detail__main">{{ shouter.twitter_name }}</p>
+                                <p>Twitter Account</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
 
         </main>
 

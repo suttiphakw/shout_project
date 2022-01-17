@@ -841,16 +841,6 @@ def menu__social_media(request, token):
     shouter = Shouter.objects.filter(id=_id).first()
     context = {
         'shouter': shouter,
-        'ig_username': shouter.ig_username,
-        'ig_media_count': shouter.ig_media_count,
-        'ig_followers': shouter.ig_follower_count,
-        'ig_followings': shouter.ig_following_count,
-        'ig_active_follower': shouter.ig_active_follower,
-        'ig_active_follower_percent': shouter.ig_active_follower_percent,
-        'ig_engagement': shouter.ig_average_total_like,
-        'ig_engagement_percent': shouter.ig_engagement_percent,
-        'ig_profile_picture_url': shouter.ig_profile_picture,
-        'fb_connect_status': shouter.fb_is_connect,
         'token': token
     }
     return render(request, 'shouters/menu__social-media.html', context)
@@ -868,7 +858,8 @@ def menu__bank_account(request, token):
         return redirect('on_dev')
 
     shouter = Shouter.objects.filter(id=_id).first()
-    return redirect('on_dev')
+    # return redirect('on_dev')
+    return render(request, 'shouters/menu__bank-account.html')
 
 
 def menu__edit_profile(request, token):
