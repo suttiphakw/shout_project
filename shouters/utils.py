@@ -226,25 +226,26 @@ class FacebookAPI:
     def get_engagement_insight(self, media_objects, access_token, followers):
         list_like = []
         list_reach = []
+        session = requests.Session()
         if len(media_objects) >= 20:
             for item in media_objects[0:20]:
                 item_detail_url = self.basic_url + item['id']
                 item_insight_url = item_detail_url + '/insights'
-                response_like_count = requests.get(item_detail_url,
-                                                   params={
-                                                       'fields': 'like_count',
-                                                       'access_token': access_token
-                                                   })
+                response_like_count = session.get(item_detail_url,
+                                                  params={
+                                                      'fields': 'like_count',
+                                                      'access_token': access_token
+                                                  })
                 if response_like_count.status_code != 200:
                     list_like.append(0)
                 else:
                     list_like.append(get_json(response=response_like_count, param='like_count'))
 
-                response_reach_count = requests.get(item_insight_url,
-                                                    params={
-                                                        'metric': 'reach',
-                                                        'access_token': access_token
-                                                    })
+                response_reach_count = session.get(item_insight_url,
+                                                   params={
+                                                       'metric': 'reach',
+                                                       'access_token': access_token
+                                                   })
                 if response_reach_count.status_code != 200:
                     list_reach.append(0)
                 else:
@@ -256,21 +257,21 @@ class FacebookAPI:
             for item in media_objects[0:len(media_objects)]:
                 item_detail_url = self.basic_url + item['id']
                 item_insight_url = item_detail_url + '/insights'
-                response_like_count = requests.get(item_detail_url,
-                                                   params={
-                                                       'fields': 'like_count',
-                                                       'access_token': access_token
-                                                   })
+                response_like_count = session.get(item_detail_url,
+                                                  params={
+                                                      'fields': 'like_count',
+                                                      'access_token': access_token
+                                                  })
                 if response_like_count.status_code != 200:
                     list_like.append(0)
                 else:
                     list_like.append(get_json(response=response_like_count, param='like_count'))
 
-                response_reach_count = requests.get(item_insight_url,
-                                                    params={
-                                                        'metric': 'reach',
-                                                        'access_token': access_token
-                                                    })
+                response_reach_count = session.get(item_insight_url,
+                                                   params={
+                                                       'metric': 'reach',
+                                                       'access_token': access_token
+                                                   })
                 if response_reach_count.status_code != 200:
                     list_reach.append(0)
                 else:
