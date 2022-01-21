@@ -10,7 +10,7 @@ def shouter_interest(interest_list):
     elif foo == 'finance_investment':
       interest.append('💰 Finance & Investment')
     elif foo == 'lifestyle':
-      interest.append('🌻 Lifestyle')
+      interest.append('🚶🏻 Lifestyle')
     elif foo == 'fashion':
       interest.append('👗 Fashion')
     elif foo == 'automobile':
