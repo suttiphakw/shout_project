@@ -93,12 +93,12 @@ class Shouter(models.Model):
     # ig_like_engagement = models.IntegerField(null=True, blank=True)
 
     # # Pricing
-    ig_price_story_fc = models.FloatField(null=True, blank=True)
-    ig_price_story_ugc = models.FloatField(null=True, blank=True)
-    ig_price_post_fc = models.FloatField(null=True, blank=True)
-    ig_price_post_ugc = models.FloatField(null=True, blank=True)
-    ig_price_story_post_fc = models.FloatField(null=True, blank=True)
-    ig_price_story_post_ugc = models.FloatField(null=True, blank=True)
+    ig_price_story_fc = models.IntegerField(null=True, blank=True)
+    ig_price_story_ugc = models.IntegerField(null=True, blank=True)
+    ig_price_post_fc = models.IntegerField(null=True, blank=True)
+    ig_price_post_ugc = models.IntegerField(null=True, blank=True)
+    ig_price_story_post_fc = models.IntegerField(null=True, blank=True)
+    ig_price_story_post_ugc = models.IntegerField(null=True, blank=True)
 
     ig_fb_price_story_fc = models.FloatField(null=True, blank=True)
     ig_fb_price_story_ugc = models.FloatField(null=True, blank=True)
