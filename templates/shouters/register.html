@@ -40,6 +40,8 @@
         } else {
           if(interest.length > 5) {
             alert('Please choose max to 5 interest');
+          } else if(tel.length !== 10) {
+            alert('Please enter tel 10 digit');
           } else {
             $("#registration").submit();
           }
@@ -92,7 +94,13 @@
             <section class="register__form" id="register">
                 <p class="register__form__header__text">รูปโปรไฟล์</p>
                 <div class="register__form__header">
-                    <img src="{{ line_profile_picture }}" alt="" class="register__form__image">
+                    {% if line_profile_picture %}
+                      <img src="{{ line_profile_picture }}" alt="" class="register__form__image">
+                    {% else %}
+                      <svg class="register__form__image">
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>
+                      </svg>
+                    {% endif %}
                 </div>
                 <form action="{% url 'shouter__register' token %}" method="POST" class="register__form__input" name="registration" id="registration"> {% csrf_token %}
                     <!-- Firstname -->

@@ -52,9 +52,15 @@
 </head>
 <body>
     <section class="container">
-        <section class="register__top">
-            <h1 class="register__top__logo">&#128582;&#127995;</h1>
-            <h1 class="register__top__header">แก้ไขข้อมูลส่วนตัว</h1>
+        <section class="social-media-list">
+            <a href="{% url 'shouter__menu' token %}">
+                <svg class="social-media-list__icon-back">
+                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-left"></use>
+                </svg>
+            </a>
+            <div class="social-media-list__header">
+                <p>แก้ไขข้อมูลส่วนตัว</p>
+            </div>
         </section>
 
         <main class="register__info">
@@ -277,7 +283,7 @@
                         {% endif %}
                     </select>
 
-                  <span class="btn-main btn-shouter" style="text-align: center" onclick="submitForm()">ยืนยันการแก้ไข</span>
+                  <span class="btn-main btn-shouter" style="text-align: center" onclick="submitForm()">บันทึก</span>
                 </form>
             </section>
         </main>

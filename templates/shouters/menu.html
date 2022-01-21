@@ -20,18 +20,21 @@
 <body>
     <section class="container">
         <section class="shouter-account__top">
-            <img class="shouter-account__top__image" src="{{ shouter.ig_profile_picture }}"
-                 alt="" style="width: 25rem; height: 25rem; border-radius: 50%; border: 2px solid white">
+            {% if shouter.line_profile_picture %}
+                <img class="shouter-account__top__image" src="{{ shouter.line_profile_picture }}"
+                     alt="" style="width: 25rem; height: 25rem; border-radius: 50%; border: 2px solid white;">
+            {% else %}
+                <svg class="shouter-account__top__image register__form__image" style="border: 2px solid white;">
+                  <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>
+                </svg>
+            {% endif %}
+
             <h2 class="shouter-account__top__main-text">
                 {{ shouter.nickname }}
             </h2>
             <h3 class="shouter-account__top__sub-text">
                 {{ shouter.first_name }}  {{ shouter.last_name }}
             </h3>
-            <a href="{% url 'shouter__menu__edit-profile' token %}" style="color: #7E8290; font-size: 16px; padding: 10px 10px; margin-top: 20px;
-            background-color: white; text-decoration: none; border-radius: 10px;">
-                แก้ไขข้อมูลส่วนตัว
-            </a>
 
         </section>
 
@@ -39,6 +42,19 @@
             <div class="shouter-account__content__block">
                 <p class="shouter-account__content__header">การทำงานของคุณ</p>
             </div>
+
+            <a href="{% url 'shouter__menu__edit-profile' token %}" class="shouter-account__content__block">
+                <div class="shouter-account__content__block__left">
+                    <svg class="shouter-account__icon">
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-v-card"></use>
+                    </svg>
+                    <p class="shouter-account__content__text">แก้ไขข้อมูลส่วนตัว</p>
+                </div>
+                <svg class="shouter-account__content__block__right shouter-account__icon-next">
+                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-right"></use>
+                </svg>
+            </a>
+
 
             <a href="{% url 'shouter__menu__social-media' token %}" class="shouter-account__content__block">
                 <div class="shouter-account__content__block__left">
@@ -52,10 +68,10 @@
                 </svg>
             </a>
 
-            <a href="" class="shouter-account__content__block">
+            <a href="{% url 'shouter__menu__work-selection' token %}" class="shouter-account__content__block">
                 <div class="shouter-account__content__block__left">
                     <svg class="shouter-account__icon">
-                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-megaphone"></use>
                     </svg>
                     <p class="shouter-account__content__text">งานที่เปิดรับ</p>
                 </div>
@@ -64,10 +80,10 @@
                 </svg>
             </a>
 
-            <a href="" class="shouter-account__content__block">
+            <a href="{% url 'shouter__menu__bank-account' token %}" class="shouter-account__content__block">
                 <div class="shouter-account__content__block__left">
                     <svg class="shouter-account__icon">
-                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-credit"></use>
                     </svg>
                     <p class="shouter-account__content__text">บัญชีธนาคาร / บัตรประชาชน</p>
                 </div>

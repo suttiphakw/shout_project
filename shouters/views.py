@@ -1,9 +1,13 @@
 import jwt
 import requests
 import datetime
+import os
+import random
 from django.utils.timezone import now
 from django.shortcuts import render, redirect, HttpResponse
 from django.middleware.csrf import get_token
+from django.core.files.storage import FileSystemStorage
+from datetime import timezone, timedelta
 # from django.contrib import messages, auth
 # from django.contrib.auth.models import User
 # from django.contrib.auth.decorators import login_required
@@ -14,9 +18,30 @@ from shouters.models import Shouter
 # from orders.models import Order
 
 from utils.cal_price import IGStoryFc, IGStoryUgc, IGPostFc, IGPostUgc
-from shouters.lists import thailand_province, date_lists, month_lists, year_lists, education_lists
+from shouters.lists import thailand_province, date_lists, month_lists, year_lists, education_lists, banking_lists
 from shouters.lineMessagingApi.lineMessagingApi import LineApiMessage
 
+# Upload Image
+def get_unique_name(dir, filename, shouter):
+    if not dir.endswith('/'):
+        dir += '/'
+
+    sp = filename.split('.')
+    first_name = shouter.first_name
+    last_name = shouter.last_name
+    ext = sp[-1]
+    tz = timezone(timedelta(hours=7))
+    today = datetime.datetime.now(tz=tz)
+    y = today.year
+    m = today.month
+    d = today.day
+    h = today.hour
+    mi = today.minute
+    s = today.second
+    return f'{dir}{first_name}_{last_name}_{y}{m:02d}{d:02d}_{h:02d}{mi:02d}{s:02d}.{ext}'
+
+def round_to_five(x, base=5):
+    return base * round(x / base)
 
 # Create your views here.
 def landing_page(request):
@@ -445,7 +470,10 @@ def oauth(request):
                 # /shouters/line-login?q=work_management/
                 # /shouters/line-login?q=payment/
                 # /shouters/line-login?q=shouter_history/
-                redirect_url = '/shouters/menu/{}/'.format(encoded_token)
+                if q == "bank-account":
+                    redirect_url = '/shouters/menu/bank-account/{}/'.format(encoded_token)
+                else:
+                    redirect_url = '/shouters/menu/{}/'.format(encoded_token)
                 # if q == 'menu':
                 #     redirect_url = '/shouters/menu/{}/'.format(encoded_token)
                 # elif q == 'bank_account':
@@ -771,10 +799,10 @@ def register__get_ig_data(request, token):
     shouter.save()
 
     # Cal Price
-    ig_price_story_fc = round(IGStoryFc().cal_price(ig_story_view), 2)
-    ig_price_story_ugc = round(IGStoryUgc().cal_price(ig_story_view), 2)
-    ig_price_post_fc = round(IGPostFc().cal_price(ig_ad_post_reach), 2)
-    ig_price_post_ugc = round(IGPostUgc().cal_price(ig_ad_post_reach), 2)
+    ig_price_story_fc = round_to_five(IGStoryFc().cal_price(ig_story_view))
+    ig_price_story_ugc = round_to_five(IGStoryUgc().cal_price(ig_story_view))
+    ig_price_post_fc = round_to_five(IGPostFc().cal_price(ig_ad_post_reach))
+    ig_price_post_ugc = round_to_five(IGPostUgc().cal_price(ig_ad_post_reach))
     shouter.ig_price_story_fc = ig_price_story_fc
     shouter.ig_price_story_ugc = ig_price_story_ugc
     shouter.ig_price_post_fc = ig_price_post_fc
@@ -783,16 +811,16 @@ def register__get_ig_data(request, token):
 
     ig_price_story_post_fc = (ig_price_story_fc + ig_price_post_fc) * 0.9
     ig_price_story_post_ugc = (ig_price_story_ugc + ig_price_post_ugc) * 0.9
-    shouter.ig_price_story_post_fc = round(ig_price_story_post_fc, 2)
-    shouter.ig_price_story_post_ugc = round(ig_price_story_post_ugc, 2)
+    shouter.ig_price_story_post_fc = round_to_five(ig_price_story_post_fc)
+    shouter.ig_price_story_post_ugc = round_to_five(ig_price_story_post_ugc)
     shouter.save()
 
-    shouter.ig_fb_price_story_fc = round(ig_price_story_fc * 1.1, 2)
-    shouter.ig_fb_price_story_ugc = round(ig_price_story_ugc * 1.1, 2)
-    shouter.ig_fb_price_post_fc = round(ig_price_post_fc * 1.1, 2)
-    shouter.ig_fb_price_post_ugc = round(ig_price_post_ugc * 1.1, 2)
-    shouter.ig_fb_price_story_post_fc = round(ig_price_story_post_fc * 1.1, 2)
-    shouter.ig_fb_price_story_post_ugc = round(ig_price_story_post_ugc * 1.1, 2)
+    shouter.ig_fb_price_story_fc = round_to_five(ig_price_story_fc * 1.1)
+    shouter.ig_fb_price_story_ugc = round_to_five(ig_price_story_ugc * 1.1)
+    shouter.ig_fb_price_post_fc = round_to_five(ig_price_post_fc * 1.1)
+    shouter.ig_fb_price_post_ugc = round_to_five(ig_price_post_ugc * 1.1)
+    shouter.ig_fb_price_story_post_fc = round_to_five(ig_price_story_post_fc * 1.1)
+    shouter.ig_fb_price_story_post_ugc = round_to_five(ig_price_story_post_ugc * 1.1)
     shouter.save()
 
     context__audience_insight = FacebookAPI().get_audience_insight(business_account_id=ig_business_account_id,
@@ -858,8 +886,68 @@ def menu__bank_account(request, token):
         return redirect('on_dev')
 
     shouter = Shouter.objects.filter(id=_id).first()
-    # return redirect('on_dev')
-    return render(request, 'shouters/menu__bank-account.html')
+    context = {
+        'banking_lists': banking_lists,
+        'token': token
+    }
+
+    if shouter.is_connect_bank:
+        context = {
+            'banking_lists': banking_lists,
+            'shouter': shouter,
+            'token': token
+        }
+
+    if request.method == 'POST':
+        # Import FS
+        fs = FileSystemStorage()
+
+        # Get data from form input
+        id_card = request.FILES["id_card"] if "id_card" in request.FILES else False
+        book_bank = request.FILES["book_bank"] if "book_bank" in request.FILES else False
+        bank_name = request.POST['bank_name']
+        bank_username = request.POST['bank_username']
+        bank_account_number = request.POST['bank_account_number']
+
+        # Change File name of photo
+        if not id_card and not book_bank:
+            shouter.bank_name = bank_name
+            shouter.bank_username = bank_username
+            shouter.bank_account_number = bank_account_number
+            shouter.save()
+        elif not id_card:
+            filename_book_bank = fs.save(get_unique_name('book_bank/', book_bank.name, shouter), book_bank)
+
+            shouter.book_bank_photo = filename_book_bank
+            shouter.bank_name = bank_name
+            shouter.bank_username = bank_username
+            shouter.bank_account_number = bank_account_number
+            shouter.save()
+        elif not book_bank:
+            filename_id_card = fs.save(get_unique_name('id_card/', id_card.name, shouter), id_card)
+
+            shouter.id_card_photo = filename_id_card
+            shouter.bank_name = bank_name
+            shouter.bank_username = bank_username
+            shouter.bank_account_number = bank_account_number
+            shouter.save()
+        else:
+            filename_id_card = fs.save(get_unique_name('id_card/', id_card.name, shouter), id_card)
+            filename_book_bank = fs.save(get_unique_name('book_bank/', book_bank.name, shouter), book_bank)
+
+            # Save to Database
+            shouter.id_card_photo = filename_id_card
+            shouter.book_bank_photo = filename_book_bank
+            shouter.bank_name = bank_name
+            shouter.bank_username = bank_username
+            shouter.bank_account_number = bank_account_number
+            shouter.is_connect_bank = True
+            shouter.save()
+
+        redirect_url = '/shouters/menu/{}/'.format(token)
+        return redirect(redirect_url)
+
+    return render(request, 'shouters/menu__bank-account.html', context=context)
 
 
 def menu__edit_profile(request, token):
@@ -935,3 +1023,149 @@ def menu__edit_profile(request, token):
         return redirect(redirect_url)
 
     return render(request, 'shouters/menu__edit-profile.html', context)
+
+
+def menu__work_selection(request, token):
+    try:
+        decoded_token = jwt.decode(token, 'SHOUTER_JWT_TOKEN', algorithms='HS256')
+        _id = decoded_token.get('_id')
+        pass
+    except:
+        return HttpResponse('404Error')
+
+    if not Shouter.objects.filter(id=_id).exists():
+        return redirect('on_dev')
+
+    shouter = Shouter.objects.filter(id=_id).first()
+
+    context = {
+        'shouter': shouter,
+        # Token
+        'token': token,
+    }
+
+    if request.method == 'POST':
+        # IG Only
+        is_check_ig = request.POST.getlist('is_check_ig')
+        if not is_check_ig == []:
+            shouter.is_check_ig = True
+
+            is_check_ig_story = request.POST.getlist('is_check_ig_story')
+            if len(is_check_ig_story) != 0:
+                is_check_ig_story = True
+            else:
+                is_check_ig_story = False
+
+            is_check_ig_post = request.POST.getlist('is_check_ig_post')
+            if len(is_check_ig_post) != 0:
+                is_check_ig_post = True
+            else:
+                is_check_ig_post = False
+
+            is_check_ig_story_post = request.POST.getlist('is_check_ig_story_post')
+            if len(is_check_ig_story_post) != 0:
+                is_check_ig_story_post = True
+            else:
+                is_check_ig_story_post = False
+
+            if not is_check_ig_story and not is_check_ig_post and not is_check_ig_story_post:
+                shouter.is_check_ig = False
+
+            shouter.is_check_ig_story = is_check_ig_story
+            shouter.is_check_ig_post = is_check_ig_post
+            shouter.is_check_ig_story_post = is_check_ig_story_post
+
+        else:
+            shouter.is_check_ig = False
+            shouter.is_check_ig_story = False
+            shouter.is_check_ig_post = False
+            shouter.is_check_ig_story_post = False
+
+        # IG + FB
+        is_check_ig_fb = request.POST.getlist('is_check_ig_fb')
+        if not is_check_ig_fb == []:
+            shouter.is_check_ig_fb = True
+
+            is_check_ig_fb_story = request.POST.getlist('is_check_ig_fb_story')
+            if len(is_check_ig_fb_story) != 0:
+                is_check_ig_fb_story = True
+            else:
+                is_check_ig_fb_story = False
+
+            is_check_ig_fb_post = request.POST.getlist('is_check_ig_fb_post')
+            if len(is_check_ig_fb_post) != 0:
+                is_check_ig_fb_post = True
+            else:
+                is_check_ig_fb_post = False
+
+            is_check_ig_fb_story_post = request.POST.getlist('is_check_ig_fb_story_post')
+            if len(is_check_ig_fb_story_post) != 0:
+                is_check_ig_fb_story_post = True
+            else:
+                is_check_ig_fb_story_post = False
+
+            if not is_check_ig_fb_story and not is_check_ig_fb_post and not is_check_ig_fb_story_post:
+                shouter.is_check_ig_fb = False
+
+            shouter.is_check_ig_fb_story = is_check_ig_fb_story
+            shouter.is_check_ig_fb_post = is_check_ig_fb_post
+            shouter.is_check_ig_fb_story_post = is_check_ig_fb_story_post
+
+        else:
+            shouter.is_check_ig_fb = False
+            shouter.is_check_ig_fb_story = False
+            shouter.is_check_ig_fb_post = False
+            shouter.is_check_ig_fb_story_post = False
+
+        # Tiktok
+        is_check_tiktok = request.POST.getlist('is_check_tiktok')
+        if len(is_check_tiktok) != 0:
+            try:
+                tiktok_name = request.POST['tiktok_name']
+                tiktok_price = request.POST['tiktok_price']
+            except:
+                shouter.is_check_tiktok = False
+                tiktok_name = None
+                tiktok_price = None
+            if tiktok_name == '' or tiktok_price == '':
+                shouter.is_check_tiktok = False
+                shouter.tiktok_name = None
+                shouter.tiktok_price = None
+            else:
+                shouter.is_check_tiktok = True
+                shouter.tiktok_name = tiktok_name
+                shouter.tiktok_price = tiktok_price
+        else:
+            shouter.is_check_tiktok = False
+            shouter.tiktok_name = None
+            shouter.tiktok_price = None
+
+        # Twitter
+        is_check_twitter = request.POST.getlist('is_check_twitter')
+        if len(is_check_twitter) != 0:
+            try:
+                twitter_name = request.POST['twitter_name']
+                twitter_price = request.POST['twitter_price']
+            except:
+                shouter.is_check_twitter = False
+                twitter_name = None
+                twitter_price = None
+            if twitter_name == '' or twitter_price == '':
+                shouter.is_check_twitter = False
+                shouter.twitter_name = None
+                shouter.twitter_price = None
+            else:
+                shouter.is_check_twitter = True
+                shouter.twitter_name = twitter_name
+                shouter.twitter_price = twitter_price
+        else:
+            shouter.is_check_twitter = False
+            shouter.twitter_name = None
+            shouter.twitter_price = None
+
+        shouter.save()
+
+        redirect_url = '/shouters/menu/{}/'.format(token)
+        return redirect(redirect_url)
+
+    return render(request, 'shouters/menu__work-selection.html', context)

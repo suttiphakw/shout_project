@@ -12,31 +12,82 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/main.js' %}"></script>
     <!-- Vue Framework -->
-<!--    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
-<!--    <script src="https://unpkg.com/vue@next" defer></script>-->
-<!--    <script src="js/main.js" defer></script>-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
+    <!--    <script src="https://unpkg.com/vue@next" defer></script>-->
+    <!--    <script src="js/main.js" defer></script>-->
+
+    <!-- J query -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script>
         function showPreview1(event){
           if(event.target.files.length > 0){
-            var src = URL.createObjectURL(event.target.files[0]);
-            var preview = document.getElementById("file-ip-1-preview");
-            var text = document.getElementById("text-file-ip-1");
+            const src = URL.createObjectURL(event.target.files[0]);
+            const preview = document.getElementById("file-ip-1-preview");
+            const text = document.getElementById("text-file-ip-1");
+            const old_photo = document.getElementById("old_photo_1");
             preview.src = src;
             preview.style.display = "block";
-            text.remove();
+            text.style.display = "none";
+            old_photo.style.display = "none";
           }
         }
 
         function showPreview2(event){
           if(event.target.files.length > 0){
-            var src = URL.createObjectURL(event.target.files[0]);
-            var preview = document.getElementById("file-ip-2-preview");
-            var text = document.getElementById("text-file-ip-2");
+            const src = URL.createObjectURL(event.target.files[0]);
+            const preview = document.getElementById("file-ip-2-preview");
+            const text = document.getElementById("text-file-ip-2");
+            const old_photo = document.getElementById("old_photo_2");
             preview.src = src;
             preview.style.display = "block";
-            text.remove();
+            text.style.display = "none";
+            old_photo.style.display = "none";
           }
         }
+
+        function addUploadAgain1(){
+          const text = document.getElementById("text-file-ip-1");
+          text.style.display = "block";
+        }
+
+        function addUploadAgain2(){
+          const text = document.getElementById("text-file-ip-2");
+          text.style.display = "block";
+        }
+
+        function submitForm() {
+          const preview_1 = $("#file-ip-1-preview").css("display");
+          const preview_2 = $("#file-ip-2-preview").css("display");
+          const bank_account_number = $("#bank_account_number").val();
+          const bank_name = $("#bank_name").val();
+          const bank_username = $("#bank_username").val();
+          const old_photo_1 = $("#old_photo_1").css("display");
+          const old_photo_2 = $("#old_photo_2").css("display");
+
+          if(preview_1 !== "block" || preview_2 !== "block" || bank_account_number.trim() === '' ||
+            bank_name.trim() === '' || bank_username.trim() === '') {
+            if(old_photo_1 === "none" && old_photo_2 === "none") {
+              alert('Please insert photo and fill in all information.');
+            }
+            else {
+              if(bank_account_number.trim() === '' || bank_name.trim() === '' || bank_username.trim() === '') {
+                alert('Please fill in all information.');
+              } else {
+                $("#bank_account").submit();
+              }
+            }
+          } else {
+            $("#bank_account").submit();
+          }
+
+          {#console.log($("#file-ip-1-preview").css("display"));#}
+          {#console.log($("#file-ip-2-preview").css("display"));#}
+          {#$("#bank_account").submit();#}
+        }
+
+        {#  console.log($("#old_photo_1").attr("src"));#}
+        {#  console.log($("#old_photo_2").attr("src"));#}
     </script>
     <!-- Title -->
     <title>Shout | Account</title>
@@ -44,7 +95,7 @@
 <body>
     <section class="container">
         <section class="social-media-list">
-            <a href="">
+            <a href="{% url 'shouter__menu' token %}">
                 <svg class="social-media-list__icon-back">
                     <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-left"></use>
                 </svg>
@@ -55,22 +106,37 @@
         </section>
 
         <main class="bank-account__content">
-            <form action="">
-                <h3 style="text-align: center; color: red; font-size: 30px; font-family: minimal_bold, sans-serif; margin-top: 15px">** ขณะนี้ยังไม่เปิดให้บริการ **</h3>
+            <form action="{% url 'shouter__menu__bank-account' token %}" method="POST" enctype="multipart/form-data" id="bank_account"> {% csrf_token %}
                 <div class="social-card">
                     <div class="social-card__header">
                         <div class="social-card__name">
                             <h3>สำเนาบัตรประชาชน</h3>
                         </div>
+                        <svg class="social-card__icon" onclick="addUploadAgain1()" style="fill: var(--color-primary);">
+                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-compose"></use>
+                        </svg>
                     </div>
-                    <div class="bank-account__detail">
-                        <div class="bank-account__form-input">
-                            <div class="bank-account__preview">
-                                <img id="file-ip-1-preview">
+                    <div class="bank-account__detail" style="display: flex; flex-direction: column;">
+                        {% if shouter.is_connect_bank %}
+                            <img src="{{ shouter.id_card_photo.url }}" style="width: 100%; height: 100%" id="old_photo_1">
+                            <div class="bank-account__form-input">
+                                <img src="{{ shouter.id_card_photo.url }}" style="width: 100px; height: 100px">
+                                <div class="bank-account__preview">
+                                    <img id="file-ip-1-preview">
+                                </div>
+                                <label id="text-file-ip-1" for="file-ip-1" style="border: 1px solid #E9EBF1;">อัพโหลดใหม่</label>
+                                <input type="file" name="id_card" id="file-ip-1" accept="image/*" onchange="showPreview1(event);">
                             </div>
-                            <label id="text-file-ip-1" for="file-ip-1">อัพโหลดใหม่</label>
-                            <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview1(event);">
-                        </div>
+                        {% else %}
+                            <div id="old_photo_1" style="display:none;"></div>
+                            <div class="bank-account__form-input">
+                                <div class="bank-account__preview">
+                                    <img id="file-ip-1-preview">
+                                </div>
+                                <label id="text-file-ip-1" for="file-ip-1" style="border: 1px solid #E9EBF1;">อัพโหลดใหม่</label>
+                                <input type="file" name="id_card" id="file-ip-1" accept="image/*" onchange="showPreview1(event);">
+                            </div>
+                        {% endif %}
                     </div>
 
                     <div class="social-media-list__space"></div>
@@ -79,15 +145,30 @@
                         <div class="social-card__name">
                             <h3>บัญชีธนาคาร</h3>
                         </div>
+                        <svg class="social-card__icon" onclick="addUploadAgain2()" style="fill: var(--color-primary);">
+                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-compose"></use>
+                        </svg>
                     </div>
-                    <div class="bank-account__detail">
-                        <div class="bank-account__form-input">
-                            <div class="bank-account__preview">
-                                <img id="file-ip-2-preview">
+                    <div class="bank-account__detail" style="display: flex; flex-direction: column;">
+                        {% if shouter.is_connect_bank %}
+                            <img src="{{ shouter.book_bank_photo.url }}" style="width: 100%; height: 100%" id="old_photo_2">
+                            <div class="bank-account__form-input">
+                                <div class="bank-account__preview">
+                                    <img id="file-ip-2-preview">
+                                </div>
+                                <label id="text-file-ip-2" for="file-ip-2" style="border: 1px solid #E9EBF1;">อัพโหลดใหม่</label>
+                                <input type="file" name="book_bank" id="file-ip-2" accept="image/*" onchange="showPreview2(event);">
                             </div>
-                            <label id="text-file-ip-1" for="file-ip-2">อัพโหลดใหม่</label>
-                            <input type="file" id="file-ip-2" accept="image/*" onchange="showPreview2(event);">
-                        </div>
+                        {% else %}
+                            <div id="old_photo_2" style="display:none;"></div>
+                            <div class="bank-account__form-input">
+                                <div class="bank-account__preview">
+                                    <img id="file-ip-2-preview">
+                                </div>
+                                <label id="text-file-ip-2" for="file-ip-2" style="border: 1px solid #E9EBF1;">อัพโหลดใหม่</label>
+                                <input type="file" name="book_bank" id="file-ip-2" accept="image/*" onchange="showPreview2(event);">
+                            </div>
+                        {% endif %}
                     </div>
 
                     <ul class="bank-account__list">
@@ -102,27 +183,61 @@
                     <div class="social-media-list__space"></div>
 
                     <div class="bank-account__text-input">
-                        <label for="bank_account">เลขบัญชีธนาคาร <span>*</span> </label>
-                        <input type="text" id="bank_account" name="bank_account" placeholder="000-0000-00-0"/>
+                        {% if shouter.is_connect_bank %}
+                            <label for="bank_account_number">เลขบัญชีธนาคาร <span>*</span> </label>
+                            <input type="tel" id="bank_account_number" name="bank_account_number" placeholder="Enter Account Number"
+                                   value="{{ shouter.bank_account_number }}"
+                                   style="display: flex; font-size: 18px; height: 40px; width: 100%; border: var(--border-grey-light);
+                            border-radius: 6px; color: var(--color-text-main); margin: 5px 0 20px; padding: 6px 12px;">
 
-                        <label for="bank_name">ชื่อธนาคาร <span>*</span> </label>
-                        <input type="text" id="bank_name" name="bank_name" placeholder="Siam Commercial Bank"/>
+                            <label for="bank_name">ชื่อธนาคาร <span>*</span> </label>
+                            <select name="bank_name" id="bank_name" style="display: flex; font-size: 18px; height: 40px; width: 100%; border: var(--border-grey-light);
+                            border-radius: 6px; color: var(--color-text-main); margin: 5px 0 20px;">
+                                <option value="" selected disabled>สถาบันการเงิน</option>
+                                {% for foo in banking_lists %}
+                                    {% if shouter.bank_name == foo %}
+                                        <option value={{ foo }} selected>{{ foo }}</option>
+                                    {% else %}
+                                        <option value={{ foo }}>{{ foo }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
 
-                        <label for="bank_username">ชื่อเจ้าของบัญชี <span>*</span> </label>
-                        <input type="text" id="bank_username" name="bank_username" placeholder="นางสาว พิม ยอดเยี่ยม"/>
+                            <label for="bank_username">ชื่อเจ้าของบัญชี <span>*</span> </label>
+                            <input type="text" id="bank_username" name="bank_username" placeholder="นางสาว พิม ยอดเยี่ยม"
+                                   value="{{ shouter.bank_username }}"/>
+                        {% else %}
+                            <label for="bank_account_number">เลขบัญชีธนาคาร <span>*</span> </label>
+                            <input type="tel" id="bank_account_number" name="bank_account_number" placeholder="Enter Account Number"
+                                   style="display: flex; font-size: 18px; height: 40px; width: 100%; border: var(--border-grey-light);
+                            border-radius: 6px; color: var(--color-text-main); margin: 5px 0 20px; padding: 6px 12px;">
+
+                            <label for="bank_name">ชื่อธนาคาร <span>*</span> </label>
+                            <select name="bank_name" id="bank_name" style="display: flex; font-size: 18px; height: 40px; width: 100%; border: var(--border-grey-light);
+                            border-radius: 6px; color: var(--color-text-main); margin: 5px 0 20px;">
+                                <option value="" selected disabled>สถาบันการเงิน</option>
+                                {% for foo in banking_lists %}
+                                    <option value={{ foo }}>{{ foo }}</option>
+                                {% endfor %}
+                            </select>
+
+                            <label for="bank_username">ชื่อเจ้าของบัญชี <span>*</span> </label>
+                            <input type="text" id="bank_username" name="bank_username" placeholder="นางสาว พิม ยอดเยี่ยม"/>
+                        {% endif %}
 
                     </div>
+
 
                     <div class="bank-account__consent">
                         <svg class="bank-account__consent__icon">
                             <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-shield"></use>
                         </svg>
 
-                        <p class="bank-account__consent__text">ข้อมูลของคุณจะถูกจัดเก็บอย่างปลอดภัย และเป็นความลับ ในระบบของเรา
+                        <p class="bank-account__consent__text" style="font-size: 14px">ข้อมูลของคุณจะถูกจัดเก็บอย่างปลอดภัย และเป็นความลับ ในระบบของเรา
                             คุณสามารถเข้าถึงข้อมูลนี้ ได้แต่เพียงผู้เดียว</p>
                     </div>
 
-                    <input class="btn-shouter btn-main" type="submit" value="บันทึก">
+                  <span class="btn-shouter btn-main" style="margin: 10px 0; text-align: center" onclick="submitForm()">บันทึก</span>
 
                 </div>
             </form>

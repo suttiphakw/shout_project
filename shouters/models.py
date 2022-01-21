@@ -25,12 +25,20 @@ class Shouter(models.Model):
     college = models.CharField(max_length=120, null=True, blank=True)
     interest = ArrayField(models.CharField(max_length=200, null=True, blank=True), null=True, blank=True)
 
+    # # Bank Account
+    id_card_photo = models.ImageField(upload_to='id_card/%Y/%m/%d/', blank=True)
+    book_bank_photo = models.ImageField(upload_to='book_bank/%Y/%m/%d/', blank=True)
+    bank_name = models.CharField(max_length=120, null=True, blank=True)
+    bank_username = models.CharField(max_length=120, null=True, blank=True)
+    bank_account_number = models.CharField(max_length=120, null=True, blank=True)
     register_created = models.DateTimeField(default=now)
 
+    # # Boolean
     is_register = models.BooleanField(default=False)
     is_finished_regis = models.BooleanField(default=False)
     is_approve = models.BooleanField(default=False)
     is_already_approve = models.BooleanField(default=False)
+    is_connect_bank = models.BooleanField(default=False)
 
     # # Line Token
     line_access_token = models.CharField(max_length=500, null=True, blank=True)

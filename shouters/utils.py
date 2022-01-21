@@ -62,7 +62,10 @@ class LineAPI:
 
         user_id = get_json(response=response_user, param='sub')
         username = get_json(response=response_user, param='name')
-        profile_picture = get_json(response=response_user, param='picture')
+        try:
+            profile_picture = get_json(response=response_user, param='picture')
+        except:
+            profile_picture = None
 
         context = {
             'user_id': user_id,
