@@ -27,10 +27,10 @@ class ShouterAdmin(admin.ModelAdmin):
         'ig_profile_picture', 'ig_average_total_like', 'ig_engagement_percent', 'ig_story_view',
         'ig_average_post_reach', 'ig_predicted_ad_post_reach', 'ig_ad_post_reach',
         # Pricing
-        # 'ig_price_story_fc', 'ig_price_story_ugc', 'ig_price_post_fc', 'ig_price_post_ugc', 'ig_price_story_post_fc',
-        # 'ig_price_story_post_ugc',
-        # 'ig_fb_price_story_fc', 'ig_fb_price_story_ugc', 'ig_fb_price_post_fc', 'ig_fb_price_post_ugc',
-        # 'ig_fb_price_story_post_fc', 'ig_fb_price_story_post_ugc',
+        'ig_price_story_fc', 'ig_price_story_ugc', 'ig_price_post_fc', 'ig_price_post_ugc', 'ig_price_story_post_fc',
+        'ig_price_story_post_ugc',
+        'ig_fb_price_story_fc', 'ig_fb_price_story_ugc', 'ig_fb_price_post_fc', 'ig_fb_price_post_ugc',
+        'ig_fb_price_story_post_fc', 'ig_fb_price_story_post_ugc',
         # Work Selection
         'is_check_ig', 'is_check_ig_story', 'is_check_ig_post', 'is_check_ig_story_post',
         'is_check_ig_fb', 'is_check_ig_fb_story', 'is_check_ig_fb_post', 'is_check_ig_fb_story_post',
@@ -67,8 +67,7 @@ class ShouterAdmin(admin.ModelAdmin):
         ('Line Token Info', {'fields': ('line_user_id', 'line_access_token', 'line_access_token_updated',
                                         'line_id_token', 'line_id_token_updated')}),
         ('Facebook Token Info', {'fields': ('fb_main_access_token', 'fb_access_token', 'fb_access_token_created', )}),
-        ('Raw Data', {'fields': ('fb_response_access_token', 'fb_response_page_id', 'fb_response_business_account_id',
-                                 'ig_response_bio', 'ig_response_media_objects', 'ig_response_audience_insight',
+        ('Raw Data', {'fields': ('ig_response_media_objects', 'ig_response_audience_insight',
                                  'ig_response_active_follower',)}),
     )
 
