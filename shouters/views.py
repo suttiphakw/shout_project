@@ -423,7 +423,6 @@ def oauth(request):
     list_state = state.split(',')
     # Get q (query string)
     q = list_state[1]
-    q = q[7:-2]
 
     access_token, id_token = LineAPI().get_access_token(code=code)
 
@@ -470,7 +469,7 @@ def oauth(request):
                 # /shouters/line-login?q=work_management/
                 # /shouters/line-login?q=payment/
                 # /shouters/line-login?q=shouter_history/
-                if q == "bank-account":
+                if "bank-account" in q:
                     redirect_url = '/shouters/menu/bank-account/{}/'.format(encoded_token)
                 else:
                     redirect_url = '/shouters/menu/{}/'.format(encoded_token)
