@@ -3,7 +3,7 @@ from shouters.models import Shouter
 
 # Register your models here.
 class ShouterAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'line_username', 'ig_username', 'ig_follower_count', 'is_register',
+    list_display = ('first_name', 'last_name', 'line_username', 'ig_username', 'ig_follower_count',
                     'fb_is_connect', 'is_approve')
 
     readonly_fields = (
