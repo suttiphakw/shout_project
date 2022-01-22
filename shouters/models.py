@@ -66,7 +66,7 @@ class Shouter(models.Model):
     fb_access_token_created = models.DateTimeField(default=now)
     fb_page_id = models.CharField(max_length=120, null=True, blank=True)
     fb_page_name = models.CharField(max_length=120, null=True, blank=True)
-    fb_is_connect = models.BooleanField(default=False)
+    fb_is_connect = models.BooleanField(default=False, verbose_name='IS CONNECT TO FACEBOOK PAGE')
     is_already_fb_connect = models.BooleanField(default=False)
     fb_name = models.CharField(max_length=500, null=True, blank=True)
     fb_profile_picture = models.URLField(max_length=500, null=True, blank=True)
