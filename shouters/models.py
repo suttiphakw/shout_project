@@ -93,19 +93,19 @@ class Shouter(models.Model):
     # ig_like_engagement = models.IntegerField(null=True, blank=True)
 
     # # Pricing
-    ig_price_story_fc = models.IntegerField(null=True, blank=True, verbose_name="IG STORY Price (FC)")
-    ig_price_story_ugc = models.IntegerField(null=True, blank=True, verbose_name="IG STORY Price (UGC)")
-    ig_price_post_fc = models.IntegerField(null=True, blank=True, verbose_name="IG POST Price (FC)")
-    ig_price_post_ugc = models.IntegerField(null=True, blank=True, verbose_name="IG POST Price (FC)")
-    ig_price_story_post_fc = models.IntegerField(null=True, blank=True, verbose_name="IG STORY+POST Price (FC)")
-    ig_price_story_post_ugc = models.IntegerField(null=True, blank=True, verbose_name="IG STORY+POST Price (UGC)")
+    ig_price_story_fc = models.IntegerField(null=True, blank=True, verbose_name="IG STORY Price (MIN)")
+    ig_price_story_ugc = models.IntegerField(null=True, blank=True, verbose_name="IG STORY Price (MAX)")
+    ig_price_post_fc = models.IntegerField(null=True, blank=True, verbose_name="IG POST Price (MIN)")
+    ig_price_post_ugc = models.IntegerField(null=True, blank=True, verbose_name="IG POST Price (MAX)")
+    ig_price_story_post_fc = models.IntegerField(null=True, blank=True, verbose_name="IG STORY+POST Price (MIN)")
+    ig_price_story_post_ugc = models.IntegerField(null=True, blank=True, verbose_name="IG STORY+POST Price (MAX)")
 
-    ig_fb_price_story_fc = models.IntegerField(null=True, blank=True, verbose_name="IG+FB STORY Price (FC)")
-    ig_fb_price_story_ugc = models.IntegerField(null=True, blank=True, verbose_name="IG+FB STORY Price (UGC)")
-    ig_fb_price_post_fc = models.IntegerField(null=True, blank=True, verbose_name="IG+FB POST Price (FC)")
-    ig_fb_price_post_ugc = models.IntegerField(null=True, blank=True, verbose_name="IG+FB POST Price (FC)")
-    ig_fb_price_story_post_fc = models.IntegerField(null=True, blank=True, verbose_name="IG+FB STORY+POST Price (FC)")
-    ig_fb_price_story_post_ugc = models.IntegerField(null=True, blank=True, verbose_name="IG+FB STORY+POST Price (UGC)")
+    ig_fb_price_story_fc = models.IntegerField(null=True, blank=True, verbose_name="IG+FB STORY Price (MIN)")
+    ig_fb_price_story_ugc = models.IntegerField(null=True, blank=True, verbose_name="IG+FB STORY Price (MAX)")
+    ig_fb_price_post_fc = models.IntegerField(null=True, blank=True, verbose_name="IG+FB POST Price (MIN)")
+    ig_fb_price_post_ugc = models.IntegerField(null=True, blank=True, verbose_name="IG+FB POST Price (MAX)")
+    ig_fb_price_story_post_fc = models.IntegerField(null=True, blank=True, verbose_name="IG+FB STORY+POST Price (MIN)")
+    ig_fb_price_story_post_ugc = models.IntegerField(null=True, blank=True, verbose_name="IG+FB STORY+POST Price (MAX)")
 
     # # Work Selection
     is_check_ig = models.BooleanField(default=False, verbose_name="ACCEPT WORK (IG)")
