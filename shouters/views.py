@@ -513,7 +513,7 @@ def oauth(request):
 
         # JWT ENCODED
         encoded_token = jwt.encode(
-            {'exp': datetime.datetime.now() + datetime.timedelta(days=1), '_id': _id},
+            {'exp': datetime.datetime.now() + datetime.timedelta(days=1), '_id': _id, 'state': 'new'},
             'SHOUTER_JWT_TOKEN',
             algorithm='HS256'
         )
