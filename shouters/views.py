@@ -835,7 +835,7 @@ def register__get_ig_data(request, token):
     if state == 'new':
         redirect_url = '/shouters/register/work-selection/{}/'.format(token)
     else:
-        redirect_url = '/shouters/menu/{}/'.format(token)
+        redirect_url = '/shouters/menu/social-media/{}/'.format(token)
 
     return redirect(redirect_url)
 
