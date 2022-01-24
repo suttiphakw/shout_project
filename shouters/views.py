@@ -452,7 +452,7 @@ def oauth(request):
 
         # JWT ENCODED
         encoded_token = jwt.encode(
-            {'exp': datetime.datetime.now() + datetime.timedelta(days=1), '_id': _id},
+            {'exp': datetime.datetime.now() + datetime.timedelta(days=1), '_id': _id, 'state': 'new'},
             'SHOUTER_JWT_TOKEN',
             algorithm='HS256'
         )
@@ -588,6 +588,7 @@ def oauth2(request):
     try:
         decoded_token = jwt.decode(token, 'SHOUTER_JWT_TOKEN', algorithms='HS256')
         _id = decoded_token.get('_id')
+        state = decoded_token.get('state')
         pass
     except:
         return HttpResponse('404Error')
@@ -668,6 +669,7 @@ def oauth2(request):
                 data = {
                     'exp': datetime.datetime.now() + datetime.timedelta(days=1),
                     '_id': _id,
+                    'state': state,
                     'access_token': obj__access_token,
                     'page_name': obj__page_name,
                     'page_id': obj__page_id,
@@ -713,6 +715,7 @@ def register__get_ig_data(request, token):
     try:
         decoded_token = jwt.decode(token, 'SHOUTER_JWT_TOKEN', algorithms='HS256')
         _id = decoded_token.get('_id')
+        state = decoded_token.get('state')
         fb_access_token = decoded_token.get('access_token')
         fb_page_name = decoded_token.get('page_name')
         fb_page_id = decoded_token.get('page_id')
@@ -829,7 +832,10 @@ def register__get_ig_data(request, token):
     shouter.fb_is_connect = True
     shouter.save()
 
-    redirect_url = '/shouters/register/work-selection/{}/'.format(token)
+    if state == 'new':
+        redirect_url = '/shouters/register/work-selection/{}/'.format(token)
+    else:
+        redirect_url = '/shouters/menu/{}/'.format(token)
 
     return redirect(redirect_url)
 
@@ -866,6 +872,16 @@ def menu__social_media(request, token):
         return redirect('on_dev')
 
     shouter = Shouter.objects.filter(id=_id).first()
+
+    # create new token state
+    data = {
+        'exp': datetime.datetime.now() + datetime.timedelta(days=1),
+        '_id': _id,
+        'state': 're',
+    }
+
+    token = jwt.encode(data, 'SHOUTER_JWT_TOKEN', algorithm='HS256')
+
     context = {
         'shouter': shouter,
         'token': token
@@ -961,7 +977,6 @@ def menu__edit_profile(request, token):
 
     if not Shouter.objects.filter(id=_id).exists():
         return redirect('on_dev')
-
     shouter = Shouter.objects.filter(id=_id).first()
 
     context = {
