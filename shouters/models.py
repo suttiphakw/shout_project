@@ -159,29 +159,13 @@ class Shouter(models.Model):
 # Function approve from admin
 def article_pre_save(sender, instance, *args, **kwargs):
     if instance.is_approve is True and instance.is_already_approve is False:
-        # sent Text and Flex Message
-        # Get Init Data
+        # Check IG PHOTO
         access_token = instance.fb_main_access_token
         business_account_id = instance.ig_business_account_id
-        first_name = instance.first_name
-        line_user_id = instance.line_user_id
-        ig_username = instance.ig_username
         ig_profile_picture = instance.ig_profile_picture
-        ig_follower_count = instance.ig_follower_count
-        ig_follower_count = str(ig_follower_count)
-
         response = requests.get(ig_profile_picture)
 
-        if response.ok:
-            response_text = api__admin_approve_text_message(line_user_id=line_user_id)
-            response_flex = api__admin_approve_flex_message(line_user_id=line_user_id,
-                                                            ig_profile_picture=ig_profile_picture,
-                                                            first_name=first_name,
-                                                            ig_username=ig_username,
-                                                            ig_follower_count=ig_follower_count)
-            response_image = api__admin_approve_image_message(line_user_id=line_user_id)
-
-        else:
+        if not response.ok:
             # Get Bio
             context__ig_biography = FacebookAPI().get_ig_biography(business_account_id=business_account_id,
                                                                    access_token=access_token)
@@ -190,27 +174,28 @@ def article_pre_save(sender, instance, *args, **kwargs):
                 instance.ig_profile_picture = ig_profile_picture
                 instance.save()
 
-                response_text = api__admin_approve_text_message(line_user_id=line_user_id)
-                response_flex = api__admin_approve_flex_message(line_user_id=line_user_id,
-                                                                ig_profile_picture=ig_profile_picture,
-                                                                first_name=first_name,
-                                                                ig_username=ig_username,
-                                                                ig_follower_count=ig_follower_count)
-                response_image = api__admin_approve_image_message(line_user_id=line_user_id)
-            else:
-                response_text = api__admin_approve_text_message(line_user_id=line_user_id)
-                response_flex = api__admin_approve_flex_message(line_user_id=line_user_id,
-                                                                ig_profile_picture=ig_profile_picture,
-                                                                first_name=first_name,
-                                                                ig_username=ig_username,
-                                                                ig_follower_count=ig_follower_count)
-                response_image = api__admin_approve_image_message(line_user_id=line_user_id)
-
 
 def article_post_save(sender, instance, *args, **kwargs):
     if instance.is_approve is True and instance.is_already_approve is False:
         instance.is_already_approve = True
         instance.save()
+
+        # Sent Text and Flex Message
+        # Get Init Data
+        first_name = instance.first_name
+        line_user_id = instance.line_user_id
+        ig_username = instance.ig_username
+        ig_profile_picture = instance.ig_profile_picture
+        ig_follower_count = instance.ig_follower_count
+        ig_follower_count = str(ig_follower_count)
+
+        response_text = api__admin_approve_text_message(line_user_id=line_user_id)
+        response_flex = api__admin_approve_flex_message(line_user_id=line_user_id,
+                                                        ig_profile_picture=ig_profile_picture,
+                                                        first_name=first_name,
+                                                        ig_username=ig_username,
+                                                        ig_follower_count=ig_follower_count)
+        response_image = api__admin_approve_image_message(line_user_id=line_user_id)
 
 pre_save.connect(article_pre_save, sender=Shouter)
 post_save.connect(article_post_save, sender=Shouter)
