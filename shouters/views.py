@@ -903,15 +903,9 @@ def menu__bank_account(request, token):
     shouter = Shouter.objects.filter(id=_id).first()
     context = {
         'banking_lists': banking_lists,
+        'shouter': shouter,
         'token': token
     }
-
-    if shouter.is_connect_bank:
-        context = {
-            'banking_lists': banking_lists,
-            'shouter': shouter,
-            'token': token
-        }
 
     if request.method == 'POST':
         # Import FS
