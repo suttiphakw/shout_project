@@ -9,12 +9,12 @@ class ShouterAdmin(admin.ModelAdmin):
     readonly_fields = (
         # Status
         'is_register', 'is_already_approve', 'is_already_fb_connect', 'is_finished_regis',
-        'is_connect_bank',
+        # 'is_connect_bank',
         # Personal Info
         'nickname', 'first_name', 'last_name', 'email', 'tel', 'gender',
         'birthday_date', 'birthday_month', 'birthday_year', 'province', 'education', 'college', 'interest',
         # ID Card and Book Bank
-        'id_card_photo', 'book_bank_photo', 'bank_name', 'bank_username', 'bank_account_number',
+        # 'id_card_photo', 'book_bank_photo', 'bank_name', 'bank_username', 'bank_account_number',
         # Line
         'line_access_token', 'line_access_token_updated', 'line_id_token', 'line_id_token_updated', 'line_user_id',
         'line_username', 'line_profile_picture',

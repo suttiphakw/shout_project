@@ -186,7 +186,7 @@
 {#                        <p class="register__form__input__province__text">Thailand</p>#}
                         <select name="province" id="province">
                             {% for foo in thailand_provinces %}
-                                {% if shouter.province == foo %}
+                                {% if shouter.province == foo.province %}
                                     <option value={{ foo.province }} selected>{{ foo.province }}</option>
                                 {% else %}
                                     <option value={{ foo.province }}>{{ foo.province }}</option>

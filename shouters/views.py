@@ -899,6 +899,7 @@ def menu__bank_account(request, token):
 
     if request.method == 'POST':
         # Import FS
+        max_size = (500, 500)
         fs = FileSystemStorage()
 
         # Get data from form input
@@ -931,6 +932,7 @@ def menu__bank_account(request, token):
             shouter.bank_account_number = bank_account_number
             shouter.save()
         else:
+            # Save Image
             filename_id_card = fs.save(get_unique_name('id_card/', id_card.name, shouter), id_card)
             filename_book_bank = fs.save(get_unique_name('book_bank/', book_bank.name, shouter), book_bank)
 
