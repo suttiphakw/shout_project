@@ -5,6 +5,9 @@ from django.db.models.signals import pre_save, post_save
 from shouters.lineMessagingApi.adminApproveApi import (api__admin_approve_text_message,
                                                        api__admin_approve_flex_message,
                                                        api__admin_approve_image_message)
+from shouters.utils import FacebookAPI
+
+import requests
 from shout_project.settings import LINE_CHANNEL_ACCESS_TOKEN
 
 # Create your models here.
@@ -158,6 +161,8 @@ def article_pre_save(sender, instance, *args, **kwargs):
     if instance.is_approve is True and instance.is_already_approve is False:
         # sent Text and Flex Message
         # Get Init Data
+        access_token = instance.fb_main_access_token
+        business_account_id = instance.ig_business_account_id
         first_name = instance.first_name
         line_user_id = instance.line_user_id
         ig_username = instance.ig_username
@@ -165,17 +170,33 @@ def article_pre_save(sender, instance, *args, **kwargs):
         ig_follower_count = instance.ig_follower_count
         ig_follower_count = str(ig_follower_count)
 
-        print(first_name, line_user_id, ig_profile_picture, ig_username, ig_follower_count)
+        response = requests.get(ig_profile_picture)
 
-        response_text = api__admin_approve_text_message(line_user_id=line_user_id)
-        response_flex = api__admin_approve_flex_message(line_user_id=line_user_id,
-                                                        ig_profile_picture=ig_profile_picture,
-                                                        first_name=first_name,
-                                                        ig_username=ig_username,
-                                                        ig_follower_count=ig_follower_count)
-        response_image = api__admin_approve_image_message(line_user_id=line_user_id)
+        if response.ok:
+            response_text = api__admin_approve_text_message(line_user_id=line_user_id)
+            response_flex = api__admin_approve_flex_message(line_user_id=line_user_id,
+                                                            ig_profile_picture=ig_profile_picture,
+                                                            first_name=first_name,
+                                                            ig_username=ig_username,
+                                                            ig_follower_count=ig_follower_count)
+            response_image = api__admin_approve_image_message(line_user_id=line_user_id)
+        else:
+            # Get Bio
+            context__ig_biography = FacebookAPI().get_ig_biography(business_account_id=business_account_id,
+                                                                   access_token=access_token)
+            if context__ig_biography:
+                ig_profile_picture = context__ig_biography.get('profile_picture_url')
+                instance.ig_profile_picture = ig_profile_picture
+                ig_profile_picture.save()
 
-        print(response_text.status_code, response_flex.status_code, response_image)
+            ig_profile_picture = instance.ig_profile_picture
+            response_text = api__admin_approve_text_message(line_user_id=line_user_id)
+            response_flex = api__admin_approve_flex_message(line_user_id=line_user_id,
+                                                            ig_profile_picture=ig_profile_picture,
+                                                            first_name=first_name,
+                                                            ig_username=ig_username,
+                                                            ig_follower_count=ig_follower_count)
+            response_image = api__admin_approve_image_message(line_user_id=line_user_id)
 
 def article_post_save(sender, instance, *args, **kwargs):
     if instance.is_approve is True and instance.is_already_approve is False:
