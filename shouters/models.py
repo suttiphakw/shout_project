@@ -172,7 +172,7 @@ def article_pre_save(sender, instance, *args, **kwargs):
 
         response = requests.get(ig_profile_picture)
 
-        if response.ok:
+        if response.status_code == 200:
             response_text = api__admin_approve_text_message(line_user_id=line_user_id)
             response_flex = api__admin_approve_flex_message(line_user_id=line_user_id,
                                                             ig_profile_picture=ig_profile_picture,
@@ -180,6 +180,8 @@ def article_pre_save(sender, instance, *args, **kwargs):
                                                             ig_username=ig_username,
                                                             ig_follower_count=ig_follower_count)
             response_image = api__admin_approve_image_message(line_user_id=line_user_id)
+
+            print(response_text, response_flex, response_image)
         else:
             # Get Bio
             context__ig_biography = FacebookAPI().get_ig_biography(business_account_id=business_account_id,
@@ -197,6 +199,8 @@ def article_pre_save(sender, instance, *args, **kwargs):
                                                             ig_username=ig_username,
                                                             ig_follower_count=ig_follower_count)
             response_image = api__admin_approve_image_message(line_user_id=line_user_id)
+
+            print(response_text, response_flex, response_image)
 
 def article_post_save(sender, instance, *args, **kwargs):
     if instance.is_approve is True and instance.is_already_approve is False:
