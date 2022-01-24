@@ -187,7 +187,7 @@ def article_pre_save(sender, instance, *args, **kwargs):
             if context__ig_biography:
                 ig_profile_picture = context__ig_biography.get('profile_picture_url')
                 instance.ig_profile_picture = ig_profile_picture
-                ig_profile_picture.save()
+                instance.save()
 
             ig_profile_picture = instance.ig_profile_picture
             response_text = api__admin_approve_text_message(line_user_id=line_user_id)
