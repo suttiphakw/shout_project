@@ -1972,6 +1972,41 @@ input:checked + .slider:before {
   border-top: var(--border-grey-light);
   padding: 4rem 0 2rem;
 }
+.register__choose-device {
+  display: flex;
+  margin-top: 30px;
+}
+.register__choose-device__card {
+  width: 50%;
+  padding: 0 30px;
+  display: flex;
+}
+.register__choose-device__card input {
+  -webkit-appearance: none;
+  display: none;
+}
+.register__choose-device__card label {
+  flex: 0 0 100%;
+  padding: 10px 20px;
+  border: var(--border-grey-light);
+  border-radius: 20px;
+  background-color: #E9EBF1;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.register__choose-device__card input[type="radio"]:checked + .register__choose-device__card label {
+  background-color: white;
+}
+.register__choose-device__icon {
+  height: 30px;
+  width: 30px;
+  margin: 10px;
+  fill: #242566;
+}
 
 .select {
   display: flex;

@@ -13,6 +13,7 @@ urlpatterns = [
     path('register/<str:token>/', views.register, name='shouter__register'),
     path('register/info-1/<str:token>/', views.register__info_1, name='shouter__register__info-1'),
     path('register/info-2/<str:token>/', views.register__info_2, name='shouter__register__info-2'),
+    path('register/choose-device/<str:token>/', views.register__choose_device, name='shouter__register__choose-device'),
     path('register/info-3/<str:token>/', views.register__info_3, name='shouter__register__info-3'),
     path('register/info-4/<str:token>/', views.register__info_4, name='shouter__register__info-4'),
     path('register/info-5/<str:token>/', views.register__info_5, name='shouter__register__info-5'),

@@ -65,6 +65,12 @@ def register__info_2(request, token):
     }
     return render(request, 'shouters/register__info-2.html', context=context)
 
+def register__choose_device(request, token):
+    context = {
+        'token': token
+    }
+    return render(request, 'shouters/register__choose-device.html', context=context)
+
 
 def register__info_3(request, token):
     context = {
