@@ -188,7 +188,7 @@ def article_post_save(sender, instance, *args, **kwargs):
         ig_username = instance.ig_username
         ig_profile_picture = instance.ig_profile_picture
         ig_follower_count = instance.ig_follower_count
-        ig_follower_count = str(ig_follower_count)
+        ig_follower_count = '{:,}'.format(ig_follower_count)
 
         response_text = api__admin_approve_text_message(line_user_id=line_user_id)
         response_flex = api__admin_approve_flex_message(line_user_id=line_user_id,
