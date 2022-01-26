@@ -560,7 +560,7 @@ def facebook_logout(request, token):
 
     if response.status_code == 200:
         # shouter.fb_access_token = ''
-        # shouter.fb_is_connect = False
+        shouter.fb_is_connect = False
         # shouter.ig_username = ''
         # shouter.ig_media_count = 0
         # shouter.ig_follower_count = 0
@@ -572,7 +572,7 @@ def facebook_logout(request, token):
         # shouter.ig_average_total_like = 0
         # shouter.ig_engagement_percent = 0
         #
-        # shouter.save()
+        shouter.save()
 
         redirect_url = '/shouters/menu/social-media/{}/'.format(token)
 
