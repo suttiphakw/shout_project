@@ -11,23 +11,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{% static 'img/logo/Shout_Logov2-07.png' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <!-- Vue Framework -->
-<!--    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
-<!--    <script src="https://unpkg.com/vue@next" defer></script>-->
-<!--    <script src="js/main.js" defer></script>-->
+    <!-- J query -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+
+    <style>
+      .social-media-list {
+          display: flex;
+          justify-content: center;
+      }
+      .your-campaign__header {
+          display: flex;
+      }
+      .your-campaign__header__box {
+          flex: 0 0 33%;
+          padding: 20px 0;
+          font-size: 14px;
+          display: flex;
+          justify-content: center;
+          cursor: pointer;
+      }
+      .selected_box {
+          background-color: #F8F0F6;
+          border-bottom: 4px solid #801B69;
+          font-size: 16px;
+          font-weight: 500;
+      }
+      .your-campaign__detail {
+          padding: 60px 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+      }
+      .your-campaign__detail img {
+          height: 60%;
+          width: 60%;
+          margin-bottom: 60px;
+      }
+      .your-campaign__detail p {
+          font-size: 14px;
+          line-height: 2;
+      }
+      .your-campaign__detail p > span {
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 2;
+      }
+    </style>
+    <script>
+      function select_box_1() {
+        const box_1_detail = document.getElementById("box_1_detail");
+        const box_2_detail = document.getElementById("box_2_detail");
+        const box_3_detail = document.getElementById("box_3_detail");
+
+        $("#box_1").addClass("selected_box");
+        $("#box_2").removeClass("selected_box");
+        $("#box_3").removeClass("selected_box");
+
+        box_1_detail.style.display = "flex";
+        box_2_detail.style.display = "none";
+        box_3_detail.style.display = "none";
+      }
+      function select_box_2() {
+        const box_1_detail = document.getElementById("box_1_detail");
+        const box_2_detail = document.getElementById("box_2_detail");
+        const box_3_detail = document.getElementById("box_3_detail");
+
+        $("#box_1").removeClass("selected_box");
+        $("#box_2").addClass("selected_box");
+        $("#box_3").removeClass("selected_box");
+
+        box_1_detail.style.display = "none";
+        box_2_detail.style.display = "flex";
+        box_3_detail.style.display = "none";
+      }
+      function select_box_3() {
+        const box_1_detail = document.getElementById("box_1_detail");
+        const box_2_detail = document.getElementById("box_2_detail");
+        const box_3_detail = document.getElementById("box_3_detail");
+
+        $("#box_1").removeClass("selected_box");
+        $("#box_2").removeClass("selected_box");
+        $("#box_3").addClass("selected_box");
+
+        box_1_detail.style.display = "none";
+        box_2_detail.style.display = "none";
+        box_3_detail.style.display = "flex";
+      }
+    </script>
     <!-- Title -->
     <title>Shout | Your Campaign</title>
 </head>
 <body>
     <section class="container">
         <section class="social-media-list">
-            <a href="{% url 'shouter__menu' token %}">
-                <svg class="social-media-list__icon-back">
-                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-left"></use>
-                </svg>
-            </a>
             <div class="social-media-list__header">
-                <p>Your Campaign</p>
+                <p>แคปเปญของคุณ</p>
+            </div>
+        </section>
+        <section>
+            <div class="your-campaign__header">
+                <div class="your-campaign__header__box selected_box" id="box_1" onclick="select_box_1()">
+                  <p>รอการตอบรับ</p>
+                </div>
+                <div class="your-campaign__header__box" id="box_2" onclick="select_box_2()">
+                  <p>เข้าร่วมอยู่</p>
+                </div>
+                <div class="your-campaign__header__box" id="box_3" onclick="select_box_3()">
+                  <p>เสร็จสิ้น</p>
+                </div>
+            </div>
+          
+            <div class="your-campaign__detail" id="box_1_detail">
+              <img src="{% static 'img/shouters/no-content.png' %}" alt="">
+              <p><span>ไม่มีแคมเปญที่รอตอบรับ</span></p>
+              <p>รายการจะเพิ่มเข้ามาหลังจากที่แบรนด์เสนองานให้คุณ</p>
+            </div>
+
+            <div class="your-campaign__detail" id="box_2_detail" style="display: none;">
+              <img src="{% static 'img/shouters/no-content.png' %}" alt="">
+              <p><span>ไม่พบแคมเปญที่เข้าร่วมอยู่</span></p>
+              <p>โปรดตอบรับเพื่อเข้าร่วมแคมเปญ</p>
+            </div>
+
+            <div class="your-campaign__detail" id="box_3_detail" style="display: none;">
+              <img src="{% static 'img/shouters/no-content.png' %}" alt="">
+              <p><span>ไม่พบแคมเปญที่เสร็จสิ้น</span></p>
+              <p>โปรดส่งงาน และรอแบรนด์ยืนยันกากรทำงานของคุณ</p>
             </div>
         </section>
     </section>
