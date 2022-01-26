@@ -33,7 +33,8 @@
 
         <main class="social-media-list__content">
             <div class="social-card">
-                <div class="social-card__header">
+                {% if shouter.fb_is_connect %}
+                    <div class="social-card__header">
                     <div class="social-card__name">
                         <svg class="social-card__icon">
                             <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
@@ -41,7 +42,6 @@
                         <h3>Instagram</h3>
                     </div>
                 </div>
-                {% if shouter.fb_is_connect %}
                     <div class="social-card__detail">
                         <div class="social-card__container__top">
                             <img src="{{ shouter.ig_profile_picture }}" alt="" style="width: 15rem; height: 15rem; border-radius: 50%">
@@ -105,6 +105,14 @@
                         Logout From Facebook
                     </a>
                 {% else %}
+                    <div class="social-card__header">
+                    <div class="social-card__name">
+                        <svg class="social-card__icon">
+                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
+                        </svg>
+                        <h3>Instagram</h3>
+                    </div>
+                </div>
                     <div class="social-card__detail">
                         <div class="social-card__container__top">
                             <img src="" alt="" style="width: 15rem; height: 15rem; border-radius: 50%">
