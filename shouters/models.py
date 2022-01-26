@@ -183,6 +183,7 @@ def article_post_save(sender, instance, *args, **kwargs):
         # Sent Text and Flex Message
         # Get Init Data
         first_name = instance.first_name
+        last_name = instance.last_name
         line_user_id = instance.line_user_id
         ig_username = instance.ig_username
         ig_profile_picture = instance.ig_profile_picture
@@ -193,6 +194,7 @@ def article_post_save(sender, instance, *args, **kwargs):
         response_flex = api__admin_approve_flex_message(line_user_id=line_user_id,
                                                         ig_profile_picture=ig_profile_picture,
                                                         first_name=first_name,
+                                                        last_name=last_name,
                                                         ig_username=ig_username,
                                                         ig_follower_count=ig_follower_count)
         response_image = api__admin_approve_image_message(line_user_id=line_user_id)

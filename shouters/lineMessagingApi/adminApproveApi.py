@@ -31,7 +31,7 @@ def api__admin_approve_text_message(line_user_id):
         return None
 
 
-def api__admin_approve_flex_message(line_user_id, ig_profile_picture, first_name, ig_username, ig_follower_count):
+def api__admin_approve_flex_message(line_user_id, ig_profile_picture, first_name, last_name, ig_username, ig_follower_count):
     push_message_url = 'https://api.line.me/v2/bot/message/push'
     headers = {
         "Content-Type": "application/json",
@@ -144,7 +144,7 @@ def api__admin_approve_flex_message(line_user_id, ig_profile_picture, first_name
                           },
                           {
                             "type": "text",
-                            "text": first_name,
+                            "text": "{} {}".format(first_name, last_name),
                             "flex": 1,
                             "margin": "none",
                             "wrap": False,
