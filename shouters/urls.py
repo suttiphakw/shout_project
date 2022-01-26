@@ -41,4 +41,10 @@ urlpatterns = [
     path('menu/social-media/<str:token>/', views.menu__social_media, name='shouter__menu__social-media'),
     path('menu/work-selection/<str:token>/', views.menu__work_selection, name='shouter__menu__work-selection'),
     path('menu/bank-account/<str:token>/', views.menu__bank_account, name='shouter__menu__bank-account'),
+
+    # Your campaign
+    path('campaign/<str:token>/', views.campaign, name='shouter__campaign'),
+
+    # Your Payment
+    path('payment/<str:token>/', views.payment, name='shouter__payment'),
 ]

@@ -1,0 +1,35 @@
+{% load static %}
+{% load humanize %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static 'img/logo/Shout_Logov2-07.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Vue Framework -->
+<!--    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
+<!--    <script src="https://unpkg.com/vue@next" defer></script>-->
+<!--    <script src="js/main.js" defer></script>-->
+    <!-- Title -->
+    <title>Shout | Your Payment</title>
+</head>
+<body>
+    <section class="container">
+        <section class="social-media-list">
+            <a href="{% url 'shouter__menu' token %}">
+                <svg class="social-media-list__icon-back">
+                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-left"></use>
+                </svg>
+            </a>
+            <div class="social-media-list__header">
+                <p>Your Payment</p>
+            </div>
+        </section>
+    </section>
+</body>
+</html>

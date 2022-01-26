@@ -477,27 +477,12 @@ def oauth(request):
                 # /shouters/line-login?q=shouter_history/
                 if "bank-account" in q:
                     redirect_url = '/shouters/menu/bank-account/{}/'.format(encoded_token)
+                elif "campaign" in q:
+                    redirect_url = '/shouters/campaign/{}/'.format(encoded_token)
+                elif "payment" in q:
+                    redirect_url = '/shouters/payment/{}/'.format(encoded_token)
                 else:
                     redirect_url = '/shouters/menu/{}/'.format(encoded_token)
-                # if q == 'menu':
-                #     redirect_url = '/shouters/menu/{}/'.format(encoded_token)
-                # elif q == 'bank_account':
-                #     redirect_url = '/shouters/menu/bank-account/{}/'.format(encoded_token)
-                # else:
-                #     redirect_url = '/dev/'
-                # # if user_id exist in the model and is_connect_ig = True -> go to main page ...
-                # if q == 'accept_or_reject':
-                #     # return redirect('/orders/{}/choose/'.format(order_id))
-                #     return redirect('on_dev')
-                # elif q == 'work_management':
-                #     # return redirect('/orders/{}/'.format(order_id))
-                #     return redirect('on_dev')
-                # elif q == 'payment':
-                #     # return redirect('/shouters/{}/payment/'.format(_id))
-                #     return redirect('on_dev')
-                # elif q == 'shouter_history':
-                #     # return redirect('/shouters/{}/history'.format(_id))
-                #     return redirect('on_dev')
 
         return redirect(redirect_url)
 
@@ -1185,3 +1170,47 @@ def menu__work_selection(request, token):
         return redirect(redirect_url)
 
     return render(request, 'shouters/menu__work-selection.html', context)
+
+
+def campaign(request, token):
+    try:
+        decoded_token = jwt.decode(token, 'SHOUTER_JWT_TOKEN', algorithms='HS256')
+        _id = decoded_token.get('_id')
+        pass
+    except:
+        return HttpResponse('404Error')
+
+    if not Shouter.objects.filter(id=_id).exists():
+        return redirect('on_dev')
+
+    shouter = Shouter.objects.filter(id=_id).first()
+
+    context = {
+        'shouter': shouter,
+        # Token
+        'token': token,
+    }
+
+    return render(request, 'shouters/campaign.html', context)
+
+
+def payment(request, token):
+    try:
+        decoded_token = jwt.decode(token, 'SHOUTER_JWT_TOKEN', algorithms='HS256')
+        _id = decoded_token.get('_id')
+        pass
+    except:
+        return HttpResponse('404Error')
+
+    if not Shouter.objects.filter(id=_id).exists():
+        return redirect('on_dev')
+
+    shouter = Shouter.objects.filter(id=_id).first()
+
+    context = {
+        'shouter': shouter,
+        # Token
+        'token': token,
+    }
+
+    return render(request, 'shouters/payment.html', context)
