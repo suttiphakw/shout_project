@@ -44,15 +44,15 @@ class Shouter(models.Model):
     is_connect_bank = models.BooleanField(default=False, verbose_name='IS CONNECT TO BANK')
 
     # # Line Token
-    line_access_token = models.CharField(max_length=500, null=True, blank=True)
+    line_access_token = models.CharField(max_length=1000, null=True, blank=True)
     line_access_token_updated = models.DateTimeField(default=now)
-    line_id_token = models.CharField(max_length=500, null=True, blank=True)
+    line_id_token = models.CharField(max_length=1000, null=True, blank=True)
     line_id_token_updated = models.DateTimeField(default=now)
 
     # # Line User Information
     line_user_id = models.CharField(max_length=100, null=True, blank=True)
     line_username = models.CharField(max_length=100, null=True, blank=True)
-    line_profile_picture = models.URLField(max_length=500, null=True, blank=True)
+    line_profile_picture = models.URLField(max_length=1000, null=True, blank=True)
 
     # # Raw Data
     fb_response_access_token = models.JSONField(null=True, blank=True)
@@ -64,15 +64,15 @@ class Shouter(models.Model):
     ig_response_active_follower = models.JSONField(null=True, blank=True)
 
     # # Facebook
-    fb_main_access_token = models.CharField(max_length=500, null=True, blank=True)
-    fb_access_token = models.CharField(max_length=500, null=True, blank=True)
+    fb_main_access_token = models.CharField(max_length=1000, null=True, blank=True)
+    fb_access_token = models.CharField(max_length=1000, null=True, blank=True)
     fb_access_token_created = models.DateTimeField(default=now)
     fb_page_id = models.CharField(max_length=120, null=True, blank=True)
     fb_page_name = models.CharField(max_length=120, null=True, blank=True)
     fb_is_connect = models.BooleanField(default=False, verbose_name='IS CONNECT TO FACEBOOK PAGE')
     is_already_fb_connect = models.BooleanField(default=False)
     fb_name = models.CharField(max_length=500, null=True, blank=True)
-    fb_profile_picture = models.URLField(max_length=500, null=True, blank=True)
+    fb_profile_picture = models.URLField(max_length=1000, null=True, blank=True)
 
     # # Instagram
     ig_business_account_id = models.CharField(max_length=120, null=True, blank=True)
@@ -83,7 +83,7 @@ class Shouter(models.Model):
     ig_active_follower = models.IntegerField(null=True, blank=True)
     ig_active_follower_harmonic = models.IntegerField(null=True, blank=True)
     ig_active_follower_percent = models.FloatField(null=True, blank=True)
-    ig_profile_picture = models.URLField(max_length=500, null=True, blank=True)
+    ig_profile_picture = models.URLField(max_length=1000, null=True, blank=True)
 
     # ig_post_permalink
     ig_average_total_like = models.IntegerField(null=True, blank=True, verbose_name="IG => AVERAGE LIKE")

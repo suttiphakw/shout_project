@@ -12,7 +12,34 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- Vue Framework -->
 <!--    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
-    <script src="js/main.js" defer></script>
+    <!-- J query -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script>
+      function ios_device() {
+        const android_info = document.getElementById("android-info");
+        android_info.style.display = "none";
+        $("#nextPage").removeClass("register__choose-device__button-disable");
+        $('input[type="checkbox"]').prop('checked', false);
+      }
+
+      function android_device() {
+        const android_info = document.getElementById("android-info");
+        android_info.style.display = "flex";
+        $("#nextPage").addClass("register__choose-device__button-disable");
+      }
+
+      $(document).ready(function(){
+        $('input[type="checkbox"]').click(function(){
+          if($(this).is(":checked")){
+            $("#nextPage").removeClass("register__choose-device__button-disable");
+          }
+          else if($(this).is(":not(:checked)")){
+            $("#nextPage").addClass("register__choose-device__button-disable");
+          }
+        });
+      });
+    </script>
     <!-- Title -->
     <title>Shout | Register</title>
 </head>
@@ -58,8 +85,8 @@
             <div class="register__choose-device">
                 <div class="register__choose-device__card">
                     <!-- IOS -->
-                    <input type="radio" name="device">
-                    <label for="">
+                    <input type="radio" name="device" id="ios">
+                    <label for="ios" class="register__choose-device__radio" onclick="ios_device()">
                         <svg class="register__choose-device__icon">
                             <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-appleinc"></use>
                         </svg>
@@ -70,16 +97,28 @@
 
                 <div class="register__choose-device__card">
                     <!-- Android -->
-                    <input type="radio" name="device">
-                    <label for="">
+                    <input type="radio" name="device" id="android">
+                    <label for="android" class="register__choose-device__radio" onclick="android_device()">
                         <svg class="register__choose-device__icon">
                             <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-android"></use>
                         </svg>
                         <span>Android</span>
                     </label>
                 </div>
-
             </div>
+
+            <div class="register__choose-device__android-info" id="android-info">
+              <span>กรุณาเปิดหน้าต่างนี้ใน เบราว์เซอร์เริ่มต้น(Default Browser) ก่อนเข้าสู่ขั้นตอนถัดไป</span>
+              <img src="{% static 'img/shouters/register__open-default-browser.png' %}" alt="">
+              <div class="register__choose-device__android-info__checkbox">
+                  <input type="checkbox" id="is_default_browser">
+                  <label for="is_default_browser">ฉันอยู่ในเบราว์เซอร์เริ่มต้นแล้ว</label>
+              </div>
+            </div>
+
+            <a href="https://www.google.com/" id="nextPage" class="btn btn-main btn-shouter register__choose-device__button register__choose-device__button-disable">
+                ถัดไป &#8594;
+            </a>
 
         </main>
 

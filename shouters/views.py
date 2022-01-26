@@ -559,20 +559,20 @@ def facebook_logout(request, token):
     # Save Access Token and Page ID to database
 
     if response.status_code == 200:
-        shouter.fb_access_token = ''
-        shouter.fb_is_connect = False
-        shouter.ig_username = ''
-        shouter.ig_media_count = 0
-        shouter.ig_follower_count = 0
-        shouter.ig_following_count = 0
-        shouter.ig_active_follower = 0
-        shouter.ig_active_follower_harmonic = 0
-        shouter.ig_active_follower_percent = 0
-        shouter.ig_profile_picture = ''
-        shouter.ig_average_total_like = 0
-        shouter.ig_engagement_percent = 0
-
-        shouter.save()
+        # shouter.fb_access_token = ''
+        # shouter.fb_is_connect = False
+        # shouter.ig_username = ''
+        # shouter.ig_media_count = 0
+        # shouter.ig_follower_count = 0
+        # shouter.ig_following_count = 0
+        # shouter.ig_active_follower = 0
+        # shouter.ig_active_follower_harmonic = 0
+        # shouter.ig_active_follower_percent = 0
+        # shouter.ig_profile_picture = ''
+        # shouter.ig_average_total_like = 0
+        # shouter.ig_engagement_percent = 0
+        #
+        # shouter.save()
 
         redirect_url = '/shouters/menu/social-media/{}/'.format(token)
 

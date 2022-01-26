@@ -1978,14 +1978,14 @@ input:checked + .slider:before {
 }
 .register__choose-device__card {
   width: 50%;
-  padding: 0 30px;
+  padding: 0 10px;
   display: flex;
 }
 .register__choose-device__card input {
   -webkit-appearance: none;
   display: none;
 }
-.register__choose-device__card label {
+.register__choose-device__radio {
   flex: 0 0 100%;
   padding: 10px 20px;
   border: var(--border-grey-light);
@@ -1998,14 +1998,56 @@ input:checked + .slider:before {
   flex-direction: column;
   align-items: center;
 }
-.register__choose-device__card input[type="radio"]:checked + .register__choose-device__card label {
+.register__choose-device__card input[type="radio"]:checked + .register__choose-device__radio {
   background-color: white;
+  color: #801B69;
+  border: 1px solid #801B69;
+}
+.register__choose-device__card input[type="radio"]:checked + .register__choose-device__radio > .register__choose-device__icon {
+  fill: #801B69;
 }
 .register__choose-device__icon {
   height: 30px;
   width: 30px;
   margin: 10px;
   fill: #242566;
+}
+.register__choose-device__android-info {
+  margin: 20px 0;
+  padding: 0 10px;
+  display: none;
+  flex-direction: column;
+
+}
+.register__choose-device__android-info > span {
+  padding: 10px 20px;
+  font-size: 14px;
+  text-align: center;
+}
+.register__choose-device__android-info > img {
+  width: 100%;
+  padding: 10px 0;
+}
+.register__choose-device__android-info__checkbox {
+  font-size: 16px;
+  margin-top: 20px;
+  padding: 0 20px;
+}
+.register__choose-device__android-info__checkbox > input {
+  transform: scale(2);
+}
+.register__choose-device__android-info__checkbox > label {
+  padding: 0 10px;
+}
+.register__choose-device__button {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+.register__choose-device__button-disable {
+  pointer-events: none;
+  background-color: #E9EBF1;
+  color: #7E8290;
 }
 
 .select {
