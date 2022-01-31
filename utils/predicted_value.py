@@ -1,9 +1,9 @@
 import statistics
 
 class PredictedIG:
-    peers_story_view_per_like = 1.53
-    nano_story_view_per_like = 1.78
-    micro_story_view_per_like = 1.55
+    peers_story_view_per_like = 1.48
+    nano_story_view_per_like = 1.45
+    micro_story_view_per_like = 1.45
 
     @staticmethod
     def like(followers):

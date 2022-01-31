@@ -6,6 +6,7 @@ from shouters.lineMessagingApi.adminApproveApi import (api__admin_approve_text_m
                                                        api__admin_approve_flex_message,
                                                        api__admin_approve_image_message)
 from shouters.utils import FacebookAPI
+from shouters.refresh_data import refresh_shouters
 
 import requests
 from shout_project.settings import LINE_CHANNEL_ACCESS_TOKEN
@@ -42,6 +43,9 @@ class Shouter(models.Model):
     is_approve = models.BooleanField(default=False, verbose_name='IS ADMIN APPROVE')
     is_already_approve = models.BooleanField(default=False)
     is_connect_bank = models.BooleanField(default=False, verbose_name='IS CONNECT TO BANK')
+
+    # Refresh_data
+    is_refresh_shouters_data = models.BooleanField(default=False, verbose_name='REFRESH SHOUTER DATA')
 
     # # Line Token
     line_access_token = models.CharField(max_length=1000, null=True, blank=True)
@@ -88,10 +92,10 @@ class Shouter(models.Model):
     # ig_post_permalink
     ig_average_total_like = models.IntegerField(null=True, blank=True, verbose_name="IG => AVERAGE LIKE")
     ig_engagement_percent = models.FloatField(null=True, blank=True, verbose_name="IG => LIKE PERCENTAGE")
-    ig_story_view = models.FloatField(null=True, blank=True, verbose_name="IG => AVERAGE STORY VIEW")
-    ig_average_post_reach = models.FloatField(null=True, blank=True, verbose_name="IG => AVERAGE POST REACH")
-    ig_predicted_ad_post_reach = models.FloatField(null=True, blank=True, verbose_name="PREDICTED => AVERAGE POST REACH")
-    ig_ad_post_reach = models.FloatField(null=True, blank=True, verbose_name="PREDICTED => AD POST REACH")
+    ig_story_view = models.IntegerField(null=True, blank=True, verbose_name="IG => AVERAGE STORY VIEW")
+    ig_average_post_reach = models.IntegerField(null=True, blank=True, verbose_name="IG => AVERAGE POST REACH")
+    ig_predicted_ad_post_reach = models.IntegerField(null=True, blank=True, verbose_name="PREDICTED => AVERAGE POST REACH")
+    ig_ad_post_reach = models.IntegerField(null=True, blank=True, verbose_name="PREDICTED => AD POST REACH")
 
     # ig_like_engagement = models.IntegerField(null=True, blank=True)
 
@@ -156,8 +160,9 @@ class Shouter(models.Model):
     #     return self.first_name
 
 
-# Function approve from admin
-def article_pre_save(sender, instance, *args, **kwargs):
+# Function check before save
+def shouters_pre_save(sender, instance, *args, **kwargs):
+    # Admin Approve
     if instance.is_approve is True and instance.is_already_approve is False:
         # Check IG PHOTO
         access_token = instance.fb_main_access_token
@@ -174,8 +179,99 @@ def article_pre_save(sender, instance, *args, **kwargs):
                 instance.ig_profile_picture = ig_profile_picture
                 instance.save()
 
+    # Refresh Shouter Data
+    if instance.is_refresh_shouters_data is True:
+        # Get Init Data
+        access_token = instance.fb_main_access_token
+        business_account_id = instance.ig_business_account_id
 
-def article_post_save(sender, instance, *args, **kwargs):
+        # Get New Data
+        response = refresh_shouters(access_token=access_token, business_account_id=business_account_id)
+        #   response = {
+        #     # FB
+        #     "fb_name": fb_name,
+        #     "fb_profile_picture": fb_profile_picture,
+        #     # IG Biography
+        #     "ig_username": ig_username,
+        #     "ig_media_count": ig_media_count,
+        #     "ig_follower_count": ig_follower_count,
+        #     "ig_following_count": ig_following_count,
+        #     "ig_profile_picture": ig_profile_picture,
+        #     # IG Active Follower
+        #     "ig_response_active_follower": ig_response_active_follower,
+        #     "ig_active_follower": ig_active_follower,
+        #     "ig_active_follower_harmonic": ig_active_follower_harmonic,
+        #     "ig_active_follower_percent": ig_active_follower_percent,
+        #     # Media Objects
+        #     "ig_response_media_objects": ig_response_media_objects,
+        #     # Engagement
+        #     "ig_average_total_like": ig_average_total_like,
+        #     "ig_engagement_percent": ig_engagement_percent,
+        #     "ig_story_view": ig_story_view,
+        #     "ig_average_post_reach": ig_average_post_reach,
+        #     "ig_predicted_ad_post_reach": predicted_ad_post_reach,
+        #     "ig_ad_post_reach": ig_ad_post_reach,
+        #     # Price
+        #     "ig_price_story_fc": ig_price_story_fc,
+        #     "ig_price_story_ugc": ig_price_story_ugc,
+        #     "ig_price_post_fc": ig_price_post_fc,
+        #     "ig_price_post_ugc": ig_price_post_ugc,
+        #     "ig_price_story_post_fc": ig_price_story_post_fc,
+        #     "ig_price_story_post_ugc": ig_price_story_post_ugc,
+        #     "ig_fb_price_story_fc": ig_fb_price_story_fc,
+        #     "ig_fb_price_story_ugc": ig_fb_price_story_ugc,
+        #     "ig_fb_price_post_fc": ig_fb_price_post_fc,
+        #     "ig_fb_price_post_ugc": ig_fb_price_post_ugc,
+        #     "ig_fb_price_story_post_fc": ig_fb_price_story_post_fc,
+        #     "ig_fb_price_story_post_ugc": ig_fb_price_story_post_ugc,
+        #     # Audience Insight
+        #     "ig_response_audience_insight": ig_response_audience_insight
+        #   }
+
+        # FB
+        instance.fb_name = response.get("fb_name", None)
+        # IG Biography
+        instance.fb_profile_picture = response.get("fb_profile_picture", None)
+        instance.ig_username = response.get("ig_username", None)
+        instance.ig_media_count = response.get("ig_media_count", None)
+        instance.ig_follower_count = response.get("ig_follower_count", None)
+        instance.ig_following_count = response.get("ig_following_count", None)
+        instance.ig_profile_picture = response.get("ig_profile_picture", None)
+        # IG Active Follower
+        instance.ig_response_active_follower = response.get("ig_response_active_follower", None)
+        instance.ig_active_follower = response.get("ig_active_follower", None)
+        instance.ig_active_follower_harmonic = response.get("ig_active_follower_harmonic", None)
+        instance.ig_active_follower_percent = response.get("ig_active_follower_percent", None)
+        # Media Objects
+        instance.ig_response_media_objects = response.get("ig_response_media_objects", None)
+        # Engagement
+        instance.ig_average_total_like = response.get("ig_average_total_like", None)
+        instance.ig_engagement_percent = response.get("ig_engagement_percent", None)
+        instance.ig_story_view = response.get("ig_story_view", None)
+        instance.ig_average_post_reach = response.get("ig_average_post_reach", None)
+        instance.ig_predicted_ad_post_reach = response.get("ig_predicted_ad_post_reach", None)
+        instance.ig_ad_post_reach = response.get("ig_ad_post_reach", None)
+        # Price
+        instance.ig_price_story_fc = response.get("ig_price_story_fc", None)
+        instance.ig_price_story_ugc = response.get("ig_price_story_ugc", None)
+        instance.ig_price_post_fc = response.get("ig_price_post_fc", None)
+        instance.ig_price_post_ugc = response.get("ig_price_post_ugc", None)
+        instance.ig_price_story_post_fc = response.get("ig_price_story_post_fc", None)
+        instance.ig_price_story_post_ugc = response.get("ig_price_story_post_ugc", None)
+        instance.ig_fb_price_story_fc = response.get("ig_fb_price_story_fc", None)
+        instance.ig_fb_price_story_ugc = response.get("ig_fb_price_story_ugc", None)
+        instance.ig_fb_price_post_fc = response.get("ig_fb_price_post_fc", None)
+        instance.ig_fb_price_post_ugc = response.get("ig_fb_price_post_ugc", None)
+        instance.ig_fb_price_story_post_fc = response.get("ig_fb_price_story_post_fc", None)
+        instance.ig_fb_price_story_post_ugc = response.get("ig_fb_price_story_post_ugc", None)
+        # Audience Insight
+        instance.ig_response_audience_insight = response.get("ig_response_audience_insight",  None)
+        # Save
+        instance.is_refresh_shouters_data = False
+        instance.save()
+
+
+def shouters_post_save(sender, instance, *args, **kwargs):
     if instance.is_approve is True and instance.is_already_approve is False:
         instance.is_already_approve = True
         instance.save()
@@ -199,5 +295,6 @@ def article_post_save(sender, instance, *args, **kwargs):
                                                         ig_follower_count=ig_follower_count)
         response_image = api__admin_approve_image_message(line_user_id=line_user_id)
 
-pre_save.connect(article_pre_save, sender=Shouter)
-post_save.connect(article_post_save, sender=Shouter)
+# Run Pre and Post Save Function
+pre_save.connect(shouters_pre_save, sender=Shouter)
+post_save.connect(shouters_post_save, sender=Shouter)

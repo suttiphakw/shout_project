@@ -773,7 +773,7 @@ def register__get_ig_data(request, token):
 
     shouter.ig_average_total_like = context__engagement.get('average_total_like')
 
-    ig_engagement_percent = (shouter.ig_average_total_like / shouter.ig_active_follower) * 100
+    ig_engagement_percent = (shouter.ig_average_total_like / shouter.ig_follower_count) * 100
     ig_engagement_percent = round(ig_engagement_percent, 2)
     ig_story_view = context__engagement.get('story_view')
     ig_average_post_reach = context__engagement.get('average_post_reach')
