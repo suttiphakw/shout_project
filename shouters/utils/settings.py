@@ -11,7 +11,7 @@ line_response_type = 'code'
 line_scope = 'profile%20openid'
 
 # ENDPOINT URI
-line_endpoint = 'https://access.line.me/oauth2/v2.1/'
+line_endpoint = 'https://api.line.me/oauth2/v2.1/'
 
 #########################################################################
 ### FACEBOOK ###
