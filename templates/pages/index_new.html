@@ -1,0 +1,333 @@
+{% extends "_base.html" %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  {% block css %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  {% endblock %}
+	{% block title %}
+    <title>Shout | แพลตฟอร์มทำการตลาดบอกต่อผ่านคนตัวเล็กง่ายๆ</title>
+  {% endblock %}
+</head>
+
+<body>
+	{% block content %}
+	<section>
+		<header class="header">
+			<a href="{% url 'index' %}">
+				<img src="{% static 'img/logo/logo-01.png' %}" alt="logo" class="header__logo">
+			</a>
+			<nav class="user-nav">
+				<ul class="user-nav__items">
+					<li class="user-nav__item">
+						<a class="user-nav__link" href="#koc">Why KOC</a>
+					</li>
+					<li class="user-nav__item">
+						<a class="user-nav__link" href="#why-shout">Solution</a>
+					</li>
+					<li class="user-nav__item">
+						<a class="user-nav__link" href="#how-shout">Our Product</a>
+					</li>
+					<li class="user-nav__item">
+						<a class="user-nav__link" href="#start-now">Contact us</a>
+					</li>
+					<li class="user-nav__item">
+						<a class="user-nav__link__button" href="{% url 'on_dev' %}">
+							<button class="btn__white">
+								<svg class="user-nav__icon">
+									<use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-user"></use>
+								</svg>
+								<span>เข้าสู่ระบบ</span>
+							</button>				
+						</a>
+					</li>
+					<li class="user-nav__item">
+						<a class="user-nav__link__button" href="{% url 'on_dev' %}">
+							<button class="btn__orange">
+								<span>สมัครเลย &#8594;</span>
+							</button>				
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<main class="content">
+			<section id="uvp" class="uvp">
+				<div class="uvp__content">
+					<div class="uvp__content__left">
+						<div class="uvp__content__left__main">
+							<h2 class="text-purple-gradient">ทำการตลาดบอกต่อผ่าน</h2>
+							<h2 class="text-purple-gradient margin_bottom_2">คนตัวเล็กจำนวนมากได้ง่ายๆ</h2>
+							<h6 class="r desktop_view"><span>Shout - แพลตฟอร์ม</span>
+								ที่ทำให้คุณเข้าถึงกลุ่มลูกค้าอย่างใกล้ชิด แม่นยำ</h6>
+							<h6 class="r desktop_view">และ เพิ่มยอดขายได้ง่ายกว่าเดิม
+								ตั้งแต่เริ่มจนจบทำได้ด้วยตัวคุณเอง</h6>
+							<h6 class="r mobile_view">
+								<span>Shout - แพลตฟอร์ม</span> ที่ทำให้คุณเข้าถึงกลุ่มลูกค้าอย่างใกล้ชิด แม่นยำ และ
+								เพิ่มยอดขายได้ง่ายกว่าเดิม ตั้งแต่เริ่มจนจบทำได้ด้วยตัวคุณเอง
+							</h6>
+							<div class="uvp__button">
+								<a href="{% url 'on_dev' %}">
+									<button class="btn__orange">สมัครเลย &#8594;</button>
+								</a>
+								<a href="{% url 'on_dev' %}">
+									<button class="btn__white">ดูเพิ่มเติม &#8594;</button>
+								</a>
+							</div>
+						</div>
+						<div class="uvp__content__left__sub">
+							<p class="desktop_view">ติดต่อเรา <span>087-560-4935</span> /
+								<span>contact@shoutsolution.com</span></p>
+							<p class="desktop_view">หรือสนใจมาร่วมเป็น Shouter (ผู้บอกต่อ) กับเรา?
+								<a href="{% url 'shouter__index' %}" class="uvp__content__left__sub__link">สมัครที่นี่</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="uvp__content__right desktop_view">
+						<img src="{% static 'img/pages/UVP.png' %}" alt="" class="uvp__content__right__photo">
+					</div>
+					<div class="uvp__content__right-mobile mobile_view">
+						<img src="{% static 'img/pages/UVP-mobile.png' %}" alt="" class="uvp__content__right-mobile__photo">
+					</div>
+				</div>
+
+			</section>
+			<section class="details">
+				<section id="koc" class="koc">
+					<div class="koc__header">
+						<h2>ทำไมต้องคนตัวเล็ก?</h2>
+						<h5 class="r">(Key Opinion Customer)</h5>
+					</div>
+					<div class="koc__content">
+						<div class="koc__content__item">
+							<div class="koc__content__item-1">
+								<img src="{% static 'img/pages/Sec2_01.png' %}" alt="KOC Photo 1" class="koc__content__photo">
+								<div class="koc__content__detail">
+									<h5 class="margin_bottom_1">ผู้บริโภคไม่ได้เชื่อ Influencer อีกต่อไป</h2>
+									<p>
+										93% ของผู้บริโภคมีแนวโน้มที่จะเชื่อถือ และสนใจคอนเทนท์ที่มาจาก KOC
+										เพราะคอนเทนท์จะมีความเป็นธรรมชาติ และความใกล้ชิด เข้าถึงได้ทำให้เกิด Interaction พูดคุย
+										ระหว่าง KOC กับผู้บริโภคมากกว่า เมื่อเทียบกับ KOL หรือ Macro - Influencer ที่มีความห่างไกลตัว
+										และคอนเทนท์ที่ Tie-in โฆษณาสูง
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="koc__content__item">
+							<div class="koc__content__item-1">
+								<img src="{% static 'img/pages/Sec2_02.png' %}" alt="KOC Photo 2" class="koc__content__photo">
+								<div class="koc__content__detail">
+									<h5 class="margin_bottom_1">Cost Effective</h2>
+									<p>
+										การโปรโมทผ่าน KOC : Micro - Nano - Peers Influencer มีค่าใช้จ่ายที่น้อยกว่า เพราะไม่ต้อง
+										ใช้ไปกับการ Production ที่ยิ่งใหญ่ ขายของเกินไปแต่ไม่เป็นธรรมชาติ
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="koc__content__item">
+							<div class="koc__content__item-2">
+								<div class="koc__content__detail">
+									<h5 class="margin_bottom_1">ได้คนมากกว่า แต่งบเท่าเดิม</h2>
+									<p>
+										ได้จำนวนคนบอกต่อ โปรโมทสินค้าที่มากกว่า เมื่อเทียบกับการทำ KOL Marketing และ KOC Marketing
+										ส่งผลต่อการที่ทำให้เกิด Trending ที่ดึงดูดความสนใจผู้บริโภคมากขึ้น ด้วยงบการตลาดที่เท่ากัน
+									</p>
+								</div>
+								<img src="{% static 'img/pages/Sec2_03.png' %}" alt="KOC Photo 3" class="koc__content__photo">
+							</div>
+						</div>
+						<div class="koc__content__item">
+							<div class="koc__content__item-2">
+								<div class="koc__content__detail">							
+									<h5 class="margin_bottom_1">ปลอดภัยต่อภาพลักษณ์ แบรนด์</h2>
+									<p>
+										ปลอดภัยในภาพลักษณ์ของแบรนด์ ไม่ต้องห่วงเรื่องข่าวด้านลบของ KOC เพราะมีฐาน Followers (ผู้ติดตาม)
+										ไม่สูง ทำให้มักจะไม่เกิดเรื่องดราม่าต่างๆ เมื่อเทียบกับ KOL
+									</p>
+								</div>
+								<img src="{% static 'img/pages/Sec2_04.png' %}" alt="KOC Photo 4" class="koc__content__photo">
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section id="why-shout" class="why-shout">
+					<div class="why-shout__header">
+						<h2>Why Shout?</h2>
+					</div>			
+					<div class="why-shout__content">
+						<div class="why-shout__content__item">
+							<img src="{% static 'img/pages/Sec3_01.png' %}" alt="" class="why-shout__content__item__photo">
+							<div class="padding_2">
+								<h5 class="margin_bottom_1">เริ่มต้น ยัน วัดผล จบในที่เดียว!</h3>
+								<p>
+									วางแผน - เลือกคน - จัดการ - ตรวจงาน - วัดผลแคมเปญครบบนแพลตฟอร์มง่ายๆ ด้วย
+									Data-Driven Marketing คุณคนเดียวก็ทำได้!
+								</p>
+							</div>					
+						</div>
+						<div class="why-shout__content__item">
+							<img src="{% static 'img/pages/Sec3_02.png' %}" alt="" class="why-shout__content__item__photo">
+							<div class="padding_2">
+								<h5 class="margin_bottom_1">No Agency Fees, No Management Fees</h3>
+								<p>
+									ไม่มีค่าธรรมเนียมเอเจนซี่, ไม่มีค่าธรรมเนียมการ จัดการ, ทุกบาท ทุกสตางค์ ถูกใช้ไปกับการสร้าง
+									Earned Media เพื่อประสิทธิภาพของ ต้นทุนการตลาดสูงสุด (ROI)
+								</p>
+							</div>						
+						</div>
+						<div class="why-shout__content__item">
+							<img src="{% static 'img/pages/Sec3_03.png' %}" alt="" class="why-shout__content__item__photo">
+							<div class="padding_2">
+								<h5 class="margin_bottom_1">KPI Guaranteed</h3>
+								<p>
+									การันตียอดการเข้าถึงกลุ่มลุกค้า (Organic Reach) ตามงบการตลาด ให้คุณได้หมดห่วง
+								</p>
+							</div>						
+						</div>
+
+					</div>
+				</section>
+
+				<section id="how-shout" class="how-shout">
+					<h2 class="how-shout__header">How Shout Works?</h2>
+					<div class="how-shout__content">
+
+						<div class="how-shout__content__item">
+							<img src="{% static 'img/pages/Sec4_01.png' %}" alt="How Shout Photo 1" class="how-shout__content__photo">
+							<div class="how-shout__content__detail">
+								<h3 class="how-shout__content__header">Campaign Planning</h3>
+								<p class="how-shout__content__text">
+									สร้างและวางแผนแคมเปญได้ง่ายๆ เพียงแค่ระบุข้อมุล กลุ่มลูกค้า (Target Audience),
+									งบการตลาด (Media Budget), ยอดเป้าหมายการเข้าถึงลูกค้า (Target Reach),
+									ประเภทงานที่ต้องการ (Content Type), และรายละเอียดงานต่างๆ (Brief)
+									ตามรูปแบบที่แพลตฟอร์มได้ออกแบบเตรียมไว้ให้ เพื่อประสิทธิภาพในการบอกต่อสูงสุด
+								</p>
+								<a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
+							</div>
+						</div>
+
+						<div class="how-shout__content__item">
+							<div class="how-shout__content__detail">
+								<h3 class="how-shout__content__header">Shouter Selection</h3>
+								<p class="how-shout__content__text">
+									แพลตฟอร์มจะคัดเลือก Shouter (ผู้บอกต่อ) ที่จะมาเป็นตัวแทนกระบอกเสียง ให้กับแบรนด์ของคุณในทันที
+									โดยจะดูจาก:
+								</p>
+								<ul class="how-shout__content__text">
+									<li>กลุ่มเป้าหมาย (Target Audience)</li>
+									<li>มี Media Performance ที่ดีและสูง</li>
+									<li>เหมาะสมกับแคมเปญของคุณที่สุด จากระบบ Shouter Matching Score ที่คำนวณมาจากข้อมูลเชิงลึก (Insight)
+									</li>
+								</ul>
+								<a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
+							</div>
+							<img src="{% static 'img/pages/Sec4_02.png' %}" alt="How Shout Photo 2" class="how-shout__content__photo">
+						</div>
+
+						<div class="how-shout__content__item">
+							<img src="{% static 'img/pages/Sec4_03.png' %}" alt="How Shout Photo 3" class="how-shout__content__photo">
+							<div class="how-shout__content__detail">
+								<h3 class="how-shout__content__header">Campaign Management</h3>
+								<p class="how-shout__content__text">
+									บริหารจัดการแคมเปญได้อย่างง่ายดาย ตรวจสอบภาพรวม สถานะการทำงานต่างๆของ Shouter (ผู้บอกต่อ)
+									และตรวจงาน Approve งานผ่านระบบโดยไม่ต้องพูดคุยให้ยุ่งยาก
+								</p>
+								<a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
+							</div>
+						</div>
+
+						<div class="how-shout__content__item">
+							<div class="how-shout__content__detail">
+								<h3 class="how-shout__content__header">Real-Time Dashboard</h3>
+								<p class="how-shout__content__text">
+									ตรวจสอบผลลัพธ์แคมเปญได้อย่างเรียลไทม์ อยากดูเมื่อไหร่ก็ดูได้ ไม่ว่าจะเป็น งานที่โพสท์แล้ว (Launched
+									Work) ,
+									ยอดการเข้าถึง (Organic Reach), การมีส่วนร่วม (Engagement), จำนวนครั้งการมองเห็น (Impression),
+									จำนวนครั้งการคลิ๊ก (Traffic) และอื่นๆได้อย่างง่ายดาย ไม่ต้องขอและรอ Report เป็นเดือนๆให้เสียเวลา
+								</p>
+								<a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
+							</div>
+							<img src="{% static 'img/pages/Sec4_04.png' %}" alt="How Shout Photo 4" class="how-shout__content__photo">
+						</div>
+
+					</div>
+				</section>
+
+				<section id="start-now" class="start-now">
+					<div class="start-now__content">
+						<div class="start-now__content__left">
+							<h1 class="start-now__content__main">เริ่ม Shout! เลยวันนี้</h1>
+							<h3 class="start-now__content__sub">สร้าง Earned media ผ่าน Shouter (ผู้บอกต่อ) ได้ง่ายๆด้วยตัวคุณเอง</h3>
+						</div>
+						<div class="start-now__content__right">
+							<a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
+							<a href="{% url 'on_dev' %}" class="btn btn-sub btn__brand-page">ดูเพิ่มเติม</a>
+						</div>
+					</div>
+				</section>
+			</section>
+		</main>
+		<footer class="footer">
+			<div class="footer__left">
+				<img src="{% static 'img/logo/Shout_Logov2-02.png' %}" alt="" class="footer__brand-logo">
+				<div class="footer__info">
+					<svg class="footer__icon">
+						<use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-location-pin"></use>
+					</svg>
+					<div class="footer__info__container">
+						<p class="footer__text-main">บริษัท เชาท์ พีทูพี จำกัด / Shout P2P Company Limited</p>
+						<p class="footer__text-sub">29 ซอยเพชรเกษม 60/3 บางด้วน ภาษีเจริญ 10160 ประเทศไทย</p>
+					</div>
+				</div>
+				<div class="footer__info">
+					<svg class="footer__icon">
+						<use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-mobile"></use>
+					</svg>
+					<p class="footer__text-sub">087-560-4935</p>
+				</div>
+				<div class="footer__info">
+					<svg class="footer__icon">
+						<use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-mail"></use>
+					</svg>
+					<p class="footer__text-sub">contact@shoutsolution.com</p>
+				</div>
+			</div>
+
+			<div class="footer__right">
+				<div class="footer__link">
+					<a href="#koc">What’s KOC</a>
+					<a href="#why-shout">Why Shout</a>
+					<a href="#how-shout">How it works</a>
+				</div>
+
+				<div class="footer__social-media">
+					<svg class="footer__icon-white">
+						<use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-facebook"></use>
+					</svg>
+					<svg class="footer__icon-white">
+						<use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-instagram"></use>
+					</svg>
+					<svg class="footer__icon-white">
+						<use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-twitter"></use>
+					</svg>
+				</div>
+
+				<div class="footer__term-policy">
+					<a href="https://drive.google.com/file/d/1Rm1Te3h2vVEPhnaIbsSrBWNRjj1UA_8U/view?usp=sharing">Terms and
+						Conditions</a>
+					<span> | </span>
+					<a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+				</div>
+				<p class="footer__text-reserved">© 2021 Shout Solution. All rights reserved.</p>
+			</div>
+		</footer>
+	</section>
+	{% endblock %}
+</body>
+
+</html>

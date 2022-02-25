@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 :root {
   --color-primary: #801B69;
   --color-primary-light: #F8F0F6;
@@ -55,7 +55,7 @@ html {
 }
 
 body {
-  font-family: "IBM Plex Sans Thai", sans-serif;
+  font-family: "Prompt", sans-serif;
   font-weight: 400;
   line-height: 1.4;
   color: var(--color-text-main);
@@ -63,7 +63,7 @@ body {
 }
 
 button {
-  font-family: "IBM Plex Sans Thai", sans-serif;
+  font-family: "Prompt", sans-serif;
 }
 
 .btn {
@@ -84,6 +84,10 @@ button {
   background-color: #ffffff;
   border: 1px solid var(--color-secondary);
   color: var(--color-secondary);
+}
+.btn-facebook {
+  background-color: var(--background-facebook-button);
+  color: white;
 }
 @media screen and (max-width: 56.25em) {
   .btn__brand-page {
@@ -1744,7 +1748,7 @@ input:checked + .slider:before {
   border-bottom: var(--border-grey-light);
 }
 .register__info__header__text {
-  font-size: 5rem;
+  font-size: 4rem;
 }
 .register__info__header__subtext {
   font-size: 4rem;
@@ -2017,7 +2021,6 @@ input:checked + .slider:before {
   padding: 0 10px;
   display: none;
   flex-direction: column;
-
 }
 .register__choose-device__android-info > span {
   padding: 10px 20px;
@@ -2027,6 +2030,12 @@ input:checked + .slider:before {
 .register__choose-device__android-info > img {
   width: 100%;
   padding: 10px 0;
+}
+.register__choose-device__android-info__container {
+  padding: 10px 30px;
+}
+.register__choose-device__android-info__text {
+  font-size: 14px;
 }
 .register__choose-device__android-info__checkbox {
   font-size: 16px;
@@ -2049,14 +2058,210 @@ input:checked + .slider:before {
   background-color: #E9EBF1;
   color: #7E8290;
 }
-
+.register__facebook_checkboxes {
+  padding: 4rem;
+}
+.register__facebook_checkbox {
+  border: var(--border-grey-light);
+  padding: 4rem 4rem 8rem;
+  position: relative;
+  border-radius: 10px;
+  margin-bottom: 3rem;
+}
+.register__facebook_checkbox__flex input[type=checkbox] {
+  margin-left: 5px;
+  transform: scale(1.5);
+  flex: 0 0 10%;
+}
+.register__facebook_checkbox__flex label {
+  font-size: 12px;
+  flex: 0 0 90%;
+}
+.register__facebook_checkbox__flex {
+  display: flex;
+}
+.register__facebook_checkbox__link {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  font-size: 10px;
+  color: var(--color-primary);
+  border-bottom: 1px solid var(--color-primary);
+  cursor: pointer;
+}
+.register__modal {
+  display: none;
+}
+.register__modal__backdrop {
+  height: 100vh;
+  width: 100vw;
+  background-color: #808080;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.register__modal__card {
+  position: fixed;
+  top: 15%;
+  left: 10%;
+  background-color: white;
+  /*height: 70vh;*/
+  width: 80vw;
+  z-index: 10000;
+  border-radius: 10px;
+}
+.register__modal__header {
+  background-color: #F8F0F6;
+  height: 50px;
+  width: 80vw;
+  z-index: 10001;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-primary);
+  padding: 0 10px;
+  justify-content: space-between;
+}
+.register__modal__content {
+  padding: 3rem;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.register__modal__content img {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.register__modal__footer {
+  padding: 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+.register__modal__button {
+  width: 40px;
+  height: 40px;
+  fill: var(--color-primary);
+  cursor: pointer;
+}
+.register__modal__button-white {
+  width: 40px;
+  height: 40px;
+  fill: white;
+}
+.register__modal__button-close {
+  width: 20px;
+  height: 20px;
+  fill: var(--color-primary);
+  cursor: pointer;
+  z-index: 10002;
+}
+.register__modal__page {
+  font-size: 60px;
+  line-height: 0;
+}
+.text-bold {
+  font-weight: 600;
+}
+.text-violet {
+  color: var(--color-primary);
+}
+.text-lightgrey {
+  color: #E9EBF1;
+}
+.text-red {
+  color: red;
+}
+.text-small {
+  font-size: 10px;
+}
+.text-center {
+  text-align: center;
+}
+.register__facebook_error {
+  padding: 4rem;
+}
+.register__facebook_error_image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+  margin-bottom: 8rem;
+}
+.register__facebook_error_detail {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  justify-content: center;
+}
+.register__facebook_error_box {
+  margin-top: 10px;
+  padding: 4rem 4rem 10rem 4rem;
+  border: 1px solid #E15C5A;
+  border-radius: 10px;
+  display: flex;
+  position: relative;
+  background-color: rgba(253, 227, 220, 0.5);
+}
+.register__facebook_success_box {
+  margin-top: 10px;
+  padding: 4rem 4rem 10rem 4rem;
+  border: var(--border-grey-light);
+  border-radius: 10px;
+  display: flex;
+  position: relative;
+  color: rgba(159, 160, 166, 1);
+}
+.register__facebook_box {
+  margin-top: 10px;
+  padding: 4rem;
+  border: var(--border-grey-light);
+  border-radius: 10px;
+  display: flex;
+  position: relative;
+}
+.register__facebook_box img {
+  width: 5%;
+  height: 5%;
+  margin-right: 10px;
+}
+.register__facebook_box__flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.register__facebook_box__photo {
+  margin-top: 10px;
+  width: 100% !important;
+  height: 100% !important;
+}
+.register__facebook_success_box img {
+  width: 5%;
+  height: 5%;
+  margin-right: 10px;
+}
+.register__facebook_error_box img {
+  width: 5%;
+  height: 5%;
+  margin-right: 10px;
+}
+.register__facebook_error_link {
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+  border-bottom: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  cursor: pointer;
+  font-size: 10px;
+}
 .select {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   font-size: 3.5rem;
 }
-
 .select__item {
   padding: 10px;
   margin: 5px;
@@ -2067,10 +2272,11 @@ input:checked + .slider:before {
   transition: background 0.1s;
   border: 1px solid #E9EBF1;
 }
-
 .select__item--selected {
   background: #F8F0F6;
   border: 1px solid #C382B4;
 }
-
+.margin__top_5 {
+  margin-top: 5rem;
+}
 /*# sourceMappingURL=style.css.map */

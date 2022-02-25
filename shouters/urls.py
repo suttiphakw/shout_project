@@ -14,9 +14,10 @@ urlpatterns = [
     path('register/info-1/<str:token>/', views.register__info_1, name='shouter__register__info-1'),
     path('register/info-2/<str:token>/', views.register__info_2, name='shouter__register__info-2'),
     path('register/choose-device/<str:token>/', views.register__choose_device, name='shouter__register__choose-device'),
-    path('register/info-3/<str:token>/', views.register__info_3, name='shouter__register__info-3'),
-    path('register/info-4/<str:token>/', views.register__info_4, name='shouter__register__info-4'),
-    path('register/info-5/<str:token>/', views.register__info_5, name='shouter__register__info-5'),
+    path('register/facebook-checkbox/<str:token>/', views.register__facebook_checkbox, name='shouter__register__facebook-checkbox'),
+    path('register/facebook-error-1/<str:token>/', views.register__connect_facebook_error_1, name='shouter__register__connect-facebook-error-1'),
+    path('register/facebook-error-2/<str:token>/', views.register__connect_facebook_error_2, name='shouter__register__connect-facebook-error-2'),
+    path('register/facebook-change/<str:token>/', views.register__connect_facebook_change, name='shouter__register__connect-facebook-change'),
     path('register/info-6/<str:token>/', views.register__info_6, name='shouter__register__info-6'),
     path('register/choose-instagram/<str:token>/', views.register__choose_instagram, name='shouter__register__choose_instagram'),
     path('register/work-selection/<str:token>/', views.register__work_selection, name='shouter__register__work_selection'),
@@ -31,8 +32,8 @@ urlpatterns = [
     path('oauth/', views.oauth, name='shouter__oauth'),
 
     # Facebook Login + Logout and oauth
-    path('facebook-login/<str:token>/', views.facebook_login, name='shouter__facebook-login'),
-    path('facebook-logout/<str:token>/', views.facebook_logout, name='shouter__facebook-logout'),
+    path('instagram-login/<str:token>/', views.facebook_login, name='shouter__facebook-login'),
+    path('instagram-logout/<str:token>/', views.facebook_logout, name='shouter__facebook-logout'),
     path('oauth2/', views.oauth2, name='shouter__oauth2'),
 
     # Shouter Menu
@@ -47,4 +48,7 @@ urlpatterns = [
 
     # Your Payment
     path('payment/<str:token>/', views.payment, name='shouter__payment'),
+
+    # Error Page
+    path('not-fount-user/', views.not_found_user, name='shouter__not_fount_user')
 ]

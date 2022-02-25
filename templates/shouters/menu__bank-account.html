@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{% static 'img/logo/Shout_Logov2-07.png' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-{#    <script src="{% static 'js/main.js' %}"></script>#}
+{#    <script src="{% static 'js/base.js' %}"></script>#}
     <!-- Vue Framework -->
     <!--    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
     <!--    <script src="https://unpkg.com/vue@next" defer></script>-->
-    <!--    <script src="js/main.js" defer></script>-->
+    <!--    <script src="js/base.js" defer></script>-->
 
     <!-- J query -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -116,6 +116,7 @@
                     <div class="social-card__header">
                         <div class="social-card__name">
                             <h3>สำเนาบัตรประชาชน</h3>
+
                         </div>
                     </div>
                     <div class="bank-account__detail">
@@ -200,8 +201,9 @@
                 <div class="social-card" id="default_data">
                     <!-- ID CARD -->
                     <div class="social-card__header">
-                        <div class="social-card__name">
+                        <div class="social-card__name" style="display: flex; flex-direction: column; align-items: flex-start">
                             <h3>สำเนาบัตรประชาชน</h3>
+                            <h3>cccccc</h3>
                         </div>
                         <svg class="social-card__icon" onclick="reUpload()" style="fill: var(--color-primary);">
                             <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-compose"></use>

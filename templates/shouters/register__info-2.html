@@ -1,76 +1,73 @@
+{% extends "_base.html" %}
 {% load static %}
 
 <!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="{% static 'img/logo/Shout_Logov2-07.png' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <!-- Vue Framework -->
-<!--    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
-    <script src="{% static 'js/main.js' %}" defer></script>
-    <!-- Title -->
-    <title>Shout | Register</title>
+  {% block css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% endblock %}
+  {% block title %}
+  <!-- Title -->
+  <title>Shout | Register</title>
+  {% endblock %}
 </head>
+
 <body>
+  {% block content %}
     <section class="container">
-        <section class="register__top">
-            <svg class="register__top__icon">
-                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
+      <section class="register__top">
+        <svg class="register__top__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
+        </svg>
+        <h1 class="register__top__header">เชื่อมต่อ Instagram ของคุณผ่าน IG Business Account</h1>
+      </section>
+
+      <section class="register__stage">
+        <div class="register__stage__block">
+          <div class="register__stage__number">
+            <svg class="register__stage__icon">
+              <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
             </svg>
-            <h1 class="register__top__header">เชื่อมต่อ Instagram ของคุณผ่าน IG Business Account</h1>
-        </section>
+          </div>
+          <p class="register__stage__text">ข้อมูลส่วนตัว</p>
+        </div>
 
-        <section class="register__stage">
-            <div class="register__stage__block">
-                <div class="register__stage__number">
-                    <svg class="register__stage__icon">
-                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                    </svg>
-                </div>
-                <p class="register__stage__text">ข้อมูลส่วนตัว</p>
-            </div>
+        <div class="register__stage__block">
+          <div class="register__stage__number">
+            <p>2</p>
+          </div>
+          <p class="register__stage__text">เชื่อมต่อ Social Media</p>
+        </div>
 
-            <div class="register__stage__block">
-                <div class="register__stage__number">
-                    <p>2</p>
-                </div>
-                <p class="register__stage__text">เชื่อมต่อ Social Media</p>
-            </div>
+        <div class="register__stage__block">
+          <div class="register__stage__number register__stage__number__disable">
+            <p>3</p>
+          </div>
+          <p class="register__stage__text register__stage__text__disable">ยืนยันบัญชี</p>
+        </div>
+      </section>
 
-            <div class="register__stage__block">
-                <div class="register__stage__number register__stage__number__disable">
-                    <p>3</p>
-                </div>
-                <p class="register__stage__text register__stage__text__disable">ยืนยันบัญชี</p>
-            </div>
-        </section>
+      <main class="register__info">
+        <div class="register__info__header">
+          <h1 class="register__info__header__text">ทำไมเราต้องเชื่อมต่อ Instagram ของคุณ?</h1>
+        </div>
 
-        <main class="register__info">
-            <div class="register__info__header">
-                <h1 class="register__info__header__text">ทำไมเราต้องเชื่อมต่อ Instagram ของคุณ?</h1>
-            </div>
-
-            <div class="register__info__main">
-                <div class="register__info__block">
-                    <img src="{% static 'img/shouters/register__info-2-1.png' %}" alt="" class="register__info__image">
-                    <img src="{% static 'img/shouters/register__info-2-2.png' %}" alt="" class="register__info__image">
-                    <img src="{% static 'img/shouters/register__info-2-3.png' %}" alt="" class="register__info__image">
-                    <img src="{% static 'img/shouters/register__info-2-4.png' %}" alt="" class="register__info__image">
-                    <a href="{% url 'shouter__register__info-3' token %}" class="register__info__btn">
-                        ถัดไป
-                    </a>
-                </div>
-            </div>
-
-        </main>
-
+        <div class="register__info__main">
+          <div class="register__info__block">
+            <img src="{% static 'img/shouters/register__info-2-1.png' %}" alt="" class="register__info__image">
+            <img src="{% static 'img/shouters/register__info-2-2.png' %}" alt="" class="register__info__image">
+            <img src="{% static 'img/shouters/register__info-2-3.png' %}" alt="" class="register__info__image">
+            <img src="{% static 'img/shouters/register__info-2-4.png' %}" alt="" class="register__info__image">
+            <a href="{% url 'shouter__register__choose-device' token %}" class="register__info__btn">
+              ถัดไป
+            </a>
+          </div>
+        </div>
+      </main>
     </section>
-
-
+  {% endblock %}
 </body>
+
 </html>

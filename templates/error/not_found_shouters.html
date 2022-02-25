@@ -1,0 +1,42 @@
+{% extends "_base.html" %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  {% block css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- J query -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <!-- Facebook Checkbox JS -->
+    <script src="{% static 'js/shouters/register__facebook-checkbox.js' %}"></script>
+  {% endblock %}
+  {% block title %}
+    <!-- Title -->
+    <title>Shout | Not Found Shouter</title>
+  {% endblock %}
+</head>
+
+<body>
+  {% block content %}
+    <section class="container">
+      <main class="register__info">
+        <div class="register__info__header">
+          <h1 class="register__info__header__text">ไม่เจอข้อมูลของท่าน</h1>
+        </div>
+        <div class="register__facebook_error">
+          <div class="register__facebook_error_image">
+            <img src="{% static 'img/shouters/register__facebook-error-1.png' %}" alt="">
+          </div>
+          <div class="register__facebook_error_detail">
+            <p class="text-center">กรุณาปิดหน้าต่างและลองใหม่อีกครั้ง</p>
+          </div>
+        </div>
+      </main>
+    </section>
+  {% endblock %}
+</body>
+
+</html>

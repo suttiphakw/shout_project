@@ -1,51 +1,43 @@
+{% extends "_base.html" %}
 {% load static %}
 
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block css %}
     <meta
       property="og:description"
       content="แพลตฟอร์มทำการตลาดบอกต่อผ่านคนตัวเล็กง่ายๆ"
     />
-    <meta property="og:image" content="{% static 'img/pages/UVP-mobile.png' %}" />
-    <link rel="shortcut icon" href="{% static 'img/logo/Shout_Logov2-07.png' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQKHQG4402"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-BQKHQG4402');
-    </script>
+    {% endblock %}
+    {% block title %}
     <title>Shout | แพลตฟอร์มทำการตลาดบอกต่อผ่านคนตัวเล็กง่ายๆ</title>
+    {% endblock %}
 </head>
 <body>
+  {% block content %}
     <section class="container">
         <header class="header">
-            <img src="{% static 'img/logo/Shout_Logov2-01.png' %}" alt="logo" class="logo">
+            <a href="">
+                <img src="{% static 'img/logo/logo-01.png' %}" alt="logo" class="logo">
+            </a>
             <nav class="user-nav">
                 <ul class="user-nav__items">
                     <li class="user-nav__item">
-                        <a class="user-nav__link" href="#koc">What's KOC</a>
+                        <a class="user-nav__link" href="#">What's KOC</a>
                     </li>
                     <li class="user-nav__item">
-                        <a class="user-nav__link" href="#why-shout">Why Shout</a>
+                        <a class="user-nav__link" href="#">Why Shout</a>
                     </li>
                     <li class="user-nav__item">
-                        <a class="user-nav__link" href="#how-shout">How it works</a>
+                        <a class="user-nav__link" href="#">How it works</a>
                     </li>
                     <li class="user-nav__item">
-                        <a class="user-nav__link" href="#start-now">Contact us</a>
+                        <a class="user-nav__link" href="#">Contact us</a>
                     </li>
                     <li class="user-nav__item">
-                        <a class="user-nav__link" href="{% url 'on_dev' %}">
+                        <a class="user-nav__link" href="#">
                             <svg class="user-nav__icon">
                                 <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-user"></use>
                             </svg>
@@ -66,18 +58,18 @@
                             <p class="uvp__content__left__main__bottom"><span>Shout - แพลตฟอร์ม</span> ที่ทำให้คุณเข้าถึงกลุ่มลูกค้าอย่างใกล้ชิด แม่นยำ</p>
                             <p class="uvp__content__left__main__bottom">และ เพิ่มยอดขายได้ง่ายกว่าเดิม ตั้งแต่เริ่มจนจบทำได้ด้วยตัวคุณเอง</p>
                             <p class="uvp__content__left__main__bottom-mobile">
-                              <span>Shout - แพลตฟอร์ม</span> ที่ทำให้คุณเข้าถึงกลุ่มลูกค้าอย่างใกล้ชิด แม่นยำ และ เพิ่มยอดขายได้ง่ายกว่าเดิม ตั้งแต่เริ่มจนจบทำได้ด้วยตัวคุณเอง
+                                <span>Shout - แพลตฟอร์ม</span> ที่ทำให้คุณเข้าถึงกลุ่มลูกค้าอย่างใกล้ชิด แม่นยำ และ เพิ่มยอดขายได้ง่ายกว่าเดิม ตั้งแต่เริ่มจนจบทำได้ด้วยตัวคุณเอง
                             </p>
                             <div class="uvp__button">
-                                <a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
-                                <a href="{% url 'on_dev' %}" class="btn btn-sub btn__brand-page">ดูเพิ่มเติม</a>
+                                <a href="#" class="btn btn-main btn__brand-page">เริ่มเลย</a>
+                                <a href="#" class="btn btn-sub btn__brand-page">ดูเพิ่มเติม</a>
                             </div>
 
                         </div>
                         <div class="uvp__content__left__sub">
-                            <p class="uvp__content__left__sub__info">ติดต่อเรา <span>087-560-4935</span> / <span>contact@shoutsolution.com</span></p>
+                            <p class="uvp__content__left__sub__info">ติดต่อเรา <span>087-560-4935</span> / <span>contact.shoutsolution@gmail.com</span></p>
                             <p class="uvp__content__left__sub__info">หรือสนใจมาร่วมเป็น Shouter (ผู้บอกต่อ) กับเรา?
-                                <a href="{% url 'shouter__index' %}" class="uvp__content__left__sub__link">สมัครที่นี่</a>
+                                <a href="" class="uvp__content__left__sub__link">สมัครที่นี่</a>
                             </p>
                         </div>
                     </div>
@@ -87,6 +79,13 @@
                     </div>
                     <div class="uvp__content__right-mobile">
                         <img src="{% static 'img/pages/UVP-mobile.png' %}" alt="" class="uvp__content__right-mobile__photo">
+                    </div>
+
+                    <div class="uvp__content__left__sub-mobile">
+                        <p class="uvp__content__left__sub__info">ติดต่อเรา <span>087-560-4935</span> / <span>contact.shoutsolution@gmail.com</span></p>
+                        <p class="uvp__content__left__sub__info">หรือสนใจมาร่วมเป็น Shouter (ผู้บอกต่อ) กับเรา?
+                            <a href="" class="uvp__content__left__sub__link">สมัครที่นี่</a>
+                        </p>
                     </div>
                 </div>
 
@@ -202,7 +201,7 @@
                                     ประเภทงานที่ต้องการ (Content Type), และรายละเอียดงานต่างๆ (Brief)
                                     ตามรูปแบบที่แพลตฟอร์มได้ออกแบบเตรียมไว้ให้ เพื่อประสิทธิภาพในการบอกต่อสูงสุด
                                 </p>
-                                <a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
+                                <a href="#" class="btn btn-main btn__brand-page">เริ่มเลย</a>
                             </div>
                         </div>
 
@@ -217,7 +216,7 @@
                                     <li>มี Media Performance ที่ดีและสูง</li>
                                     <li>เหมาะสมกับแคมเปญของคุณที่สุด จากระบบ Shouter Matching Score ที่คำนวณมาจากข้อมูลเชิงลึก (Insight)</li>
                                 </ul>
-                                <a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
+                                <a href="#" class="btn btn-main btn__brand-page">เริ่มเลย</a>
                             </div>
                             <img src="{% static 'img/pages/Sec4_02.png' %}" alt="How Shout Photo 2" class="how-shout__content__photo">
                         </div>
@@ -230,7 +229,7 @@
                                     บริหารจัดการแคมเปญได้อย่างง่ายดาย ตรวจสอบภาพรวม สถานะการทำงานต่างๆของ Shouter (ผู้บอกต่อ)
                                     และตรวจงาน Approve งานผ่านระบบโดยไม่ต้องพูดคุยให้ยุ่งยาก
                                 </p>
-                                <a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
+                                <a href="#" class="btn btn-main btn__brand-page">เริ่มเลย</a>
                             </div>
                         </div>
 
@@ -242,7 +241,7 @@
                                     ยอดการเข้าถึง (Organic Reach), การมีส่วนร่วม (Engagement), จำนวนครั้งการมองเห็น (Impression),
                                     จำนวนครั้งการคลิ๊ก (Traffic) และอื่นๆได้อย่างง่ายดาย ไม่ต้องขอและรอ Report เป็นเดือนๆให้เสียเวลา
                                 </p>
-                                <a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
+                                <a href="#" class="btn btn-main btn__brand-page">เริ่มเลย</a>
                             </div>
                             <img src="{% static 'img/pages/Sec4_04.png' %}" alt="How Shout Photo 4" class="how-shout__content__photo">
                         </div>
@@ -257,8 +256,8 @@
                             <h3 class="start-now__content__sub">สร้าง Earned media ผ่าน Shouter (ผู้บอกต่อ) ได้ง่ายๆด้วยตัวคุณเอง</h3>
                         </div>
                         <div class="start-now__content__right">
-                            <a href="{% url 'on_dev' %}" class="btn btn-main btn__brand-page">เริ่มเลย</a>
-                            <a href="{% url 'on_dev' %}" class="btn btn-sub btn__brand-page">ดูเพิ่มเติม</a>
+                            <a href="#" class="btn btn-main btn__brand-page">เริ่มเลย</a>
+                            <a href="#" class="btn btn-sub btn__brand-page">ดูเพิ่มเติม</a>
                         </div>
                     </div>
                 </section>
@@ -270,7 +269,7 @@
         <footer class="footer">
 
             <div class="footer__left">
-                <img src="{% static 'img/logo/Shout_Logov2-02.png' %}" alt="" class="footer__brand-logo">
+                <img src="{% static 'img/logo/logo-02.png' %}" alt="" class="footer__brand-logo">
                 <div class="footer__info">
                     <svg class="footer__icon">
                         <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-location-pin"></use>
@@ -290,15 +289,15 @@
                     <svg class="footer__icon">
                         <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-mail"></use>
                     </svg>
-                    <p class="footer__text-sub">contact@shoutsolution.com</p>
+                    <p class="footer__text-sub">contact.shoutsolution@gmail.com</p>
                 </div>
             </div>
 
             <div class="footer__right">
                 <div class="footer__link">
-                    <a href="#koc">What’s KOC</a>
-                    <a href="#why-shout">Why Shout</a>
-                    <a href="#how-shout">How it works</a>
+                    <a href="">What’s KOC</a>
+                    <a href="">Why Shout</a>
+                    <a href="">How it works</a>
                 </div>
 
                 <div class="footer__social-media">
@@ -323,5 +322,6 @@
 
         </footer>
     </section>
+  {% endblock %}
 </body>
 </html>

@@ -1,229 +1,204 @@
+{% extends "_base.html" %}
 {% load static %}
 
 <!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="{% static 'img/logo/Shout_Logov2-07.png' %}">
+  {% block css %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- Vue Framework -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <!-- J query -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-    <script>
-      function submitForm() {
-        {#const form = document.getElementById("#registration")#}
-        const first_name = $('#first_name').val();
-        const last_name = $('#last_name').val();
-        const nickname = $('#nickname').val();
-        const email = $('#email').val();
-        const tel = $('#tel').val();
-        const gender = $("input[type='radio'][name='gender']:checked").val();
-        const birthday_date = $('#birthday_date').val();
-        const birthday_month = $('#birthday_month').val();
-        const birthday_year = $('#birthday_year').val();
-        const province = $('#province').val();
-        const education = $('#education').val();
-        const college = $('#college').val();
-        const interest = $('#interest').val();
+    <!-- Notify js -->
+    <script src="{% static 'js/notify.js' %}"></script>
+    <script src="{% static 'js/shouters/register.js' %}"></script>
 
-        if (first_name.trim() === '' || last_name.trim() === '' ||
-          nickname.trim() === '' || email.trim() === '' || tel.trim() === '' || gender === undefined ||
-          birthday_date.trim() === '' || birthday_month.trim() === '' || birthday_year.trim() === '' ||
-          province.trim() === '' || education.trim() === '' || college.trim() === '' || interest.length === 0) {
-          alert('Please fill in all information.');
-        } else {
-          if(interest.length > 5) {
-            alert('Please choose max to 5 interest');
-          } else if(tel.length !== 10) {
-            alert('Please enter tel 10 digit');
-          } else {
-            $("#registration").submit();
-          }
-        }
-      }
-
-    </script>
+  {% endblock %}
+  {% block title %}
     <!-- Title -->
     <title>Shout | Register</title>
+  {% endblock %}
 </head>
+
 <body>
+  {% block content %}
     <section class="container">
-        <section class="register__top">
-            <h1 class="register__top__logo">&#128582;&#127995;</h1>
-            <h1 class="register__top__header">สมัครเป็น Shouter กับเราง่ายๆ แล้วรอรับงานได้เลย</h1>
+      <section class="register__top">
+        <h1 class="register__top__logo">&#128582;&#127995;</h1>
+        <h1 class="register__top__header">สมัครเป็น Shouter กับเราง่ายๆ แล้วรอรับงานได้เลย</h1>
+      </section>
+
+      <section class="register__stage">
+        <div class="register__stage__block">
+          <div class="register__stage__number">
+            <p>1</p>
+          </div>
+          <p class="register__stage__text">ข้อมูลส่วนตัว</p>
+        </div>
+
+        <div class="register__stage__block">
+          <div class="register__stage__number register__stage__number__disable">
+            <p>2</p>
+          </div>
+          <p class="register__stage__text register__stage__text__disable">เชื่อมต่อ Social Media</p>
+        </div>
+
+        <div class="register__stage__block">
+          <div class="register__stage__number register__stage__number__disable">
+            <p>3</p>
+          </div>
+          <p class="register__stage__text register__stage__text__disable">ยืนยันบัญชี</p>
+        </div>
+      </section>
+
+      <main class="register__info">
+        <div class="register__info__header">
+          <h1 class="register__info__header__text">โปรดกรอกข้อมูลส่วนตัวของคุณ</h1>
+          <p class="register__info__header__subtext">*ข้อมูลจะถูกตรวจสอบเพื่อทำการอนุมัติ</p>
+          {% if warning %}
+          <p class="register__info__header__subtext" style="color: red">** {{ warning }} **</p>
+          {% endif %}
+        </div>
+
+        <section class="register__form" id="register">
+          <p class="register__form__header__text">รูปโปรไฟล์</p>
+          <div class="register__form__header">
+            {% if line_profile_picture %}
+            <img src="{{ line_profile_picture }}" alt="" class="register__form__image">
+            {% else %}
+            <svg class="register__form__image">
+              <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>
+            </svg>
+            {% endif %}
+          </div>
+          <form action="{% url 'shouter__register' token %}" method="POST" class="register__form__input"
+            name="registration" id="registration"> {% csrf_token %}
+            <!-- Firstname -->
+            <label for="first_name">ชื่อจริง <span>*</span></label>
+            <div id="messageBox"></div>
+            <input type="text" id="first_name" name="first_name" placeholder="Your firstname">
+
+            <!-- Lastname -->
+            <label for="last_name">นามสกุล <span>*</span></label>
+            <div id="messageBox"></div>
+            <input type="text" id="last_name" name="last_name" placeholder="Your surname">
+
+            <!-- Nickname -->
+            <label for="nickname">ชื่อเล่น <span>*</span></label>
+            <div id="messageBox"></div>
+            <input type="text" id="nickname" name="nickname" placeholder="Your nickname">
+
+            <!-- Email -->
+            <label for="email">Email ติดต่อ <span>*</span></label>
+            <div id="messageBox"></div>
+            <input type="email" id="email" name="email" placeholder="contact@shoutsolution.com" style="font-size: 16px">
+
+            <!-- Tel -->
+            <label for="tel">เบอร์โทรติดต่อ <span>*</span></label>
+            <div id="messageBox"></div>
+            <input type="tel" id="tel" name="tel" placeholder="000-000-0000" style="font-size: 16px">
+
+            <!-- Gender -->
+            <p>เพศ <span>*</span></p>
+            <div id="errorGender"></div>
+            <div class="register__form__input__radio">
+              <div class="register__form__input__radio__choice">
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">‍หญิง</label>
+              </div>
+              <div class="register__form__input__radio__choice">
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">‍ชาย</label>
+              </div>
+              <div class="register__form__input__radio__choice register__form__input__radio__choice__last">
+                <input type="radio" id="alternative" name="gender" value="alternative">
+                <label for="alternative">LGBTQ+</label>
+              </div>
+            </div>
+
+            <!-- Birthday -->
+            <p>วัน/เดือน/ปี เกิด <span>*</span></p>
+            <div class="register__form__input__select">
+              <select name="birthday_date" id="birthday_date">
+                <option value="" selected disabled>วันที่</option>
+                {% for date_list in date_lists %}
+                <option value={{ date_list }}>{{ date_list }}</option>
+                {% endfor %}
+              </select>
+              <select name="birthday_month" id="birthday_month">
+                <option value="" selected disabled>เดือน</option>
+                {% for month_list in month_lists %}
+                <option value={{ month_list }}>{{ month_list }}</option>
+                {% endfor %}
+              </select>
+              <select name="birthday_year" id="birthday_year">
+                <option value="" selected disabled>ปี</option>
+                {% for year_list in year_lists %}
+                <option value={{ year_list }}>{{ year_list }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <!-- Province -->
+            <p>จังหวัดที่อาศัยอยู่ปัจจุบัน <span>*</span></p>
+            <div class="register__form__input__province">
+              {# <svg class="register__form__input__province__icon">#}
+                {# <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-location"></use>#}
+                {# </svg>#}
+              {# <p class="register__form__input__province__text">Thailand</p>#}
+              <select name="province" id="province">
+                <option value="none" selected disabled>เลือกจังหวัด</option>
+                {% for foo in thailand_provinces %}
+                <option value={{ foo.province }}>{{ foo.province }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <!-- Education -->
+            <p>การศึกษาล่าสุด หรือ กำลังศึกษา <span>*</span></p>
+            <div class="register__form__input__education">
+              <select name="education" id="education">
+                <option value="none" selected disabled>เลือกระดับการศึกษา</option>
+                {% for foo in education_lists %}
+                <option value={{ foo }}>{{ foo }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <!-- College -->
+            <label for="college">สถานศึกษาล่าสุด <span>*</span></label>
+            <input type="text" id="college" name="college" placeholder="ระบุสถานศึกษา">
+
+            <!-- Interest -->
+            <label class="register__form__input__interest__text">หมวดหมู่ความสนใจ (มากสุด 5) <span>*</span></label>
+            <select id="interest" name="interest" class="custom-select" multiple>
+              <option value="technology_gadget">📱 Technology & Gadget</option>
+              <option value="social_csr">⭐️ Social & CSR</option>
+              <option value="entertainment">🎸 Entertainment</option>
+              <option value="finance_investment">💰 Finance & Investment</option>
+              <option value="lifestyle">🚶🏻 Lifestyle</option>
+              <option value="fashion">👗 Fashion</option>
+              <option value="automobile">🚘 Automobile</option>
+              <option value="food_drink">🍔 Food & Drink</option>
+              <option value="beauty">💄 Beauty</option>
+              <option value="travel">✈️ Travel</option>
+              <option value="health_sport">🏀 Health & Sport</option>
+              <option value="design_art">🎨 Design & Art</option>
+              <option value="luxury">👜 Luxury</option>
+            </select>
+
+            <span class="btn-main btn-shouter submit_button" style="text-align: center" onclick="submitForm()">ถัดไป</span>
+          </form>
         </section>
-
-        <section class="register__stage">
-            <div class="register__stage__block">
-                <div class="register__stage__number">
-                    <p>1</p>
-                </div>
-                <p class="register__stage__text">ข้อมูลส่วนตัว</p>
-            </div>
-
-            <div class="register__stage__block">
-                <div class="register__stage__number register__stage__number__disable">
-                    <p>2</p>
-                </div>
-                <p class="register__stage__text register__stage__text__disable">เชื่อมต่อ Social Media</p>
-            </div>
-
-            <div class="register__stage__block">
-                <div class="register__stage__number register__stage__number__disable">
-                    <p>3</p>
-                </div>
-                <p class="register__stage__text register__stage__text__disable">ยืนยันบัญชี</p>
-            </div>
-        </section>
-
-        <main class="register__info">
-            <div class="register__info__header">
-                <h1 class="register__info__header__text">โปรดกรอกข้อมูลส่วนตัวของคุณ</h1>
-                <p class="register__info__header__subtext">*ข้อมูลจะถูกตรวจสอบเพื่อทำการอนุมัติ</p>
-                {% if warning %}
-                    <p class="register__info__header__subtext" style="color: red">** {{ warning }} **</p>
-                {% endif %} 
-            </div>
-
-            <section class="register__form" id="register">
-                <p class="register__form__header__text">รูปโปรไฟล์</p>
-                <div class="register__form__header">
-                    {% if line_profile_picture %}
-                      <img src="{{ line_profile_picture }}" alt="" class="register__form__image">
-                    {% else %}
-                      <svg class="register__form__image">
-                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>
-                      </svg>
-                    {% endif %}
-                </div>
-                <form action="{% url 'shouter__register' token %}" method="POST" class="register__form__input" name="registration" id="registration"> {% csrf_token %}
-                    <!-- Firstname -->
-                    <label for="first_name">ชื่อจริง <span>*</span></label>
-                    <div id="messageBox"></div>
-                    <input type="text" id="first_name" name="first_name" placeholder="Your firstname">
-
-                    <!-- Lastname -->
-                    <label for="last_name">นามสกุล <span>*</span></label>
-                    <div id="messageBox"></div>
-                    <input type="text" id="last_name" name="last_name" placeholder="Your surname">
-
-                    <!-- Nickname -->
-                    <label for="nickname">ชื่อเล่น <span>*</span></label>
-                    <div id="messageBox"></div>
-                    <input type="text" id="nickname" name="nickname" placeholder="Your nickname">
-
-                    <!-- Email -->
-                    <label for="email">Email ติดต่อ <span>*</span></label>
-                    <div id="messageBox"></div>
-                    <input type="email" id="email" name="email" placeholder="contact@shoutsolution.com" style="font-size: 16px">
-
-                    <!-- Tel -->
-                    <label for="tel">เบอร์โทรติดต่อ <span>*</span></label>
-                    <div id="messageBox"></div>
-                    <input type="tel" id="tel" name="tel" placeholder="000-000-0000" style="font-size: 16px">
-
-                    <!-- Gender -->
-                    <p>เพศ <span>*</span></p>
-                    <div id="errorGender"></div>
-                    <div class="register__form__input__radio">
-                        <div class="register__form__input__radio__choice">
-                            <input type="radio" id="female" name="gender" value="female">
-                            <label for="female">️‍หญิง</label>
-                        </div>
-                        <div class="register__form__input__radio__choice">
-                            <input type="radio" id="male" name="gender" value="male">
-                            <label for="male">‍ชาย</label>
-                        </div>
-                        <div class="register__form__input__radio__choice register__form__input__radio__choice__last">
-                            <input type="radio" id="alternative" name="gender" value="alternative">
-                            <label for="alternative">️LGBTQ+</label>
-                        </div>
-                    </div>
-
-                    <!-- Birthday -->
-                    <p>วัน/เดือน/ปี เกิด <span>*</span></p>
-                    <div class="register__form__input__select">
-                        <select name="birthday_date" id="birthday_date">
-                            <option value="" selected disabled>วันที่</option>
-                            {% for date_list in date_lists %}
-                                <option value={{ date_list }}>{{ date_list }}</option>
-                            {% endfor %}
-                        </select>
-                        <select name="birthday_month" id="birthday_month">
-                            <option value="" selected disabled>เดือน</option>
-                            {% for month_list in month_lists %}
-                                <option value={{ month_list }}>{{ month_list }}</option>
-                            {% endfor %}
-                        </select>
-                        <select name="birthday_year" id="birthday_year">
-                            <option value="" selected disabled>ปี</option>
-                            {% for year_list in year_lists %}
-                                <option value={{ year_list }}>{{ year_list }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <!-- Province -->
-                    <p>จังหวัดที่อาศัยอยู่ปัจจุบัน <span>*</span></p>
-                    <div class="register__form__input__province">
-{#                        <svg class="register__form__input__province__icon">#}
-{#                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-location"></use>#}
-{#                        </svg>#}
-{#                        <p class="register__form__input__province__text">Thailand</p>#}
-                        <select name="province" id="province">
-                            <option value="none" selected disabled>เลือกจังหวัด</option>
-                            {% for foo in thailand_provinces %}
-                                <option value={{ foo.province }}>{{ foo.province }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <!-- Education -->
-                    <p>การศึกษาล่าสุด หรือ กำลังศึกษา <span>*</span></p>
-                    <div class="register__form__input__education">
-                        <select name="education" id="education">
-                            <option value="none" selected disabled>เลือกระดับการศึกษา</option>
-                            {% for foo in education_lists %}
-                                <option value={{ foo }}>{{ foo }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <!-- College -->
-                    <label for="college">สถานศึกษาล่าสุด <span>*</span></label>
-                    <input type="text" id="college" name="college" placeholder="ระบุสถานศึกษา">
-
-                    <!-- Interest -->
-                    <label class="register__form__input__interest__text" >หมวดหมู่ความสนใจ (มากสุด 5) <span>*</span></label>
-                    <select id="interest" name="interest" class="custom-select" multiple>
-                        <option value="technology_gadget">📱 Technology & Gadget</option>
-                        <option value="social_csr">⭐️ Social & CSR</option>
-                        <option value="entertainment">🎸 Entertainment</option>
-                        <option value="finance_investment">💰 Finance & Investment</option>
-                        <option value="lifestyle">🚶🏻 Lifestyle</option>
-                        <option value="fashion">👗 Fashion</option>
-                        <option value="automobile">🚘 Automobile</option>
-                        <option value="food_drink">🍔 Food & Drink</option>
-                        <option value="beauty">💄 Beauty</option>
-                        <option value="travel">✈️ Travel</option>
-                        <option value="health_sport">🏀 Health & Sport</option>
-                        <option value="design_art">🎨 Design & Art</option>
-                        <option value="luxury">👜 Luxury</option>
-                    </select>
-
-                  <span class="btn-main btn-shouter" style="text-align: center" onclick="submitForm()">ถัดไป</span>
-                </form>
-            </section>
-        </main>
+      </main>
     </section>
+    <script src="{% static 'js/shouters/custom-select.js' %}"></script>
+  {% endblock %}
 
-    <script src="{% static 'js/custom-select.js' %}"></script>
 
 </body>
+
 </html>

@@ -5,11 +5,10 @@ from django.db.models.signals import pre_save, post_save
 from shouters.lineMessagingApi.adminApproveApi import (api__admin_approve_text_message,
                                                        api__admin_approve_flex_message,
                                                        api__admin_approve_image_message)
-from shouters.utils import FacebookAPI
 from shouters.refresh_data import refresh_shouters
+from .utils.instagram import ig_api_bio
 
 import requests
-from shout_project.settings import LINE_CHANNEL_ACCESS_TOKEN
 
 # Create your models here.
 class Shouter(models.Model):
@@ -59,17 +58,12 @@ class Shouter(models.Model):
     line_profile_picture = models.URLField(max_length=1000, null=True, blank=True)
 
     # # Raw Data
-    fb_response_access_token = models.JSONField(null=True, blank=True)
-    fb_response_page_id = models.JSONField(null=True, blank=True)
-    fb_response_business_account_id = models.JSONField(null=True, blank=True)
-    ig_response_bio = models.JSONField(null=True, blank=True)
     ig_response_media_objects = models.JSONField(null=True, blank=True)
     ig_response_audience_insight = models.JSONField(null=True, blank=True)
     ig_response_active_follower = models.JSONField(null=True, blank=True)
 
     # # Facebook
     fb_main_access_token = models.CharField(max_length=1000, null=True, blank=True)
-    fb_access_token = models.CharField(max_length=1000, null=True, blank=True)
     fb_access_token_created = models.DateTimeField(default=now)
     fb_page_id = models.CharField(max_length=120, null=True, blank=True)
     fb_page_name = models.CharField(max_length=120, null=True, blank=True)
@@ -89,15 +83,15 @@ class Shouter(models.Model):
     ig_active_follower_percent = models.FloatField(null=True, blank=True)
     ig_profile_picture = models.URLField(max_length=1000, null=True, blank=True)
 
-    # ig_post_permalink
+    # # Engagement
     ig_average_total_like = models.IntegerField(null=True, blank=True, verbose_name="IG => AVERAGE LIKE")
     ig_engagement_percent = models.FloatField(null=True, blank=True, verbose_name="IG => LIKE PERCENTAGE")
     ig_story_view = models.IntegerField(null=True, blank=True, verbose_name="IG => AVERAGE STORY VIEW")
     ig_average_post_reach = models.IntegerField(null=True, blank=True, verbose_name="IG => AVERAGE POST REACH")
     ig_predicted_ad_post_reach = models.IntegerField(null=True, blank=True, verbose_name="PREDICTED => AVERAGE POST REACH")
-    ig_ad_post_reach = models.IntegerField(null=True, blank=True, verbose_name="PREDICTED => AD POST REACH")
-
-    # ig_like_engagement = models.IntegerField(null=True, blank=True)
+    ig_post_reach_guarantee = models.IntegerField(null=True, blank=True, verbose_name="GUARANTEE => POST REACH")
+    ig_story_view_guarantee = models.IntegerField(null=True, blank=True, verbose_name="GUARANTEE => STORY VIEW")
+    ig_ad_post_reach = models.IntegerField(null=True, blank=True, verbose_name="ESTIMATE => AD POST REACH")
 
     # # Pricing
     ig_price_story_fc = models.IntegerField(null=True, blank=True, verbose_name="IG STORY Price (MIN)")
@@ -131,7 +125,10 @@ class Shouter(models.Model):
     twitter_name = models.CharField(max_length=120, null=True, blank=True, verbose_name="TWITTER NAME")
     twitter_price = models.IntegerField(null=True, blank=True, verbose_name="TWITTER PRICE")
 
-    #
+    # # Error
+    is_error = models.BooleanField(default=False, verbose_name="SHOUTER IS ERROR")
+    error_section = models.CharField(max_length=120, null=True, blank=True, verbose_name="ERROR SECTION")
+
     # # Insight
     ig_insight = models.JSONField(null=True, blank=True)
     ig_max_total_people = models.IntegerField(null=True, blank=True)
@@ -172,8 +169,7 @@ def shouters_pre_save(sender, instance, *args, **kwargs):
 
         if not response.ok:
             # Get Bio
-            context__ig_biography = FacebookAPI().get_ig_biography(business_account_id=business_account_id,
-                                                                   access_token=access_token)
+            context__ig_biography = ig_api_bio.get(business_account_id=business_account_id, access_token=access_token)
             if context__ig_biography:
                 ig_profile_picture = context__ig_biography.get('profile_picture_url')
                 instance.ig_profile_picture = ig_profile_picture
@@ -187,47 +183,6 @@ def shouters_pre_save(sender, instance, *args, **kwargs):
 
         # Get New Data
         response = refresh_shouters(access_token=access_token, business_account_id=business_account_id)
-        #   response = {
-        #     # FB
-        #     "fb_name": fb_name,
-        #     "fb_profile_picture": fb_profile_picture,
-        #     # IG Biography
-        #     "ig_username": ig_username,
-        #     "ig_media_count": ig_media_count,
-        #     "ig_follower_count": ig_follower_count,
-        #     "ig_following_count": ig_following_count,
-        #     "ig_profile_picture": ig_profile_picture,
-        #     # IG Active Follower
-        #     "ig_response_active_follower": ig_response_active_follower,
-        #     "ig_active_follower": ig_active_follower,
-        #     "ig_active_follower_harmonic": ig_active_follower_harmonic,
-        #     "ig_active_follower_percent": ig_active_follower_percent,
-        #     # Media Objects
-        #     "ig_response_media_objects": ig_response_media_objects,
-        #     # Engagement
-        #     "ig_average_total_like": ig_average_total_like,
-        #     "ig_engagement_percent": ig_engagement_percent,
-        #     "ig_story_view": ig_story_view,
-        #     "ig_average_post_reach": ig_average_post_reach,
-        #     "ig_predicted_ad_post_reach": predicted_ad_post_reach,
-        #     "ig_ad_post_reach": ig_ad_post_reach,
-        #     # Price
-        #     "ig_price_story_fc": ig_price_story_fc,
-        #     "ig_price_story_ugc": ig_price_story_ugc,
-        #     "ig_price_post_fc": ig_price_post_fc,
-        #     "ig_price_post_ugc": ig_price_post_ugc,
-        #     "ig_price_story_post_fc": ig_price_story_post_fc,
-        #     "ig_price_story_post_ugc": ig_price_story_post_ugc,
-        #     "ig_fb_price_story_fc": ig_fb_price_story_fc,
-        #     "ig_fb_price_story_ugc": ig_fb_price_story_ugc,
-        #     "ig_fb_price_post_fc": ig_fb_price_post_fc,
-        #     "ig_fb_price_post_ugc": ig_fb_price_post_ugc,
-        #     "ig_fb_price_story_post_fc": ig_fb_price_story_post_fc,
-        #     "ig_fb_price_story_post_ugc": ig_fb_price_story_post_ugc,
-        #     # Audience Insight
-        #     "ig_response_audience_insight": ig_response_audience_insight
-        #   }
-
         # FB
         instance.fb_name = response.get("fb_name", None)
         # IG Biography

@@ -1,0 +1,342 @@
+{% extends "_base.html" %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  {% block css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- J query -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <!-- Facebook Checkbox JS -->
+    <script src="{% static 'js/shouters/register__facebook-checkbox.js' %}"></script>
+  {% endblock %}
+  {% block title %}
+    <!-- Title -->
+    <title>Shout | Connect Facebook Error</title>
+  {% endblock %}
+</head>
+
+<body>
+  {% block content %}
+    <section class="container">
+      <section class="register__stage">
+        <div class="register__stage__block">
+          <div class="register__stage__number">
+            <svg class="register__stage__icon">
+              <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+            </svg>
+          </div>
+          <p class="register__stage__text">ข้อมูลส่วนตัว</p>
+        </div>
+
+        <div class="register__stage__block">
+          <div class="register__stage__number">
+            <p>2</p>
+          </div>
+          <p class="register__stage__text">เชื่อมต่อ Social Media</p>
+        </div>
+
+        <div class="register__stage__block">
+          <div class="register__stage__number register__stage__number__disable">
+            <p>3</p>
+          </div>
+          <p class="register__stage__text register__stage__text__disable">ยืนยันบัญชี</p>
+        </div>
+      </section>
+
+      <main class="register__info">
+        <div class="register__info__header">
+          <h1 class="register__info__header__text">การเชื่อมต่อบัญชีไม่สำเร็จ</h1>
+        </div>
+        <div class="register__facebook_error">
+          <div class="register__facebook_error_image">
+            <img src="{% static 'img/shouters/register__facebook-error-1.png' %}" alt="">
+          </div>
+          <div class="register__facebook_error_detail">
+            <p class="text-center">โปรดตรวจสอบข้อผิดพลาดในรายการด้านล่าง แก้ไขให้ถูกต้อง และเชื่อมต่อใหม่อีกครั้ง</p>
+            <div class="register__facebook_success_box">
+              <img src="{% static 'img/shouters/register__facebook-error-3.png' %}" alt="">
+              <p>บัญชี Instagram ต้องเป็น <span class="text-bold">Professional Account</span></p>
+              <p class="register__facebook_error_link" onclick="showModal_1()">ไม่แน่ใจ? กดที่นี่</p>
+            </div>
+            <div class="register__facebook_success_box">
+              <img src="{% static 'img/shouters/register__facebook-error-3.png' %}" alt="">
+              <p>บัญชี <span class="text-bold">Instagram ต้องผูกกับ Facebook Page</span></p>
+              <p class="register__facebook_error_link" onclick="showModal_2()">ไม่แน่ใจ? กดที่นี่</p>
+            </div>
+            <div class="register__facebook_error_box">
+              <img src="{% static 'img/shouters/register__facebook-error-2.png' %}" alt="">
+              <p>ในการเชื่อมต่อ ฉันต้องเลือกบัญชี Instagram และ Facebook Page ที่ได้ผูกกันไว้ และเปิดการเข้าถึงทุกข้อ </p>
+              <p class="register__facebook_error_link" onclick="showModal_3()">ไม่แน่ใจ? กดที่นี่</p>
+            </div>
+          </div>
+        </div>
+        <a href="{% url 'shouter__facebook-login' token %}"
+          class="btn btn-facebook btn-shouter register__choose-device__button" style="margin-top: 20px">
+          เชื่อมต่ออีกครั้ง &#8594;
+        </a>
+
+        <!-- Modal -->
+        <!---------------------------------------------------------------------->
+        <!-- Modal 1.1 -->
+        <div class="register__modal" id="modal_1_1">
+          <div class="register__modal__backdrop"></div>
+          <div class="register__modal__card">
+            <div class="register__modal__header">IG Business Account</div>
+            <div class="register__modal__content">
+              <img src="{% static 'img/shouters/register__facebook-checkbox-1.1.png' %}" alt="">
+              <p>1. ตรวจสอบหน้า Profile หากเป็น Professional Account (Business/Creator Account)
+                <span class="text-bold">แล้วจะขึ้นปุ่ม INSIGHTS ให้เห็น</span>
+                <span class="text-violet">หากยังไม่เป็นให้ดูวิธีให้หน้าถัดไป</span>
+              </p>
+            </div>
+            <div class="register__modal__footer">
+              <svg class="register__modal__button-white">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-left"></use>
+              </svg>
+              <div class="register__modal__page">
+                <span class="text-violet">.</span>
+                <span class="text-lightgrey">.</span>
+                <span class="text-lightgrey">.</span>
+              </div>
+              <svg class="register__modal__button" onclick="nextTo1_2()">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-right"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <!-- Modal 1.2 -->
+        <div class="register__modal" id="modal_1_2">
+          <div class="register__modal__backdrop"></div>
+          <div class="register__modal__card">
+            <div class="register__modal__header">IG Business Account</div>
+            <div class="register__modal__content">
+              <img src="{% static 'img/shouters/register__facebook-checkbox-1.2.png' %}" alt="">
+              <p>2.  ในหน้า
+                <span class="text-bold">กด Switch to Professional Account</span>
+                <span class="text-bold">Edit Profile</span>
+              </p>
+            </div>
+            <div class="register__modal__footer">
+              <svg class="register__modal__button" onclick="backTo1_1()">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-left"></use>
+              </svg>
+              <div class="register__modal__page">
+                <span class="text-lightgrey">.</span>
+                <span class="text-violet">.</span>
+                <span class="text-lightgrey">.</span>
+              </div>
+              <svg class="register__modal__button" onclick="nextTo1_3()">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-right"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <!-- Modal 1.3 -->
+        <div class="register__modal" id="modal_1_3">
+          <div class="register__modal__backdrop"></div>
+          <div class="register__modal__card">
+            <div class="register__modal__header">
+              <p>IG Business Account</p>
+              <svg class="register__modal__button-close" onclick="closeModal()">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cross"></use>
+              </svg>
+            </div>
+            <div class="register__modal__content">
+              <img src="{% static 'img/shouters/register__facebook-checkbox-1.3.png' %}" alt="">
+              <p>3. เลือกเป็น Business หรือ Creator Account ได้เลย เสร็จสิ้นเรียบร้อย!</p>
+              <span class="text-violet">(อย่าลืมผูก Facebook Page ตามหัวข้อถัดไปด้วย)</span>
+            </div>
+            <div class="register__modal__footer">
+              <svg class="register__modal__button" onclick="backTo1_2()">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-left"></use>
+              </svg>
+              <div class="register__modal__page">
+                <span class="text-lightgrey">.</span>
+                <span class="text-lightgrey">.</span>
+                <span class="text-violet">.</span>
+              </div>
+              <svg class="register__modal__button-white">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-right"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <!---------------------------------------------------------------------->
+        <!-- Modal 2.1 -->
+        <div class="register__modal" id="modal_2_1">
+          <div class="register__modal__backdrop"></div>
+          <div class="register__modal__card">
+            <div class="register__modal__header">FB Page & IG Account Link</div>
+            <div class="register__modal__content">
+              <img src="{% static 'img/shouters/register__facebook-checkbox-2.1.png' %}" alt="">
+              <p>1. กดตรง <span class="text-bold">Page ในหน้า Edit Profile</span></p>
+              <br>
+              <p class="text-small">Facebook Page ใช้เพื่อการเชื่อมต่อบัญชีกับ Shout! เท่านั้น ไม่ต้องใช้รับงานจริง</p>
+            </div>
+            <div class="register__modal__footer">
+              <svg class="register__modal__button-white">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-left"></use>
+              </svg>
+              <div class="register__modal__page">
+                <span class="text-violet">.</span>
+                <span class="text-lightgrey">.</span>
+                <span class="text-lightgrey">.</span>
+              </div>
+              <svg class="register__modal__button" onclick="nextTo2_2()">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-right"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <!-- Modal 2.2 -->
+        <div class="register__modal" id="modal_2_2">
+          <div class="register__modal__backdrop"></div>
+          <div class="register__modal__card">
+            <div class="register__modal__header">FB Page & IG Account Link</div>
+            <div class="register__modal__content">
+              <img src="{% static 'img/shouters/register__facebook-checkbox-2.2.png' %}" alt="">
+              <p>2. เลือก Create Facebook Page (เพจจะชื่อเดียวกับ IG)</p>
+              <br>
+              <p class="text-red">*กดแค่ 1 ครั้งพอ <span class="text-bold">ห้ามกดซ้ำ</span> ไม่งั้นจะเกิดข้อผิดพลาด*</p>
+              <br>
+              <span class="text-small">Facebook Page ใช้เพื่อการเชื่อมต่อบัญชีกับ Shout! เท่านั้น ไม่ต้องใช้รับงานจริง</span>
+            </div>
+            <div class="register__modal__footer">
+              <svg class="register__modal__button" onclick="backTo2_1()">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-left"></use>
+              </svg>
+              <div class="register__modal__page">
+                <span class="text-lightgrey">.</span>
+                <span class="text-violet">.</span>
+                <span class="text-lightgrey">.</span>
+              </div>
+              <svg class="register__modal__button" onclick="nextTo2_3()">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-right"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <!-- Modal 2.3 -->
+        <div class="register__modal" id="modal_2_3">
+          <div class="register__modal__backdrop"></div>
+          <div class="register__modal__card">
+            <div class="register__modal__header">
+              <p>FB Page & IG Account Link</p>
+              <svg class="register__modal__button-close" onclick="closeModal()">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cross"></use>
+              </svg>
+            </div>
+            <div class="register__modal__content">
+              <img src="{% static 'img/shouters/register__facebook-checkbox-2.3.png' %}" alt="">
+              <p>3. เสร็จสิ้นการผูกเพจ (อาจยังไม่ขึ้น แต่ได้แล้ว!) หากไม่แน่ใจ ให้กดปิดหน้านี้ รอสักพัก แล้วเข้ามาดูใหม่ เพจจะขึ้นแล้ว</p>
+              <br>
+              <p class="text-violet"><span class="text-bold">Next Step </span>: คุณสามารถเข้ามาสมัคร Shout! ต่อได้เลย</p>
+              <br>
+              <span class="text-small">Facebook Page ใช้เพื่อการเชื่อมต่อบัญชีกับ Shout! เท่านั้น ไม่ต้องใช้รับงานจริง</span>
+            </div>
+            <div class="register__modal__footer">
+              <svg class="register__modal__button" onclick="backTo2_2()">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-left"></use>
+              </svg>
+              <div class="register__modal__page">
+                <span class="text-lightgrey">.</span>
+                <span class="text-lightgrey">.</span>
+                <span class="text-violet">.</span>
+              </div>
+              <svg class="register__modal__button-white">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-right"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <!---------------------------------------------------------------------->
+        <!-- Modal 3.1 -->
+        <div class="register__modal" id="modal_3_1">
+          <div class="register__modal__backdrop"></div>
+          <div class="register__modal__card">
+            <div class="register__modal__header">Login with Facebook</div>
+            <div class="register__modal__content">
+              <img src="{% static 'img/shouters/register__facebook-checkbox-3.1.png' %}" alt="">
+              <p>1. เลือก IG ที่ต้องการรับงาน</p>
+            </div>
+            <div class="register__modal__footer">
+              <svg class="register__modal__button-white">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-left"></use>
+              </svg>
+              <div class="register__modal__page">
+                <span class="text-violet">.</span>
+                <span class="text-lightgrey">.</span>
+                <span class="text-lightgrey">.</span>
+              </div>
+              <svg class="register__modal__button" onclick="nextTo3_2()">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-right"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <!-- Modal 3.2 -->
+        <div class="register__modal" id="modal_3_2">
+          <div class="register__modal__backdrop"></div>
+          <div class="register__modal__card">
+            <div class="register__modal__header">Login with Facebook</div>
+            <div class="register__modal__content">
+              <img src="{% static 'img/shouters/register__facebook-checkbox-3.2.png' %}" alt="">
+              <p>2. เลือก Page ที่ผูกกับ IG นั้นๆ</p>
+              <br>
+              <p class="text-red text-small">(ดูตรง Page ในหน้า IG Edit Profile หรือเลือก All pages ได้เลย)</p>
+            </div>
+            <div class="register__modal__footer">
+              <svg class="register__modal__button" onclick="backTo3_1()">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-left"></use>
+              </svg>
+              <div class="register__modal__page">
+                <span class="text-lightgrey">.</span>
+                <span class="text-violet">.</span>
+                <span class="text-lightgrey">.</span>
+              </div>
+              <svg class="register__modal__button" onclick="nextTo3_3()">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-right"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <!-- Modal 3.3 -->
+        <div class="register__modal" id="modal_3_3">
+          <div class="register__modal__backdrop"></div>
+          <div class="register__modal__card">
+            <div class="register__modal__header">
+              <p>Login with Facebook</p>
+              <svg class="register__modal__button-close" onclick="closeModal()">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cross"></use>
+              </svg>
+            </div>
+            <div class="register__modal__content">
+              <img src="{% static 'img/shouters/register__facebook-checkbox-3.3.png' %}" alt="">
+              <p>3. เปิดการเข้าถึงทั้ง 4 หัวข้อ</p>
+            </div>
+            <div class="register__modal__footer">
+              <svg class="register__modal__button" onclick="backTo3_2()">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-left"></use>
+              </svg>
+              <div class="register__modal__page">
+                <span class="text-lightgrey">.</span>
+                <span class="text-lightgrey">.</span>
+                <span class="text-violet">.</span>
+              </div>
+              <svg class="register__modal__button-white">
+                <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-right"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <!---------------------------------------------------------------------->
+      </main>
+    </section>
+  {% endblock %}
+</body>
+
+</html>
