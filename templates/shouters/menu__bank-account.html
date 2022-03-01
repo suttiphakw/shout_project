@@ -19,6 +19,7 @@
     <!-- J query -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="{% static 'js/notify.js' %}"></script>
     <script>
         function showPreview1(event){
           if(event.target.files.length > 0){
@@ -55,30 +56,15 @@
           if(preview_1 !== "block" || preview_2 !== "block" || bank_account_number.trim() === '' ||
             bank_name.trim() === '' || bank_username.trim() === '') {
             if(old_photo_1 === "none" && old_photo_2 === "none") {
-              alert('Please insert photo and fill in all information.');
+              $(".submit_button").notify("Please insert photo and fill in all information.", {position: "top left"}, "error");
             }
             else {
               if(bank_account_number.trim() === '' || bank_name.trim() === '' || bank_username.trim() === '') {
-                alert('Please fill in all information.');
+                $(".submit_button").notify("Please fill in all information.", {position: "top left"}, "error");
               } else {
                 $("#bank_account").submit();
               }
             }
-          } else {
-            $("#bank_account").submit();
-          }
-        }
-
-        function submitForm_new() {
-          const preview_1 = $("#file-ip-1-preview").css("display");
-          const preview_2 = $("#file-ip-2-preview").css("display");
-          const bank_account_number = $("#bank_account_number").val();
-          const bank_name = $("#bank_name").val();
-          const bank_username = $("#bank_username").val();
-
-          if(preview_1 !== "block" || preview_2 !== "block" || bank_account_number.trim() === '' ||
-            bank_name.trim() === '' || bank_username.trim() === '') {
-            alert('Please insert photo and fill in all information.');
           } else {
             $("#bank_account").submit();
           }
@@ -193,7 +179,7 @@
                     </div>
 
                     <!-- BUTTON -->
-                    <span class="btn-shouter btn-main" style="margin: 10px 0; text-align: center" onclick="submitForm()">บันทึก</span>
+                    <span class="btn-shouter btn-main submit_button" style="margin: 10px 0; text-align: center" onclick="submitForm()">บันทึก</span>
 
                 </div>
                 {% else %}
@@ -329,7 +315,7 @@
                     </div>
 
                     <!-- BUTTON -->
-                    <span class="btn-shouter btn-main" style="margin: 10px 0; text-align: center" onclick="submitForm()">บันทึก</span>
+                    <span class="btn-shouter btn-main submit_button" style="margin: 10px 0; text-align: center" onclick="submitForm()">บันทึก</span>
 
                 </div>
                 {% endif %}

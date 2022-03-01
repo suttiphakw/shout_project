@@ -18,9 +18,9 @@ def get(id_token):
   except:
     return False
 
-  try:
+  if 'picture' in data.keys():
     line_profile_picture = data['picture']
-  except:
+  else:
     line_profile_picture = None
 
   context = {

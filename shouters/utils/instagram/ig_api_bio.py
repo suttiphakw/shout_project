@@ -17,9 +17,13 @@ def get(business_account_id, access_token):
     media_count = data['media_count']
     followers_count = data['followers_count']
     followings_count = data['follows_count']
-    ig_profile_picture = data['profile_picture_url']
   except:
     return False
+
+  if 'profile_picture_url' in data.keys():
+    ig_profile_picture = data['profile_picture_url']
+  else:
+    ig_profile_picture = None
 
   context = {
     'username': username,
