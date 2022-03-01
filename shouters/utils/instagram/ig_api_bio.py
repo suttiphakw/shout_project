@@ -18,7 +18,7 @@ def get(business_account_id, access_token):
     followers_count = data['followers_count']
     followings_count = data['follows_count']
     ig_profile_picture = data['profile_picture_url']
-  except ValueError:
+  except:
     return False
 
   context = {

@@ -6,8 +6,7 @@ def get(id_token):
     'id_token': id_token,
     'client_id': settings.line_client_id
   }
-  response = requests.get(settings.line_endpoint + 'verify/',
-                          data=params)
+  response = requests.post(settings.line_endpoint + 'verify/', data=params)
 
   if not response.ok:
     return False

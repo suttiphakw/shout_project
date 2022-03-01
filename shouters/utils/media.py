@@ -1,3 +1,6 @@
+import datetime
+from datetime import timezone, timedelta
+
 # Upload Image
 def get_unique_name(dir, filename, shouter):
   if not dir.endswith('/'):
