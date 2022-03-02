@@ -183,10 +183,10 @@ def shouters_pre_save(sender, instance, *args, **kwargs):
 
         # Get New Data
         response = refresh_shouters(access_token=access_token, business_account_id=business_account_id)
-        # FB
+        # FB Biography
         instance.fb_name = response.get("fb_name", None)
-        # IG Biography
         instance.fb_profile_picture = response.get("fb_profile_picture", None)
+        # IG Biography
         instance.ig_username = response.get("ig_username", None)
         instance.ig_media_count = response.get("ig_media_count", None)
         instance.ig_follower_count = response.get("ig_follower_count", None)
@@ -201,10 +201,13 @@ def shouters_pre_save(sender, instance, *args, **kwargs):
         instance.ig_response_media_objects = response.get("ig_response_media_objects", None)
         # Engagement
         instance.ig_average_total_like = response.get("ig_average_total_like", None)
-        instance.ig_engagement_percent = response.get("ig_engagement_percent", None)
         instance.ig_story_view = response.get("ig_story_view", None)
         instance.ig_average_post_reach = response.get("ig_average_post_reach", None)
+        # Engagement => จากการคำนวน
+        instance.ig_engagement_percent = response.get("ig_engagement_percent", None)
         instance.ig_predicted_ad_post_reach = response.get("ig_predicted_ad_post_reach", None)
+        instance.ig_post_reach_guarantee = response.get("ig_post_reach_guarantee", None)
+        instance.ig_story_view_guarantee = response.get("ig_story_view_guarantee", None)
         instance.ig_ad_post_reach = response.get("ig_ad_post_reach", None)
         # Price
         instance.ig_price_story_fc = response.get("ig_price_story_fc", None)
