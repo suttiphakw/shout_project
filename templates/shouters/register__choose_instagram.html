@@ -82,8 +82,13 @@
                 </div>
 
                 <div class="register__choose-ig__radio-btn__body">
-                  <img src="{{ obj.ig_profile_picture }}" alt=""
-                    style="width: 20rem; height: 20rem; border-radius: 50%">
+                  {% if obj.ig_profile_picture %}
+                    <img src="{{ obj.ig_profile_picture }}" alt="" style="width: 20rem; height: 20rem; border-radius: 50%">
+                  {% else %}
+                    <svg style="width: 20rem; height: 20rem; border-radius: 50%">
+                      <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>
+                    </svg>
+                  {% endif %}
                   <p class="register__choose-ig__radio-btn__body__main">@{{ obj.ig_username }}</p>
                   <p>Facebook : {{ obj.fb_name }}</p>
                   <p>Page : {{ obj.page_name }}</p>
@@ -136,8 +141,13 @@
                 </div>
 
                 <div class="register__choose-ig__radio-btn__body">
-                  <img src="{{ obj.ig_profile_picture }}" alt=""
-                    style="width: 20rem; height: 20rem; border-radius: 50%">
+                  {% if obj.ig_profile_picture %}
+                    <img src="{{ obj.ig_profile_picture }}" alt="" style="width: 20rem; height: 20rem; border-radius: 50%">
+                  {% else %}
+                    <svg style="width: 20rem; height: 20rem; border-radius: 50%">
+                      <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>
+                    </svg>
+                  {% endif %}
                   <p class="register__choose-ig__radio-btn__body__main">@{{ obj.ig_username }}</p>
                   <p>Facebook : {{ obj.fb_name }}</p>
                   <p>Page : {{ obj.page_name }}</p>

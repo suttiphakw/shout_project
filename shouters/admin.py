@@ -24,7 +24,7 @@ class ShouterAdmin(admin.ModelAdmin):
         # Instagram
         'ig_business_account_id', 'ig_username', 'ig_media_count', 'ig_follower_count', 'ig_following_count',
         'ig_active_follower', 'ig_active_follower_harmonic', 'ig_active_follower_percent', 'ig_profile_picture',
-        'ig_average_total_like', 'ig_engagement_percent', 'ig_story_view',
+        'ig_average_total_like', 'ig_engagement_percent', 'ig_story_view','ig_post_reach_guarantee','ig_story_view_guarantee',
         'ig_average_post_reach', 'ig_predicted_ad_post_reach', 'ig_ad_post_reach',
         # Pricing
         'ig_price_story_fc', 'ig_price_story_ugc', 'ig_price_post_fc', 'ig_price_post_ugc', 'ig_price_story_post_fc',

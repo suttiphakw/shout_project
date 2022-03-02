@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'pages',
     'accounts',
+    'brands',
     'shouters',
     'rest_framework',
     'rest_framework_simplejwt',
