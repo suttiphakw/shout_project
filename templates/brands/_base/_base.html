@@ -16,12 +16,43 @@
       <!-- LOGO -->
       <img src="{% static 'img/logo/logo-01.png' %}" alt="">
       <!-- NOTIFICATION -->
-      <svg class="brand_header__notification">
-        <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-notifications-outline"></use>
-      </svg>
+      <div class="brand_header__notification">
+        <svg class="brand_header__notification__icon">
+          <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-notifications-outline"></use>
+        </svg>
+        <!-- <p>notification</p> -->
+      </div>      
     </header>
     <section class="brand_sidebar">
-
+      <div class="brand_sidebar__top">
+        <p class="brand_sidebar__text">MENU</p>
+        <a href="" class="brand_sidebar__menu brand_sidebar__selected">
+          <svg class="brand_sidebar__icon">
+            <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-home"></use>
+          </svg>
+          <span>หน้าหลัก</span>
+        </a>
+        <a href="" class="brand_sidebar__menu">
+          <svg class="brand_sidebar__icon">
+            <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-bullhorn"></use>
+          </svg>
+          <span>แคมเปญของคุณ</span>
+        </a>
+        <a href="" class="brand_sidebar__menu">
+          <svg class="brand_sidebar__icon">
+            <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-cog"></use>
+          </svg>
+          <span>ตั้งค่า</span>
+        </a>        
+      </div>
+      <div class="brand_sidebar__bottom">
+        <a href="" class="brand_sidebar__menu">
+          <svg class="brand_sidebar__icon">
+            <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-exit"></use>
+          </svg>
+          <span>ออกจากระบบ</span>
+        </a>        
+      </div>
     </section>
     <section class="brand_content">
       {% block content %} {% endblock %}

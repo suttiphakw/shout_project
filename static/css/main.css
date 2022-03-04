@@ -207,7 +207,10 @@ h6 {
 }
 
 .brand_content {
-  margin-top: 5rem;
+  margin-top: 4rem;
+  margin-left: 15rem;
+  background-color: #F0F0F0;
+  min-height: 100vh;
 }
 
 button {
@@ -240,11 +243,10 @@ button {
 
 .brand_header {
   position: fixed;
-  height: 5rem;
+  height: 4rem;
   top: 0;
   left: 0;
   right: 0;
-  background-color: black;
   padding: 0 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -255,16 +257,102 @@ button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  background-color: white;
 }
 
 .brand_header img {
-  height: 5rem;
+  height: 4rem;
 }
 
 .brand_header__notification {
-  height: 2rem;
-  width: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+}
+
+.brand_header__notification__icon {
+  height: 1.5rem;
+  width: 1.5rem;
   fill: var(--color-primary);
+}
+
+.brand_sidebar {
+  position: fixed;
+  top: 4rem;
+  bottom: 0;
+  left: 0;
+  width: 15rem;
+  background: var(--color-main-gradient);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 2rem 0 3rem;
+  color: white;
+}
+
+.brand_sidebar a {
+  color: white;
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+.brand_sidebar__top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.brand_sidebar__text {
+  opacity: 0.6;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.brand_sidebar__menu {
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.brand_sidebar__menu:hover {
+  border-left: 4px solid white;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1rem calc(1rem - 4px);
+  -webkit-transition: 0.5s ease-out;
+  transition: 0.5s ease-out;
+}
+
+.brand_sidebar__selected:link {
+  border-left: 4px solid white;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1rem calc(1rem - 4px);
+}
+
+.brand_sidebar__selected:link:link {
+  opacity: 0.9;
+}
+
+.brand_sidebar__icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: white;
+  margin-right: 1rem;
 }
 
 .login {

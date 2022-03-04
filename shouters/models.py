@@ -164,16 +164,16 @@ def shouters_pre_save(sender, instance, *args, **kwargs):
         # Check IG PHOTO
         access_token = instance.fb_main_access_token
         business_account_id = instance.ig_business_account_id
-        ig_profile_picture = instance.ig_profile_picture
-        response = requests.get(ig_profile_picture)
 
-        if not response.ok:
-            # Get Bio
-            context__ig_biography = ig_api_bio.get(business_account_id=business_account_id, access_token=access_token)
-            if context__ig_biography:
-                ig_profile_picture = context__ig_biography.get('profile_picture_url')
+        # Get Bio
+        context__ig_biography = ig_api_bio.get(business_account_id=business_account_id, access_token=access_token)
+        if context__ig_biography:
+            ig_profile_picture = context__ig_biography['ig_profile_picture']
+            if ig_profile_picture:
                 instance.ig_profile_picture = ig_profile_picture
-                instance.save()
+            else:
+                instance.ig_profile_picture = None
+            instance.save()
 
     # Refresh Shouter Data
     if instance.is_refresh_shouters_data is True:
