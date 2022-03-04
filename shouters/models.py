@@ -6,7 +6,7 @@ from shouters.lineMessagingApi.adminApproveApi import (api__admin_approve_text_m
                                                        api__admin_approve_flex_message,
                                                        api__admin_approve_image_message)
 from shouters.refresh_data import refresh_shouters
-from .utils.instagram import ig_api_bio
+from shouters.utils.refresh import ig_photo
 
 import requests
 
@@ -164,15 +164,10 @@ def shouters_pre_save(sender, instance, *args, **kwargs):
         # Check IG PHOTO
         access_token = instance.fb_main_access_token
         business_account_id = instance.ig_business_account_id
-
         # Get Bio
-        context__ig_biography = ig_api_bio.get(business_account_id=business_account_id, access_token=access_token)
-        if context__ig_biography:
-            ig_profile_picture = context__ig_biography['ig_profile_picture']
-            if ig_profile_picture:
-                instance.ig_profile_picture = ig_profile_picture
-            else:
-                instance.ig_profile_picture = None
+        ig_profile_picture = ig_photo.get(business_account_id=business_account_id, access_token=access_token)
+        if ig_profile_picture:
+            instance.ig_profile_picture = ig_profile_picture
             instance.save()
 
     # Refresh Shouter Data
