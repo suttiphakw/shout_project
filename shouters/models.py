@@ -160,14 +160,14 @@ class Shouter(models.Model):
 # Function check before save
 def shouters_pre_save(sender, instance, *args, **kwargs):
     # Admin Approve
-    if instance.is_approve is True and instance.is_already_approve is False:
-        # Check IG PHOTO
-        access_token = instance.fb_main_access_token
-        business_account_id = instance.ig_business_account_id
-        # Get Bio
-        ig_profile_picture = ig_photo(business_account_id=business_account_id, access_token=access_token)
-        instance.ig_profile_picture = ig_profile_picture
-        instance.save()
+    # if instance.is_approve is True and instance.is_already_approve is False:
+    #     # Check IG PHOTO
+    #     access_token = instance.fb_main_access_token
+    #     business_account_id = instance.ig_business_account_id
+    #     # Get Bio
+    #     ig_profile_picture = ig_photo(business_account_id=business_account_id, access_token=access_token)
+    #     instance.ig_profile_picture = ig_profile_picture
+    #     instance.save()
 
     # Refresh Shouter Data
     if instance.is_refresh_shouters_data is True:
