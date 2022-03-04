@@ -1,6 +1,6 @@
 from shouters.utils.instagram import ig_api_bio
 
-def get(access_token, business_account_id):
+def ig_photo(access_token, business_account_id):
   context__ig_biography = ig_api_bio.get(business_account_id, access_token)
   if not context__ig_biography:
     return None
