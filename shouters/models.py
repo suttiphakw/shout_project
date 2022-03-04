@@ -166,9 +166,8 @@ def shouters_pre_save(sender, instance, *args, **kwargs):
         business_account_id = instance.ig_business_account_id
         # Get Bio
         ig_profile_picture = ig_photo.get(business_account_id=business_account_id, access_token=access_token)
-        if ig_profile_picture:
-            instance.ig_profile_picture = ig_profile_picture
-            instance.save()
+        instance.ig_profile_picture = ig_profile_picture
+        instance.save()
 
     # Refresh Shouter Data
     if instance.is_refresh_shouters_data is True:
