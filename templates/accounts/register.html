@@ -11,7 +11,7 @@
   <title>Shout | Register</title>
 </head>
 <body>
-  <main class="register">
+  <main>
     <section class="register">
       <article class="register__left">
         <img src="{% static 'img/accounts/register__left.png' %}" alt="">
@@ -24,56 +24,62 @@
         <div class="register__right__card">
           <form action="{% url 'register' %}" method="post"> {% csrf_token %}
             <div class="register__input">
-              <div class="register__input__box">
-                <div class="register__input__box__1">
-
+              <!-- First Name -->
+              <div class="register__input__box-3">
+                <label for="first_name">First name</label>
+                <input type="text" required id="first_name" name="first_name">
+              </div>
+              <!-- Last Name -->
+              <div class="register__input__box-4">
+                <label for="last_name">Last name</label>
+                <input type="text" required id="last_name" name="last_name">
+              </div>
+              <!-- Email -->
+              <div class="register__input__box-2">
+                <label for="email">Email Address</label>
+                <input type="email" required id="email" name="email">
+              </div>
+              <!-- Tel -->
+              <div class="register__input__box-1">
+                <label for="tel">Phone Number</label>
+                <input type="tel" required id="tel" name="tel">
+              </div>
+              <!-- Password 1 -->
+              <div class="register__input__box-2">
+                <label for="password_1">Password</label>
+                <input type="password" required id="password_1" name="password_1">
+              </div>
+              <!-- Company -->
+              <div class="register__input__box-1">
+                <label for="company">Company</label>
+                <input type="text" required id="company" name="company">
+              </div>
+              <!-- Password 2 -->
+              <div class="register__input__box-2">
+                <label for="password_2">Confirm Password</label>
+                <input type="password" required id="password_2" name="password_2">
+              </div>
+              <!-- Position -->
+              <div class="register__input__box-1">
+                <label for="position">Position</label>
+                <input type="text" required id="position" name="position">
+              </div>
+              <div class="register__input__box-2">
+                <div class="register__input__checkbox">
+                  <input type="checkbox" id="agree">
+                  <label for="agree">I agree to Terms & conditions and Privacy policy</label>
                 </div>
-                <div class="register__input__box__1">
-                  
-                </div>
+                <button class="btn__orange" type="submit">Sign Up &#8594;</button>
               </div>
-              <div class="register__input__box">
-
-              </div>
-              <div class="register__input__box">
-                
-              </div>
-            </div>
-            <!-- First Name -->
-            <label for="first_name">First name</label>
-            <input type="text" required id="first_name" name="first_name">
-            <!-- Last Name -->
-            <label for="last_name">Last name</label>
-            <input type="text" required id="last_name" name="last_name">
-            <!-- Email -->
-            <label for="email">Email</label>
-            <input type="email" required id="email" name="email">
-            <br>
-            <!-- Tel -->
-            <label for="tel">Phone Number</label>
-            <input type="tel" required id="tel" name="tel">
-            <br>
-            <!-- Company -->
-            <label for="company">Company</label>
-            <input type="text" required id="company" name="company">
-            <br>
-            <!-- Position -->
-            <label for="position">Position</label>
-            <input type="text" required id="position" name="position">
-            <br>
-            <!-- Password 1 -->
-            <label for="password_1">Password</label>
-            <input type="password" required id="password_1" name="password_1">
-            <br>
-            <!-- Password 2 -->
-            <label for="password_2">Confirm Password</label>
-            <input type="password" required id="password_2" name="password_2">
-            <br>
-            <!-- Submit -->
-            <button type="submit">Sign Up</button>
+            </div>          
             {% include 'partials/_alerts.html' %}
           </form>
-        </div>      
+        </div>
+        <div class="register__right__text">
+          <a href="">
+            <p>มีบัญชีอยู่แล้ว? Log-in</p>
+          </a>        
+        </div>
       </article>
     </section>
   </main>
