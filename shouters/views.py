@@ -343,11 +343,8 @@ def register__finished(request, token):
 
   shouter.is_finished_regis = True
   shouter.save()
-  # response_text = LineApiMessage().api__wait_for_approve_text_message(line_user_id=shouter.line_user_id)
-  # response_flex = LineApiMessage().api__wait_for_approve_flex_message(line_user_id=shouter.line_user_id)
-
-  # if not response_text.ok or not response_flex.ok:
-  #   return HttpResponse('404Error')
+  response_text = LineApiMessage().api__wait_for_approve_text_message(line_user_id=shouter.line_user_id)
+  response_flex = LineApiMessage().api__wait_for_approve_flex_message(line_user_id=shouter.line_user_id)
 
   context = {
     'token': token

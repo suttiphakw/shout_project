@@ -43,7 +43,7 @@ def login(request):
     user = auth.authenticate(username=email, password=password)
     if user is not None:
       auth.login(request, user)
-      return redirect('brand__home')
+      return redirect('brand__index')
     else:
       messages.error(request, 'Incorrect email or password')
       return redirect('login')

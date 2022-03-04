@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{% static 'img/logo/logo-07.png' %}">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <title>Shout | {% block title %} {% endblock %}</title>
+</head>
+<body>
+  <main>
+    <header class="brand_header">
+      <!-- LOGO -->
+      <img src="{% static 'img/logo/logo-01.png' %}" alt="">
+      <!-- NOTIFICATION -->
+      <svg class="brand_header__notification">
+        <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-notifications-outline"></use>
+      </svg>
+    </header>
+    <section class="brand_sidebar">
+
+    </section>
+    <section class="brand_content">
+      {% block content %} {% endblock %}
+    </section>
+  </main>
+</body>
+</html>
