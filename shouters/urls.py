@@ -18,7 +18,6 @@ urlpatterns = [
     path('register/facebook-error-1/<str:token>/', views.register__connect_facebook_error_1, name='shouter__register__connect-facebook-error-1'),
     path('register/facebook-error-2/<str:token>/', views.register__connect_facebook_error_2, name='shouter__register__connect-facebook-error-2'),
     path('register/facebook-change/<str:token>/', views.register__connect_facebook_change, name='shouter__register__connect-facebook-change'),
-    path('register/info-6/<str:token>/', views.register__info_6, name='shouter__register__info-6'),
     path('register/choose-instagram/<str:token>/', views.register__choose_instagram, name='shouter__register__choose_instagram'),
     path('register/work-selection/<str:token>/', views.register__work_selection, name='shouter__register__work_selection'),
     path('register/account-summary/<str:token>/', views.register__account_summary, name='shouter__register__account_summary'),
