@@ -80,13 +80,6 @@ def register__facebook_checkbox(request, token):
   return render(request, 'shouters/register__facebook-checkbox.html', context=context)
 
 
-def register__info_6(request, token):
-  context = {
-      'token': token
-  }
-  return render(request, 'shouters/register__info-6.html', context=context)
-
-
 def register(request, token):
   try:
     decoded_token = jwt_token.decode(token)
@@ -127,7 +120,7 @@ def register(request, token):
       education = request.POST['education']
       college = request.POST['college']
       interest = request.POST.getlist('interest')
-    except ValueError:
+    except KeyError:
       context = {
         'warning': 'Please Fulfill the information',
         'token': token,
@@ -168,7 +161,7 @@ def register__choose_instagram(request, token):
     decoded_token = jwt_token.decode(token)
     _id = decoded_token['_id']
     pass
-  except ValueError:
+  except KeyError:
     # Go to Token Failed Page
     return HttpResponse('Token Failed')
 
@@ -193,7 +186,7 @@ def register__account_summary(request, token):
     decoded_token = jwt_token.decode(token)
     _id = decoded_token['_id']
     pass
-  except ValueError:
+  except KeyError:
     # Go to Token Failed Page
     return HttpResponse('Token Failed')
 
@@ -217,7 +210,7 @@ def register__work_selection(request, token):
     decoded_token = jwt_token.decode(token)
     _id = decoded_token['_id']
     pass
-  except ValueError:
+  except KeyError:
     # Go to Token Failed Page
     return HttpResponse('Token Failed')
 
@@ -655,7 +648,7 @@ def register__get_ig_data(request, token):
     ig_following_count = decoded_token['ig_following_count']
     ig_profile_picture = decoded_token['ig_profile_picture']
     pass
-  except ValueError:
+  except KeyError:
     # Go to Token Failed Page
     return HttpResponse('Token Failed')
 
@@ -715,16 +708,16 @@ def register__get_ig_data(request, token):
 
     # เก็บ POST REACH เพื่อดูว่าเก็บไก้มากกว่า 3 ไหม
     context__post_reach = ig_api_engagement.get_reach(final_dict=final_dict, access_token=access_token)
-    try:
+    if 'ig_average_post_reach' in context__post_reach.keys():
       reach_list = context__post_reach['reach_list']
-    except ValueError:
-      reach_list = []
-    # Media < 3 -> like = average, story_view = 0, post_reach = 0
-    if len(media_objects) < 3 or len(reach_list) < 3:
-      ig_average_post_reach = predicted_post_reach.get(ig_average_total_like=ig_average_total_like, ig_story_view=ig_story_view)
+      # Media < 3 -> like = average, story_view = 0, post_reach = 0
+      if len(media_objects) < 3 or len(reach_list) < 3:
+        ig_average_post_reach = predicted_post_reach.get(ig_average_total_like=ig_average_total_like, ig_story_view=ig_story_view)
+      else:
+        # AVERAGE POST REACH
+        ig_average_post_reach = context__post_reach['ig_average_post_reach']
     else:
-      # AVERAGE POST REACH
-      ig_average_post_reach = context__post_reach['ig_average_post_reach']
+      ig_average_post_reach = predicted_post_reach.get(ig_average_total_like=ig_average_total_like, ig_story_view=ig_story_view)
   ##########################################################################################################################
 
   ##########################################################################################################################

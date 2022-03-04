@@ -62,8 +62,13 @@ def get_reach(final_dict, access_token):
       continue
 
   # Calculate Average Post Reach
-  ig_average_post_reach = statistics.mean(reach_list)
+  if not reach_list:
+    context = {
+      'reach_list': reach_list
+    }
+    return context
 
+  ig_average_post_reach = statistics.mean(reach_list)
   context = {
     'reach_list': reach_list,
     'ig_average_post_reach': ig_average_post_reach
