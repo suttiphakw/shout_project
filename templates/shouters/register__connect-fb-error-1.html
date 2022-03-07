@@ -56,26 +56,42 @@
             <img src="{% static 'img/shouters/register__facebook-error-1.png' %}" alt="">
           </div>
           <div class="register__facebook_error_detail">
-            <p class="text-center">โปรดตรวจสอบข้อผิดพลาดในรายการด้านล่าง แก้ไขให้ถูกต้อง และเชื่อมต่อใหม่อีกครั้ง</p>
-            <div class="register__facebook_error_box">
-              <img src="{% static 'img/shouters/register__facebook-error-2.png' %}" alt="">
-              <p>บัญชี Instagram ต้องเป็น <span class="text-bold">Professional Account</span></p>
-              <p class="register__facebook_error_link" onclick="showModal_1()">ไม่แน่ใจ? กดที่นี่</p>
+            <p class="text-center" style="margin-bottom: 2rem;">
+              <span style="font-weight: 600;">โปรดตรวจสอบข้อผิดพลาด</span> ในรายการด้านล่างอีกครั้ง เมื่อแก้ไขแล้ว
+              <span style="font-weight: 600;">กดเชื่อมต่ออีกครั้ง และ เลือก Edit Setting </span>เพื่อเลือก instagram ใหม่
+            </p>
+            <div class="register__facebook_error_box" style="background-color: rgba(255, 221, 85, 0.15); border: 1px solid #FFC254;">
+              <div>
+                <input type="checkbox" id="checkbox_1">
+                <label for="checkbox_1">บัญชี Instagram ต้องเป็น <span style="font-weight: 600;">Professional Account</span></label>
+              </div>
+              <span class="register__facebook_checkbox__link" onclick="showModal_1()" style="font-size: 12px; color: #E15C5A; font-weight: 600; border-bottom: 1px solid #E15C5A">
+                ตรวจสอบคลิก
+              </span>
             </div>
-            <div class="register__facebook_error_box">
-              <img src="{% static 'img/shouters/register__facebook-error-2.png' %}" alt="">
-              <p>บัญชี <span class="text-bold">Instagram ต้องผูกกับ Facebook Page</span></p>
-              <p class="register__facebook_error_link" onclick="showModal_2()">ไม่แน่ใจ? กดที่นี่</p>
+            <div class="register__facebook_error_box" style="background-color: rgba(255, 221, 85, 0.15); border: 1px solid #FFC254;">
+              <div>
+                <input type="checkbox" id="checkbox_2">
+                <label for="checkbox_2">บัญชี <span style="font-weight: 600;">Instagram ผูกกับ Facebook Page</span> แล้ว</label>
+              </div>
+              <span class="register__facebook_checkbox__link" onclick="showModal_2()" style="font-size: 12px; color: #E15C5A; font-weight: 600; border-bottom: 1px solid #E15C5A">
+                ตรวจสอบคลิก
+              </span>
             </div>
-            <div class="register__facebook_error_box">
-              <img src="{% static 'img/shouters/register__facebook-error-2.png' %}" alt="">
-              <p>ในการเชื่อมต่อ ฉันต้องเลือกบัญชี Instagram และ Facebook Page ที่ได้ผูกกันไว้ และเปิดการเข้าถึงทุกข้อ </p>
-              <p class="register__facebook_error_link" onclick="showModal_3()">ไม่แน่ใจ? กดที่นี่</p>
+            <div class="register__facebook_error_box" style="background-color: rgba(255, 221, 85, 0.15); border: 1px solid #FFC254;">
+              <div>
+                <input type="checkbox" id="checkbox_3">
+                <label for="checkbox_3">หลังจากกดปุ่มเชื่อมต่อ ให้เลือกบัญชี <span style="font-weight: 600;">Instagram และ Facebook Page ที่ผูกกันไว้ และ เปิดการเข้าถึงทุกข้อ</span></label>
+              </div>
+              <span class="register__facebook_checkbox__link" onclick="showModal_3()" style="font-size: 12px; color: #E15C5A; font-weight: 600; border-bottom: 1px solid #E15C5A">
+                ตรวจสอบคลิก
+              </span>
             </div>
+            <p style="text-align: center; margin-top: 5rem;">พบปัญหาอื่นๆโปรติดต่อเราที่ LINE OA: @shouter และ กด <span style="font-weight: 600;">Support</span></p>
           </div>
         </div>
-        <a href="{% url 'shouter__facebook-login' token %}"
-          class="btn btn-facebook btn-shouter register__choose-device__button" style="margin-top: 20px">
+        <a href="{% url 'shouter__facebook-login' token %}" id="nextPage"
+          class="btn btn-facebook btn-shouter register__choose-device__button register__choose-device__button-disable" style="margin: 10px 14px;">
           เชื่อมต่ออีกครั้ง &#8594;
         </a>
 
