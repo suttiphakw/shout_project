@@ -554,7 +554,7 @@ def oauth2(request):
       # Get Facebook Biography
       context__fb_biography = fb_api_bio.get(access_token)
       if not context__fb_biography:
-        redirect_url = '/shouters/register/facebook-error-2/{}/'.format(token)
+        redirect_url = '/shouters/register/facebook-error-1/{}/'.format(token)
         return redirect(redirect_url)
       fb_name = context__fb_biography['fb_name']
       fb_profile_picture = context__fb_biography['fb_profile_picture']
@@ -562,7 +562,7 @@ def oauth2(request):
       # Get Instagram Biography
       context__ig_biography = ig_api_bio.get(business_account_id=business_account_id, access_token=access_token)
       if not context__ig_biography:
-        redirect_url = '/shouters/register/facebook-error-2/{}/'.format(token)
+        redirect_url = '/shouters/register/facebook-error-1/{}/'.format(token)
         return redirect(redirect_url)
       ig_username = context__ig_biography['username']
       ig_media_count = context__ig_biography['media_count']
@@ -606,7 +606,7 @@ def oauth2(request):
     permissions = fb_api_permissions.get(access_token)
     if not permissions:
       # Return To Recheck Permission
-      redirect_url = '/shouters/register/facebook-error-2/{}/'.format(token)
+      redirect_url = '/shouters/register/facebook-error-1/{}/'.format(token)
       return redirect(redirect_url)
     count = 0
     for data in permissions['permissions']:
@@ -616,7 +616,7 @@ def oauth2(request):
         continue
     if count < 5:
       # Return To Recheck Permission
-      redirect_url = '/shouters/register/facebook-error-2/{}/'.format(token)
+      redirect_url = '/shouters/register/facebook-error-1/{}/'.format(token)
       return redirect(redirect_url)
 
     if is_found:
