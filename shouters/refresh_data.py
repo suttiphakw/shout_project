@@ -70,6 +70,7 @@ def refresh_shouters(access_token, business_account_id):
     ig_average_total_like = 0
     ig_story_view = 0
     ig_average_post_reach = 0
+    ig_reach_source = 'no media'
   else:
     # context__like_engagement return เป็น dict => dict['list_like'] = list และ dict['mean'] = average like after cut outlier
     context__like_engagement = ig_api_engagement.get_like(media_objects=media_objects, access_token=access_token)
@@ -85,11 +86,14 @@ def refresh_shouters(access_token, business_account_id):
       # Media < 3 -> like = average, story_view = 0, post_reach = 0
       if len(media_objects) < 3 or len(reach_list) < 3:
         ig_average_post_reach = predicted_post_reach.get(ig_average_total_like=ig_average_total_like, ig_story_view=ig_story_view)
+        ig_reach_source = 'predicted'
       else:
         # AVERAGE POST REACH
         ig_average_post_reach = context__post_reach['ig_average_post_reach']
+        ig_reach_source = 'api'
     else:
       ig_average_post_reach = predicted_post_reach.get(ig_average_total_like=ig_average_total_like, ig_story_view=ig_story_view)
+      ig_reach_source = 'predicted'
   ##########################################################################################################################
 
   ##########################################################################################################################
@@ -154,6 +158,7 @@ def refresh_shouters(access_token, business_account_id):
     "ig_average_total_like": ig_average_total_like,
     "ig_story_view": ig_story_view,
     "ig_average_post_reach": ig_average_post_reach,
+    "ig_reach_source": ig_reach_source,
     ##########################################################################################################################
     # Engagement => จากการคำนวน
     "ig_engagement_percent": ig_engagement_percent,

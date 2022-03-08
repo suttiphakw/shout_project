@@ -198,6 +198,7 @@ def shouters_pre_save(sender, instance, *args, **kwargs):
         instance.ig_average_total_like = response.get("ig_average_total_like", None)
         instance.ig_story_view = response.get("ig_story_view", None)
         instance.ig_average_post_reach = response.get("ig_average_post_reach", None)
+        instance.ig_reach_source = response.get("ig_reach_source", None)
         # Engagement => จากการคำนวน
         instance.ig_engagement_percent = response.get("ig_engagement_percent", None)
         instance.ig_predicted_ad_post_reach = response.get("ig_predicted_ad_post_reach", None)
