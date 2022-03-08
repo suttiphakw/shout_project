@@ -1,5 +1,6 @@
 {% extends "_base.html" %}
 {% load static %}
+{% load humanize %}
 
 <!doctype html>
 <html lang="en">
@@ -66,48 +67,49 @@
       <form action="{% url 'shouter__register__choose_instagram' token %}" method="post" id="choose-instagram">
         {% csrf_token %}
         <div class="register__choose-ig__body">
-          {% for obj in list_obj %}
-          <div class="register__choose-ig__card">
-            <label for="{{ obj.encoded_token }}" class="register__choose-ig__custom-radio">
-              <input type="radio" id="{{ obj.encoded_token }}" value="{{ obj.encoded_token }}" name="instagram"
-                onclick="removeClass()">
-              <span class="register__choose-ig__radio-btn" onclick="removeClass()">
-                <div class="register__choose-ig__radio-btn__top">
-                  <svg class="register__choose-ig__instagram-icon">
-                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
-                  </svg>
-                  <svg class="register__choose-ig__check-icon">
-                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                  </svg>
-                </div>
-
-                <div class="register__choose-ig__radio-btn__body">
-                  {% if obj.ig_profile_picture %}
-                    <img src="{{ obj.ig_profile_picture }}" alt="" style="width: 20rem; height: 20rem; border-radius: 50%">
-                  {% else %}
-                    <svg style="width: 20rem; height: 20rem; border-radius: 50%">
-                      <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>
+          <div class="register__choose-ig__card__container" style="display: flex; flex-wrap: wrap; padding: 3rem">
+            {% for obj in list_obj %}
+            <div class="register__choose-ig__card">
+              <label for="{{ obj.encoded_token }}" class="register__choose-ig__custom-radio">
+                <input type="radio" id="{{ obj.encoded_token }}" value="{{ obj.encoded_token }}" name="instagram"
+                  onclick="removeClass()">
+                <span class="register__choose-ig__radio-btn" onclick="removeClass()" style="flex: 0 0 45%; margin: 0;">
+                  <div class="register__choose-ig__radio-btn__top">
+                    <svg class="register__choose-ig__instagram-icon">
+                      <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
                     </svg>
-                  {% endif %}
-                  <p class="register__choose-ig__radio-btn__body__main">@{{ obj.ig_username }}</p>
-                  <p>Facebook : {{ obj.fb_name }}</p>
-                  <p>Page : {{ obj.page_name }}</p>
-                </div>
-                <div class="register__choose-ig__radio-btn__body__info">
-                  <div class="register__choose-ig__radio-btn__body__info__left">
-                    <h2>{{ obj.ig_follower_count }}</h2>
-                    <p>Followers</p>
+                    <svg class="register__choose-ig__check-icon">
+                      <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                    </svg>
                   </div>
-                  <div class="register__choose-ig__radio-btn__body__info__right">
-                    <h2>{{ obj.ig_following_count }}</h2>
-                    <p>Followings</p>
-                  </div>
-                </div>
-              </span>
-            </label>
-          </div>
-          {% endfor %}
 
+                  <div class="register__choose-ig__radio-btn__body">
+                    {% if obj.ig_profile_picture %}
+                      <img src="{{ obj.ig_profile_picture }}" alt="" style="width: 20rem; height: 20rem; border-radius: 50%">
+                    {% else %}
+                      <svg style="width: 20rem; height: 20rem; border-radius: 50%">
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>
+                      </svg>
+                    {% endif %}
+                    <p class="register__choose-ig__radio-btn__body__main" style="font-size: 16px">@{{ obj.ig_username }}</p>
+                    <p style="font-size: 13px">Facebook : {{ obj.fb_name }}</p>
+                    <p style="font-size: 13px">Page : {{ obj.page_name }}</p>
+                  </div>
+                  <div class="register__choose-ig__radio-btn__body__info">
+                    <div class="register__choose-ig__radio-btn__body__info__left">
+                      <h2 style="font-size: 16px; font-weight: 600;">{{ obj.ig_follower_count|intcomma }}</h2>
+                      <p style="font-size: 13px">Followers</p>
+                    </div>
+                    <div class="register__choose-ig__radio-btn__body__info__right">
+                      <h2 style="font-size: 16px; font-weight: 600;">{{ obj.ig_following_count|intcomma }}</h2>
+                      <p style="font-size: 13px">Followings</p>
+                    </div>
+                  </div>
+                </span>
+              </label>
+            </div>
+            {% endfor %}
+            </div>
           <span
             style="text-align: center; font-size: 12px; color: #F37324;">หน้าถัดไปอาจใช้ระยะเวลาในการดำเนินการสักครู่
             โปรดรอประมาณ 15 วินาที</span>
@@ -115,6 +117,10 @@
           <span onclick="submitForm()" id="submitButton" class="btn btn-main btn-shouter submit__disabled"
             style="text-align: center">
             ยืนยันเชื่อมต่อเลย
+          </span>
+
+          <span style="text-align: center; font-size: 12px;">ไม่มีบัญชีที่ต้องการเชื่อมต่อ?
+            <a href="{% url 'shouter__register__connect-facebook-error-1' token %}" style="color: #F37324;">คลิ๊กที่นี่</a>
           </span>
         </div>
       </form>
@@ -126,47 +132,48 @@
       <form action="{% url 'shouter__register__choose_instagram' token %}" method="post" id="choose-instagram">
         {% csrf_token %}
         <div class="register__choose-ig__body">
+          <div class="register__choose-ig__card__container" style="display: flex; flex-wrap: wrap; padding: 3rem">
           {% for obj in list_obj %}
-          <div class="register__choose-ig__card">
-            <label for="{{ obj.encoded_token }}" class="register__choose-ig__custom-radio">
-              <input type="radio" id="{{ obj.encoded_token }}" value="{{ obj.encoded_token }}" name="instagram" checked>
-              <span class="register__choose-ig__radio-btn">
-                <div class="register__choose-ig__radio-btn__top">
-                  <svg class="register__choose-ig__instagram-icon">
-                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
-                  </svg>
-                  <svg class="register__choose-ig__check-icon">
-                    <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                  </svg>
-                </div>
-
-                <div class="register__choose-ig__radio-btn__body">
-                  {% if obj.ig_profile_picture %}
-                    <img src="{{ obj.ig_profile_picture }}" alt="" style="width: 20rem; height: 20rem; border-radius: 50%">
-                  {% else %}
-                    <svg style="width: 20rem; height: 20rem; border-radius: 50%">
-                      <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>
+            <div class="register__choose-ig__card">
+              <label for="{{ obj.encoded_token }}" class="register__choose-ig__custom-radio">
+                <input type="radio" id="{{ obj.encoded_token }}" value="{{ obj.encoded_token }}" name="instagram" checked>
+                <span class="register__choose-ig__radio-btn" style="flex: 0 0 45%; margin: 0;">
+                  <div class="register__choose-ig__radio-btn__top">
+                    <svg class="register__choose-ig__instagram-icon">
+                      <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-instagram"></use>
                     </svg>
-                  {% endif %}
-                  <p class="register__choose-ig__radio-btn__body__main">@{{ obj.ig_username }}</p>
-                  <p>Facebook : {{ obj.fb_name }}</p>
-                  <p>Page : {{ obj.page_name }}</p>
-                </div>
-                <div class="register__choose-ig__radio-btn__body__info">
-                  <div class="register__choose-ig__radio-btn__body__info__left">
-                    <h2>{{ obj.ig_follower_count }}</h2>
-                    <p>Followers</p>
+                    <svg class="register__choose-ig__check-icon">
+                      <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                    </svg>
                   </div>
-                  <div class="register__choose-ig__radio-btn__body__info__right">
-                    <h2>{{ obj.ig_following_count }}</h2>
-                    <p>Followings</p>
-                  </div>
-                </div>
-              </span>
-            </label>
-          </div>
-          {% endfor %}
 
+                  <div class="register__choose-ig__radio-btn__body">
+                    {% if obj.ig_profile_picture %}
+                      <img src="{{ obj.ig_profile_picture }}" alt="" style="width: 20rem; height: 20rem; border-radius: 50%">
+                    {% else %}
+                      <svg style="width: 20rem; height: 20rem; border-radius: 50%">
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-user"></use>
+                      </svg>
+                    {% endif %}
+                    <p class="register__choose-ig__radio-btn__body__main" style="font-size: 16px">@{{ obj.ig_username }}</p>
+                    <p style="font-size: 13px">Facebook : {{ obj.fb_name }}</p>
+                    <p style="font-size: 13px">Page : {{ obj.page_name }}</p>
+                  </div>
+                  <div class="register__choose-ig__radio-btn__body__info">
+                    <div class="register__choose-ig__radio-btn__body__info__left">
+                      <h2 style="font-size: 16px; font-weight: 600;">{{ obj.ig_follower_count|intcomma }}</h2>
+                      <p style="font-size: 13px">Followers</p>
+                    </div>
+                    <div class="register__choose-ig__radio-btn__body__info__right">
+                      <h2 style="font-size: 16px; font-weight: 600;">{{ obj.ig_following_count|intcomma }}</h2>
+                      <p style="font-size: 13px">Followings</p>
+                    </div>
+                  </div>
+                </span>
+              </label>
+            </div>
+          {% endfor %}
+          </div>
           <span
             style="text-align: center; font-size: 12px; color: #F37324;">หน้าถัดไปอาจใช้ระยะเวลาในการดำเนินการสักครู่
             โปรดรอประมาณ 15 วินาที</span>
