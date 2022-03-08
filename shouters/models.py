@@ -88,7 +88,7 @@ class Shouter(models.Model):
     ig_engagement_percent = models.FloatField(null=True, blank=True, verbose_name="IG => LIKE PERCENTAGE")
     ig_story_view = models.IntegerField(null=True, blank=True, verbose_name="IG => AVERAGE STORY VIEW")
     ig_average_post_reach = models.IntegerField(null=True, blank=True, verbose_name="IG => AVERAGE POST REACH")
-    ig_reach_source = models.CharField(null=True, blank=True, verbose_name="IG => REACH SOURCE (API / PREDICTED)")
+    ig_reach_source = models.CharField(max_length=120, null=True, blank=True, verbose_name="IG => REACH SOURCE (API / PREDICTED)")
     ig_predicted_ad_post_reach = models.IntegerField(null=True, blank=True, verbose_name="PREDICTED => LOW ADS REACH")
     ig_post_reach_guarantee = models.IntegerField(null=True, blank=True, verbose_name="GUARANTEE => POST REACH")
     ig_story_view_guarantee = models.IntegerField(null=True, blank=True, verbose_name="GUARANTEE => STORY VIEW")
