@@ -13,5 +13,13 @@ def campaigns(requests):
 
 
 @login_required()
-def create_campaigns(requests):
-  return render(requests, 'brands/campaigns_create.html')
+def create_name(requests):
+  return render(requests, 'brands/create/name.html')
+
+@login_required()
+def create_scope_budget(requests):
+  return render(requests, 'brands/create/scope_budget.html')
+
+@login_required()
+def create_content_type(requests):
+  return render(requests, 'brands/create/content_type.html')

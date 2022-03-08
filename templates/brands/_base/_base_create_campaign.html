@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{% static 'img/logo/logo-07.png' %}">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <title>Shout | {% block title %} {% endblock %}</title>
+</head>
+<body>
+  <main>
+    <header class="campaign__create__header">
+      <div class="campaign__create__header__left">
+        <p class="campaign__create__header__left__text__disable">แคมเปญของคุณ</p>
+        <svg class="campaign__create__header__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-cheveron-right"></use>
+        </svg>
+        <p class="campaign__create__header__left__text">Create Campaign</p>
+      </div>
+      <img src="{% static 'img/logo/logo-07.png' %}" alt="">
+    </header>
+    {% block content %} {% endblock %}
+  </main>
+</body>
+</html>

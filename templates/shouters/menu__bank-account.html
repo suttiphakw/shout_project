@@ -55,17 +55,19 @@
 
           if(preview_1 !== "block" || preview_2 !== "block" || bank_account_number.trim() === '' ||
             bank_name.trim() === '' || bank_username.trim() === '') {
-            if(old_photo_1 === "none" && old_photo_2 === "none") {
+            if(preview_1 === "none" || preview_2 === "none") {
               $(".submit_button").notify("Please insert photo and fill in all information.", {position: "top left"}, "error");
             }
             else {
               if(bank_account_number.trim() === '' || bank_name.trim() === '' || bank_username.trim() === '') {
                 $(".submit_button").notify("Please fill in all information.", {position: "top left"}, "error");
               } else {
+                {#console.log(preview_1, preview_2, old_photo_1, old_photo_2);#}
                 $("#bank_account").submit();
               }
             }
           } else {
+            {#console.log('case2');#}
             $("#bank_account").submit();
           }
         }

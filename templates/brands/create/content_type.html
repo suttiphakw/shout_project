@@ -1,0 +1,95 @@
+{% extends "brands/_base/_base_create_campaign.html" %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block title %} Create Campaign {% endblock %}
+</head>
+<body>
+  {% block content %}
+    <!-- Breadcrumb -->
+    <section class="campaign__create__breadcrumb">
+      <!--1-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Campaign Name</p>
+        </div>
+      </div>
+      <!--2-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Scope & Budget</p>
+        </div>
+      </div>
+      <!--3-->
+      <div class="campaign__create__breadcrumb__active">
+        <div class="campaign__create__breadcrumb__number">
+          <p>3</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Content Type</p>
+        </div>
+      </div>
+      <!--4-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>4</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Product Detail</p>
+        </div>
+      </div>
+      <!--5-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>5</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Target Customer</p>
+        </div>
+      </div>
+      <!--6-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>6</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Shouter Selection</p>
+        </div>
+      </div>
+      <!--7-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>7</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Timeline</p>
+        </div>
+      </div>
+      <!--8-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>8</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Brief</p>
+        </div>
+      </div>
+    </section>
+    <!-- Content -->
+    <section class="campaign__create__content">
+      <h1>Create Campaign Page</h1>
+    </section>
+  {% endblock %}
+</body>
+</html>
