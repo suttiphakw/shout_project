@@ -687,14 +687,15 @@ def register__get_ig_data(request, token):
   try:
     ig_response_media_objects = context__media_objects['data']
     media_objects = context__media_objects['media_objects']
-  except ValueError:
+  except KeyError:
     ig_response_media_objects = {}
     media_objects = []
   if not context__media_objects or len(media_objects) == 0:
     ig_average_total_like = 0
     ig_story_view = 0
     ig_average_post_reach = 0
-    error.log(shouter, 'ไม่สามารถเก็บ Post Reach ของ user ได้')
+    ig_reach_source = 'no media'
+    # error.log(shouter, 'ไม่สามารถเก็บ Post Reach ของ user ได้')
   else:
     # context__like_engagement return เป็น dict => dict['list_like'] = list และ dict['mean'] = average like after cut outlier
     context__like_engagement = ig_api_engagement.get_like(media_objects=media_objects, access_token=access_token)
@@ -710,11 +711,14 @@ def register__get_ig_data(request, token):
       # Media < 3 -> like = average, story_view = 0, post_reach = 0
       if len(media_objects) < 3 or len(reach_list) < 3:
         ig_average_post_reach = predicted_post_reach.get(ig_average_total_like=ig_average_total_like, ig_story_view=ig_story_view)
+        ig_reach_source = 'predicted'
       else:
         # AVERAGE POST REACH
         ig_average_post_reach = context__post_reach['ig_average_post_reach']
+        ig_reach_source = 'api'
     else:
       ig_average_post_reach = predicted_post_reach.get(ig_average_total_like=ig_average_total_like, ig_story_view=ig_story_view)
+      ig_reach_source = 'predicted'
   ##########################################################################################################################
 
   ##########################################################################################################################
@@ -727,6 +731,7 @@ def register__get_ig_data(request, token):
   shouter.ig_engagement_percent = ig_engagement_percent
   shouter.ig_story_view = ig_story_view
   shouter.ig_average_post_reach = ig_average_post_reach
+  shouter.ig_reach_source = ig_reach_source
   shouter.save()
 
   # Cal AD and Guarantee Reach
