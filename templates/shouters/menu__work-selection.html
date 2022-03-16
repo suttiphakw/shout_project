@@ -21,7 +21,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
   <!-- JS -->
 {#  <script src="{% static 'js/shouters/menu__work-selection.js' %}"></script>#}
-  <script>
+  <script >
     function toggleVisible(bool) {
       return bool !== true;
     }
@@ -86,7 +86,6 @@
     }
 
 
-
     function defaultVisible() {
       // IG
       const is_check_ig_bool = $("input[type='checkbox'][name='is_check_ig']").is(':checked');
@@ -114,12 +113,13 @@
     }
 
     $(document).ready(function(){
-      console.log('ready')
+      console.log('ready');
+      alert("test");
       defaultVisible();
     });
   </script>
   <!-- Title -->
-  <title>Shout | menu</title>
+  <title>Shout | Menu</title>
 </head>
 
 <body>
@@ -140,8 +140,7 @@
         <div class="content-2__body">
           <div class="register__account-summary__warning">
             <p class="register__account-summary__warning__icon">⭐️</p>
-            <p class="register__account-summary__warning__text">ราคาจะมีการปรับเปลี่ยนอยู่ตลอดเวลา ตามข้อมูล Instagram
-              และผลลัพธ์การ ทำงานของคุณ</p>
+            <p class="register__account-summary__warning__text">ราคาจะมีการปรับเปลี่ยนอยู่ตลอดเวลา ตามข้อมูล Instagram และผลลัพธ์การ ทำงานของคุณ</p>
           </div>
 
           <div class="social-card">
