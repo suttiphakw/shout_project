@@ -85,7 +85,6 @@
       is_visible(bool, is_check_twitter_visible);
     }
 
-
     function defaultVisible() {
       // IG
       const is_check_ig_bool = $("input[type='checkbox'][name='is_check_ig']").is(':checked');
@@ -114,7 +113,6 @@
 
     $(document).ready(function(){
       console.log('ready');
-      alert("test");
       defaultVisible();
     });
   </script>
@@ -157,7 +155,7 @@
                 {% else %}
                   <input type="checkbox" name="is_check_ig" id="is_check_ig">
                 {% endif %}
-                <span onclick="is_check_ig()" class="slider round"></span>å
+                <span onmousedown="is_check_ig()" class="slider round" id="is_check_ig_button"></span>å
               </label>
             </div>
             <div class="social-card__detail" id="is_check_ig_visible">
@@ -221,7 +219,7 @@
                 {% else %}
                   <input type="checkbox" name="is_check_ig_fb" id="is_check_ig_fb">
                 {% endif %}
-                <span onclick="is_check_ig_fb()" class="slider round"></span>
+                <span onmousedown="is_check_ig_fb()" class="slider round"></span>
               </label>
             </div>
             <div class="social-card__detail" id="is_check_ig_fb_visible">
@@ -283,7 +281,7 @@
                 {% else %}
                   <input type="checkbox" name="is_check_tiktok" id="is_check_tiktok">
                 {% endif %}
-                <span onclick="is_check_tiktok()" class="slider round"></span>
+                <span onmousedown="is_check_tiktok()" class="slider round"></span>
               </label>
             </div>
             <div class="social-card__detail" id="is_check_tiktok_visible">
@@ -321,7 +319,7 @@
                 {% else %}
                   <input type="checkbox" name="is_check_twitter">
                 {% endif %}
-                <span onclick="is_check_twitter()" class="slider round"></span>
+                <span onmousedown="is_check_twitter()" class="slider round"></span>
               </label>
             </div>
             <div class="social-card__detail" id="is_check_twitter_visible">
