@@ -1011,6 +1011,7 @@ def menu__work_selection(request, token):
 
     # IG + FB
     is_check_ig_fb = request.POST.getlist('is_check_ig_fb')
+    print(is_check_ig_fb)
     if is_check_ig_fb:
       shouter.is_check_ig_fb = True
       # Story
@@ -1018,7 +1019,7 @@ def menu__work_selection(request, token):
       is_check_ig_fb_story = fn_work_selection.is_check(is_check_ig_fb_story)
       # Post
       is_check_ig_fb_post = request.POST.getlist('is_check_ig_fb_post')
-      is_check_ig_fb_story = fn_work_selection.is_check(is_check_ig_fb_story)
+      is_check_ig_fb_post = fn_work_selection.is_check(is_check_ig_fb_post)
       # Story + Post
       is_check_ig_fb_story_post = request.POST.getlist('is_check_ig_fb_story_post')
       is_check_ig_fb_story_post = fn_work_selection.is_check(is_check_ig_fb_story_post)
@@ -1036,6 +1037,7 @@ def menu__work_selection(request, token):
 
     # Tiktok
     is_check_tiktok = request.POST.getlist('is_check_tiktok')
+    # print(is_check_tiktok)
     if len(is_check_tiktok) != 0:
       try:
         tiktok_name = request.POST['tiktok_name']
