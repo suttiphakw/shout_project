@@ -22,4 +22,3 @@ def get(business_account_id, access_token):
     'media_objects': media_objects
   }
   return context
-

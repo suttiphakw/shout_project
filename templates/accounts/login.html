@@ -18,7 +18,7 @@
       </article>
       <article class="login__right">
         <div class="login__right__header">
-          <h2>Login</h2>
+          <h3>Login</h3>
           <h6 class="r">เข้าสู่บัญชีนักการตลาดของคุณ</h6>
         </div>
         <div class="login__right__card">
@@ -26,13 +26,13 @@
             <div class="login__input">
               <!-- Email -->
               <label for="email">Email Address</label>
-              <input type="email" required id="email" name="email">
+              <input type="email" required id="email" name="email" placeholder="Enter your email">
               <!-- Password -->
               <label for="password">Password</label>
-              <input type="password" required id="password" name="password">
-              <button class="btn__orange" type="submit">Login &#8594;</button>
+              <input type="password" required id="password" name="password" placeholder="Enter your password">
+              <button class="btn__orange" type="submit">Log in &#8594;</button>
             </div>
-            <p class="login__right__text">ลืมรหัสผ่าน</p>
+            <p class="login__forget__password">ลืมรหัสผ่าน</p>
             {% include 'partials/_alerts.html' %}
           </form>
         </div>
