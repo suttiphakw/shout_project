@@ -670,6 +670,8 @@ def register__get_ig_data(request, token):
 
   ##########################################################################################################################
   # Get Instagram Active Follower
+  if ig_follower_count == 0:
+    ig_follower_count = 1
   context__active_follower = ig_api_active_follower.get(business_account_id=ig_business_account_id, access_token=access_token, followers_count=ig_follower_count)
   if not context__active_follower:
     error.log(shouter, 'ไม่สามารถเก็บ IG Active Follower ได้')

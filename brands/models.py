@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -10,7 +11,8 @@ class BrandProfile(models.Model):
   tel = models.CharField(max_length=255, default=None)
   company = models.CharField(max_length=255, default=None)
   position = models.CharField(max_length=255, default=None)
-
+  is_active = models.BooleanField(default=False)
+  
   def __str__(self):
     return self.company
 

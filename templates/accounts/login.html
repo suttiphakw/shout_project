@@ -23,6 +23,12 @@
         </div>
         <div class="login__right__card">
           <form action="{% url 'login' %}" method="post"> {% csrf_token %}
+            {% if message %}
+              <div class="login__error">
+                <img src="{% static 'img/accounts/error.png' %}" alt="">
+                <p>{{message}}</p>
+              </div>
+            {% endif %}
             <div class="login__input">
               <!-- Email -->
               <label for="email">Email Address</label>
@@ -32,13 +38,14 @@
               <input type="password" required id="password" name="password" placeholder="Enter your password">
               <button class="btn__orange" type="submit">Log in &#8594;</button>
             </div>
-            <p class="login__forget__password">ลืมรหัสผ่าน</p>
-            {% include 'partials/_alerts.html' %}
+            <a href="{% url 'forget_password' %}">
+              <p class="login__forget__password">ลืมรหัสผ่าน</p>
+            </a>
           </form>
         </div>
         <div class="login__right__text">
-          <a href="">
-            <p>มีบัญชีอยู่แล้ว? Log-in</p>
+          <a href="{% url 'register' %}">
+            <p>ยังไม่มีบัญชี? Register</p>
           </a>        
         </div>
       </article>

@@ -88,6 +88,229 @@ function change_page_5() {
   active_page_5.style.display = "block";
 }
 
+function change_campaign_1() {
+  const active_page_1 = document.getElementById("campaign_1");
+  const active_page_2 = document.getElementById("campaign_2");
+  const active_page_3 = document.getElementById("campaign_3");
+  const active_page_4 = document.getElementById("campaign_4");
+  const active_page_5 = document.getElementById("campaign_5");
+  const active_page_6 = document.getElementById("campaign_6");
+  const active_page_7 = document.getElementById("campaign_7");
+  active_page_1.style.display = "flex";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "none";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "none";
+}
+
+function change_campaign_2() {
+  const active_page_1 = document.getElementById("campaign_1");
+  const active_page_2 = document.getElementById("campaign_2");
+  const active_page_3 = document.getElementById("campaign_3");
+  const active_page_4 = document.getElementById("campaign_4");
+  const active_page_5 = document.getElementById("campaign_5");
+  const active_page_6 = document.getElementById("campaign_6");
+  const active_page_7 = document.getElementById("campaign_7");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "flex";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "none";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "none";
+}
+
+function change_campaign_3() {
+  const active_page_1 = document.getElementById("campaign_1");
+  const active_page_2 = document.getElementById("campaign_2");
+  const active_page_3 = document.getElementById("campaign_3");
+  const active_page_4 = document.getElementById("campaign_4");
+  const active_page_5 = document.getElementById("campaign_5");
+  const active_page_6 = document.getElementById("campaign_6");
+  const active_page_7 = document.getElementById("campaign_7");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "flex";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "none";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "none";
+}
+
+function change_campaign_4() {
+  const active_page_1 = document.getElementById("campaign_1");
+  const active_page_2 = document.getElementById("campaign_2");
+  const active_page_3 = document.getElementById("campaign_3");
+  const active_page_4 = document.getElementById("campaign_4");
+  const active_page_5 = document.getElementById("campaign_5");
+  const active_page_6 = document.getElementById("campaign_6");
+  const active_page_7 = document.getElementById("campaign_7");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "flex";
+  active_page_5.style.display = "none";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "none";
+}
+
+function change_campaign_5() {
+  const active_page_1 = document.getElementById("campaign_1");
+  const active_page_2 = document.getElementById("campaign_2");
+  const active_page_3 = document.getElementById("campaign_3");
+  const active_page_4 = document.getElementById("campaign_4");
+  const active_page_5 = document.getElementById("campaign_5");
+  const active_page_6 = document.getElementById("campaign_6");
+  const active_page_7 = document.getElementById("campaign_7");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "flex";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "none";
+}
+
+function change_campaign_6() {
+  const active_page_1 = document.getElementById("campaign_1");
+  const active_page_2 = document.getElementById("campaign_2");
+  const active_page_3 = document.getElementById("campaign_3");
+  const active_page_4 = document.getElementById("campaign_4");
+  const active_page_5 = document.getElementById("campaign_5");
+  const active_page_6 = document.getElementById("campaign_6");
+  const active_page_7 = document.getElementById("campaign_7");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "none";
+  active_page_6.style.display = "flex";
+  active_page_7.style.display = "none";
+}
+
+function change_campaign_7() {
+  const active_page_1 = document.getElementById("campaign_1");
+  const active_page_2 = document.getElementById("campaign_2");
+  const active_page_3 = document.getElementById("campaign_3");
+  const active_page_4 = document.getElementById("campaign_4");
+  const active_page_5 = document.getElementById("campaign_5");
+  const active_page_6 = document.getElementById("campaign_6");
+  const active_page_7 = document.getElementById("campaign_7");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "none";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "flex";
+}
+
+function footer_page_1_next() {
+  const active_page_1 = document.getElementById("footer_1");
+  const active_page_2 = document.getElementById("footer_2");
+  const active_page_3 = document.getElementById("footer_3");
+  const active_page_4 = document.getElementById("footer_4");
+  const active_page_5 = document.getElementById("footer_5");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "block";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "none";
+}
+
+function footer_page_2_back() {
+  const active_page_1 = document.getElementById("footer_1");
+  const active_page_2 = document.getElementById("footer_2");
+  const active_page_3 = document.getElementById("footer_3");
+  const active_page_4 = document.getElementById("footer_4");
+  const active_page_5 = document.getElementById("footer_5");
+  active_page_1.style.display = "block";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "none";
+}
+
+function footer_page_2_next() {
+  const active_page_1 = document.getElementById("footer_1");
+  const active_page_2 = document.getElementById("footer_2");
+  const active_page_3 = document.getElementById("footer_3");
+  const active_page_4 = document.getElementById("footer_4");
+  const active_page_5 = document.getElementById("footer_5");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "block";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "none";
+}
+
+function footer_page_3_back() {
+  const active_page_1 = document.getElementById("footer_1");
+  const active_page_2 = document.getElementById("footer_2");
+  const active_page_3 = document.getElementById("footer_3");
+  const active_page_4 = document.getElementById("footer_4");
+  const active_page_5 = document.getElementById("footer_5");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "block";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "none";
+}
+
+function footer_page_3_next() {
+  const active_page_1 = document.getElementById("footer_1");
+  const active_page_2 = document.getElementById("footer_2");
+  const active_page_3 = document.getElementById("footer_3");
+  const active_page_4 = document.getElementById("footer_4");
+  const active_page_5 = document.getElementById("footer_5");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "block";
+  active_page_5.style.display = "none";
+}
+
+function footer_page_4_back() {
+  const active_page_1 = document.getElementById("footer_1");
+  const active_page_2 = document.getElementById("footer_2");
+  const active_page_3 = document.getElementById("footer_3");
+  const active_page_4 = document.getElementById("footer_4");
+  const active_page_5 = document.getElementById("footer_5");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "block";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "none";
+}
+
+function footer_page_4_next() {
+  const active_page_1 = document.getElementById("footer_1");
+  const active_page_2 = document.getElementById("footer_2");
+  const active_page_3 = document.getElementById("footer_3");
+  const active_page_4 = document.getElementById("footer_4");
+  const active_page_5 = document.getElementById("footer_5");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "block";
+}
+
+function footer_page_5_back() {
+  const active_page_1 = document.getElementById("footer_1");
+  const active_page_2 = document.getElementById("footer_2");
+  const active_page_3 = document.getElementById("footer_3");
+  const active_page_4 = document.getElementById("footer_4");
+  const active_page_5 = document.getElementById("footer_5");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "block";
+  active_page_5.style.display = "none";
+}
+
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -183,6 +406,9 @@ function cal_price() {
 
   // Change Inner HTML Value
 
+  // Input
+  document.getElementById("budget").value = numberWithCommas(budget);
+
   // Shouter
   document.getElementById("story_shouter").innerHTML = numberWithCommas(min_story_shouter) + " - " + numberWithCommas(max_story_shouter) + " คน"
   document.getElementById("post_shouter").innerHTML = numberWithCommas(min_post_shouter) + " - " + numberWithCommas(max_post_shouter) + " คน"
@@ -201,6 +427,12 @@ function cal_price() {
 }
 
 var myVar = false;
+function resolveAfter5Seconds() {
+  return new Promise(resolve => {
+    setTimeout(() => {resolve()}, 5000);
+  });
+}
+
 function resolveAfter10Seconds() {
   return new Promise(resolve => {
     setTimeout(() => {resolve()}, 10000);
@@ -208,8 +440,26 @@ function resolveAfter10Seconds() {
 }
 
 function stopChange_uvp() {
-  console.log('test');
+  // console.log('test');
   myVar = true;
+}
+
+async function change_campaign() {
+  change_campaign_1();
+  await resolveAfter5Seconds();
+  change_campaign_2();
+  await resolveAfter5Seconds();
+  change_campaign_3();
+  await resolveAfter5Seconds();
+  change_campaign_4();
+  await resolveAfter5Seconds();
+  change_campaign_5();
+  await resolveAfter5Seconds();
+  change_campaign_6();
+  await resolveAfter5Seconds();
+  change_campaign_7();
+  await resolveAfter5Seconds();
+  setTimeout(change_campaign(), 3000);
 }
 
 async function change_uvp(){
@@ -252,25 +502,12 @@ async function change_uvp(){
   setTimeout(change_uvp(), 10000);
 }
 
-// function updateTextView(_obj){
-//   var num = getNumber(_obj.val());
-//   if(num==0){
-//     _obj.val('');
-//   }else{
-//     _obj.val(num.toLocaleString());
-//   }
-// }
-// function getNumber(_str){
-//   var arr = _str.toString().split('');
-//   var out = new Array();
-//   for(var cnt=0;cnt<arr.length;cnt++){
-//     if(isNaN(arr[cnt])==false){
-//       out.push(arr[cnt]);
-//     }
-//   }
-//   return Number(out.join(''));
-// }
-
 $(document).ready(function(){
+  const active_page_1 = document.getElementById("campaign_1");
+  const active_page_0 = document.getElementById("default_uvp");
+  console.log(active_page_0);
+  console.log(active_page_1);
+  change_campaign();
+  console.log('ready_1')
   change_uvp();
 });

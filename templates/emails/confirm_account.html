@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email</title>
+  <style>
+    body, button {
+      font-family: 'Sans-serif', sans-serif;
+      font-weight: 400;
+      line-height: 1.4;
+      color: #242566;
+      opacity: 0.99;
+      font-size: 16px;
+    }
+    h1, h2, h3, h4, h5, h6, p {
+      margin: 0;
+    }
+    h5 {
+      font-size: 25px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    h6 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    a {
+      text-decoration: none;
+    }
+    button {
+      height: 48px;
+      width: 350px;
+      background: #F37324;
+      border: none;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    header {
+      height: 80px;
+      background: #1C1C44;
+      padding-left: 16px;
+    }
+    header img {
+      height: 80px;
+    }
+    .email {
+      width: 500px;
+      border: 1px solid black;
+    }
+    .email__body {
+      padding: 16px 0 16px 16px;
+    }
+    .email__link {
+      padding: 16px 0;
+    }
+    footer {
+      background: #E9EBF1;
+    }
+    .footer__detail {
+      padding: 16px 0 16px 16px;
+    }
+  </style>
+</head>
+<body>
+  <section class="email">
+    <header>
+      <img src="https://www.img.in.th/images/83e59e0ab52da1e25c9f82d5c63f6d3d.png" alt="">
+    </header>
+    <div class="email__body">
+      <h5>ยืนยันอีเมลของคุณ</h5>
+      <p>เพื่อทำการสร้างบัญชี Shout! โปรดยืนยันอีเมลของท่าน โดยคลิกลิงค์ หรือปุ่มด้านล่าง</p>
+      <p class="email__link">{{ confirm_link }}</p>
+      <p class="email__link">หรือกด</p>
+      <a href="{{ confirm_link }}">
+        <button>ยืนยัน</button>
+      </a>
+    </div>
+    <footer>
+      <div class="footer__detail">
+        <h6>ติดต่อเรา (ฟรี)</h6>
+        <p>โทร: 087-560-4935 (คุณโอ๊ต)</p>
+        <p>Email: contact@shoutsolution.com</p>
+      </div>
+    </footer>
+  </section>
+</body>
+</html>

@@ -13,6 +13,8 @@ function submitForm() {
   const college = $('#college').val();
   const interest = $('#interest').val();
 
+  console.log(interest);
+
   if (first_name.trim() === '' || last_name.trim() === '' ||
     nickname.trim() === '' || email.trim() === '' || tel.trim() === '' || gender === undefined ||
     birthday_date.trim() === '' || birthday_month.trim() === '' || birthday_year.trim() === '' ||

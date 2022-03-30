@@ -66,6 +66,11 @@
     <!-- Campaign UVP 1 -->
     <section class="campaign__index__uvp campaign__animation__1" id="uvp_1">
       <img src="{% static 'img/brands/CTP_02.png' %}" alt="" class="campaign__index__uvp__background">
+      <!-- campaign uvp image description-->
+      <div class="campaign__index__uvp__background__description">
+        <p class="header">Campaign Planning</p>
+        <p>เลือกประเภทงาน งบการตลาด กลุ่มลูกค้า และรายละเอียดงานที่ต้องการ เพื่อสร้างแผนแคมเปญของคุณ</p>
+      </div>
       <!-- campaign uvp header -->
       <div class="campaign__index__uvp__header">
         <h6>โปรโมทแบรนด์ของคุณได้ง่ายๆ ผ่านคนตัวเล็ก (KOC)</h4>
@@ -112,6 +117,11 @@
     <!-- Campaign UVP 2 -->
     <section class="campaign__index__uvp campaign__animation__2" id="uvp_2">
       <img src="{% static 'img/brands/CTP_03.png' %}" alt="" class="campaign__index__uvp__background">
+      <!-- campaign uvp image description-->
+      <div class="campaign__index__uvp__background__description">
+        <p class="header">Shouter Selection</p>
+        <p>แพลตฟอร์มจะคัดเลือกผู้บอกต่อ (Shouter) ด้วย Social Media Insight Data ให้คุณได้ปรับแต่งตามความเหมาะสม เพื่อให้ตรงความต้องการ ความแม่นยำ และประสิทธิภาพสูงสุด</p>
+      </div>
       <!-- campaign uvp header -->
       <div class="campaign__index__uvp__header">
         <h6>โปรโมทแบรนด์ของคุณได้ง่ายๆ ผ่านคนตัวเล็ก (KOC)</h4>
@@ -143,7 +153,7 @@
       <!-- campaign uvp button -->
       <div class="campaign__index__uvp__button">
         <a href="">
-          <button class="w300 btn__orange">เริ่มเลย &#8594;</button>
+          <button class="w300 btn__orange" style="font-weight: 700;">เริ่มเลย &#8594;</button>
         </a>
       </div>      
       <div class="campaign__index__uvp__pagination">
@@ -158,6 +168,10 @@
     <!-- Campaign UVP 3 -->
     <section class="campaign__index__uvp campaign__animation__3" id="uvp_3">
       <img src="{% static 'img/brands/CTP_04.png' %}" alt="" class="campaign__index__uvp__background">
+      <div class="campaign__index__uvp__background__description">
+        <p class="header">Campaign Management</p>
+        <p>ตรวจสอบความคืบหน้า สถานะการทำงานต่างๆ เช่น รอการตอบรับ กำลังทำงาน รอตรวจงาน ส่งงานแล้ว ของผู้บอกต่อ (Shouter) จบในหน้าเดียว</p>
+      </div>
       <!-- campaign uvp header -->
       <div class="campaign__index__uvp__header">
         <h6>โปรโมทแบรนด์ของคุณได้ง่ายๆ ผ่านคนตัวเล็ก (KOC)</h4>
@@ -204,6 +218,10 @@
     <!-- Campaign UVP 4 -->
     <section class="campaign__index__uvp campaign__animation__4" id="uvp_4">
       <img src="{% static 'img/brands/CTP_05.png' %}" alt="" class="campaign__index__uvp__background">
+      <div class="campaign__index__uvp__background__description">
+        <p class="header">Work Approval</p>
+        <p>ตรวจสอบดราฟท์งาน ทำการอนุมัติ หรือให้ Feedback แก้ไข ก่อนโพสท์จริง</p>
+      </div>
       <!-- campaign uvp header -->
       <div class="campaign__index__uvp__header">
         <h6>โปรโมทแบรนด์ของคุณได้ง่ายๆ ผ่านคนตัวเล็ก (KOC)</h4>
@@ -250,6 +268,10 @@
     <!-- Campaign UVP 5 -->
     <section class="campaign__index__uvp campaign__animation__5" id="uvp_5">
       <img src="{% static 'img/brands/CTP_06.png' %}" alt="" class="campaign__index__uvp__background">
+      <div class="campaign__index__uvp__background__description">
+        <p class="header">Real-time Result Dashboard</p>
+        <p>ติดตามผลลัพธ์แคมเปญเชิงลึกได้ เช่น Reach, Engagement, Impression, CPR , และอื่นๆ รวมถึงโพสท์งานที่ได้ ทำการโพสท์ออกไป อย่าง Real-time</p>
+      </div>
       <!-- campaign uvp header -->
       <div class="campaign__index__uvp__header">
         <h6>โปรโมทแบรนด์ของคุณได้ง่ายๆ ผ่านคนตัวเล็ก (KOC)</h4>
@@ -309,7 +331,8 @@
               <h6>Your Budget = Net Price</h6>
             </div>
             <div class="campaign__index__detail__left__input">
-              <input type="number" placeholder="กรอก Budget (ขั้นต่ำ 50,000 บาท)" class="h48" id="budget">
+              <!-- <label for="budget">กรอก Budget เพื่อประเมิน</label> -->
+              <input type="text" placeholder="ขั้นต่ำ 50,000 บาท" class="h48" id="budget">
               <span class="campaign__index__detail__left__input__span">บาท</span>
             </div>                  
             <button class="h48 w120 btn__purple" onclick="cal_price()">ประเมิน &#8594;</button>
@@ -362,13 +385,13 @@
               <p>Number of Shouters (จำนวนคน)</p>
             </div>
             <div class="campaign__index__detail__left__table__box-2-2">
-              <p id="story_shouter">10-20 คน</p>
+              <p id="story_shouter">-</p>
             </div>
             <div class="campaign__index__detail__left__table__box-2-3">
-              <p id="post_shouter">10-20 คน</p>
+              <p id="post_shouter">-</p>
             </div>
             <div class="campaign__index__detail__left__table__box-2-4">
-              <p id="story_post_shouter">10-20 คน</p>
+              <p id="story_post_shouter">-</p>
             </div>
 
             <!-- Reach -->
@@ -376,13 +399,13 @@
               <p>Estimated Reach (การเข้าถึง)</p>
             </div>
             <div class="campaign__index__detail__left__table__box-3-2">
-              <p id="story_reach">10000-15000 reach</p>
+              <p id="story_reach">-</p>
             </div>
             <div class="campaign__index__detail__left__table__box-3-3">
-              <p id="post_reach">10000-15000 reach</p>
+              <p id="post_reach">-</p>
             </div>
             <div class="campaign__index__detail__left__table__box-3-4">
-              <p id="story_post_reach">10000-15000 reach</p>
+              <p id="story_post_reach">-</p>
             </div>
 
             <!-- Cost Per Reach -->
@@ -390,13 +413,13 @@
               <p>Cost Per Reach</p>
             </div>
             <div class="campaign__index__detail__left__table__box-4-2">
-              <p id="story_cpr">3 บาท</p>
+              <p id="story_cpr">-</p>
             </div>
             <div class="campaign__index__detail__left__table__box-4-3">
-              <p id="post_cpr">3 บาท</p>
+              <p id="post_cpr">-</p>
             </div>
             <div class="campaign__index__detail__left__table__box-4-4">
-              <p id="story_post_cpr">3 บาท</p>
+              <p id="story_post_cpr">-</p>
             </div>
 
           </div>
@@ -405,22 +428,182 @@
       <!-- ตัวอย่างแคมเปญ -->
       <div class="campaign__index__detail__right">
         <p class="campaign__index__detail__right__header">ตัวอย่างแคมเปญ</p>
-        <div class="campaign__card card__height__32rem campaign__index__detail__right__content">
-          <img src="{% static 'img/brands/index__detail__right.png' %}" alt="">
+        <!-- Campaign 1 -->
+        <div class="campaign__card card__height__32rem campaign__index__detail__right__content" id="campaign_1">
+          <img src="{% static 'img/brands/campaign_1.jpg' %}" alt="">
           <div class="campaign__index__detail__right__info">
             <span>รูปแบบงาน</span>
-            <p>Story Only</p>
+            <p>Multi-Post + Story</p>
           </div>
           <div class="campaign__index__detail__right__info">
             <span>แบรนด์</span>
-            <p>Serb</p>
+            <p>Pavitree</p>
           </div>
           <div class="campaign__index__detail__right__info">
             <span>จำนวนคน</span>
-            <p>120 คน</p>
+            <p>15 คน</p>
+          </div>
+          <div class="campaign__index__detail__right__pagination">
+            <span class="campaign__index__detail__right__pagination__activate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate" onclick="change_campaign_2()">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate" onclick="change_campaign_3()">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate" onclick="change_campaign_4()">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate" onclick="change_campaign_5()">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate" onclick="change_campaign_6()">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate" onclick="change_campaign_7()">.</span>
           </div>
         </div>
-      </div> 
+        <!-- Campaign 2 -->
+        <div class="campaign__card card__height__32rem campaign__index__detail__right__content campaign__index__detail__right__content__deactivate" id="campaign_2">
+          <img src="{% static 'img/brands/campaign_2.jpg' %}" alt="">
+          <div class="campaign__index__detail__right__info">
+            <span>รูปแบบงาน</span>
+            <p>Multi-Post + Story</p>
+          </div>
+          <div class="campaign__index__detail__right__info">
+            <span>แบรนด์</span>
+            <p>Pavitree</p>
+          </div>
+          <div class="campaign__index__detail__right__info">
+            <span>จำนวนคน</span>
+            <p>15 คน</p>
+          </div>
+          <div class="campaign__index__detail__right__pagination">
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__activate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+          </div>
+        </div>
+        <!-- Campaign 3 -->
+        <div class="campaign__card card__height__32rem campaign__index__detail__right__content campaign__index__detail__right__content__deactivate" id="campaign_3">
+          <img src="{% static 'img/brands/campaign_3.jpg' %}" alt="">
+          <div class="campaign__index__detail__right__info">
+            <span>รูปแบบงาน</span>
+            <p>Multi-Post + Story</p>
+          </div>
+          <div class="campaign__index__detail__right__info">
+            <span>แบรนด์</span>
+            <p>Pavitree</p>
+          </div>
+          <div class="campaign__index__detail__right__info">
+            <span>จำนวนคน</span>
+            <p>15 คน</p>
+          </div>
+          <div class="campaign__index__detail__right__pagination">
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__activate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+          </div>
+        </div>
+        <!-- Campaign 4 -->
+        <div class="campaign__card card__height__32rem campaign__index__detail__right__content campaign__index__detail__right__content__deactivate" id="campaign_4">
+          <img src="{% static 'img/brands/campaign_4.jpg' %}" alt="">
+          <div class="campaign__index__detail__right__info">
+            <span>รูปแบบงาน</span>
+            <p>Multi-Post + Story</p>
+          </div>
+          <div class="campaign__index__detail__right__info">
+            <span>แบรนด์</span>
+            <p>Pavitree</p>
+          </div>
+          <div class="campaign__index__detail__right__info">
+            <span>จำนวนคน</span>
+            <p>15 คน</p>
+          </div>
+          <div class="campaign__index__detail__right__pagination">
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__activate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+          </div>
+        </div>
+        <!-- Campaign 5 -->
+        <div class="campaign__card card__height__32rem campaign__index__detail__right__content campaign__index__detail__right__content__deactivate" id="campaign_5">
+          <img src="{% static 'img/brands/campaign_5.jpg' %}" alt="">
+          <div class="campaign__index__detail__right__info">
+            <span>รูปแบบงาน</span>
+            <p>Multi-Post + Story</p>
+          </div>
+          <div class="campaign__index__detail__right__info">
+            <span>แบรนด์</span>
+            <p>Pavitree</p>
+          </div>
+          <div class="campaign__index__detail__right__info">
+            <span>จำนวนคน</span>
+            <p>15 คน</p>
+          </div>
+          <div class="campaign__index__detail__right__pagination">
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__activate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+          </div>
+        </div>
+        <!-- Campaign 6 -->
+        <div class="campaign__card card__height__32rem campaign__index__detail__right__content campaign__index__detail__right__content__deactivate" id="campaign_6">
+          <img src="{% static 'img/brands/campaign_6.jpg' %}" alt="">
+          <div class="campaign__index__detail__right__info">
+            <span>รูปแบบงาน</span>
+            <p>Multi-Post + Story</p>
+          </div>
+          <div class="campaign__index__detail__right__info">
+            <span>แบรนด์</span>
+            <p>Pavitree</p>
+          </div>
+          <div class="campaign__index__detail__right__info">
+            <span>จำนวนคน</span>
+            <p>15 คน</p>
+          </div>
+          <div class="campaign__index__detail__right__pagination">
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__activate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+          </div>
+        </div>
+        <!-- Campaign 7 -->
+        <div class="campaign__card card__height__32rem campaign__index__detail__right__content campaign__index__detail__right__content__deactivate" id="campaign_7">
+          <img src="{% static 'img/brands/campaign_7.jpg' %}" alt="">
+          <div class="campaign__index__detail__right__info">
+            <span>รูปแบบงาน</span>
+            <p>Multi-Post + Story</p>
+          </div>
+          <div class="campaign__index__detail__right__info">
+            <span>แบรนด์</span>
+            <p>Pavitree</p>
+          </div>
+          <div class="campaign__index__detail__right__info">
+            <span>จำนวนคน</span>
+            <p>15 คน</p>
+          </div>
+          <div class="campaign__index__detail__right__pagination">
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__deactivate">.</span>
+            <span class="campaign__index__detail__right__pagination__activate">.</span>
+          </div>
+        </div>
+      </div>
     </section>
     <!-- Index Footer -->
     <section class="campaign___index__footer">
@@ -436,79 +619,434 @@
               และความน่าสนใจของสื่อกลางคนตัวเล็ก
             </span>
           </div>
-          <div class="campaign__index__footer__detail__right">
+          <!-- footer right activate id = 1 -->
+          <div class="campaign__index__footer__detail__right" id="footer_1">
             <div class="campaign__index__footer__detail__right__cards">
               <svg class="campaign__index__footer__detail__right__icon">
                 <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-cheveron-left"></use>
               </svg>
               <div class="campaign__card campaign__card__shouter">
-                <img src="{% static 'img/brands/index__shouter__ex_1.png' %}" alt="">
+                <img src="{% static 'img/brands/shouter_1.jpeg' %}" alt="">
                 <div class="campaign__card__shouter__detail">
-                  <span>Micro Influencer</span>
+                  <span class="influencer nano">Nano Influencer</span>
                   <div class="campaign__card__shouter__detail__text">
                     <div class="campaign__card__shouter__detail__text__follower">
-                      <p class="campaign__card__shouter__detail__text__follower__header">ผู้ติดตาม</p>
-                      <p>2,390</p>
+                      <p class="campaign__card__shouter__detail__text__follower__header">Followers</p>
+                      <p>8,907</p>
                     </div>
                     <div class="campaign__card__shouter__detail__text__engagement">
-                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement Rate</p>
-                      <p>30%</p>
+                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement <span class="rate">(Rate)</span></p>
+                      <p>357 <span class="rate">(4.01%)</span></p>
                     </div>
                   </div>
                 </div>
                 <div class="campaign__card__shouter__tag">
                   <p>Lifestyle</p>
-                  <p>Food</p>
+                  <p>Food & Drink</p>
+                  <p>Fashion</p>
+                  <p>Beauty</p>
+                  <p>Luxury</p>
+                </div>
+              </div>
+              <div class="campaign__card campaign__card__shouter">
+                <img src="{% static 'img/brands/shouter_2.jpeg' %}" alt="">
+                <div class="campaign__card__shouter__detail">
+                  <span class="influencer micro">Micro Influencer</span>
+                  <div class="campaign__card__shouter__detail__text">
+                    <div class="campaign__card__shouter__detail__text__follower">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Followers</p>
+                      <p>32,684</p>
+                    </div>
+                    <div class="campaign__card__shouter__detail__text__engagement">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement <span class="rate">(Rate)</span></p>
+                      <p>1,264 <span class="rate">(3.87%)</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="campaign__card__shouter__tag">
+                  <p>Fashion</p>
+                  <p>Food & Drink</p>
+                  <p>Beauty</p>
+                  <p>Travel</p>
+                  <p>Luxury</p>
+                </div>
+              </div>
+              <div class="campaign__card campaign__card__shouter">
+                <img src="{% static 'img/brands/shouter_3.jpeg' %}" alt="">
+                <div class="campaign__card__shouter__detail">
+                  <span class="influencer nano">Nano Influencer</span>
+                  <div class="campaign__card__shouter__detail__text">
+                    <div class="campaign__card__shouter__detail__text__follower">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Followers</p>
+                      <p>1,775</p>
+                    </div>
+                    <div class="campaign__card__shouter__detail__text__engagement">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement <span class="rate">(Rate)</span></p>
+                      <p>101 <span class="rate">(5.7%)</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="campaign__card__shouter__tag">
+                  <p>Design & Art</p>
+                  <p>Food & Drink</p>
+                  <p>Fashion</p>
+                  <p>Beauty</p>
+                  <p>Lifestyle</p>
+                </div>
+              </div>
+              <svg class="campaign__index__footer__detail__right__icon" onclick="footer_page_1_next()">
+                <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-cheveron-right"></use>
+              </svg>
+            </div>
+            <div class="campaign__index__footer__detail__right__pagination">
+              <span class="campaign__index__footer__detail__right__pagination__activate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+            </div>
+          </div>
+          <!-- footer right deactivate id = 2 -->
+          <div class="campaign__index__footer__detail__right campaign__index__footer__detail__right__deactivate" id="footer_2">
+            <div class="campaign__index__footer__detail__right__cards">
+              <svg class="campaign__index__footer__detail__right__icon" onclick="footer_page_2_back()">
+                <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-cheveron-left"></use>
+              </svg>
+              <div class="campaign__card campaign__card__shouter">
+                <img src="{% static 'img/brands/shouter_4.jpeg' %}" alt="">
+                <div class="campaign__card__shouter__detail">
+                  <span class="influencer micro">Micro Influencer</span>
+                  <div class="campaign__card__shouter__detail__text">
+                    <div class="campaign__card__shouter__detail__text__follower">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Followers</p>
+                      <p>61,761</p>
+                    </div>
+                    <div class="campaign__card__shouter__detail__text__engagement">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement <span class="rate">(Rate)</span></p>
+                      <p>2,347 <span class="rate">(3.8%)</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="campaign__card__shouter__tag">
+                  <p>Lifestyle</p>
+                  <p>Fashion</p>
+                  <p>Beauty</p>
+                  <p>Travel</p>
+                  <p>Luxury</p>
+                </div>
+              </div>
+              <div class="campaign__card campaign__card__shouter">
+                <img src="{% static 'img/brands/shouter_5.jpeg' %}" alt="">
+                <div class="campaign__card__shouter__detail">
+                  <span class="influencer micro">Micro Influencer</span>
+                  <div class="campaign__card__shouter__detail__text">
+                    <div class="campaign__card__shouter__detail__text__follower">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Followers</p>
+                      <p>32,040</p>
+                    </div>
+                    <div class="campaign__card__shouter__detail__text__engagement">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement <span class="rate">(Rate)</span></p>
+                      <p>2,842 <span class="rate">(8.87%)</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="campaign__card__shouter__tag">
+                  <p>Fashion</p>
+                  <p>Beauty</p>
+                </div>
+              </div>
+              <div class="campaign__card campaign__card__shouter">
+                <img src="{% static 'img/brands/shouter_6.jpeg' %}" alt="">
+                <div class="campaign__card__shouter__detail">
+                  <span class="influencer nano">Nano Influencer</span>
+                  <div class="campaign__card__shouter__detail__text">
+                    <div class="campaign__card__shouter__detail__text__follower">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Followers</p>
+                      <p>5,569</p>
+                    </div>
+                    <div class="campaign__card__shouter__detail__text__engagement">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement <span class="rate">(Rate)</span></p>
+                      <p>1,665 <span class="rate">(19.44%)</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="campaign__card__shouter__tag">
+                  <p>Social & CSR</p>
+                  <p>Food & Drink</p>
+                  <p>Fashion</p>
+                  <p>Beauty</p>
+                  <p>Lifestyle</p>
+                </div>
+              </div>
+              <svg class="campaign__index__footer__detail__right__icon" onclick="footer_page_2_next()">
+                <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-cheveron-right"></use>
+              </svg>
+            </div>
+            <div class="campaign__index__footer__detail__right__pagination">
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__activate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+            </div>
+          </div>
+          <!-- footer right deactivate id = 3 -->
+          <div class="campaign__index__footer__detail__right campaign__index__footer__detail__right__deactivate" id="footer_3">
+            <div class="campaign__index__footer__detail__right__cards">
+              <svg class="campaign__index__footer__detail__right__icon" onclick="footer_page_3_back()">
+                <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-cheveron-left"></use>
+              </svg>
+              <div class="campaign__card campaign__card__shouter">
+                <img src="{% static 'img/brands/shouter_7.jpeg' %}" alt="">
+                <div class="campaign__card__shouter__detail">
+                  <span class="influencer nano">Nano Influencer</span>
+                  <div class="campaign__card__shouter__detail__text">
+                    <div class="campaign__card__shouter__detail__text__follower">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Followers</p>
+                      <p>6,520</p>
+                    </div>
+                    <div class="campaign__card__shouter__detail__text__engagement">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement <span class="rate">(Rate)</span></p>
+                      <p>150 <span class="rate">(2.31%)</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="campaign__card__shouter__tag">
+                  <p>Lifestyle</p>
+                  <p>Fashion</p>
+                  <p>Beauty</p>
+                  <p>Food & Drink</p>
+                  <p>Design & Art</p>
+                </div>
+              </div>
+              <div class="campaign__card campaign__card__shouter">
+                <img src="{% static 'img/brands/shouter_8.jpeg' %}" alt="">
+                <div class="campaign__card__shouter__detail">
+                  <span class="influencer micro">Micro Influencer</span>
+                  <div class="campaign__card__shouter__detail__text">
+                    <div class="campaign__card__shouter__detail__text__follower">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Followers</p>
+                      <p>25,027</p>
+                    </div>
+                    <div class="campaign__card__shouter__detail__text__engagement">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement <span class="rate">(Rate)</span></p>
+                      <p>788 <span class="rate">(3.15%)</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="campaign__card__shouter__tag">
+                  <p>LifeStyle</p>
+                  <p>Fashion</p>
+                  <p>Beauty</p>
+                </div>
+              </div>
+              <div class="campaign__card campaign__card__shouter">
+                <img src="{% static 'img/brands/shouter_9.jpeg' %}" alt="">
+                <div class="campaign__card__shouter__detail">
+                  <span class="influencer micro">Micro Influencer</span>
+                  <div class="campaign__card__shouter__detail__text">
+                    <div class="campaign__card__shouter__detail__text__follower">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Followers</p>
+                      <p>12,908</p>
+                    </div>
+                    <div class="campaign__card__shouter__detail__text__engagement">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement <span class="rate">(Rate)</span></p>
+                      <p>495 <span class="rate">(3.83%)</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="campaign__card__shouter__tag">
+                  <p>Finance & Invesment</p>
+                  <p>Food & Drink</p>
+                  <p>Travel</p>
+                  <p>Beauty</p>
+                  <p>Luxury</p>
+                </div>
+              </div>
+              <svg class="campaign__index__footer__detail__right__icon" onclick="footer_page_3_next()">
+                <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-cheveron-right"></use>
+              </svg>
+            </div>
+            <div class="campaign__index__footer__detail__right__pagination">
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__activate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+            </div>
+          </div>
+          <!-- footer right deactivate id = 4 -->
+          <div class="campaign__index__footer__detail__right campaign__index__footer__detail__right__deactivate" id="footer_4">
+            <div class="campaign__index__footer__detail__right__cards">
+              <svg class="campaign__index__footer__detail__right__icon" onclick="footer_page_4_back()">
+                <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-cheveron-left"></use>
+              </svg>
+              <div class="campaign__card campaign__card__shouter">
+                <img src="{% static 'img/brands/shouter_10.jpeg' %}" alt="">
+                <div class="campaign__card__shouter__detail">
+                  <span class="influencer nano">Nano Influencer</span>
+                  <div class="campaign__card__shouter__detail__text">
+                    <div class="campaign__card__shouter__detail__text__follower">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Followers</p>
+                      <p>5,228</p>
+                    </div>
+                    <div class="campaign__card__shouter__detail__text__engagement">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement <span class="rate">(Rate)</span></p>
+                      <p>247 <span class="rate">(4.73%)</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="campaign__card__shouter__tag">
+                  <p>Lifestyle</p>
+                  <p>Fashion</p>
+                  <p>Beauty</p>
+                  <p>Food & Drink</p>
                   <p>Travel</p>
                 </div>
               </div>
               <div class="campaign__card campaign__card__shouter">
-                <img src="{% static 'img/brands/index__shouter__ex_2.png' %}" alt="">
+                <img src="{% static 'img/brands/shouter_11.jpeg' %}" alt="">
                 <div class="campaign__card__shouter__detail">
-                  <span>Micro Influencer</span>
+                  <span class="influencer nano">Nano Influencer</span>
                   <div class="campaign__card__shouter__detail__text">
                     <div class="campaign__card__shouter__detail__text__follower">
-                      <p class="campaign__card__shouter__detail__text__follower__header">ผู้ติดตาม</p>
-                      <p>2,390</p>
+                      <p class="campaign__card__shouter__detail__text__follower__header">Followers</p>
+                      <p>2,122</p>
                     </div>
                     <div class="campaign__card__shouter__detail__text__engagement">
-                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement Rate</p>
-                      <p>30%</p>
+                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement <span class="rate">(Rate)</span></p>
+                      <p>324 <span class="rate">(15.29%)</span></p>
                     </div>
                   </div>
                 </div>
                 <div class="campaign__card__shouter__tag">
+                  <p>Entertainment</p>
                   <p>Lifestyle</p>
-                  <p>Food</p>
-                  <p>Travel</p>
-                  <p>Travel</p>
+                  <p>Beauty</p>
+                  <p>Fashion</p>
                   <p>Travel</p>
                 </div>
               </div>
               <div class="campaign__card campaign__card__shouter">
-                <img src="{% static 'img/brands/index__shouter__ex_3.png' %}" alt="">
+                <img src="{% static 'img/brands/shouter_12.jpeg' %}" alt="">
                 <div class="campaign__card__shouter__detail">
-                  <span>Micro Influencer</span>
+                  <span class="influencer nano">Nano Influencer</span>
                   <div class="campaign__card__shouter__detail__text">
                     <div class="campaign__card__shouter__detail__text__follower">
-                      <p class="campaign__card__shouter__detail__text__follower__header">ผู้ติดตาม</p>
-                      <p>2,390</p>
+                      <p class="campaign__card__shouter__detail__text__follower__header">Followers</p>
+                      <p>2,874</p>
                     </div>
                     <div class="campaign__card__shouter__detail__text__engagement">
-                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement Rate</p>
-                      <p>30%</p>
+                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement <span class="rate">(Rate)</span></p>
+                      <p>278 <span class="rate">(9.7%)</span></p>
                     </div>
                   </div>
                 </div>
                 <div class="campaign__card__shouter__tag">
+                  <p>Technology & Gadget</p>
                   <p>Lifestyle</p>
-                  <p>Food</p>
+                  <p>Fashion</p>
+                  <p>Beauty</p>
+                  <p>Health & Sport</p>
+                </div>
+              </div>
+              <svg class="campaign__index__footer__detail__right__icon" onclick="footer_page_4_next()">
+                <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-cheveron-right"></use>
+              </svg>
+            </div>
+            <div class="campaign__index__footer__detail__right__pagination">
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__activate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+            </div>
+          </div>
+          <!-- footer right deactivate id = 5 -->
+          <div class="campaign__index__footer__detail__right campaign__index__footer__detail__right__deactivate" id="footer_5">
+            <div class="campaign__index__footer__detail__right__cards">
+              <svg class="campaign__index__footer__detail__right__icon" onclick="footer_page_5_back()">
+                <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-cheveron-left"></use>
+              </svg>
+              <div class="campaign__card campaign__card__shouter">
+                <img src="{% static 'img/brands/shouter_13.jpeg' %}" alt="">
+                <div class="campaign__card__shouter__detail">
+                  <span class="influencer nano">Nano Influencer</span>
+                  <div class="campaign__card__shouter__detail__text">
+                    <div class="campaign__card__shouter__detail__text__follower">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Followers</p>
+                      <p>2,510</p>
+                    </div>
+                    <div class="campaign__card__shouter__detail__text__engagement">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement <span class="rate">(Rate)</span></p>
+                      <p>379 <span class="rate">(15.1%)</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="campaign__card__shouter__tag">
+                  <p>Social & CSR</p>
+                  <p>Entertainment</p>
+                  <p>Finance & Investment</p>
+                  <p>Lifestyle</p>
+                  <p>Fashion</p>
+                </div>
+              </div>
+              <div class="campaign__card campaign__card__shouter">
+                <img src="{% static 'img/brands/shouter_14.jpeg' %}" alt="">
+                <div class="campaign__card__shouter__detail">
+                  <span class="influencer nano">Nano Influencer</span>
+                  <div class="campaign__card__shouter__detail__text">
+                    <div class="campaign__card__shouter__detail__text__follower">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Followers</p>
+                      <p>2,187</p>
+                    </div>
+                    <div class="campaign__card__shouter__detail__text__engagement">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement <span class="rate">(Rate)</span></p>
+                      <p>185 <span class="rate">(8.48%)</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="campaign__card__shouter__tag">
+                  <p>Entertainment</p>
+                  <p>Design & Art</p>
+                  <p>Lifestyle</p>
+                  <p>Beauty</p>
+                  <p>Fashion</p>
+                </div>
+              </div>
+              <div class="campaign__card campaign__card__shouter">
+                <img src="{% static 'img/brands/shouter_15.jpeg' %}" alt="">
+                <div class="campaign__card__shouter__detail">
+                  <span class="influencer micro">Micro Influencer</span>
+                  <div class="campaign__card__shouter__detail__text">
+                    <div class="campaign__card__shouter__detail__text__follower">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Followers</p>
+                      <p>15,234</p>
+                    </div>
+                    <div class="campaign__card__shouter__detail__text__engagement">
+                      <p class="campaign__card__shouter__detail__text__follower__header">Engagement <span class="rate">(Rate)</span></p>
+                      <p>244 <span class="rate">(1.6%)</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="campaign__card__shouter__tag">
+                  <p>Technology & Gadget</p>
+                  <p>Food & Drink</p>
+                  <p>Entertainment</p>
+                  <p>Fashion</p>
                   <p>Travel</p>
                 </div>
               </div>
               <svg class="campaign__index__footer__detail__right__icon">
                 <use xlink:href="{% static 'img/brands/sprite.svg' %}#icon-cheveron-right"></use>
               </svg>
+            </div>
+            <div class="campaign__index__footer__detail__right__pagination">
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__deactivate">.</span>
+              <span class="campaign__index__footer__detail__right__pagination__activate">.</span>
             </div>
           </div>
         </div>       

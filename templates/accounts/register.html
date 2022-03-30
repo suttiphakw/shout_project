@@ -8,6 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" href="{% static 'img/logo/logo-07.png' %}">
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <!-- Title -->
   <title>Shout | Register</title>
 </head>
 <body>
@@ -27,52 +28,52 @@
               <!-- First Name -->
               <div class="register__input__box-3">
                 <label for="first_name">First name</label>
-                <input type="text" required id="first_name" name="first_name">
+                <input type="text" required id="first_name" name="first_name" placeholder="ชื่อจริง">
               </div>
               <!-- Last Name -->
               <div class="register__input__box-4">
                 <label for="last_name">Last name</label>
-                <input type="text" required id="last_name" name="last_name">
+                <input type="text" required id="last_name" name="last_name" placeholder="นามสกุล">
               </div>
               <!-- Email -->
               <div class="register__input__box-2">
                 <label for="email">Email Address</label>
-                <input type="email" required id="email" name="email">
+                <input type="email" required id="email" name="email" placeholder="อีเมลติดต่อ">
               </div>
               <!-- Tel -->
               <div class="register__input__box-1">
                 <label for="tel">Phone Number</label>
-                <input type="tel" required id="tel" name="tel">
+                <input type="tel" required id="tel" name="tel" placeholder="090-000-0000">
               </div>
               <!-- Password 1 -->
               <div class="register__input__box-2">
                 <label for="password_1">Password</label>
-                <input type="password" required id="password_1" name="password_1">
+                <input type="password" required id="password_1" name="password_1" placeholder="รหัสผ่าน">
               </div>
               <!-- Company -->
               <div class="register__input__box-1">
                 <label for="company">Company</label>
-                <input type="text" required id="company" name="company">
+                <input type="text" required id="company" name="company" placeholder="ชื่อบริษัท">
               </div>
               <!-- Password 2 -->
               <div class="register__input__box-2">
                 <label for="password_2">Confirm Password</label>
-                <input type="password" required id="password_2" name="password_2">
+                <input type="password" required id="password_2" name="password_2" placeholder="ยืนยันรหัสผ่าน">
               </div>
               <!-- Position -->
               <div class="register__input__box-1">
                 <label for="position">Position</label>
-                <input type="text" required id="position" name="position">
+                <input type="text" required id="position" name="position" placeholder="ตำแหน่ง">
               </div>
               <div class="register__input__box-2">
                 <div class="register__input__checkbox">
-                  <input type="checkbox" id="agree">
+                  <input type="checkbox" id="agree" required>
                   <label for="agree">I agree to 
                     <a href="https://drive.google.com/file/d/1Rm1Te3h2vVEPhnaIbsSrBWNRjj1UA_8U/view?usp=sharing">Terms of use</a> and 
                     <a href="{% url 'privacy_policy' %}">Privacy policy</a>
                   </label>
                 </div>
-                <button class="w100pc btn__orange" type="submit">Sign Up &#8594;</button>
+                <button class="w100pc btn__orange">Sign Up &#8594;</button>
               </div>
             </div>          
             {% include 'partials/_alerts.html' %}

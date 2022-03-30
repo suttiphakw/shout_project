@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{% static 'img/logo/logo-07.png' %}">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <title>Shout | Email Verification</title>
+</head>
+<body>
+  <section class="email__verification">
+    <h4>Verification Email Sent</h4>
+    <img src="{% static 'img/accounts/email_icon.png' %}" alt="">
+    <div class="email__verification__detail">
+      <p>โปรดตรวจสอบ Email ใน Inbox {{ email }}</p>
+      <p>เพื่อทำการยืนยัน Email ของคุณในและเข้าใช้งาน Shout!</p>
+    </div>
+    <a href="{% url 'login' %}">
+      <button class="w300 btn__orange">กลับสู่หน้า Log-in</button>
+    </a>
+  </section>
+</body>
+</html>

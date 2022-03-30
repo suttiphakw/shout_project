@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-(1o-psk&4db39^@ae8d@3!#$5hd!my#&o%@x1!%-&-#rx&2tb^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['5ac2-171-99-160-24.ngrok.io', '127.0.0.1']
+ALLOWED_HOSTS = ['5ac2-171-99-160-24.ngrok.io', '127.0.0.1', 'localhost']
 
 TEMP_HOST = 'https://5ac2-171-99-160-24.ngrok.io/'
 LINE_CLIENT_ID = '1656634729'
@@ -46,10 +46,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.humanize',
-    'pages',
+    'django.contrib.humanize',    
     'accounts',
     'brands',
+    'campaigns',
+    'pages',
     'shouters',
     'rest_framework',
     'rest_framework_simplejwt',
@@ -95,10 +96,17 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'shout_test',
         'USERNAME': 'postgres',
-        'PASSWORD': 'Hotmail001',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME':  BASE_DIR / 'db.sqlite3'
+#     }
+# }
 
 
 # Password validation
@@ -154,3 +162,26 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     from .local_settings import *
 # except ImportError:
 #     pass
+
+
+# # Email Verification
+# def verified_callback(user):
+#     user.is_active = True
+#
+# EMAIL_VERIFIED_CALLBACK = verified_callback
+# EMAIL_FROM_ADDRESS = 'noreply@aliasaddress.com'
+# EMAIL_MAIL_SUBJECT = 'Confirm your email'
+# EMAIL_MAIL_HTML = 'mail_body.html'
+# EMAIL_MAIL_PLAIN = 'mail_body.txt'
+# EMAIL_TOKEN_LIFE = 60 * 60
+# EMAIL_PAGE_TEMPLATE = 'confirm_template.html'
+# EMAIL_PAGE_DOMAIN = 'http://www.shoutsolution.com/'
+# EMAIL_MULTI_USER = True  # optional (defaults to False)
+#
+# For Django Email Backend
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'noreply@shoutsolution.com'
+EMAIL_HOST_PASSWORD = 'ytubfpbfqmqrvuzh'  # os.environ['password_key'] suggested
+EMAIL_USE_TLS = True

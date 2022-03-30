@@ -1,0 +1,131 @@
+{% extends "brands/_base/_base.html" %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block title %} Your Campaign {% endblock %}
+</head>
+<body>
+{% block content %}
+
+  <!-- First Banner -->
+  <section class="campaign__banner">
+    
+  </section>
+
+  <!-- Second Banner -->
+  <section class="campaign__second__banner">
+    <div class="campaign__card campaign__second__banner__left">
+      <div class="campaign__second__banner__left__logo">
+        <img src="{% static 'img/campaigns/icon_rocket.png' %}" alt="">
+        <div class="campaign__second__banner__left__text">
+          <h6>สร้างแคมเปญง่ายๆเลย ตอนนี้ ไม่มีค่าธรรมเนียม !</h6>
+          <h6 class="r">(งบขั้นต่ำ 50,000 บาท เท่านั้น)</h6>
+        </div>
+      </div>
+      <button class="w180 btn__orange">สร้างแคมเปญ<span>  +</span></button>
+    </div>
+    <div class="campaign__card campaign__second__banner__right">
+      <div class="campaign__second__banner__right__header">
+        <img src="{% static 'img/campaigns/icon_tel.png' %}" alt="">
+        <p>หรือติดต่อพวกเรา (ฟรี)</p>
+      </div>
+      <p>087-560-4935 (คุณโอ๊ต)</p>
+      <p>contact@shoutsolution.com</p>
+    </div>
+  </section>
+
+  <!-- Campaign Breadcrumb -->
+  <section class="campaign__breadcrumb">
+    <!-- Draft -->
+    <div class="campaign__breadcrumb__box activate">
+      <p>แบบร่าง (1)</p>
+    </div>
+    <!-- In Progress -->
+    <div class="campaign__breadcrumb__box">
+      <p>ดำเนินการ (1)</p>
+    </div>
+    <!-- Finished -->
+    <div class="campaign__breadcrumb__box">
+      <p>เสร็จสิ้น (1)</p>
+    </div>
+  </section>
+
+  <!-- Campaign Content -->
+  <section class="campaign__content">
+    <div class="campaign__content__header">
+      <h6>Serb Product Launching</h6>
+      <span class="campaign__content__header__tag draft">แบบร่าง</span>
+    </div>
+    <div class="campaign__content__detail">
+      <img src="{% static 'img/campaigns/serb_photo.png' %}" alt="">
+      <div class="campaign__content__detail__data">
+        <div class="campaign__content__detail__data__top">
+          <div class="campaign__content__detail__data__top__left">
+            <div class="campaign__content__detail__data__box">
+              <p class="header">Social Media</p>
+              <p>Social Media</p>
+            </div>
+            <div class="campaign__content__detail__data__box">
+              <p class="header">Work Format</p>
+              <p>Story Only</p>
+            </div>
+            <div class="campaign__content__detail__data__box">
+              <p class="header">Content Type</p>
+              <p>UGC Story</p>
+            </div>
+          </div>
+          <div class="campaign__content__detail__data__top__right">
+            <div class="campaign__content__detail__data__box">
+              <p class="header">Budget</p>
+              <p>100,000 บาท</p>
+            </div>
+            <div class="campaign__content__detail__data__box">
+              <p class="header">Shouters</p>
+              <p>35 - 36 คน</p>
+            </div>
+            <div class="campaign__content__detail__data__box">
+              <p class="header">Est. Reach</p>
+              <p>200,000 - 300,000 reach</p>
+            </div>
+          </div>
+        </div>
+        <div class="campaign__content__detail__data__bottom">
+          <p>สถานะการจัดการแคมเปญ (Shouter Status)</p>
+          <div class="campaign__content__detail__data__bottom__status">
+            <div class="campaign__content__detail__data__bottom__status__box">
+              <p>รอการตอบรับ</p>
+              <span>0</span>
+            </div>
+            <div class="campaign__content__detail__data__bottom__status__box">
+              <p>กำลังทำงาน</p>
+              <span>20</span>
+            </div>
+            <div class="campaign__content__detail__data__bottom__status__box">
+              <p>ตรวจงาน</p>
+              <span>0</span>
+            </div>
+            <div class="campaign__content__detail__data__bottom__status__box">
+              <p>เสร็จสิ้น</p>
+              <span>0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="campaign__content__detail__summary">
+        <a href="">
+          <img src="{% static 'img/campaigns/serb_graph.png' %}" alt="">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  
+
+{% endblock %}
+</body>
+</html>

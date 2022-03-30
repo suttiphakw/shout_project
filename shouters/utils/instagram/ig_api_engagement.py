@@ -34,7 +34,7 @@ def get_like(media_objects, access_token):
           id_list.append(item)
         except:
           continue
-
+  
   context = fn_engagement_outlier.cut(raw_list, id_list)
   # Return with context = {'list_like': list_like, 'mean_list': mean_list}
   # list_like = [{id: like_count}, ... ]

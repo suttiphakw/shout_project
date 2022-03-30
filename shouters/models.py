@@ -7,7 +7,6 @@ from shouters.lineMessagingApi.adminApproveApi import (api__admin_approve_text_m
                                                        api__admin_approve_image_message)
 from shouters.refresh_data import refresh_shouters
 from shouters.utils.refresh.refresh_instagram import ig_photo
-
 import requests
 
 # Create your models here.
