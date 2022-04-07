@@ -4,18 +4,13 @@ from . import views
 
 urlpatterns = [
   path('draft/', views.campaign_draft, name='campaign_draft'),
-  path('inprogress/', views.campaign_in_progress, name='campaign_in_progress'),
+  path('in_progress/', views.campaign_in_progress, name='campaign_in_progress'),
   path('finished/', views.campaign_finished, name='campaign_finished'),
-
-  # # BRANDS SETTINGS
-  # path('settings/', views.settings, name='brand__settings'),
-  # path('settings/change_password/', views.change_password, name='brand__settings_change_password'),
-
-  # # CAMPAIGN MANAGEMENT
-  # path('campaigns/', views.campaigns, name='brand__campaign'),
   
-  # # CREATE CAMPAIGN
-  # path('campaigns/create/name/', views.create_name, name='brand__create_name'),
-  # path('campaigns/create/scope_budget/', views.create_scope_budget, name='brand__create_scope_budget'),
-  # path('campaigns/create/content_type/', views.create_content_type, name='brand__create_content_type'),
+  # CREATE CAMPAIGN
+  path('create/name/', views.create_name, name='create_name'),
+  path('create/scope_budget/', views.create_scope_budget, name='create_scope_budget'),
+  path('create/content_type/', views.create_content_type, name='create_content_type'),
+  path('create/product/', views.create_product, name='create_product'),
+  path('create/target/', views.create_target, name='create_target'),
 ]

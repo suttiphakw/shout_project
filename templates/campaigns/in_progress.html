@@ -44,14 +44,14 @@
   <!-- Campaign Breadcrumb -->
   <section class="campaign__breadcrumb">
     <!-- Draft -->
-    <a href="{% url 'campaign_draft' %}" class="activate">
-      <div class="campaign__breadcrumb__box activate">
+    <a href="{% url 'campaign_draft' %}">
+      <div class="campaign__breadcrumb__box">
         <p>แบบร่าง (1)</p>
       </div>
     </a>
     <!-- In Progress -->
-    <a href="{% url 'campaign_in_progress' %}">
-      <div class="campaign__breadcrumb__box">
+    <a href="{% url 'campaign_in_progress' %}" class="activate">
+      <div class="campaign__breadcrumb__box activate">
         <p>ดำเนินการ (1)</p>
       </div>
     </a>
@@ -67,7 +67,7 @@
   <section class="campaign__content">
     <div class="campaign__content__header">
       <h6>Serb Product Launching</h6>
-      <span class="campaign__content__header__tag draft">แบบร่าง</span>
+      <span class="campaign__content__header__tag in_progress">กำลังดำเนินการ</span>
     </div>
     <div class="campaign__content__detail">
       <img src="{% static 'img/campaigns/serb_photo.png' %}" alt="">
@@ -128,8 +128,8 @@
         </div>
       </div>
       <div class="campaign__content__detail__summary">
-        <a href="">
-          <img src="{% static 'img/campaigns/serb_graph.png' %}" alt="">
+        <a href="" class="none">
+          <img src="{% static 'img/campaigns/icon_insight.png' %}" alt="">
         </a>
       </div>
     </div>

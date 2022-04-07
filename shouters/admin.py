@@ -40,7 +40,7 @@ class ShouterAdmin(admin.ModelAdmin):
         'ig_response_media_objects', 'ig_response_audience_insight', 'ig_response_active_follower',
     )
 
-    search_fields = ['ig_username', 'first_name']
+    search_fields = ['ig_username', 'first_name', 'line_username']
 
     list_filter = ('is_register', 'is_finished_regis', 'is_connect_bank', 'fb_is_connect')
 

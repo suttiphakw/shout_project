@@ -25,6 +25,8 @@ function submitForm() {
       $(".submit_button").notify("Please choose max to 5 interest.", {position: "top left"}, "error");
     } else if(tel.length !== 10) {
       $(".submit_button").notify("Please enter tel 10 digit.", {position: "top left"}, "error");
+    } else if(!email.includes("@")) {
+      $(".submit_button").notify("Please enter correct form of email.", {position: "top left"}, "error");
     } else {
       $("#registration").submit();
     }

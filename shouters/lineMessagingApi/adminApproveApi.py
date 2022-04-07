@@ -209,3 +209,50 @@ def api__admin_approve_image_message(line_user_id):
         return response
     except:
         return None
+
+
+def api__resend_connect_instagram(line_user_id):
+    push_message_url = 'https://api.line.me/v2/bot/message/multicast'
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {}".format(LINE_CHANNEL_ACCESS_TOKEN)
+    }
+    data = {
+        "to": line_user_id,
+        "messages": [
+            {
+                "type": "text",
+                "text": "Hello World!"
+            }
+        ]
+    }
+
+    try:
+        response = requests.post(url=push_message_url, headers=headers, json=data)
+        return response
+    except:
+        return None
+
+
+def video_message(line_user_id):
+    push_message_url = 'https://api.line.me/v2/bot/message/push'
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {}".format(LINE_CHANNEL_ACCESS_TOKEN)
+    }
+    data = {
+        "to": line_user_id,
+        "messages": [
+            {
+                "type": "video",
+                "originalContentUrl": "https://www.dropbox.com/s/kdp0h3kj3gmpbdn/671019718.202630.mp4?dl=0",
+                "previewImageUrl": "https://www.img.in.th/images/1bc0545644eefd347bae258f8eb6d0ae.png"
+            }
+        ]
+    }
+
+    try:
+        response = requests.post(url=push_message_url, headers=headers, json=data)
+        return response
+    except:
+        return None

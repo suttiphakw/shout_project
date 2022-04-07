@@ -1,0 +1,368 @@
+{% extends "campaigns/_base/_base.html" %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block title %} Create Campaign {% endblock %}
+</head>
+<body>
+  {% block content %}
+    <!-- Breadcrumb -->
+    <section class="campaign__create__breadcrumb">
+      <!--1-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Campaign Name</p>
+        </div>
+      </div
+      <!--2-->
+      <div class="campaign__create__breadcrumb__active">
+        <div class="campaign__create__breadcrumb__number">
+          <p>2</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Scope & Budget</p>
+        </div>
+      </div>
+      <!--3-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>3</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Content Type</p>
+        </div>
+      </div>
+      <!--4-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>4</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Product Detail</p>
+        </div>
+      </div>
+      <!--5-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>5</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Target Customer</p>
+        </div>
+      </div>
+      <!--6-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>6</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Shouter Selection</p>
+        </div>
+      </div>
+      <!--7-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>7</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Operation & Timeline</p>
+        </div>
+      </div>
+      <!--8-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>8</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Brief</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form -->
+    <form action="" method="POST"> {% csrf_token %}
+      <!-- Right Bar -->  
+      <section class="campaign__create__rightbar">
+        <div class="campaign__create__rightbar__detail">
+          <div class="campaign__create__rightbar__detail__box">
+            <header>Campaign Name</header>
+            <!-- Budget -->
+            <div class="campaign__create__rightbar__detail__data budget">
+              <span class="bold">Budget</span>
+              <h4>100,000</h4>
+            </div>
+            <!-- Social Media -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Social Media</span>
+              <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
+            </div>
+            <!-- Shouter Count -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>ได้ Shouter</span>
+              <p>10 - 20 คน</p>
+            </div>
+            <!-- Estimated Reach -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Estimate Reach</span>
+              <p>10,000 - 20,000 reach</p>
+            </div>
+            <!-- Cost Per Reach -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Social Media</span>
+              <p>3 บาท</p>
+            </div>
+          </div>
+          <div class="campaign__create__rightbar__detail__box">
+            <header>Work Format</header>
+            <!-- รูปแบบโพส -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>รูปแบบโพส</span>
+              <p>-</p>
+            </div>
+            <!-- รูปแบบการบอกต่อ -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>รูปแบบการบอกต่อ</span>
+              <p>-</p>
+            </div>
+            <!-- จำนวน -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>จำนวน</span>
+              <p>-</p>
+            </div>
+          </div>
+          <div class="campaign__create__rightbar__detail__box">
+            <header>
+              <img src="{% static 'img/campaigns/icon_kpi_commitment.png' %}" alt="">
+              <span>KPI Commitment</span>
+            </header>
+            <!-- Commit At -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Commit At</span>
+              <p>-</p>
+            </div>
+          </div>
+        </div>
+        <div class="campaign__create__rightbar__button">
+          <button class="w100pc btn__grey" disabled>ขั้นตอนถัดไป</button>
+        </div>
+      </section>
+
+      <!-- Content -->
+      <section class="campaign__create__content">
+        <div class="campaign__create__content__scope">
+
+          <!-- Social Media-->
+          <div class="campaign__card width_create_campaign">
+            <h6 class="campaign__create__content__header">Social Media</h6>
+            <div class="campaign__create__content__scope__social">
+              <div class="campaign__create__content__scope__social__active">
+                <!-- Instagram -->
+                <div class="campaign__create__content__scope__social__box">
+                  <label for="instagram">
+                    <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
+                    <p>Instagram</p>
+                  </label>
+                  <input type="checkbox" id="instagram">
+                </div>
+                <!-- Facebook -->
+                <div class="campaign__create__content__scope__social__box">
+                  <label for="facebook">
+                    <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="">
+                    <div class="campaign__create__content__scope__social__box__flex">
+                      <p>เพิ่มแชร์ลง Facebook (Optional)</p>
+                      <span>เลือกคู่กับ Instagram เท่านั้น (เป็นการแชร์จาก Instagram ลง Facebook)</span>
+                    </div>
+                  </label>
+                  <input type="checkbox" id="facebook">
+                </div>
+              </div>
+              <hr>
+              <div class="campaign__create__content__scope__social__deactive">
+                <!-- Tiktok -->
+                <div class="campaign__create__content__scope__social__box">
+                  <label for="tiktok">
+                    <img src="{% static 'img/campaigns/icon_tiktok.png' %}" alt="">
+                    <p>Tiktok</p>
+                  </label>
+                  <input type="checkbox" id="tiktok" disabled>
+                </div>
+                <!-- Twitter -->
+                <div class="campaign__create__content__scope__social__box">
+                  <label for="twitter">
+                    <img src="{% static 'img/campaigns/icon_twitter.png' %}" alt="">
+                    <p>Twitter</p>
+                  </label>
+                  <input type="checkbox" id="twitter" disabled>
+                </div>
+                <!-- Extra -->
+                <p>หากต้องการงาน TikTok, Twitter, หรือ IG Reel โปรดติดต่อทีมงาน <span>contact@shoutsolution.com</span> หรือ <span>087-560-4935</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Budget -->
+          <div class="campaign__card width_create_campaign">
+            <h6 class="campaign__create__content__header">Budget</h6>
+            <div class="campaign__create__content__flex">
+              <div class="campaign__create__content__flex50">
+                <div class="campaign__create__content__flexcolumn campaign__create__content__scope__input">
+                  <label class="margin " for="budget">Campaign Budget <span>*</span></label>
+                  <input class="h48" type="text" name="budget" id="budget" placeholder="ขั้นต่ำ 50,000 บาท">
+                  <span class="unit">บาท</span>
+                </div>
+              </div>
+              <div class="campaign__create__content__flex50">
+                <div class="campaign__create__content__scope__no_fee">
+                  <img src="{% static 'img/campaigns/icon_money.png' %}" alt="">
+                  <span>ไม่มีค่าธรรมเนียมเอเจนซี่ / การจัดการ Your Budget = Net Price</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Work Type -->
+          <div class="campaign__card width_create_campaign">
+            <h6 class="campaign__create__content__header">Work Type</h6>
+            <p class="campaign__create__content__scope__label">เลือกประเภทการโพสต์ที่ต้องการ <span>*</span></p>
+
+            <div class="campaign__create__content__scope__work_type">
+              <input type="radio" name="work_type" id="story" checked>
+              <label for="story">
+                <div class="campaign__create__content__scope__work_type__box">
+                  <header>
+                    <h6>Story Only</h6>
+                    <button class="w180" type="button">เลือก</button>
+                  </header>
+                  <div class="campaign__create__content__scope__work_type__box__detail">
+                    <img src="{% static 'img/campaigns/create/campaign_work_type_1.png' %}" alt="">
+                    <div class="campaign__create__content__scope__work_type__box__detail__text">
+                      <div class="campaign__create__content__scope__work_type__box__detail__text__left">
+                        <p>เหมาะสำหรับแคมเปญที่</p>
+                        <ul>
+                          <li>ต้องการความรวดเร็ว เข้าถึงง่าย มีข้อมูลที่กระชับ</li>
+                          <li>Low-Involvement Product/Service</li>
+                          <li>ต้องการสร้างความแตกต่างในการทำ Marketing & Promotion</li>
+                          <li>ต้องการสร้าง Engagement & Conversion ผ่าน KOC จำนวนมาก</li>
+                          <li>การเข้าถึงคนรุ่นใหม่</li>
+                        </ul>
+                      </div>
+                      <div class="campaign__create__content__scope__work_type__box__detail__text__right">
+                        <p>ประมาณผลลัพธ์</p>
+                        <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
+                          <span>Shouter</span>
+                          <p>10 - 20 คน</p>
+                        </div>
+                        <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
+                          <span>Reach</span>
+                          <p>30,000 - 40,000 reach</p>
+                        </div>
+                        <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
+                          <span>Cost Per Reach</span>
+                          <p>0.68 - 1.23 บาท</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </label>
+            </div>
+            
+            <div class="campaign__create__content__scope__work_type">
+              <input type="radio" name="work_type" id="post">
+              <label for="post">
+                <div class="campaign__create__content__scope__work_type__box">
+                  <header>
+                    <h6>Post Only</h6>
+                    <button class="w180" type="button">เลือก</button>
+                  </header>
+                  <div class="campaign__create__content__scope__work_type__box__detail">
+                    <img src="{% static 'img/campaigns/create/campaign_work_type_2.png' %}" alt="">
+                    <div class="campaign__create__content__scope__work_type__box__detail__text">
+                      <div class="campaign__create__content__scope__work_type__box__detail__text__left">
+                        <p>เหมาะสำหรับแคมเปญที่</p>
+                        <ul>
+                          <li>ต้องการสื่อสารข้อมูลที่ละเอียด</li>
+                          <li>High-Involvement Product/Service</li>
+                          <li>ต้องการ High Quality Content และอยู่ในระบบนานขึ้น (14 วันขึ้นไป)</li>
+                          <li>ต้องการสร้างยอด Awareness สูง เน้นการเข้าถึงจำนวนมาก</li>
+                          <li>การสร้าง Branding ผ่าน KOC</li>
+                        </ul>
+                      </div>
+                      <div class="campaign__create__content__scope__work_type__box__detail__text__right">
+                        <p>ประมาณผลลัพธ์</p>
+                        <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
+                          <span>Shouter</span>
+                          <p>10 - 20 คน</p>
+                        </div>
+                        <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
+                          <span>Reach</span>
+                          <p>30,000 - 40,000 reach</p>
+                        </div>
+                        <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
+                          <span>Cost Per Reach</span>
+                          <p>0.68 - 1.23 บาท</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </label>
+            </div>
+            
+            <div class="campaign__create__content__scope__work_type">
+              <input type="radio" name="work_type" id="post_story">
+              <label for="post_story">
+                <div class="campaign__create__content__scope__work_type__box">
+                  <header>
+                    <h6>Post + Story</h6>
+                    <button class="w180" type="button">เลือก</button>
+                  </header>
+                  <div class="campaign__create__content__scope__work_type__box__detail">
+                    <img src="{% static 'img/campaigns/create/campaign_work_type_3.png' %}" alt="">
+                    <div class="campaign__create__content__scope__work_type__box__detail__text">
+                      <div class="campaign__create__content__scope__work_type__box__detail__text__left">
+                        <p>เหมาะสำหรับแคมเปญที่</p>
+                        <ul>
+                          <li>ต้องการสื่อสารข้อมูลหลากหลาย รูปแบบ สั้น ยาว (Promotion & Experience Sharing)</li>
+                          <li>Low & High-Involvement Product/Service</li>
+                          <li>ต้องการทำทั้ง Branding และ Promote เต็มรูปแบบ</li>
+                          <li>ต้องการสร้าง Awareness, Engagement, Conversion ไปพร้อมๆกัน</li>
+                          <li>การสร้างการเห็นซ้ำ (Repeat) ผ่านหลากหลาย Content</li>
+                        </ul>
+                      </div>
+                      <div class="campaign__create__content__scope__work_type__box__detail__text__right">
+                        <p>ประมาณผลลัพธ์</p>
+                        <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
+                          <span>Shouter</span>
+                          <p>10 - 20 คน</p>
+                        </div>
+                        <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
+                          <span>Reach</span>
+                          <p>30,000 - 40,000 reach</p>
+                        </div>
+                        <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
+                          <span>Cost Per Reach</span>
+                          <p>0.68 - 1.23 บาท</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </form>
+  {% endblock %}
+</body>
+</html>

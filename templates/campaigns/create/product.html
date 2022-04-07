@@ -1,0 +1,192 @@
+{% extends "campaigns/_base/_base.html" %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block script %}
+  <script src="{% static 'js/campaigns/content_type.js' %}"></script>
+  {% endblock %}
+  {% block title %} Create Campaign {% endblock %}
+</head>
+<body>
+  {% block content %}
+    <!-- Breadcrumb -->
+    <section class="campaign__create__breadcrumb">
+      <!--1-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Campaign Name</p>
+        </div>
+      </div>
+      <!--2-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Scope & Budget</p>
+        </div>
+      </div>
+      <!--3-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Content Type</p>
+        </div>
+      </div>
+      <!--4-->
+      <div class="campaign__create__breadcrumb__active">
+        <div class="campaign__create__breadcrumb__number">
+          <p>4</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Product Detail</p>
+        </div>
+      </div>
+      <!--5-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>5</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Target Customer</p>
+        </div>
+      </div>
+      <!--6-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>6</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Shouter Selection</p>
+        </div>
+      </div>
+      <!--7-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>7</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Timeline</p>
+        </div>
+      </div>
+      <!--8-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>8</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Brief</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form -->
+    <form action="" method="POST"> {% csrf_token %}
+      <!-- Right Bar -->  
+      <section class="campaign__create__rightbar">
+        <div class="campaign__create__rightbar__detail">
+          <div class="campaign__create__rightbar__detail__box">
+            <header>Campaign Name</header>
+            <!-- Budget -->
+            <div class="campaign__create__rightbar__detail__data budget">
+              <span class="bold">Budget</span>
+              <h4>100,000</h4>
+            </div>
+            <!-- Social Media -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Social Media</span>
+              <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
+            </div>
+            <!-- Shouter Count -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>ได้ Shouter</span>
+              <p>10 - 20 คน</p>
+            </div>
+            <!-- Estimated Reach -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Estimate Reach</span>
+              <p>10,000 - 20,000 reach</p>
+            </div>
+            <!-- Cost Per Reach -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Social Media</span>
+              <p>3 บาท</p>
+            </div>
+          </div>
+          <div class="campaign__create__rightbar__detail__box">
+            <header>Work Format</header>
+            <!-- รูปแบบโพส -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>รูปแบบโพส</span>
+              <p>-</p>
+            </div>
+            <!-- รูปแบบการบอกต่อ -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>รูปแบบการบอกต่อ</span>
+              <p>-</p>
+            </div>
+            <!-- จำนวน -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>จำนวน</span>
+              <p>-</p>
+            </div>
+          </div>
+          <div class="campaign__create__rightbar__detail__box">
+            <header>
+              <img src="{% static 'img/campaigns/icon_kpi_commitment.png' %}" alt="">
+              <span>KPI Commitment</span>
+            </header>
+            <!-- Commit At -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Commit At</span>
+              <p>-</p>
+            </div>
+          </div>
+        </div>
+        <div class="campaign__create__rightbar__button">
+          <button class="w100pc btn__grey">ขั้นตอนถัดไป</button>
+        </div>
+      </section>
+
+      <!-- Content -->
+      <section class="campaign__create__content">
+        <div>
+          <!-- Product or Service Detail -->
+          <div class="campaign__card width_create_campaign campaign__create__content__product" style="height: 87vh;">
+            <h6 class="campaign__create__content__header">Product or Service Detail</h6>
+            <!-- Product Name -->
+            <div class="campaign__create__content__product__name">
+              <label for="product_name" class="margin">ชื่อสินค้าและบริการของคุณ <span>*</span></label>
+              <input type="text" class="h48" id="product_name" placeholder="ชื่อสินค้าหรือบริการ">
+            </div>
+            <!-- Product Picture-->
+            <div class="campaign__create__content__product__picture">
+
+            </div>
+            <!-- Product Detail-->
+            <div class="campaign__create__content__product__detail">
+              <label for="product_detail" class="margin">ข้อมูลเกี่ยวกับสินค้าหรือบริการของคุณ <span>*</span></label>
+              <textarea name="" id="product_detail" cols="30" rows="10" placeholder="ข้อมูลเกี่ยวกับสินค้าบริการ"></textarea>
+            </div>
+            <!-- Product Link -->
+            <div class="campaign__create__content__product__link">
+              <label for="product_link" class="margin">Link for more detail <span>*</span></label>
+              <input type="text" class="h48" id="product_link" placeholder="www.shoutsolution.com">
+            </div>
+          </div>
+        </div>
+      </section>
+    </form>
+  {% endblock %}
+</body>
+</html>

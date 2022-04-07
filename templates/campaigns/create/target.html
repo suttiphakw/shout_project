@@ -1,0 +1,420 @@
+{% extends "campaigns/_base/_base.html" %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block script %}
+  <script src="{% static 'js/campaigns/content_type.js' %}"></script>
+  {% endblock %}
+  {% block title %} Create Campaign {% endblock %}
+</head>
+<body>
+  {% block content %}
+    <!-- Breadcrumb -->
+    <section class="campaign__create__breadcrumb">
+      <!--1-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Campaign Name</p>
+        </div>
+      </div>
+      <!--2-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Scope & Budget</p>
+        </div>
+      </div>
+      <!--3-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Content Type</p>
+        </div>
+      </div>
+      <!--4-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Product Detail</p>
+        </div>
+      </div>
+      <!--5-->
+      <div class="campaign__create__breadcrumb__active">
+        <div class="campaign__create__breadcrumb__number">
+          <p>5</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Target Customer</p>
+        </div>
+      </div>
+      <!--6-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>6</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Shouter Selection</p>
+        </div>
+      </div>
+      <!--7-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>7</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Timeline</p>
+        </div>
+      </div>
+      <!--8-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>8</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Brief</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form -->
+    <form action="" method="POST"> {% csrf_token %}
+      <!-- Right Bar -->  
+      <section class="campaign__create__rightbar">
+        <div class="campaign__create__rightbar__detail">
+          <div class="campaign__create__rightbar__detail__box">
+            <header>Campaign Name</header>
+            <!-- Budget -->
+            <div class="campaign__create__rightbar__detail__data budget">
+              <span class="bold">Budget</span>
+              <h4>100,000</h4>
+            </div>
+            <!-- Social Media -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Social Media</span>
+              <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
+            </div>
+            <!-- Shouter Count -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>ได้ Shouter</span>
+              <p>10 - 20 คน</p>
+            </div>
+            <!-- Estimated Reach -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Estimate Reach</span>
+              <p>10,000 - 20,000 reach</p>
+            </div>
+            <!-- Cost Per Reach -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Social Media</span>
+              <p>3 บาท</p>
+            </div>
+          </div>
+          <div class="campaign__create__rightbar__detail__box">
+            <header>Work Format</header>
+            <!-- รูปแบบโพส -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>รูปแบบโพส</span>
+              <p>-</p>
+            </div>
+            <!-- รูปแบบการบอกต่อ -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>รูปแบบการบอกต่อ</span>
+              <p>-</p>
+            </div>
+            <!-- จำนวน -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>จำนวน</span>
+              <p>-</p>
+            </div>
+          </div>
+          <div class="campaign__create__rightbar__detail__box">
+            <header>
+              <img src="{% static 'img/campaigns/icon_kpi_commitment.png' %}" alt="">
+              <span>KPI Commitment</span>
+            </header>
+            <!-- Commit At -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Commit At</span>
+              <p>-</p>
+            </div>
+          </div>
+        </div>
+        <div class="campaign__create__rightbar__button">
+          <button class="w100pc btn__grey">ขั้นตอนถัดไป</button>
+        </div>
+      </section>
+
+      <!-- Content -->
+      <section class="campaign__create__content">
+        <div>
+          <div class="campaign__card width_create_campaign campaign__create__content__target" style="height: 87vh;">
+            <!-- Header -->
+            <h6 class="campaign__create__content__header">Who is your Target Customer ?</h6>
+            <p class="campaign__create__content__subheader">แพลตฟอร์มจะคัดเลือก Shouter (ผู้บอกต่อ) ให้ตรงกลุ่มลูกค้าของคุณที่สุด</p>
+
+            <!-- Gender -->
+            <div class="campaign__create__content__target__gender">
+              <p>เพศ <span>*</span></p>
+              <div class="campaign__create__content__target__input">
+                <!-- No Gender -->
+                <input type="radio" name="gender" id="no_gender">
+                <label for="no_gender" class="campaign__create__content__target__input__box">
+                  <div class="campaign__create__content__target__input__box__left">
+                    <svg class="campaign__create__content__target__input__icon">
+                      <use xlink:href="{% static 'img/campaigns/sprite.svg' %}#icon-users"></use>
+                    </svg>
+                    <p>ไม่จำกัดเพศ</p>
+                  </div>
+                  <span class="radio">
+                    <div class="campaign__create__content__target__input__radio"></div>
+                  </span>
+                </label>
+                <!-- Female -->
+                <input type="radio" name="gender" id="female">
+                <label for="female" class="campaign__create__content__target__input__box">
+                  <div class="campaign__create__content__target__input__box__left">
+                    <svg class="campaign__create__content__target__input__icon">
+                      <use xlink:href="{% static 'img/campaigns/sprite.svg' %}#icon-woman"></use>
+                    </svg>
+                    <p>หญิง</p>
+                  </div>
+                  <span class="radio">
+                    <div class="campaign__create__content__target__input__radio"></div>
+                  </span>
+                </label>
+                <!-- Male -->
+                <input type="radio" name="gender" id="male">
+                <label for="male" class="campaign__create__content__target__input__box">
+                  <div class="campaign__create__content__target__input__box__left">
+                    <svg class="campaign__create__content__target__input__icon">
+                      <use xlink:href="{% static 'img/campaigns/sprite.svg' %}#icon-man"></use>
+                    </svg>
+                    <p>ชาย</p>
+                  </div>
+                  <span class="radio">
+                    <div class="campaign__create__content__target__input__radio"></div>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Age -->
+            <div class="campaign__create__content__target__age">
+              <p>อายุ (มากสุด 3 ช่วงอายุ) <span>*</span></p>
+              <div class="campaign__create__content__target__input">
+                <!-- All -->
+                <input type="checkbox" name="age" id="all_age">
+                <label for="all_age" class="campaign__create__content__target__input__box">
+                  <div class="campaign__create__content__target__input__box__left">
+                    <p>ไม่จำกัดช่วงอายุ</p>
+                  </div>
+                  <span class="checkbox">
+                    <svg class="campaign__create__content__target__input__checkbox">
+                      <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                    </svg>
+                  </span>
+                </label>
+                <!-- 13-17 -->
+                <input type="checkbox" name="age" id="13_17">
+                <label for="13_17" class="campaign__create__content__target__input__box">
+                  <div class="campaign__create__content__target__input__box__left">
+                    <p>13-17 ปี</p>
+                  </div>
+                  <span class="checkbox">
+                    <svg class="campaign__create__content__target__input__checkbox">
+                      <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                    </svg>
+                  </span>
+                </label>
+                <!-- 18-24 -->
+                <input type="checkbox" name="age" id="18_24">
+                <label for="18_24" class="campaign__create__content__target__input__box">
+                  <div class="campaign__create__content__target__input__box__left">
+                    <p>18-24 ปี</p>
+                  </div>
+                  <span class="checkbox">
+                    <svg class="campaign__create__content__target__input__checkbox">
+                      <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                    </svg>
+                  </span>
+                </label>
+                <!-- 25-34 -->
+                <input type="checkbox" name="age" id="25_34">
+                <label for="25_34" class="campaign__create__content__target__input__box">
+                  <div class="campaign__create__content__target__input__box__left">
+                    <p>25-34 ปี</p>
+                  </div>
+                  <span class="checkbox">
+                    <svg class="campaign__create__content__target__input__checkbox">
+                      <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                    </svg>
+                  </span>
+                </label>
+                <!-- 35-44 -->
+                <input type="checkbox" name="age" id="35_44">
+                <label for="35_44" class="campaign__create__content__target__input__box">
+                  <div class="campaign__create__content__target__input__box__left">
+                    <p>35-44 ปี</p>
+                  </div>
+                  <span class="checkbox">
+                    <svg class="campaign__create__content__target__input__checkbox">
+                      <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                    </svg>
+                  </span>
+                </label>
+                <!-- 45-54 -->
+                <input type="checkbox" name="age" id="45_54">
+                <label for="45_54" class="campaign__create__content__target__input__box">
+                  <div class="campaign__create__content__target__input__box__left">
+                    <p>45-54 ปี</p>
+                  </div>
+                  <span class="checkbox">
+                    <svg class="campaign__create__content__target__input__checkbox">
+                      <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                    </svg>
+                  </span>
+                </label>
+                <!-- 55-64 -->
+                <input type="checkbox" name="age" id="55_64">
+                <label for="55_64" class="campaign__create__content__target__input__box">
+                  <div class="campaign__create__content__target__input__box__left">
+                    <p>55-64 ปี</p>
+                  </div>
+                  <span class="checkbox">
+                    <svg class="campaign__create__content__target__input__checkbox">
+                      <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                    </svg>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Province -->
+            <div class="campaign__create__content__target__province">
+              <p>จังหวัด <span>*</span></p>
+              <div class="campaign__create__content__target__input">
+                <!-- All -->
+                <input type="radio" name="province" id="all_province">
+                <label for="all_province" class="campaign__create__content__target__input__box">
+                  <div class="campaign__create__content__target__input__box__left">
+                    <p>ทุกจังหวัด</p>
+                  </div>
+                  <span class="radio">
+                    <div class="campaign__create__content__target__input__radio"></div>
+                  </span>
+                </label>
+                <!-- Bangkok -->
+                <input type="radio" name="province" id="bkk">
+                <label for="bkk" class="campaign__create__content__target__input__box">
+                  <div class="campaign__create__content__target__input__box__left">
+                    <p>กรุงเทพฯ</p>
+                  </div>
+                  <span class="radio">
+                    <div class="campaign__create__content__target__input__radio"></div>
+                  </span>
+                </label>
+                <!-- Bangkok & Near -->
+                <input type="radio" name="province" id="bkk_nearby">
+                <label for="bkk_nearby" class="campaign__create__content__target__input__box">
+                  <div class="campaign__create__content__target__input__box__left">
+                    <p>กรุงเทพและปริมณฑล</p>
+                  </div>
+                  <span class="radio">
+                    <div class="campaign__create__content__target__input__radio"></div>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Interest -->
+            <div class="campaign__create__content__target__interest">
+              <p>ความสนใจ (เลือก 1-3 ประเภท) <span>*</span></p>
+              <div class="campaign__create__content__target__input">
+                <!-- Lifestyle -->
+                <input type="checkbox" name="interest" id="interest_lifestyle">
+                <label for="interest_lifestyle" class="campaign__create__content__target__input__interest__box">
+                  <p>🌻 Lifestyle</p>
+                </label>
+                <!-- Food & Drink -->
+                <input type="checkbox" name="interest" id="interest_food_drink">
+                <label for="interest_food_drink" class="campaign__create__content__target__input__interest__box">
+                  <p>🍔 Food & Drink</p>
+                </label>
+                <!-- Beauty -->
+                <input type="checkbox" name="interest" id="interest_beauty">
+                <label for="interest_beauty" class="campaign__create__content__target__input__interest__box">
+                  <p>💄 Beauty</p>
+                </label>
+                <!-- Fashion -->
+                <input type="checkbox" name="interest" id="interest_fashion">
+                <label for="interest_fashion" class="campaign__create__content__target__input__interest__box">
+                  <p>👗 Fashion</p>
+                </label>
+                <!-- Travel -->
+                <input type="checkbox" name="interest" id="interest_travel">
+                <label for="interest_travel" class="campaign__create__content__target__input__interest__box">
+                  <p>✈️ Travel</p>
+                </label>
+                <!-- Health & Sport -->
+                <input type="checkbox" name="interest" id="interest_health_sport">
+                <label for="interest_health_sport" class="campaign__create__content__target__input__interest__box">
+                  <p>🏀 Health & Sport</p>
+                </label>
+                <!-- Design & Art -->
+                <input type="checkbox" name="interest" id="interest_design_art">
+                <label for="interest_design_art" class="campaign__create__content__target__input__interest__box">
+                  <p>🎨 Design & Art</p>
+                </label>
+                <!-- Technology & Gatget -->
+                <input type="checkbox" name="interest" id="interest_tech_gatget">
+                <label for="interest_tech_gatget" class="campaign__create__content__target__input__interest__box">
+                  <p>📱 Technology & Gadget</p>
+                </label>
+                <!-- Social & CSR -->
+                <input type="checkbox" name="interest" id="interest_social_csr">
+                <label for="interest_social_csr" class="campaign__create__content__target__input__interest__box">
+                  <p>⭐️ Social & CSR</p>
+                </label>
+                <!-- Entertainment -->
+                <input type="checkbox" name="interest" id="interest_entertainment">
+                <label for="interest_entertainment" class="campaign__create__content__target__input__interest__box">
+                  <p>🎸 Entertainment</p>
+                </label>
+                <!-- Automobile -->
+                <input type="checkbox" name="interest" id="interest_automobile">
+                <label for="interest_automobile" class="campaign__create__content__target__input__interest__box">
+                  <p>🚘 Automobile</p>
+                </label>
+                <!-- Finance & Investment -->
+                <input type="checkbox" name="interest" id="interest_finance_investment">
+                <label for="interest_finance_investment" class="campaign__create__content__target__input__interest__box">
+                  <p>💰 Finance & Investment</p>
+                </label>
+                <!-- Luxury -->
+                <input type="checkbox" name="interest" id="interest_luxury">
+                <label for="interest_luxury" class="campaign__create__content__target__input__interest__box">
+                  <p>👜 Luxury</p>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </form>
+  {% endblock %}
+</body>
+</html>

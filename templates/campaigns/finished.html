@@ -44,8 +44,8 @@
   <!-- Campaign Breadcrumb -->
   <section class="campaign__breadcrumb">
     <!-- Draft -->
-    <a href="{% url 'campaign_draft' %}" class="activate">
-      <div class="campaign__breadcrumb__box activate">
+    <a href="{% url 'campaign_draft' %}">
+      <div class="campaign__breadcrumb__box">
         <p>แบบร่าง (1)</p>
       </div>
     </a>
@@ -56,18 +56,19 @@
       </div>
     </a>
     <!-- Finished -->
-    <a href="{% url 'campaign_finished' %}">
-      <div class="campaign__breadcrumb__box">
+    <a href="{% url 'campaign_finished' %}" class="activate">
+      <div class="campaign__breadcrumb__box activate">
         <p>เสร็จสิ้น (0)</p>
       </div>
     </a>
   </section>
 
   <!-- Campaign Content -->
+  <!-- Test
   <section class="campaign__content">
     <div class="campaign__content__header">
       <h6>Serb Product Launching</h6>
-      <span class="campaign__content__header__tag draft">แบบร่าง</span>
+      <span class="campaign__content__header__tag finished">เสร็จสิ้น</span>
     </div>
     <div class="campaign__content__detail">
       <img src="{% static 'img/campaigns/serb_photo.png' %}" alt="">
@@ -76,10 +77,7 @@
           <div class="campaign__content__detail__data__top__left">
             <div class="campaign__content__detail__data__box">
               <p class="header">Social Media</p>
-              <div class="campaign__content__detail__data__box__icon">
-                <img src="{% static 'img/brands/icon_instagram.png' %}" alt="">
-                <img src="{% static 'img/brands/icon_facebook.png' %}" alt="">
-              </div>
+              <p>Social Media</p>
             </div>
             <div class="campaign__content__detail__data__box">
               <p class="header">Work Format</p>
@@ -133,6 +131,16 @@
         </a>
       </div>
     </div>
+  </section>
+  -->
+
+  <!-- No Campaign -->
+  <section class="campaign__content__empty">
+    <img src="{% static 'img/campaigns/icon_campaign_empty.png' %}" alt="">
+    <p>ไม่มีแคมเปญที่กำลังดำเนินการอยู่</p>
+    <a href="" class="none">
+      <button class="w300 btn__orange">สร้างแคมเปญเลย +</button>
+    </a>
   </section>
 
 {% endblock %}
