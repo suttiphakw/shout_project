@@ -246,7 +246,7 @@ def video_message(line_user_id):
             {
                 "type": "video",
                 "originalContentUrl": "https://shoutsolution.com/media/source/connect-instagram.mp4",
-                "previewImageUrl": "https://www.img.in.th/images/1bc0545644eefd347bae258f8eb6d0ae.png"
+                "previewImageUrl": "https://shoutsolution.com/media/source/connect-instagram-thumbnail.png"
             }
         ]
     }
