@@ -245,7 +245,7 @@ def video_message(line_user_id):
         "messages": [
             {
                 "type": "video",
-                "originalContentUrl": "https://www.dropbox.com/s/kdp0h3kj3gmpbdn/671019718.202630.mp4?dl=0",
+                "originalContentUrl": "https://shoutsolution.com/media/source/connect-instagram.mp4",
                 "previewImageUrl": "https://www.img.in.th/images/1bc0545644eefd347bae258f8eb6d0ae.png"
             }
         ]
