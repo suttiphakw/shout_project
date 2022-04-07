@@ -4,7 +4,8 @@
 *.pyc
 __pycache__
 db.sqlite3
-media
+media/book_bank
+media/id_card
 
 # Backup files # 
 *.bak 
