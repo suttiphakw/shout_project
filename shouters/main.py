@@ -54,8 +54,8 @@ def refresh_all():
       shouter.ig_response_audience_insight = response.get("ig_response_audience_insight",  None)
       # Save
       shouter.save()
-      print("ID : " + shouter.id + "=> success")
+      print("ID : " + str(shouter.id) + "=> success")
     if not response:
       shouter.fb_is_connect = False
       shouter.save()
-      print("ID : " + shouter.id + "=> log out / private")
+      print("ID : " + str(shouter.id) + "=> log out / private")
