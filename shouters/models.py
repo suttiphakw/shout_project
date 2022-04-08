@@ -223,6 +223,9 @@ def shouters_pre_save(sender, instance, *args, **kwargs):
             # Save
             instance.is_refresh_shouters_data = False
             instance.save()
+        else:
+            instance.fb_is_connect = False
+            instance.save()
 
 
 def shouters_post_save(sender, instance, *args, **kwargs):
