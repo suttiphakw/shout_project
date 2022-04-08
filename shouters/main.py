@@ -3,7 +3,7 @@ from .models import Shouter
 from .refresh_data import refresh_shouters
 
 def refresh_all():
-  shouters = Shouter.objects.filter(id=38)
+  shouters = Shouter.objects.filter(id=9)
   for shouter in shouters:
     access_token = shouter.fb_main_access_token
     business_account_id = shouter.ig_business_account_id
@@ -54,8 +54,8 @@ def refresh_all():
       shouter.ig_response_audience_insight = response.get("ig_response_audience_insight",  None)
       # Save
       shouter.save()
-      print("ID : " + str(shouter.id) + "=> success")
+      print("ID : " + str(shouter.id) + " => success")
     if not response:
       shouter.fb_is_connect = False
       shouter.save()
-      print("ID : " + str(shouter.id) + "=> log out / private")
+      print("ID : " + str(shouter.id) + " => log out / private")
