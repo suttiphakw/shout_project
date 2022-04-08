@@ -3,7 +3,7 @@ from .models import Shouter
 from .refresh_data import refresh_shouters
 
 def refresh_all():
-  shouters = Shouter.objects.filter(id=9)
+  shouters = Shouter.objects.filter(fb_is_connect=True)
   for shouter in shouters:
     access_token = shouter.fb_main_access_token
     business_account_id = shouter.ig_business_account_id
