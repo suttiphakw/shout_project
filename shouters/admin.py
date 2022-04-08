@@ -42,7 +42,7 @@ class ShouterAdmin(admin.ModelAdmin):
 
     search_fields = ['ig_username', 'first_name', 'line_username']
 
-    list_filter = ('is_register', 'is_finished_regis', 'is_connect_bank', 'fb_is_connect')
+    list_filter = ('is_register', 'is_finished_regis', 'is_connect_bank', 'fb_is_connect', 'is_approve')
 
     fieldsets = (
         ('Status', {'fields': ('is_approve', 'is_refresh_shouters_data', 'is_register', 'fb_is_connect',
