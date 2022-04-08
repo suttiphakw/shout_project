@@ -701,26 +701,38 @@ def register__get_ig_data(request, token):
   else:
     # context__like_engagement return เป็น dict => dict['list_like'] = list และ dict['mean'] = average like after cut outlier
     context__like_engagement = ig_api_engagement.get_like(media_objects=media_objects, access_token=access_token)
-    # AVERAGE LIKE & STORY VIEW
-    final_dict = context__like_engagement['final_dict']
-    ig_average_total_like = context__like_engagement['ig_average_total_like']
-    ig_story_view = predicted_story_view.get(ig_follower_count=ig_follower_count, ig_average_total_like=ig_average_total_like)
+    # return =>
+    # {
+    #   'final_dict': [{id: like_count}, ... ],
+    #   'ig_average_total_like' : ...
+    # }
+    # if no final dict => context__like_engagement return False
+    if not context__like_engagement:
+      ig_average_total_like = 0
+      ig_story_view = 0
+      ig_average_post_reach = 0
+      ig_reach_source = 'all media like < 10'
+    else:
+      # AVERAGE LIKE & STORY VIEW
+      final_dict = context__like_engagement['final_dict']
+      ig_average_total_like = context__like_engagement['ig_average_total_like']
+      ig_story_view = predicted_story_view.get(ig_follower_count=ig_follower_count, ig_average_total_like=ig_average_total_like)
 
-    # เก็บ POST REACH เพื่อดูว่าเก็บไก้มากกว่า 3 ไหม
-    context__post_reach = ig_api_engagement.get_reach(final_dict=final_dict, access_token=access_token)
-    if 'ig_average_post_reach' in context__post_reach.keys():
-      reach_list = context__post_reach['reach_list']
-      # Media < 3 -> like = average, story_view = 0, post_reach = 0
-      if len(media_objects) < 3 or len(reach_list) < 3:
+      # เก็บ POST REACH เพื่อดูว่าเก็บไก้มากกว่า 3 ไหม
+      context__post_reach = ig_api_engagement.get_reach(final_dict=final_dict, access_token=access_token)
+      if 'ig_average_post_reach' in context__post_reach.keys():
+        reach_list = context__post_reach['reach_list']
+        # Media < 3 -> like = average, story_view = 0, post_reach = 0
+        if len(media_objects) < 3 or len(reach_list) < 3:
+          ig_average_post_reach = predicted_post_reach.get(ig_average_total_like=ig_average_total_like, ig_story_view=ig_story_view)
+          ig_reach_source = 'predicted'
+        else:
+          # AVERAGE POST REACH
+          ig_average_post_reach = context__post_reach['ig_average_post_reach']
+          ig_reach_source = 'api'
+      else:
         ig_average_post_reach = predicted_post_reach.get(ig_average_total_like=ig_average_total_like, ig_story_view=ig_story_view)
         ig_reach_source = 'predicted'
-      else:
-        # AVERAGE POST REACH
-        ig_average_post_reach = context__post_reach['ig_average_post_reach']
-        ig_reach_source = 'api'
-    else:
-      ig_average_post_reach = predicted_post_reach.get(ig_average_total_like=ig_average_total_like, ig_story_view=ig_story_view)
-      ig_reach_source = 'predicted'
   ##########################################################################################################################
 
   ##########################################################################################################################

@@ -1,6 +1,8 @@
 import statistics
 
 def cut(raw_list, id_list):
+  if len(raw_list) == 0:
+    return False
   if len(raw_list) == 1:
     context = {
       'final_dict': {id_list[0]: raw_list[0]},

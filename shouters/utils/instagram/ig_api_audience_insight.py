@@ -27,7 +27,7 @@ from shouters.utils import settings
 def get(business_account_id, access_token):
   audience_scope = ['audience_city', 'audience_country', 'audience_gender_age', 'audience_locale', 'online_followers']
   params = {
-    'metrics': ','.join(audience_scope),
+    'metric': ','.join(audience_scope),
     'period': 'lifetime',
     'access_token': access_token
   }

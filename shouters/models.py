@@ -177,51 +177,52 @@ def shouters_pre_save(sender, instance, *args, **kwargs):
 
         # Get New Data
         response = refresh_shouters(access_token=access_token, business_account_id=business_account_id)
-        # FB Biography
-        instance.fb_name = response.get("fb_name", None)
-        instance.fb_profile_picture = response.get("fb_profile_picture", None)
-        # IG Biography
-        instance.ig_username = response.get("ig_username", None)
-        instance.ig_media_count = response.get("ig_media_count", None)
-        instance.ig_follower_count = response.get("ig_follower_count", None)
-        instance.ig_following_count = response.get("ig_following_count", None)
-        instance.ig_profile_picture = response.get("ig_profile_picture", None)
-        # IG Active Follower
-        instance.ig_response_active_follower = response.get("ig_response_active_follower", None)
-        instance.ig_active_follower = response.get("ig_active_follower", None)
-        instance.ig_active_follower_harmonic = response.get("ig_active_follower_harmonic", None)
-        instance.ig_active_follower_percent = response.get("ig_active_follower_percent", None)
-        # Media Objects
-        instance.ig_response_media_objects = response.get("ig_response_media_objects", None)
-        # Engagement
-        instance.ig_average_total_like = response.get("ig_average_total_like", None)
-        instance.ig_story_view = response.get("ig_story_view", None)
-        instance.ig_average_post_reach = response.get("ig_average_post_reach", None)
-        instance.ig_reach_source = response.get("ig_reach_source", None)
-        # Engagement => จากการคำนวน
-        instance.ig_engagement_percent = response.get("ig_engagement_percent", None)
-        instance.ig_predicted_ad_post_reach = response.get("ig_predicted_ad_post_reach", None)
-        instance.ig_post_reach_guarantee = response.get("ig_post_reach_guarantee", None)
-        instance.ig_story_view_guarantee = response.get("ig_story_view_guarantee", None)
-        instance.ig_ad_post_reach = response.get("ig_ad_post_reach", None)
-        # Price
-        instance.ig_price_story_fc = response.get("ig_price_story_fc", None)
-        instance.ig_price_story_ugc = response.get("ig_price_story_ugc", None)
-        instance.ig_price_post_fc = response.get("ig_price_post_fc", None)
-        instance.ig_price_post_ugc = response.get("ig_price_post_ugc", None)
-        instance.ig_price_story_post_fc = response.get("ig_price_story_post_fc", None)
-        instance.ig_price_story_post_ugc = response.get("ig_price_story_post_ugc", None)
-        instance.ig_fb_price_story_fc = response.get("ig_fb_price_story_fc", None)
-        instance.ig_fb_price_story_ugc = response.get("ig_fb_price_story_ugc", None)
-        instance.ig_fb_price_post_fc = response.get("ig_fb_price_post_fc", None)
-        instance.ig_fb_price_post_ugc = response.get("ig_fb_price_post_ugc", None)
-        instance.ig_fb_price_story_post_fc = response.get("ig_fb_price_story_post_fc", None)
-        instance.ig_fb_price_story_post_ugc = response.get("ig_fb_price_story_post_ugc", None)
-        # Audience Insight
-        instance.ig_response_audience_insight = response.get("ig_response_audience_insight",  None)
-        # Save
-        instance.is_refresh_shouters_data = False
-        instance.save()
+        if response:
+            # FB Biography
+            instance.fb_name = response.get("fb_name", None)
+            instance.fb_profile_picture = response.get("fb_profile_picture", None)
+            # IG Biography
+            instance.ig_username = response.get("ig_username", None)
+            instance.ig_media_count = response.get("ig_media_count", None)
+            instance.ig_follower_count = response.get("ig_follower_count", None)
+            instance.ig_following_count = response.get("ig_following_count", None)
+            instance.ig_profile_picture = response.get("ig_profile_picture", None)
+            # IG Active Follower
+            instance.ig_response_active_follower = response.get("ig_response_active_follower", None)
+            instance.ig_active_follower = response.get("ig_active_follower", None)
+            instance.ig_active_follower_harmonic = response.get("ig_active_follower_harmonic", None)
+            instance.ig_active_follower_percent = response.get("ig_active_follower_percent", None)
+            # Media Objects
+            instance.ig_response_media_objects = response.get("ig_response_media_objects", None)
+            # Engagement
+            instance.ig_average_total_like = response.get("ig_average_total_like", None)
+            instance.ig_story_view = response.get("ig_story_view", None)
+            instance.ig_average_post_reach = response.get("ig_average_post_reach", None)
+            instance.ig_reach_source = response.get("ig_reach_source", None)
+            # Engagement => จากการคำนวน
+            instance.ig_engagement_percent = response.get("ig_engagement_percent", None)
+            instance.ig_predicted_ad_post_reach = response.get("ig_predicted_ad_post_reach", None)
+            instance.ig_post_reach_guarantee = response.get("ig_post_reach_guarantee", None)
+            instance.ig_story_view_guarantee = response.get("ig_story_view_guarantee", None)
+            instance.ig_ad_post_reach = response.get("ig_ad_post_reach", None)
+            # Price
+            instance.ig_price_story_fc = response.get("ig_price_story_fc", None)
+            instance.ig_price_story_ugc = response.get("ig_price_story_ugc", None)
+            instance.ig_price_post_fc = response.get("ig_price_post_fc", None)
+            instance.ig_price_post_ugc = response.get("ig_price_post_ugc", None)
+            instance.ig_price_story_post_fc = response.get("ig_price_story_post_fc", None)
+            instance.ig_price_story_post_ugc = response.get("ig_price_story_post_ugc", None)
+            instance.ig_fb_price_story_fc = response.get("ig_fb_price_story_fc", None)
+            instance.ig_fb_price_story_ugc = response.get("ig_fb_price_story_ugc", None)
+            instance.ig_fb_price_post_fc = response.get("ig_fb_price_post_fc", None)
+            instance.ig_fb_price_post_ugc = response.get("ig_fb_price_post_ugc", None)
+            instance.ig_fb_price_story_post_fc = response.get("ig_fb_price_story_post_fc", None)
+            instance.ig_fb_price_story_post_ugc = response.get("ig_fb_price_story_post_ugc", None)
+            # Audience Insight
+            instance.ig_response_audience_insight = response.get("ig_response_audience_insight",  None)
+            # Save
+            instance.is_refresh_shouters_data = False
+            instance.save()
 
 
 def shouters_post_save(sender, instance, *args, **kwargs):

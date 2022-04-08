@@ -235,7 +235,7 @@ def api__resend_connect_instagram(line_user_id):
 
 
 def video_message(line_user_id):
-    push_message_url = 'https://api.line.me/v2/bot/message/push'
+    push_message_url = 'https://api.line.me/v2/bot/message/multicast'
     headers = {
         "Content-Type": "application/json",
         "Authorization": "Bearer {}".format(LINE_CHANNEL_ACCESS_TOKEN)
@@ -246,7 +246,39 @@ def video_message(line_user_id):
             {
                 "type": "video",
                 "originalContentUrl": "https://shoutsolution.com/media/source/connect-instagram.mp4",
-                # "previewImageUrl": "https://shoutsolution.com/media/source/connect-instagram-thumbnail.png"
+                "previewImageUrl": "https://shoutsolution.com/media/source/connect-instagram-thumbnail.png",
+                "altText": "อีกนิดจะสมัครเสร็จแล้ว!!",
+            }
+        ]
+    }
+
+    try:
+        response = requests.post(url=push_message_url, headers=headers, json=data)
+        return response
+    except:
+        return None
+
+
+def re_register_message(line_user_id):
+    push_message_url = 'https://api.line.me/v2/bot/message/multicast'
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {}".format(LINE_CHANNEL_ACCESS_TOKEN)
+    }
+    data = {
+        "to": line_user_id,
+        "messages": [
+            {
+                "type": "text",
+                "text": "💓 อีกนิดเดียวคุณจะสมัครเสร็จแล้ว แค่ 1 คลิกเท่านั้น❗️(ไม่ถึง 2 นาที)\n\n"
+                        "เหลือแค่เชื่อมต่อ IG ก็เสร็จการสมัครพร้อมรับงานผ่าน Shout! ได้ง่ายๆ\n\n"
+                        "2 ขั้นตอนในการสมัครง่ายๆ 🔥\n\n"
+                        "ดูวิธีใน Video ที่ส่งไปได้เลย 👇🏻📲\n\n"
+                        "📌 IG เป็น Professional Account (เพียง 1 คลิกเสร็จ ดูเพิ่มเติมพิมพ์ 1)\n\n"
+                        "📌 IG ผูกกับ Facebook Page (เพียง 1 คลิกเสร็จ ดูเพิ่มเติมพิมพ์ 2)\n\n"
+                        "📌  คลิกลิงค์ https://shoutsolution.com/shouters/line-login?q=register/ หรือกดปุ่มบน Rich Menu เพื่อสมัคร Shout! ต่อได้เลย  🎉🎉🎉 \n\n"
+                        "หากมีข้อสงสัยประการใด สามารถกด Support บน Rich Menu หรือสอบถามทีมงานผ่านทางนี้ได้เลย \n\n"
+                        "หวังว่าจะได้ร่วมงานกันในฐานะ Shouter นะคะ ☺️🙏🏻"
             }
         ]
     }

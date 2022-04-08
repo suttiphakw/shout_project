@@ -19,6 +19,8 @@ def get_like(media_objects, access_token):
       data = response.json()
       if response.ok:
         try:
+          if data['like_count'] < 10:
+            continue
           raw_list.append(data['like_count'])
           id_list.append(item)
         except:
@@ -30,14 +32,19 @@ def get_like(media_objects, access_token):
       if response.ok:
         data = response.json()
         try:
+          if data['like_count'] < 10:
+            continue
           raw_list.append(data['like_count'])
           id_list.append(item)
         except:
           continue
   
   context = fn_engagement_outlier.cut(raw_list, id_list)
-  # Return with context = {'list_like': list_like, 'mean_list': mean_list}
-  # list_like = [{id: like_count}, ... ]
+  # Return with context = {
+  #   'final_dict': final_dict,
+  #   'ig_average_total_like': ig_average_total_like,
+  # }
+  # final_dict = [{id: like_count}, ... ]
   return context
 
 
