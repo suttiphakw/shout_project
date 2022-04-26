@@ -8,7 +8,11 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   {% block script %}
-  <script src="{% static 'js/campaigns/content_type.js' %}"></script>
+  <!-- J query -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+  <!-- Main Script -->
+  <script src="{% static 'js/campaigns/create/content_type.js' %}"></script>
   {% endblock %}
   {% block title %} Create Campaign {% endblock %}
 </head>
@@ -154,7 +158,7 @@
           </div>
         </div>
         <div class="campaign__create__rightbar__button">
-          <button class="w100pc btn__grey" type="button" onclick="show_modal()">ขั้นตอนถัดไป</button>
+          <button class="w100pc btn__orange" type="button" onclick="show_modal()">ขั้นตอนถัดไป</button>
         </div>
       </section>
 
@@ -173,13 +177,19 @@
             <h6 class="campaign__create__content__header">Story</h6>
             <div class="campaign__create__content__type">
               <!-- Prepared Content -->
-              <div class="campaign__create__content__type__box">
+              <div class="campaign__create__content__type__box activate" id="pc_box">
                 <div class="campaign__create__content__type__box__radio">
-                  <input type="radio" id="pc">
-                  <label for="pc">
+                  <input type="radio" id="pc" name="story_type">
+                  <label for="pc" onclick="story_selected('pc')">
                     <header>
                       <span>Prepared Content</span>
-                      <button class="w180" type="button">เลือก</button>
+                      <button class="w180" id="story_pc_button" type="button">เลือก</button>
+                      <button class="w180" id="story_pc_button_selected" type="button">
+                        <p>เลือกแล้ว</p>
+                        <svg class="campaign__create__content__scope__work_type__icon">
+                          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                        </svg>
+                      </button>
                     </header>
                     <div class="campaign__create__content__type__box__radio__detail">
                       <p>Shouters (ผู้บอกต่อ) จะนำ 
@@ -219,13 +229,19 @@
                 </div>
               </div>
               <!-- User Generated Content-->
-              <div class="campaign__create__content__type__box">
+              <div class="campaign__create__content__type__box" id="ugc_box">
                 <div class="campaign__create__content__type__box__radio">
-                  <input type="radio" id="pc">
-                  <label for="pc">
+                  <input type="radio" id="ugc" name="story_type">
+                  <label for="ugc" onclick="story_selected('ugc')">
                     <header>
                       <span>User Generated</span>
-                      <button class="w180" type="button">เลือก</button>
+                      <button class="w180" id="story_ugc_button" type="button">เลือก</button>
+                      <button class="w180" id="story_ugc_button_selected" type="button">
+                        <p>เลือกแล้ว</p>
+                        <svg class="campaign__create__content__scope__work_type__icon">
+                          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                        </svg>
+                      </button>
                     </header>
                     <div class="campaign__create__content__type__box__radio__detail">
                       <p>Shouters (ผู้บอกต่อ) จะทำการ 
@@ -266,13 +282,19 @@
             <h6 class="campaign__create__content__header">Post</h6>
             <div class="campaign__create__content__type">
               <!-- Single Post -->
-              <div class="campaign__create__content__type__box" id="single_box">
+              <div class="campaign__create__content__type__box activate" id="single_box">
                 <div class="campaign__create__content__type__box__radio">
-                  <input type="radio" id="single">
-                  <label for="single">
+                  <input type="radio" id="single" name="post">
+                  <label for="single" onclick="post_selected('single')">
                     <header>
                       <span>Single Post</span>
-                      <button class="w180" type="button">เลือก</button>
+                      <button class="w180" id="post_single_button" type="button">เลือก</button>
+                      <button class="w180" id="post_single_button_selected" type="button">
+                        <p>เลือกแล้ว</p>
+                        <svg class="campaign__create__content__scope__work_type__icon">
+                          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                        </svg>
+                      </button>
                     </header>
                     <div class="campaign__create__content__type__box__radio__detail">
                       <p>
@@ -315,11 +337,17 @@
               <!-- Multi Post-->
               <div class="campaign__create__content__type__box" id="multi_box">
                 <div class="campaign__create__content__type__box__radio">
-                  <input type="radio" id="multi">
-                  <label for="multi">
+                  <input type="radio" id="multi" name="post">
+                  <label for="multi" onclick="post_selected('multi')">
                     <header>
                       <span>Multi Post</span>
-                      <button class="w180" type="button">เลือก</button>
+                      <button class="w180" id="post_multi_button" type="button">เลือก</button>
+                      <button class="w180" id="post_multi_button_selected" type="button">
+                        <p>เลือกแล้ว</p>
+                        <svg class="campaign__create__content__scope__work_type__icon">
+                          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                        </svg>
+                      </button>
                     </header>
                     <div class="campaign__create__content__type__box__radio__detail">
                       <p>
@@ -353,6 +381,84 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="campaign__create__content__type__modal" id="modal">
+        <div class="campaign__create__content__type__modal__backdrop" onclick="close_modal()"></div>
+        <div class="campaign__create__content__type__modal__card">
+          <header>
+            <h5>ยืนยัน Budget & Scope of Work</h5>
+            <span onclick="close_modal()">X</span>
+          </header>
+          <div class="campaign__create__content__type__modal__content">
+            <h5>Shout Launching Campaign</h5>
+            <div class="campaign__create__content__type__modal__content__detail">
+              <div class="campaign__create__content__type__modal__content__left">
+                <p class="header">Scope of work</p>
+                <div class="campaign__create__content__type__modal__content__left__items">
+                  <div class="campaign__create__content__type__modal__content__left__item border_bottom">
+                    <span>Social Media</span>
+                    <div class="campaign__create__content__type__modal__content__left__item__photo">
+                      <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
+                    </div>
+                  </div>
+                  <div class="campaign__create__content__type__modal__content__left__item border_bottom">
+                    <span>Work Format</span>
+                    <p>Post + Story</p>
+                  </div>
+                  <div class="campaign__create__content__type__modal__content__left__item">
+                    <div class="campaign__create__content__type__modal__content__left__content__type">
+                      <span>Content Type</span>
+                      <div class="campaign__create__content__type__modal__content__left__content__type__item">
+                        <span>Story</span>
+                        <p>Finished Content x1</p>
+                      </div>
+                      <div class="campaign__create__content__type__modal__content__left__content__type__item">
+                        <span>Post</span>
+                        <p>Single Post x1</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="campaign__create__content__type__modal__content__left__consent">
+                    <p class="header">Conditions :</p>
+                    <ul>
+                      <li>Shouters (ผู้บอกต่อ) ห้ามลบโพสต์เป็นเวลา <span>14 วัน</span> หลังโพสท์</li>
+                      <li>แบรนด์ผู้ว่าจ้าง <span>ไม่สามารถนำรูปไปใช้ต่อได้</span> สำหรับการโฆษณา</li>
+                      <li>การ <span>Boost Post ไม่รวม</span> อยู่ในการจ้างงาน (ติดต่อทีมงานเพื่อดำเนินการแยกรายคน)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="campaign__create__content__type__modal__content__right">
+                <p class="header">Budget & Result</p>
+                <p class="sub_header">สามารถเพิ่มลด Budget เพื่อเปลี่ยงแปลงผลลัพธ์ที่ต้องการได้</p>
+                <div class="budget">
+                  <p>Budget</p>
+                  <div class="box">
+                    <h4>50,000 บาท</h4>
+                  </div>
+                </div>
+                <div class="campaign__create__content__type__modal__content__right__items">
+                  <div class="campaign__create__content__type__modal__content__right__item border_bottom">
+                    <span>ได้ Shouter</span>
+                    <p>10-20 คน</p>
+                  </div>
+                  <div class="campaign__create__content__type__modal__content__right__item border_bottom">
+                    <span>Reach</span>
+                    <p>10,000-20,000 Reach</p>
+                  </div>
+                  <div class="campaign__create__content__type__modal__content__right__item border_bottom">
+                    <span>Cost Per Reach</span>
+                    <p>3 บาท</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="campaign__create__content__type__modal__button">
+            <button class="w448 btn__orange">ยีนยัน</button>
           </div>
         </div>
       </section>

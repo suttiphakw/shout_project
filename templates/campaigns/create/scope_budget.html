@@ -7,6 +7,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block script %}
+  <!-- J query -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+  <!-- Notify js -->
+  <script src="{% static 'js/notify.js' %}"></script>
+  <!-- Main Script -->
+  <script src="{% static 'js/campaigns/create/scope_budget.js' %}"></script>
+  {% endblock %}
   {% block title %} Create Campaign {% endblock %}
 </head>
 <body>
@@ -88,7 +97,7 @@
     </section>
 
     <!-- Form -->
-    <form action="" method="POST"> {% csrf_token %}
+    <form action="{% url 'create_scope_budget' %}" method="POST"> {% csrf_token %}
       <!-- Right Bar -->  
       <section class="campaign__create__rightbar">
         <div class="campaign__create__rightbar__detail">
@@ -97,27 +106,30 @@
             <!-- Budget -->
             <div class="campaign__create__rightbar__detail__data budget">
               <span class="bold">Budget</span>
-              <h4>100,000</h4>
+              <h4 id="res_budget">-</h4>
             </div>
             <!-- Social Media -->
             <div class="campaign__create__rightbar__detail__data">
               <span>Social Media</span>
-              <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
+              <div class="campaign__create__rightbar__detail__data__icon">
+                <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="" class="instagram" id="icon_instagram">
+                <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="" class="facebook" id="icon_facebook">
+              </div>  
             </div>
             <!-- Shouter Count -->
             <div class="campaign__create__rightbar__detail__data">
               <span>ได้ Shouter</span>
-              <p>10 - 20 คน</p>
+              <p id="number_shouter">-</p>
             </div>
             <!-- Estimated Reach -->
             <div class="campaign__create__rightbar__detail__data">
               <span>Estimate Reach</span>
-              <p>10,000 - 20,000 reach</p>
+              <p id="number_reach">-</p>
             </div>
             <!-- Cost Per Reach -->
             <div class="campaign__create__rightbar__detail__data">
-              <span>Social Media</span>
-              <p>3 บาท</p>
+              <span>Cost Per Reach</span>
+              <p id="number_cpr">-</p>
             </div>
           </div>
           <div class="campaign__create__rightbar__detail__box">
@@ -151,7 +163,7 @@
           </div>
         </div>
         <div class="campaign__create__rightbar__button">
-          <button class="w100pc btn__grey" disabled>ขั้นตอนถัดไป</button>
+          <button class="w100pc btn__grey btn__orange" disabled id="submit_button">ขั้นตอนถัดไป</button>
         </div>
       </section>
 
@@ -166,41 +178,62 @@
               <div class="campaign__create__content__scope__social__active">
                 <!-- Instagram -->
                 <div class="campaign__create__content__scope__social__box">
-                  <label for="instagram">
-                    <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
-                    <p>Instagram</p>
+                  <input type="checkbox" id="is_check_instagram" name="is_check_instagram">
+                  <label for="is_check_instagram">
+                    <div class="label">
+                      <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
+                      <p>Instagram</p>
+                    </div>
+                    <div class="input">
+                      <svg>
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                      </svg>
+                    </div>
                   </label>
-                  <input type="checkbox" id="instagram">
                 </div>
                 <!-- Facebook -->
                 <div class="campaign__create__content__scope__social__box">
-                  <label for="facebook">
-                    <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="">
-                    <div class="campaign__create__content__scope__social__box__flex">
-                      <p>เพิ่มแชร์ลง Facebook (Optional)</p>
-                      <span>เลือกคู่กับ Instagram เท่านั้น (เป็นการแชร์จาก Instagram ลง Facebook)</span>
+                  <input disabled type="checkbox" id="is_check_facebook" name="is_check_facebook">
+                  <label for="is_check_facebook">
+                    <div class="label">
+                      <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="">
+                      <div class="campaign__create__content__scope__social__box__flex">
+                        <p>เพิ่มแชร์ลง Facebook (Optional)</p>
+                        <span>เลือกคู่กับ Instagram เท่านั้น (เป็นการแชร์จาก Instagram ลง Facebook)</span>
+                      </div>
                     </div>
-                  </label>
-                  <input type="checkbox" id="facebook">
+                    <div class="input disabled" id="facebook_checkbox">
+                      <svg>
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                      </svg>
+                    </div>
+                    <div class="input_disabled" id="facebook_checkbox_disabled"></div>
+                  </label>  
                 </div>
               </div>
               <hr>
               <div class="campaign__create__content__scope__social__deactive">
                 <!-- Tiktok -->
                 <div class="campaign__create__content__scope__social__box">
-                  <label for="tiktok">
-                    <img src="{% static 'img/campaigns/icon_tiktok.png' %}" alt="">
-                    <p>Tiktok</p>
-                  </label>
                   <input type="checkbox" id="tiktok" disabled>
+                  <label for="tiktok">
+                    <div class="label">
+                      <img src="{% static 'img/campaigns/icon_tiktok.png' %}" alt="">
+                      <p>Tiktok</p>
+                    </div>
+                    <div class="input_disabled" id="facebook_checkbox_disabled"></div>
+                  </label>
                 </div>
                 <!-- Twitter -->
                 <div class="campaign__create__content__scope__social__box">
-                  <label for="twitter">
-                    <img src="{% static 'img/campaigns/icon_twitter.png' %}" alt="">
-                    <p>Twitter</p>
-                  </label>
                   <input type="checkbox" id="twitter" disabled>
+                  <label for="twitter">
+                    <div class="label">
+                      <img src="{% static 'img/campaigns/icon_twitter.png' %}" alt="">
+                      <p>Twitter</p>
+                    </div>
+                    <div class="input_disabled" id="facebook_checkbox_disabled"></div>
+                  </label>
                 </div>
                 <!-- Extra -->
                 <p>หากต้องการงาน TikTok, Twitter, หรือ IG Reel โปรดติดต่อทีมงาน <span>contact@shoutsolution.com</span> หรือ <span>087-560-4935</span></p>
@@ -234,12 +267,18 @@
             <p class="campaign__create__content__scope__label">เลือกประเภทการโพสต์ที่ต้องการ <span>*</span></p>
 
             <div class="campaign__create__content__scope__work_type">
-              <input type="radio" name="work_type" id="story" checked>
-              <label for="story">
+              <input type="radio" name="work_type" id="story">
+              <label for="story" onclick="change_button_context('story')">
                 <div class="campaign__create__content__scope__work_type__box">
                   <header>
                     <h6>Story Only</h6>
-                    <button class="w180" type="button">เลือก</button>
+                    <button class="w180" id="story_button" type="button">เลือก</button>
+                    <button class="w180" id="story_button_selected" type="button">
+                      <p>เลือกแล้ว</p>
+                      <svg class="campaign__create__content__scope__work_type__icon">
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                      </svg>
+                    </button>
                   </header>
                   <div class="campaign__create__content__scope__work_type__box__detail">
                     <img src="{% static 'img/campaigns/create/campaign_work_type_1.png' %}" alt="">
@@ -258,15 +297,15 @@
                         <p>ประมาณผลลัพธ์</p>
                         <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
                           <span>Shouter</span>
-                          <p>10 - 20 คน</p>
+                          <p id="shouter_story">-</p>
                         </div>
                         <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
                           <span>Reach</span>
-                          <p>30,000 - 40,000 reach</p>
+                          <p id="reach_story">-</p>
                         </div>
                         <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
                           <span>Cost Per Reach</span>
-                          <p>0.68 - 1.23 บาท</p>
+                          <p id="cpr_story">-</p>
                         </div>
                       </div>
                     </div>
@@ -277,11 +316,17 @@
             
             <div class="campaign__create__content__scope__work_type">
               <input type="radio" name="work_type" id="post">
-              <label for="post">
+              <label for="post" onclick="change_button_context('post')">
                 <div class="campaign__create__content__scope__work_type__box">
                   <header>
                     <h6>Post Only</h6>
-                    <button class="w180" type="button">เลือก</button>
+                    <button class="w180" id="post_button" type="button">เลือก</button>
+                    <button class="w180" id="post_button_selected" type="button">
+                      <p>เลือกแล้ว</p>
+                      <svg class="campaign__create__content__scope__work_type__icon">
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                      </svg>
+                    </button>
                   </header>
                   <div class="campaign__create__content__scope__work_type__box__detail">
                     <img src="{% static 'img/campaigns/create/campaign_work_type_2.png' %}" alt="">
@@ -300,15 +345,15 @@
                         <p>ประมาณผลลัพธ์</p>
                         <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
                           <span>Shouter</span>
-                          <p>10 - 20 คน</p>
+                          <p id="shouter_post">-</p>
                         </div>
                         <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
                           <span>Reach</span>
-                          <p>30,000 - 40,000 reach</p>
+                          <p id="reach_post">-</p>
                         </div>
                         <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
                           <span>Cost Per Reach</span>
-                          <p>0.68 - 1.23 บาท</p>
+                          <p id="cpr_post">-</p>
                         </div>
                       </div>
                     </div>
@@ -319,11 +364,17 @@
             
             <div class="campaign__create__content__scope__work_type">
               <input type="radio" name="work_type" id="post_story">
-              <label for="post_story">
+              <label for="post_story" onclick="change_button_context('post_story')">
                 <div class="campaign__create__content__scope__work_type__box">
                   <header>
                     <h6>Post + Story</h6>
-                    <button class="w180" type="button">เลือก</button>
+                    <button class="w180" id="post_story_button" type="button">เลือก</button>
+                    <button class="w180" id="post_story_button_selected" type="button">
+                      <p>เลือกแล้ว</p>
+                      <svg class="campaign__create__content__scope__work_type__icon">
+                        <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                      </svg>
+                    </button>
                   </header>
                   <div class="campaign__create__content__scope__work_type__box__detail">
                     <img src="{% static 'img/campaigns/create/campaign_work_type_3.png' %}" alt="">
@@ -342,15 +393,15 @@
                         <p>ประมาณผลลัพธ์</p>
                         <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
                           <span>Shouter</span>
-                          <p>10 - 20 คน</p>
+                          <p id="shouter_post_story">-</p>
                         </div>
                         <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
                           <span>Reach</span>
-                          <p>30,000 - 40,000 reach</p>
+                          <p id="reach_post_story">-</p>
                         </div>
                         <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
                           <span>Cost Per Reach</span>
-                          <p>0.68 - 1.23 บาท</p>
+                          <p id="cpr_post_story">-/p>
                         </div>
                       </div>
                     </div>

@@ -94,6 +94,7 @@ function closeModal() {
   modal_2_3.style.display = "none";
   modal_3_3.style.display = "none";
 }
+//////////////////////////////////////////////////////////////////////////
 $(document).ready(function(){
   $('input[type="checkbox"]').click(function() {
     if($('#checkbox_1').is(":checked")
@@ -105,3 +106,4 @@ $(document).ready(function(){
     }
   });
 });
+//////////////////////////////////////////////////////////////////////////

@@ -508,6 +508,5 @@ $(document).ready(function(){
   console.log(active_page_0);
   console.log(active_page_1);
   change_campaign();
-  console.log('ready_1')
   change_uvp();
 });

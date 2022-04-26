@@ -8,7 +8,11 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   {% block script %}
-  <script src="{% static 'js/campaigns/content_type.js' %}"></script>
+  <!-- J query -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+  <!-- Main Script -->
+  <script src="{% static 'js/campaigns/create/product.js' %}"></script>
   {% endblock %}
   {% block title %} Create Campaign {% endblock %}
 </head>
@@ -154,7 +158,7 @@
           </div>
         </div>
         <div class="campaign__create__rightbar__button">
-          <button class="w100pc btn__grey">ขั้นตอนถัดไป</button>
+          <button class="w100pc btn__orange btn__grey" id="submit_button" disabled>ขั้นตอนถัดไป</button>
         </div>
       </section>
 
@@ -171,7 +175,42 @@
             </div>
             <!-- Product Picture-->
             <div class="campaign__create__content__product__picture">
-
+              <p>รูปตัวอย่างสินค้าหรือบริการ (ไม่เกิน 3 รูป) <span>*</span></p>
+              <div class="campaign__create__content__product__picture__input">
+                <!-- Product Photo 1 -->
+                <label for="product_photo_1">
+                  <div class="campaign__create__content__product__picture__input__upload" id="upload_box_1">
+                    <img src="{% static 'img/campaigns/create/icon_upload.png' %}" alt="">
+                    <p>Upload Image or Video</p>
+                  </div>
+                  <div class="campaign__create__content__product__picture__input__preview" id="preview_box_1">
+                    <img id="preview_photo_1" alt="">
+                  </div>
+                </label>
+                <input type="file" id="product_photo_1" accept="image/*" onchange="showPreview_1(event);">
+                <!-- Product Photo 2 -->
+                <label for="product_photo_2">
+                  <div class="campaign__create__content__product__picture__input__upload" id="upload_box_2">
+                    <img src="{% static 'img/campaigns/create/icon_upload.png' %}" alt="">
+                    <p>Upload Image or Video</p>
+                  </div>
+                  <div class="campaign__create__content__product__picture__input__preview" id="preview_box_2">
+                    <img id="preview_photo_2" alt="">
+                  </div>
+                </label>
+                <input type="file" id="product_photo_2" accept="image/*" onchange="showPreview_2(event);">
+                <!-- Product Photo 3 -->
+                <label for="product_photo_3">
+                  <div class="campaign__create__content__product__picture__input__upload" id="upload_box_3">
+                    <img src="{% static 'img/campaigns/create/icon_upload.png' %}" alt="">
+                    <p>Upload Image or Video</p>
+                  </div>
+                  <div class="campaign__create__content__product__picture__input__preview" id="preview_box_3">
+                    <img id="preview_photo_3" alt="">
+                  </div>
+                </label>
+                <input type="file" id="product_photo_3" accept="image/*" onchange="showPreview_3(event);">
+              </div>
             </div>
             <!-- Product Detail-->
             <div class="campaign__create__content__product__detail">

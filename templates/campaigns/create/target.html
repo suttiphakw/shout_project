@@ -8,7 +8,11 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   {% block script %}
-  <script src="{% static 'js/campaigns/content_type.js' %}"></script>
+  <!-- J query -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+  <!-- Main Script -->
+  <script src="{% static 'js/campaigns/create/target.js' %}"></script>
   {% endblock %}
   {% block title %} Create Campaign {% endblock %}
 </head>
@@ -154,7 +158,7 @@
           </div>
         </div>
         <div class="campaign__create__rightbar__button">
-          <button class="w100pc btn__grey">ขั้นตอนถัดไป</button>
+          <button class="w100pc btn__orange btn__grey" type="button" id="next_button" onclick="show_modal()" disabled>ขั้นตอนถัดไป</button>
         </div>
       </section>
 
@@ -410,6 +414,33 @@
                   <p>👜 Luxury</p>
                 </label>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="campaign__create__content__target__modal" id="modal">
+        <div class="campaign__create__content__target__modal__backdrop" onclick="close_modal()"></div>
+        <div class="campaign__create__content__target__modal__card">
+          <header>
+            <h5>เลือกเพศ Shouter (KOC) ที่คุณต้องการ</h5>
+            <span onclick="close_modal()">X</span>
+          </header>
+          <div class="campaign__create__content__target__modal__content">
+            <p>ต่อไปจะเป็นขั้นตอนการคัดเลือก Shouter (KOC) ที่จะมาบอกต่อแคมเปญของคุณ โปรดเลือกเพศ KOC ที่ต้องการ (เลือกได้ 1 - 3 เพศ)</p>
+            <div class="campaign__create__content__target__modal__content__detail">
+              <!-- Female Shouter -->
+              <input type="checkbox" id="shouter_female" name="shouter_gender">
+              <label for="shouter_female">หญิง</label>
+              <!-- Male Shouter -->
+              <input type="checkbox" id="shouter_male" name="shouter_gender">
+              <label for="shouter_male">ชาย</label>
+              <!-- LGBTQ+ Shouter -->
+              <input type="checkbox" id="shouter_lgbtq" name="shouter_gender">
+              <label for="shouter_lgbtq">LGBTQ+</label>
+            </div>
+            <div class="campaign__create__content__target__modal__button">
+              <button class="w100pc btn__orange btn__grey" id="submit_button" disabled>ยีนยัน</button>
             </div>
           </div>
         </div>

@@ -42,7 +42,7 @@ def register(request):
       'exp': datetime.datetime.now() + datetime.timedelta(days=1),
     }
     token = jwt.encode(data, 'U0hPVVRFUl9BQ0NFU1NfVE9LRU5fc2hvdXRzb2x1dGlvbkAyMDIw', algorithm='HS256')
-    confirm_link = 'http://127.0.0.1:8000/accounts/confirm_email/' + token + '/'
+    confirm_link = 'http://127.0.0.1:8000/accounts/email/confirm/' + token + '/'
     msg_html = render_to_string('emails/confirm_account.html', {'confirm_link': confirm_link})
     send_mail('Email Verification', 'Account Activation', 'noreply@shoutsolution.com', [brand.email], html_message=msg_html)
     redirect_url = '/accounts/email/verification/{}/'.format(token)
@@ -57,17 +57,17 @@ def login(request):
     # Get Info
     email = request.POST['email']
     password = request.POST['password']
+    # Brand email exists but not active
+    brand = BrandProfile.objects.filter(email=email).first()
+    if brand and not brand.is_active:
+      context = {
+        'message': 'กรุณาทำการยืนยัน Email ใน Inbox {}'.format(email)
+      }
+      # Return Message Actvate your email plz
+      return render(request, 'accounts/login.html', context)
     # Authenticate user
     user = auth.authenticate(username=email, password=password)
     if user is not None:   
-      # Brand email exists but not active
-      brand = BrandProfile.objects.filter(email=email).first()
-      if brand and not brand.is_active:
-        context = {
-          'message': 'กรุณาทำการยืนยัน Email ใน Inbox {}'.format(email)
-        }
-        # Return Message Actvate your email plz
-        return render(request, 'accounts/login.html', context)
       auth.login(request, user)
       return redirect('brand__index')
     context = {
@@ -88,7 +88,7 @@ def forget_password(request):
     email = request.POST['email']
     # Check Email is Exist
     brand= BrandProfile.objects.filter(email=email)
-    if brand.exist():
+    if brand.exists():
       # Send Email + Token Encode
       data = {
         'email': email,
