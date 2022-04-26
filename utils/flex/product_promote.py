@@ -6,7 +6,7 @@ from shout_project.settings import LINE_CHANNEL_ACCESS_TOKEN
 def ig_story(line_user_id):
   """ IG Story Only """
   shouter = Shouter.objects.filter(line_user_id=line_user_id).first()
-  price = shouter.ig_fb_price_story_fc
+  price = shouter.ig_price_story_fc
   push_message_url = 'https://api.line.me/v2/bot/message/push'
   headers = {
     "Content-Type": "application/json",
