@@ -233,7 +233,7 @@ def ig_story(line_user_id):
                       },
                       {
                         "type": "text",
-                        "text": "30/04/2022",
+                        "text": "29/04/2022",
                         "weight": "bold",
                         "color": "#202046",
                         "flex": 1,
@@ -325,7 +325,7 @@ def ig_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "27-30 Apr",
+                        "text": "27-29 Apr",
                         "weight": "bold",
                         "size": "xs",
                         "color": "#202046",
@@ -370,7 +370,7 @@ def ig_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "1-3 May",
+                        "text": "30-3 May",
                         "weight": "bold",
                         "size": "xs",
                         "color": "#202046",
@@ -866,7 +866,7 @@ def ig_fb_story(line_user_id):
                       },
                       {
                         "type": "text",
-                        "text": "30/04/2022",
+                        "text": "29/04/2022",
                         "weight": "bold",
                         "color": "#202046",
                         "flex": 1,
@@ -958,7 +958,7 @@ def ig_fb_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "27-30 Apr",
+                        "text": "27-29 Apr",
                         "weight": "bold",
                         "size": "xs",
                         "color": "#202046",
@@ -1003,7 +1003,7 @@ def ig_fb_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "1-3 May",
+                        "text": "30-3 May",
                         "weight": "bold",
                         "size": "xs",
                         "color": "#202046",
