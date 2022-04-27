@@ -259,7 +259,7 @@ def ig_story(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "ตกลงรับงาน!",
-                          "uri": "https://linecorp.com"
+                          "uri": "https://forms.gle/beSoPD4VwUjvrCqv9"
                         },
                         "color": "#F37324",
                         "style": "primary",
@@ -277,7 +277,7 @@ def ig_story(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "ปฎิเสธ",
-                          "uri": "https://linecorp.com"
+                          "uri": "https://forms.gle/beSoPD4VwUjvrCqv9"
                         },
                         "color": "#FFFFFFFF",
                         "margin": "none",
@@ -325,7 +325,7 @@ def ig_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "26-30 Apr",
+                        "text": "27-30 Apr",
                         "weight": "bold",
                         "size": "xs",
                         "color": "#202046",
@@ -370,7 +370,7 @@ def ig_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "1-4 May",
+                        "text": "1-3 May",
                         "weight": "bold",
                         "size": "xs",
                         "color": "#202046",
@@ -443,7 +443,7 @@ def ig_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "4-5 May",
+                        "text": "4 May",
                         "weight": "bold",
                         "size": "md",
                         "color": "#202046",
@@ -531,7 +531,7 @@ def ig_story(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "เข้าใจแล้ว เริ่มเลย!",
-                          "uri": "https://linecorp.com"
+                          "uri": "https://forms.gle/beSoPD4VwUjvrCqv9"
                         },
                         "color": "#F37324",
                         "style": "primary",
@@ -625,7 +625,7 @@ def ig_story(line_user_id):
 
   try:
     response = requests.post(url=push_message_url, headers=headers, json=data)
-    return response
+    return line_user_id ,response
   except:
     return None
 
@@ -892,7 +892,7 @@ def ig_fb_story(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "ตกลงรับงาน!",
-                          "uri": "https://linecorp.com"
+                          "uri": "https://forms.gle/yb4RXduuf98rpnBi9"
                         },
                         "color": "#F37324",
                         "style": "primary",
@@ -910,7 +910,7 @@ def ig_fb_story(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "ปฎิเสธ",
-                          "uri": "https://linecorp.com"
+                          "uri": "https://forms.gle/yb4RXduuf98rpnBi9"
                         },
                         "color": "#FFFFFFFF",
                         "margin": "none",
@@ -958,7 +958,7 @@ def ig_fb_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "26-30 Apr",
+                        "text": "27-30 Apr",
                         "weight": "bold",
                         "size": "xs",
                         "color": "#202046",
@@ -1003,7 +1003,7 @@ def ig_fb_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "1-4 May",
+                        "text": "1-3 May",
                         "weight": "bold",
                         "size": "xs",
                         "color": "#202046",
@@ -1076,7 +1076,7 @@ def ig_fb_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "4-5 May",
+                        "text": "4 May",
                         "weight": "bold",
                         "size": "md",
                         "color": "#202046",
@@ -1164,7 +1164,7 @@ def ig_fb_story(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "เข้าใจแล้ว เริ่มเลย!",
-                          "uri": "https://linecorp.com"
+                          "uri": "https://forms.gle/yb4RXduuf98rpnBi9"
                         },
                         "color": "#F37324",
                         "style": "primary",
@@ -1239,7 +1239,7 @@ def ig_fb_story(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "ดูรายละเอียดงาน",
-                          "uri": "https://linecorp.com"
+                          "uri": "https://forms.gle/yb4RXduuf98rpnBi9"
                         },
                         "color": "#F37324",
                         "style": "primary",
@@ -1258,6 +1258,6 @@ def ig_fb_story(line_user_id):
 
   try:
     response = requests.post(url=push_message_url, headers=headers, json=data)
-    return response
+    return line_user_id ,response
   except:
     return None
