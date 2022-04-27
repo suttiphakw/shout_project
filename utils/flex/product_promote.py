@@ -276,7 +276,7 @@ def ig_story(line_user_id):
                         "type": "button",
                         "action": {
                           "type": "uri",
-                          "label": "ปฎิเสธ",
+                          "label": "ดูรายละเอียด",
                           "uri": "https://forms.gle/A5cVxFRgk7fZ62WY6"
                         },
                         "color": "#FFFFFFFF",
@@ -909,7 +909,7 @@ def ig_fb_story(line_user_id):
                         "type": "button",
                         "action": {
                           "type": "uri",
-                          "label": "ปฎิเสธ",
+                          "label": "ดูรายละเอียด",
                           "uri": "https://forms.gle/EQdAWc2Dgz23LGFr9"
                         },
                         "color": "#FFFFFFFF",
