@@ -1,29 +1,29 @@
-from utils.text.draft import post
-from utils.image.draft import post_img
-from utils.flex.draft import secret_voucher, product_promote
+from utils.text.revise import post
+from utils.text.brand_comment import post as post_comment
+from utils.flex.revise import secret_voucher, product_promote
 
 
-def pp_ig(line_user_id):
+def pp_ig(line_user_id, comment):
   response_1 = post(line_user_id=line_user_id)
-  response_2 = post_img(line_user_id=line_user_id)
+  response_2 = post_comment(line_user_id=line_user_id, comment=comment)
   response_3 = product_promote.ig_story(line_user_id=line_user_id)
   return response_1.ok and response_2.ok and response_3.ok
 
-def pp_ig_fb(line_user_id):
+def pp_ig_fb(line_user_id, comment):
   response_1 = post(line_user_id=line_user_id)
-  response_2 = post_img(line_user_id=line_user_id)
+  response_2 = post_comment(line_user_id=line_user_id, comment=comment)
   response_3 = product_promote.ig_fb_story(line_user_id=line_user_id)
   return response_1.ok and response_2.ok and response_3.ok
 
-def sv_ig(line_user_id):
+def sv_ig(line_user_id, comment):
   response_1 = post(line_user_id=line_user_id)
-  response_2 = post_img(line_user_id=line_user_id)
+  response_2 = post_comment(line_user_id=line_user_id, comment=comment)
   response_3 = secret_voucher.ig_story(line_user_id=line_user_id)
   return response_1.ok and response_2.ok and response_3.ok
 
 
-def sv_ig_fb(line_user_id):
+def sv_ig_fb(line_user_id, comment):
   response_1 = post(line_user_id=line_user_id)
-  response_2 = post_img(line_user_id=line_user_id)
+  response_2 = post_comment(line_user_id=line_user_id, comment=comment)
   response_3 = secret_voucher.ig_fb_story(line_user_id=line_user_id)
   return response_1.ok and response_2.ok and response_3.ok

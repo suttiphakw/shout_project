@@ -3,10 +3,10 @@ from shouters.models import Shouter
 from shout_project.settings import LINE_CHANNEL_ACCESS_TOKEN
 
 
-def ig_story(line_user_id):
+def ig_story(line_user_id, price):
   """ IG Story Only """
-  shouter = Shouter.objects.filter(line_user_id=line_user_id).first()
-  price = shouter.ig_price_story_fc
+  # shouter = Shouter.objects.filter(line_user_id=line_user_id).first()
+  # price = shouter.ig_price_story_fc
   push_message_url = 'https://api.line.me/v2/bot/message/push'
   headers = {
     "Content-Type": "application/json",
@@ -75,7 +75,7 @@ def ig_story(line_user_id):
                         "contents": [
                           {
                             "type": "text",
-                            "text": "Shopee - Product Promote",
+                            "text": "Shopee - Secret Voucher",
                             "weight": "bold",
                             "size": "lg",
                             "align": "start",
@@ -233,7 +233,7 @@ def ig_story(line_user_id):
                       },
                       {
                         "type": "text",
-                        "text": "29/04/2022",
+                        "text": "01/05/2022",
                         "weight": "bold",
                         "color": "#202046",
                         "flex": 1,
@@ -259,7 +259,7 @@ def ig_story(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "ตกลงรับงาน!",
-                          "uri": "https://forms.gle/A5cVxFRgk7fZ62WY6"
+                          "uri": "https://forms.gle/Bebcm6Ag7tpDoZCv8"
                         },
                         "color": "#F37324",
                         "style": "primary",
@@ -277,7 +277,7 @@ def ig_story(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "ดูรายละเอียด",
-                          "uri": "https://forms.gle/A5cVxFRgk7fZ62WY6"
+                          "uri": "https://forms.gle/Bebcm6Ag7tpDoZCv8"
                         },
                         "color": "#FFFFFFFF",
                         "margin": "none",
@@ -325,7 +325,7 @@ def ig_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "27-29 Apr",
+                        "text": "30-01 May",
                         "weight": "bold",
                         "size": "xs",
                         "color": "#202046",
@@ -370,7 +370,7 @@ def ig_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "30-3 May",
+                        "text": "01-03 May",
                         "weight": "bold",
                         "size": "xs",
                         "color": "#202046",
@@ -443,7 +443,7 @@ def ig_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "4 May",
+                        "text": "04 May",
                         "weight": "bold",
                         "size": "md",
                         "color": "#202046",
@@ -480,7 +480,7 @@ def ig_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "6-20 May",
+                        "text": "06-20 May",
                         "weight": "bold",
                         "size": "xs",
                         "color": "#202046",
@@ -531,7 +531,7 @@ def ig_story(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "เข้าใจแล้ว เริ่มเลย!",
-                          "uri": "https://forms.gle/A5cVxFRgk7fZ62WY6"
+                          "uri": "https://forms.gle/Bebcm6Ag7tpDoZCv8"
                         },
                         "color": "#F37324",
                         "style": "primary",
@@ -582,7 +582,7 @@ def ig_story(line_user_id):
                         "contents": [
                           {
                             "type": "image",
-                            "url": "https://www.shoutsolution.com/media/source/temp/product_promote.jpg",
+                            "url": "https://www.shoutsolution.com/media/source/temp/secret_voucher.png",
                             "size": "full",
                             "aspectRatio": "1:2",
                             "aspectMode": "fit"
@@ -606,7 +606,7 @@ def ig_story(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "ดูรายละเอียดงาน",
-                          "uri": "https://forms.gle/A5cVxFRgk7fZ62WY6"
+                          "uri": "https://forms.gle/Bebcm6Ag7tpDoZCv8"
                         },
                         "color": "#F37324",
                         "style": "primary",
@@ -619,21 +619,21 @@ def ig_story(line_user_id):
             }
           ]
         }
-      }     
+      }
     ]
   }
 
   try:
     response = requests.post(url=push_message_url, headers=headers, json=data)
-    return line_user_id ,response
+    return response
   except:
     return None
 
 
-def ig_fb_story(line_user_id):
+def ig_fb_story(line_user_id, price):
   """ IG and FB Story Only"""
-  shouter = Shouter.objects.filter(line_user_id=line_user_id).first()
-  price = shouter.ig_fb_price_story_fc
+  # shouter = Shouter.objects.filter(line_user_id=line_user_id).first()
+  # price = shouter.ig_fb_price_story_fc
   push_message_url = 'https://api.line.me/v2/bot/message/push'
   headers = {
     "Content-Type": "application/json",
@@ -702,7 +702,7 @@ def ig_fb_story(line_user_id):
                         "contents": [
                           {
                             "type": "text",
-                            "text": "Shopee - Product Promote",
+                            "text": "Shopee - Secret Voucher",
                             "weight": "bold",
                             "size": "lg",
                             "align": "start",
@@ -866,7 +866,7 @@ def ig_fb_story(line_user_id):
                       },
                       {
                         "type": "text",
-                        "text": "29/04/2022",
+                        "text": "01/05/2022",
                         "weight": "bold",
                         "color": "#202046",
                         "flex": 1,
@@ -892,7 +892,7 @@ def ig_fb_story(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "ตกลงรับงาน!",
-                          "uri": "https://forms.gle/EQdAWc2Dgz23LGFr9"
+                          "uri": "https://forms.gle/TyPPGZ6yFaS9SR5VA"
                         },
                         "color": "#F37324",
                         "style": "primary",
@@ -910,7 +910,7 @@ def ig_fb_story(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "ดูรายละเอียด",
-                          "uri": "https://forms.gle/EQdAWc2Dgz23LGFr9"
+                          "uri": "https://forms.gle/TyPPGZ6yFaS9SR5VA"
                         },
                         "color": "#FFFFFFFF",
                         "margin": "none",
@@ -958,7 +958,7 @@ def ig_fb_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "27-29 Apr",
+                        "text": "30-01 May",
                         "weight": "bold",
                         "size": "xs",
                         "color": "#202046",
@@ -1003,7 +1003,7 @@ def ig_fb_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "30-3 May",
+                        "text": "01-03 May",
                         "weight": "bold",
                         "size": "xs",
                         "color": "#202046",
@@ -1113,7 +1113,7 @@ def ig_fb_story(line_user_id):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "6-20 May",
+                        "text": "06-20 May",
                         "weight": "bold",
                         "size": "xs",
                         "color": "#202046",
@@ -1164,7 +1164,7 @@ def ig_fb_story(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "เข้าใจแล้ว เริ่มเลย!",
-                          "uri": "https://forms.gle/EQdAWc2Dgz23LGFr9"
+                          "uri": "https://forms.gle/TyPPGZ6yFaS9SR5VA"
                         },
                         "color": "#F37324",
                         "style": "primary",
@@ -1215,7 +1215,7 @@ def ig_fb_story(line_user_id):
                         "contents": [
                           {
                             "type": "image",
-                            "url": "https://www.shoutsolution.com/media/source/temp/product_promote.jpg",
+                            "url": "https://www.shoutsolution.com/media/source/temp/secret_voucher.png",
                             "size": "full",
                             "aspectRatio": "1:2",
                             "aspectMode": "fit"
@@ -1239,7 +1239,7 @@ def ig_fb_story(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "ดูรายละเอียดงาน",
-                          "uri": "https://forms.gle/EQdAWc2Dgz23LGFr9"
+                          "uri": "https://forms.gle/TyPPGZ6yFaS9SR5VA"
                         },
                         "color": "#F37324",
                         "style": "primary",
@@ -1252,12 +1252,12 @@ def ig_fb_story(line_user_id):
             }
           ]
         }
-      }     
+      }
     ]
   }
 
   try:
     response = requests.post(url=push_message_url, headers=headers, json=data)
-    return line_user_id, response
+    return response
   except:
     return None

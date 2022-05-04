@@ -41,7 +41,7 @@ function cal_price() {
   min_post_shouter = Math.round((budget/max_multi_post_reach_factor)/max_avg_post_reach_factor)
   max_post_shouter = Math.round((budget/min_single_post_reach_factor)/min_avg_post_reach_factor)
 
-  // Calculate Story + Post Shouer
+  // Calculate Story + Post Shouter
   min_story_post_shouter = Math.round((budget/max_upper_story_post_reach_factor)/max_avg_story_post_reach_factor)
   max_story_post_shouter = Math.round((budget/min_lower_story_post_reach_factor)/min_avg_story_post_reach_factor)
 

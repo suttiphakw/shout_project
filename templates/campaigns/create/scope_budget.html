@@ -30,7 +30,7 @@
         <div class="campaign__create__breadcrumb__text">
           <p>Campaign Name</p>
         </div>
-      </div
+      </div>
       <!--2-->
       <div class="campaign__create__breadcrumb__active">
         <div class="campaign__create__breadcrumb__number">
@@ -221,7 +221,7 @@
                       <img src="{% static 'img/campaigns/icon_tiktok.png' %}" alt="">
                       <p>Tiktok</p>
                     </div>
-                    <div class="input_disabled" id="facebook_checkbox_disabled"></div>
+                    <div class="input_disabled"></div>
                   </label>
                 </div>
                 <!-- Twitter -->
@@ -232,7 +232,7 @@
                       <img src="{% static 'img/campaigns/icon_twitter.png' %}" alt="">
                       <p>Twitter</p>
                     </div>
-                    <div class="input_disabled" id="facebook_checkbox_disabled"></div>
+                    <div class="input_disabled"></div>
                   </label>
                 </div>
                 <!-- Extra -->
@@ -267,7 +267,7 @@
             <p class="campaign__create__content__scope__label">เลือกประเภทการโพสต์ที่ต้องการ <span>*</span></p>
 
             <div class="campaign__create__content__scope__work_type">
-              <input type="radio" name="work_type" id="story">
+              <input type="radio" name="work_type" id="story" value="story">
               <label for="story" onclick="change_button_context('story')">
                 <div class="campaign__create__content__scope__work_type__box">
                   <header>
@@ -315,7 +315,7 @@
             </div>
             
             <div class="campaign__create__content__scope__work_type">
-              <input type="radio" name="work_type" id="post">
+              <input type="radio" name="work_type" id="post" value="post">
               <label for="post" onclick="change_button_context('post')">
                 <div class="campaign__create__content__scope__work_type__box">
                   <header>
@@ -363,7 +363,7 @@
             </div>
             
             <div class="campaign__create__content__scope__work_type">
-              <input type="radio" name="work_type" id="post_story">
+              <input type="radio" name="work_type" id="post_story" value="post_story">
               <label for="post_story" onclick="change_button_context('post_story')">
                 <div class="campaign__create__content__scope__work_type__box">
                   <header>
@@ -401,7 +401,7 @@
                         </div>
                         <div class="campaign__create__content__scope__work_type__box__detail__text__right__data">
                           <span>Cost Per Reach</span>
-                          <p id="cpr_post_story">-/p>
+                          <p id="cpr_post_story">-</p>
                         </div>
                       </div>
                     </div>
@@ -410,7 +410,6 @@
               </label>
             </div>
           </div>
-
         </div>
       </section>
     </form>

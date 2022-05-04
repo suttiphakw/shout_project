@@ -1,5 +1,6 @@
 {% extends "campaigns/_base/_base.html" %}
 {% load static %}
+{% load humanize %}
 
 <!doctype html>
 <html lang="en">
@@ -104,27 +105,34 @@
             <!-- Budget -->
             <div class="campaign__create__rightbar__detail__data budget">
               <span class="bold">Budget</span>
-              <h4>100,000</h4>
+              <h4>{{ campaign.campaign_budget | intcomma }}</h4>
             </div>
             <!-- Social Media -->
             <div class="campaign__create__rightbar__detail__data">
               <span>Social Media</span>
-              <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
+              <div class="campaign__create__rightbar__detail__data__icon">
+                {% if campaign.campaign_is_ig %}
+                  <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
+                {% endif %}
+                {% if campaign.campaign_is_fb %}
+                  <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="">
+                {% endif %}
+              </div>
             </div>
             <!-- Shouter Count -->
             <div class="campaign__create__rightbar__detail__data">
               <span>ได้ Shouter</span>
-              <p>10 - 20 คน</p>
+              <p>{{ campaign.cal_number_shouter_min | intcomma }} - {{ campaign.cal_number_shouter_max | intcomma }} คน</p>
             </div>
             <!-- Estimated Reach -->
             <div class="campaign__create__rightbar__detail__data">
               <span>Estimate Reach</span>
-              <p>10,000 - 20,000 reach</p>
+              <p>{{ campaign.cal_estimate_reach_min | intcomma }} - {{ campaign.cal_estimate_reach_max | intcomma }} reach</p>
             </div>
             <!-- Cost Per Reach -->
             <div class="campaign__create__rightbar__detail__data">
-              <span>Social Media</span>
-              <p>3 บาท</p>
+              <span>Cost Per Reach</span>
+              <p>{{ campaign.cal_cpr_min | intcomma }} - {{ campaign.cal_cpr_max }} บาท</p>
             </div>
           </div>
           <div class="campaign__create__rightbar__detail__box">
@@ -173,215 +181,227 @@
           </div>
 
           <!-- Story -->
-          <div class="campaign__card width_create_campaign">
-            <h6 class="campaign__create__content__header">Story</h6>
-            <div class="campaign__create__content__type">
-              <!-- Prepared Content -->
-              <div class="campaign__create__content__type__box activate" id="pc_box">
-                <div class="campaign__create__content__type__box__radio">
-                  <input type="radio" id="pc" name="story_type">
-                  <label for="pc" onclick="story_selected('pc')">
-                    <header>
-                      <span>Prepared Content</span>
-                      <button class="w180" id="story_pc_button" type="button">เลือก</button>
-                      <button class="w180" id="story_pc_button_selected" type="button">
-                        <p>เลือกแล้ว</p>
-                        <svg class="campaign__create__content__scope__work_type__icon">
-                          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                        </svg>
-                      </button>
-                    </header>
-                    <div class="campaign__create__content__type__box__radio__detail">
-                      <p>Shouters (ผู้บอกต่อ) จะนำ 
-                        <span class="b violet">Content สำเร็จรูปจากทางแบรนด์ (Image or Video)</span> 
-                        โพสท์ลงบน Story และเขียนบอกต่อตาม Key Message เหมาะกับแคมเปญที่ต้องการความโปรโมท Message ที่สั้นกระชับ รวดเร็ว 
-                        <span class="b">เช่น Product Launching, Promotion & Flash Sales, etc.</span>
-                      </p>
-                    </div>
-                    <div class="campaign__create__content__type__box__radio__subdetail">
-                      <img src="{% static 'img/campaigns/create/campaign_content_type_1.png' %}" alt="">
-                      <div class="campaign__create__content__type__box__radio__table">
-                        <div class="campaign__create__content__type__box__radio__table__header">
-                          <p>ประมาณผลลัพธ์</p>
-                        </div>
-                        <div class="campaign__create__content__type__box__radio__table__box">
-                          <span>Shouter</span>
-                          <p>10 - 20 คน</p>
-                        </div>
-                        <div class="campaign__create__content__type__box__radio__table__box">
-                          <span>Reach</span>
-                          <p>30,000 Reach</p>
-                        </div>
-                        <div class="campaign__create__content__type__box__radio__table__box">
-                          <span>Cost Per Reach</span>
-                          <p>1.1 บาท</p>
+          {% if campaign.campaign_work_type != "post" %}
+            {% if campaign.campaign_work_type != "post_story" %}
+              <div class="campaign__card width_create_campaign" style="height: 75vh">
+            {% else %}
+              <div class="campaign__card width_create_campaign">
+            {% endif %}
+              <h6 class="campaign__create__content__header">Story</h6>
+              <div class="campaign__create__content__type">
+                <!-- Prepared Content -->
+                <div class="campaign__create__content__type__box activate" id="pc_box">
+                  <div class="campaign__create__content__type__box__radio">
+                    <input type="radio" id="pc" name="story_type" value="prepared_content">
+                    <label for="pc" onclick="story_selected('pc')">
+                      <header>
+                        <span>Prepared Content</span>
+                        <button class="w180" id="story_pc_button" type="button">เลือก</button>
+                        <button class="w180" id="story_pc_button_selected" type="button">
+                          <p>เลือกแล้ว</p>
+                          <svg class="campaign__create__content__scope__work_type__icon">
+                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                          </svg>
+                        </button>
+                      </header>
+                      <div class="campaign__create__content__type__box__radio__detail">
+                        <p>Shouters (ผู้บอกต่อ) จะนำ
+                          <span class="b violet">Content สำเร็จรูปจากทางแบรนด์ (Image or Video)</span>
+                          โพสท์ลงบน Story และเขียนบอกต่อตาม Key Message เหมาะกับแคมเปญที่ต้องการความโปรโมท Message ที่สั้นกระชับ รวดเร็ว
+                          <span class="b">เช่น Product Launching, Promotion & Flash Sales, etc.</span>
+                        </p>
+                      </div>
+                      <div class="campaign__create__content__type__box__radio__subdetail">
+                        <img src="{% static 'img/campaigns/create/campaign_content_type_1.png' %}" alt="">
+                        <div class="campaign__create__content__type__box__radio__table">
+                          <div class="campaign__create__content__type__box__radio__table__header">
+                            <p>ประมาณผลลัพธ์</p>
+                          </div>
+                          <div class="campaign__create__content__type__box__radio__table__box">
+                            <span>Shouter</span>
+                            <p>{{ campaign.cal_number_shouter_min | intcomma }} คน</p>
+                          </div>
+                          <div class="campaign__create__content__type__box__radio__table__box">
+                            <span>Reach</span>
+                            <p>{{ campaign.cal_estimate_reach_min | intcomma}} Reach</p>
+                          </div>
+                          <div class="campaign__create__content__type__box__radio__table__box">
+                            <span>Cost Per Reach</span>
+                            <p>{{ campaign.cal_cpr_min | intcomma }} บาท</p>
+                          </div>
                         </div>
                       </div>
+                    </label>
+                    <hr>
+                  </div>
+                  <div class="campaign__create__content__type__box__number">
+                    <p class="text">จำนวน <span>(มากสุด 3 Story) *</span></p>
+                    <div class="campaign__create__content__type__box__number__custom">
+                      <p>1</p>
                     </div>
-                  </label>
-                  <hr>
+                  </div>
                 </div>
-                <div class="campaign__create__content__type__box__number">
-                  <p class="text">จำนวน <span>(มากสุด 3 Story) *</span></p>
-                  <div class="campaign__create__content__type__box__number__custom">
-                    <p>1</p>
+                <!-- User Generated Content-->
+                <div class="campaign__create__content__type__box" id="ugc_box">
+                  <div class="campaign__create__content__type__box__radio">
+                    <input type="radio" id="ugc" name="story_type" value="user_generated">
+                    <label for="ugc" onclick="story_selected('ugc')">
+                      <header>
+                        <span>User Generated</span>
+                        <button class="w180" id="story_ugc_button" type="button">เลือก</button>
+                        <button class="w180" id="story_ugc_button_selected" type="button">
+                          <p>เลือกแล้ว</p>
+                          <svg class="campaign__create__content__scope__work_type__icon">
+                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                          </svg>
+                        </button>
+                      </header>
+                      <div class="campaign__create__content__type__box__radio__detail">
+                        <p>Shouters (ผู้บอกต่อ) จะทำการ
+                          <span class="b violet">Production Content ขึ้นมาตาม Brief</span>
+                          ที่คุณต้องการ เหมาะกับแคมเปญที่ต้องการสื่อสาร Experience Sharing, User Review
+                          <span class="b">เช่น Hotel, Beauty, Skincare, FMCG, Etc.</span>
+                        </p>
+                      </div>
+                      <div class="campaign__create__content__type__box__radio__subdetail">
+                        <img src="{% static 'img/campaigns/create/campaign_content_type_2.png' %}" alt="">
+                        <div class="campaign__create__content__type__box__radio__table">
+                          <div class="campaign__create__content__type__box__radio__table__header">
+                            <p>ประมาณผลลัพธ์</p>
+                          </div>
+                          <div class="campaign__create__content__type__box__radio__table__box">
+                            <span>Shouter</span>
+                            <p>10 - 20 คน</p>
+                          </div>
+                          <div class="campaign__create__content__type__box__radio__table__box">
+                            <span>Reach</span>
+                            <p>30,000 Reach</p>
+                          </div>
+                          <div class="campaign__create__content__type__box__radio__table__box">
+                            <span>Cost Per Reach</span>
+                            <p>1.1 บาท</p>
+                          </div>
+                        </div>
+                      </div>
+                    </label>
                   </div>
                 </div>
               </div>
-              <!-- User Generated Content-->
-              <div class="campaign__create__content__type__box" id="ugc_box">
-                <div class="campaign__create__content__type__box__radio">
-                  <input type="radio" id="ugc" name="story_type">
-                  <label for="ugc" onclick="story_selected('ugc')">
-                    <header>
-                      <span>User Generated</span>
-                      <button class="w180" id="story_ugc_button" type="button">เลือก</button>
-                      <button class="w180" id="story_ugc_button_selected" type="button">
-                        <p>เลือกแล้ว</p>
-                        <svg class="campaign__create__content__scope__work_type__icon">
-                          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                        </svg>
-                      </button>
-                    </header>
-                    <div class="campaign__create__content__type__box__radio__detail">
-                      <p>Shouters (ผู้บอกต่อ) จะทำการ 
-                        <span class="b violet">Production Content ขึ้นมาตาม Brief</span> 
-                        ที่คุณต้องการ เหมาะกับแคมเปญที่ต้องการสื่อสาร Experience Sharing, User Review 
-                        <span class="b">เช่น Hotel, Beauty, Skincare, FMCG, Etc.</span>
-                      </p>
-                    </div>
-                    <div class="campaign__create__content__type__box__radio__subdetail">
-                      <img src="{% static 'img/campaigns/create/campaign_content_type_2.png' %}" alt="">
-                      <div class="campaign__create__content__type__box__radio__table">
-                        <div class="campaign__create__content__type__box__radio__table__header">
-                          <p>ประมาณผลลัพธ์</p>
-                        </div>
-                        <div class="campaign__create__content__type__box__radio__table__box">
-                          <span>Shouter</span>
-                          <p>10 - 20 คน</p>
-                        </div>
-                        <div class="campaign__create__content__type__box__radio__table__box">
-                          <span>Reach</span>
-                          <p>30,000 Reach</p>
-                        </div>
-                        <div class="campaign__create__content__type__box__radio__table__box">
-                          <span>Cost Per Reach</span>
-                          <p>1.1 บาท</p>
-                        </div>
-                      </div>
-                    </div>
-                  </label>
-                  
-                </div>
-              </div>
             </div>
-          </div>
+          {% endif %}
 
           <!-- Post -->
-          <div class="campaign__card width_create_campaign">
-            <h6 class="campaign__create__content__header">Post</h6>
-            <div class="campaign__create__content__type">
-              <!-- Single Post -->
-              <div class="campaign__create__content__type__box activate" id="single_box">
-                <div class="campaign__create__content__type__box__radio">
-                  <input type="radio" id="single" name="post">
-                  <label for="single" onclick="post_selected('single')">
-                    <header>
-                      <span>Single Post</span>
-                      <button class="w180" id="post_single_button" type="button">เลือก</button>
-                      <button class="w180" id="post_single_button_selected" type="button">
-                        <p>เลือกแล้ว</p>
-                        <svg class="campaign__create__content__scope__work_type__icon">
-                          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                        </svg>
-                      </button>
-                    </header>
-                    <div class="campaign__create__content__type__box__radio__detail">
-                      <p>
-                        Shouters (ผู้บอกต่อ) จะทำการ 
-                        <span class="b violet">ถ่ายและโพสท์ 1 รูป </span>
-                        คู่กับสินค้า/บริการ พร้อมเขียนแคปชั่นบอกต่อตาม Brief ของคุณ เหมาะสำหรับแคมเปญที่ต้องการโปรโมทสื่อสารง่ายๆ และได้ Branding ไปในตัว 
-                        <span class="b">เช่น Product Launching, Seasonal Campaign - Promotion, Branding Campaign, etc.</span>
-                      </p>
-                    </div>
-                    <div class="campaign__create__content__type__box__radio__subdetail">
-                      <img src="{% static 'img/campaigns/create/campaign_content_type_3.png' %}" alt="">
-                      <div class="campaign__create__content__type__box__radio__table">
-                        <div class="campaign__create__content__type__box__radio__table__header">
-                          <p>ประมาณผลลัพธ์</p>
-                        </div>
-                        <div class="campaign__create__content__type__box__radio__table__box">
-                          <span>Shouter</span>
-                          <p>10 - 20 คน</p>
-                        </div>
-                        <div class="campaign__create__content__type__box__radio__table__box">
-                          <span>Reach</span>
-                          <p>30,000 Reach</p>
-                        </div>
-                        <div class="campaign__create__content__type__box__radio__table__box">
-                          <span>Cost Per Reach</span>
-                          <p>1.1 บาท</p>
+          {% if campaign.campaign_work_type != "story" %}
+            {% if campaign.campaign_work_type != "post_story" %}
+              <div class="campaign__card width_create_campaign" style="height: 75vh">
+            {% else %}
+              <div class="campaign__card width_create_campaign">
+            {% endif %}
+              <h6 class="campaign__create__content__header">Post</h6>
+              <div class="campaign__create__content__type">
+                <!-- Single Post -->
+                <div class="campaign__create__content__type__box activate" id="single_box">
+                  <div class="campaign__create__content__type__box__radio">
+                    <input type="radio" id="single" name="post_type" value="single_post">
+                    <label for="single" onclick="post_selected('single')">
+                      <header>
+                        <span>Single Post</span>
+                        <button class="w180" id="post_single_button" type="button">เลือก</button>
+                        <button class="w180" id="post_single_button_selected" type="button">
+                          <p>เลือกแล้ว</p>
+                          <svg class="campaign__create__content__scope__work_type__icon">
+                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                          </svg>
+                        </button>
+                      </header>
+                      <div class="campaign__create__content__type__box__radio__detail">
+                        <p>
+                          Shouters (ผู้บอกต่อ) จะทำการ
+                          <span class="b violet">ถ่ายและโพสท์ 1 รูป </span>
+                          คู่กับสินค้า/บริการ พร้อมเขียนแคปชั่นบอกต่อตาม Brief ของคุณ เหมาะสำหรับแคมเปญที่ต้องการโปรโมทสื่อสารง่ายๆ และได้ Branding ไปในตัว
+                          <span class="b">เช่น Product Launching, Seasonal Campaign - Promotion, Branding Campaign, etc.</span>
+                        </p>
+                      </div>
+                      <div class="campaign__create__content__type__box__radio__subdetail">
+                        <img src="{% static 'img/campaigns/create/campaign_content_type_3.png' %}" alt="">
+                        <div class="campaign__create__content__type__box__radio__table">
+                          <div class="campaign__create__content__type__box__radio__table__header">
+                            <p>ประมาณผลลัพธ์</p>
+                          </div>
+                          <div class="campaign__create__content__type__box__radio__table__box">
+                            <span>Shouter</span>
+                            <p>10 - 20 คน</p>
+                          </div>
+                          <div class="campaign__create__content__type__box__radio__table__box">
+                            <span>Reach</span>
+                            <p>30,000 Reach</p>
+                          </div>
+                          <div class="campaign__create__content__type__box__radio__table__box">
+                            <span>Cost Per Reach</span>
+                            <p>1.1 บาท</p>
+                          </div>
                         </div>
                       </div>
+                    </label>
+                    <hr>
+                  </div>
+                  <div class="campaign__create__content__type__box__number">
+                    <p class="text">จำนวน</p>
+                    <div class="campaign__create__content__type__box__number__custom">
+                      <p>1 โพสต์</p>
                     </div>
-                  </label>
-                  <hr>
+                  </div>
                 </div>
-                <div class="campaign__create__content__type__box__number">
-                  <p class="text">จำนวน</p>
-                  <div class="campaign__create__content__type__box__number__custom">
-                    <p>1 โพสต์</p>
+                <!-- Multi Post-->
+                <div class="campaign__create__content__type__box" id="multi_box">
+                  <div class="campaign__create__content__type__box__radio">
+                    <input type="radio" id="multi" name="post_type" value="multi_post">
+                    <label for="multi" onclick="post_selected('multi')">
+                      <header>
+                        <span>Multi Post</span>
+                        <button class="w180" id="post_multi_button" type="button">เลือก</button>
+                        <button class="w180" id="post_multi_button_selected" type="button">
+                          <p>เลือกแล้ว</p>
+                          <svg class="campaign__create__content__scope__work_type__icon">
+                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                          </svg>
+                        </button>
+                      </header>
+                      <div class="campaign__create__content__type__box__radio__detail">
+                        <p>
+                          Shouters (ผู้บอกต่อ) จะทำการ
+                          <span class="b violet">ถ่ายและโพสท์หลายรูปเป็นอัลบั้ม </span>
+                          พร้อมเขียนแคปชั่นบอกต่อตาม Brief ของคุณ เหมาะกับแคมเปญที่ต้องการสื่อสารรายละเอียด สินค้า/บริการที่มากขึ้น
+                          <span class="b">เช่น การทำ Product Experience Sharing, User Review, Product - Action - Result เป็นต้น</span>
+                        </p>
+                      </div>
+                      <div class="campaign__create__content__type__box__radio__subdetail">
+                        <img src="{% static 'img/campaigns/create/campaign_content_type_4.png' %}" alt="">
+                        <div class="campaign__create__content__type__box__radio__table">
+                          <div class="campaign__create__content__type__box__radio__table__header">
+                            <p>ประมาณผลลัพธ์</p>
+                          </div>
+                          <div class="campaign__create__content__type__box__radio__table__box">
+                            <span>Shouter</span>
+                            <p>10 - 20 คน</p>
+                          </div>
+                          <div class="campaign__create__content__type__box__radio__table__box">
+                            <span>Reach</span>
+                            <p>30,000 Reach</p>
+                          </div>
+                          <div class="campaign__create__content__type__box__radio__table__box">
+                            <span>Cost Per Reach</span>
+                            <p>1.1 บาท</p>
+                          </div>
+                        </div>
+                      </div>
+                    </label>
                   </div>
                 </div>
               </div>
-              <!-- Multi Post-->
-              <div class="campaign__create__content__type__box" id="multi_box">
-                <div class="campaign__create__content__type__box__radio">
-                  <input type="radio" id="multi" name="post">
-                  <label for="multi" onclick="post_selected('multi')">
-                    <header>
-                      <span>Multi Post</span>
-                      <button class="w180" id="post_multi_button" type="button">เลือก</button>
-                      <button class="w180" id="post_multi_button_selected" type="button">
-                        <p>เลือกแล้ว</p>
-                        <svg class="campaign__create__content__scope__work_type__icon">
-                          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                        </svg>
-                      </button>
-                    </header>
-                    <div class="campaign__create__content__type__box__radio__detail">
-                      <p>
-                        Shouters (ผู้บอกต่อ) จะทำการ 
-                        <span class="b violet">ถ่ายและโพสท์หลายรูปเป็นอัลบั้ม </span>
-                        พร้อมเขียนแคปชั่นบอกต่อตาม Brief ของคุณ เหมาะกับแคมเปญที่ต้องการสื่อสารรายละเอียด สินค้า/บริการที่มากขึ้น 
-                        <span class="b">เช่น การทำ Product Experience Sharing, User Review, Product - Action - Result เป็นต้น</span>
-                      </p>
-                    </div>
-                    <div class="campaign__create__content__type__box__radio__subdetail">
-                      <img src="{% static 'img/campaigns/create/campaign_content_type_4.png' %}" alt="">
-                      <div class="campaign__create__content__type__box__radio__table">
-                        <div class="campaign__create__content__type__box__radio__table__header">
-                          <p>ประมาณผลลัพธ์</p>
-                        </div>
-                        <div class="campaign__create__content__type__box__radio__table__box">
-                          <span>Shouter</span>
-                          <p>10 - 20 คน</p>
-                        </div>
-                        <div class="campaign__create__content__type__box__radio__table__box">
-                          <span>Reach</span>
-                          <p>30,000 Reach</p>
-                        </div>
-                        <div class="campaign__create__content__type__box__radio__table__box">
-                          <span>Cost Per Reach</span>
-                          <p>1.1 บาท</p>
-                        </div>
-                      </div>
-                    </div>
-                  </label>
-                </div>
-              </div>
             </div>
-          </div>
+          {% endif %}
+
         </div>
       </section>
 
@@ -401,12 +421,25 @@
                   <div class="campaign__create__content__type__modal__content__left__item border_bottom">
                     <span>Social Media</span>
                     <div class="campaign__create__content__type__modal__content__left__item__photo">
-                      <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
+                      {% if campaign.campaign_is_ig %}
+                        <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
+                      {% endif %} 
+                      {% if campaign.campaign_is_fb %}
+                        <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="">
+                      {% endif %}
                     </div>
                   </div>
                   <div class="campaign__create__content__type__modal__content__left__item border_bottom">
                     <span>Work Format</span>
-                    <p>Post + Story</p>
+                    {% if campaign.campaign_work_type == "story" %}
+                      <p>Story</p>
+                    {% endif %}
+                    {% if campaign.campaign_work_type == "post" %}
+                      <p>Post</p>
+                    {% endif %}
+                    {% if campaign.campaign_work_type == "post_story" %}
+                      <p>Post + Story</p>
+                    {% endif %}
                   </div>
                   <div class="campaign__create__content__type__modal__content__left__item">
                     <div class="campaign__create__content__type__modal__content__left__content__type">
@@ -437,21 +470,21 @@
                 <div class="budget">
                   <p>Budget</p>
                   <div class="box">
-                    <h4>50,000 บาท</h4>
+                    <h4>{{ campaign.campaign_budget | intcomma }} บาท</h4>
                   </div>
                 </div>
                 <div class="campaign__create__content__type__modal__content__right__items">
                   <div class="campaign__create__content__type__modal__content__right__item border_bottom">
                     <span>ได้ Shouter</span>
-                    <p>10-20 คน</p>
+                    <p>{{ campaign.cal_number_shouter_min | intcomma }} - {{ campaign.cal_number_shouter_max | intcomma }} คน</p>
                   </div>
                   <div class="campaign__create__content__type__modal__content__right__item border_bottom">
                     <span>Reach</span>
-                    <p>10,000-20,000 Reach</p>
+                    <p>{{ campaign.cal_estimate_reach_min | intcomma }} - {{ campaign.cal_estimate_reach_max | intcomma }} Reach</p>
                   </div>
                   <div class="campaign__create__content__type__modal__content__right__item border_bottom">
                     <span>Cost Per Reach</span>
-                    <p>3 บาท</p>
+                    <p>{{ campaign.cal_cpr_min }} - {{ campaign.cal_cpr_max }} บาท</p>
                   </div>
                 </div>
               </div>
