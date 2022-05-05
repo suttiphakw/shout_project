@@ -1,6 +1,6 @@
 from utils.text.draft import post
 from utils.image.draft import post_img
-from utils.flex.draft import secret_voucher, product_promote
+from utils.flex.insights import secret_voucher, product_promote
 
 
 def pp_ig(line_user_id):

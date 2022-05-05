@@ -434,6 +434,8 @@ def oauth(request):
           redirect_url = '/shouters/campaign/{}/'.format(token)
         elif "payment" in q:
           redirect_url = '/shouters/payment/{}/'.format(token)
+        elif "social" in q:
+          redirect_url = '/shouters/menu/social-media/{}/'.format(token)
         else:
           redirect_url = '/shouters/menu/{}/'.format(token)
 

@@ -64,7 +64,7 @@
 <body>
 <section>
     <header>Input</header>
-    <form action=""> {% csrf_token %}
+    <form action="{% url 'api_insights' %}" method=""> {% csrf_token %}
         <div class="box">
             <div class="input">
                 <label for="url">Instagram URL</label>
