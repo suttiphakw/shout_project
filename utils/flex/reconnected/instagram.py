@@ -21,7 +21,7 @@ def post(line_user_id):
     "messages": [
       {
         "type": "flex",
-        "altText": "📮 ส่ง Insights",
+        "altText": "🚨Your Instagram is disconnected ! 🚨",
         "contents": {
           "type": "bubble",
           "direction": "ltr",
@@ -207,7 +207,7 @@ def post(line_user_id):
                 "action": {
                   "type": "uri",
                   "label": "เชื่อมต่ออีกครั้ง",
-                  "uri": "https://shoutsolution.com/shouter/line-login?q=social"
+                  "uri": "https://shoutsolution.com/shouters/line-login?q=social/"
                 },
                 "color": "#F37324",
                 "style": "primary"
