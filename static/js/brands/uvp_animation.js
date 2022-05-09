@@ -213,11 +213,16 @@ function footer_page_1_next() {
   const active_page_3 = document.getElementById("footer_3");
   const active_page_4 = document.getElementById("footer_4");
   const active_page_5 = document.getElementById("footer_5");
+  const active_page_6 = document.getElementById("footer_6");
+  const active_page_7 = document.getElementById("footer_7");
   active_page_1.style.display = "none";
   active_page_2.style.display = "block";
   active_page_3.style.display = "none";
   active_page_4.style.display = "none";
   active_page_5.style.display = "none";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "none";
+
 }
 
 function footer_page_2_back() {
@@ -226,11 +231,15 @@ function footer_page_2_back() {
   const active_page_3 = document.getElementById("footer_3");
   const active_page_4 = document.getElementById("footer_4");
   const active_page_5 = document.getElementById("footer_5");
+  const active_page_6 = document.getElementById("footer_6");
+  const active_page_7 = document.getElementById("footer_7");
   active_page_1.style.display = "block";
   active_page_2.style.display = "none";
   active_page_3.style.display = "none";
   active_page_4.style.display = "none";
   active_page_5.style.display = "none";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "none";
 }
 
 function footer_page_2_next() {
@@ -239,11 +248,15 @@ function footer_page_2_next() {
   const active_page_3 = document.getElementById("footer_3");
   const active_page_4 = document.getElementById("footer_4");
   const active_page_5 = document.getElementById("footer_5");
+  const active_page_6 = document.getElementById("footer_6");
+  const active_page_7 = document.getElementById("footer_7");
   active_page_1.style.display = "none";
   active_page_2.style.display = "none";
   active_page_3.style.display = "block";
   active_page_4.style.display = "none";
   active_page_5.style.display = "none";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "none";
 }
 
 function footer_page_3_back() {
@@ -252,11 +265,15 @@ function footer_page_3_back() {
   const active_page_3 = document.getElementById("footer_3");
   const active_page_4 = document.getElementById("footer_4");
   const active_page_5 = document.getElementById("footer_5");
+  const active_page_6 = document.getElementById("footer_6");
+  const active_page_7 = document.getElementById("footer_7");
   active_page_1.style.display = "none";
   active_page_2.style.display = "block";
   active_page_3.style.display = "none";
   active_page_4.style.display = "none";
   active_page_5.style.display = "none";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "none";
 }
 
 function footer_page_3_next() {
@@ -265,11 +282,15 @@ function footer_page_3_next() {
   const active_page_3 = document.getElementById("footer_3");
   const active_page_4 = document.getElementById("footer_4");
   const active_page_5 = document.getElementById("footer_5");
+  const active_page_6 = document.getElementById("footer_6");
+  const active_page_7 = document.getElementById("footer_7");
   active_page_1.style.display = "none";
   active_page_2.style.display = "none";
   active_page_3.style.display = "none";
   active_page_4.style.display = "block";
   active_page_5.style.display = "none";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "none";
 }
 
 function footer_page_4_back() {
@@ -278,11 +299,15 @@ function footer_page_4_back() {
   const active_page_3 = document.getElementById("footer_3");
   const active_page_4 = document.getElementById("footer_4");
   const active_page_5 = document.getElementById("footer_5");
+  const active_page_6 = document.getElementById("footer_6");
+  const active_page_7 = document.getElementById("footer_7");
   active_page_1.style.display = "none";
   active_page_2.style.display = "none";
   active_page_3.style.display = "block";
   active_page_4.style.display = "none";
   active_page_5.style.display = "none";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "none";
 }
 
 function footer_page_4_next() {
@@ -291,11 +316,15 @@ function footer_page_4_next() {
   const active_page_3 = document.getElementById("footer_3");
   const active_page_4 = document.getElementById("footer_4");
   const active_page_5 = document.getElementById("footer_5");
+  const active_page_6 = document.getElementById("footer_6");
+  const active_page_7 = document.getElementById("footer_7");
   active_page_1.style.display = "none";
   active_page_2.style.display = "none";
   active_page_3.style.display = "none";
   active_page_4.style.display = "none";
   active_page_5.style.display = "block";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "none";
 }
 
 function footer_page_5_back() {
@@ -304,11 +333,83 @@ function footer_page_5_back() {
   const active_page_3 = document.getElementById("footer_3");
   const active_page_4 = document.getElementById("footer_4");
   const active_page_5 = document.getElementById("footer_5");
+  const active_page_6 = document.getElementById("footer_6");
+  const active_page_7 = document.getElementById("footer_7");
   active_page_1.style.display = "none";
   active_page_2.style.display = "none";
   active_page_3.style.display = "none";
   active_page_4.style.display = "block";
   active_page_5.style.display = "none";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "none";
+}
+
+function footer_page_5_next() {
+  const active_page_1 = document.getElementById("footer_1");
+  const active_page_2 = document.getElementById("footer_2");
+  const active_page_3 = document.getElementById("footer_3");
+  const active_page_4 = document.getElementById("footer_4");
+  const active_page_5 = document.getElementById("footer_5");
+  const active_page_6 = document.getElementById("footer_6");
+  const active_page_7 = document.getElementById("footer_7");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "none";
+  active_page_6.style.display = "block";
+  active_page_7.style.display = "none";
+}
+
+function footer_page_6_back() {
+  const active_page_1 = document.getElementById("footer_1");
+  const active_page_2 = document.getElementById("footer_2");
+  const active_page_3 = document.getElementById("footer_3");
+  const active_page_4 = document.getElementById("footer_4");
+  const active_page_5 = document.getElementById("footer_5");
+  const active_page_6 = document.getElementById("footer_6");
+  const active_page_7 = document.getElementById("footer_7");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "block";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "none";
+}
+
+function footer_page_6_next() {
+  const active_page_1 = document.getElementById("footer_1");
+  const active_page_2 = document.getElementById("footer_2");
+  const active_page_3 = document.getElementById("footer_3");
+  const active_page_4 = document.getElementById("footer_4");
+  const active_page_5 = document.getElementById("footer_5");
+  const active_page_6 = document.getElementById("footer_6");
+  const active_page_7 = document.getElementById("footer_7");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "none";
+  active_page_6.style.display = "none";
+  active_page_7.style.display = "block";
+}
+
+function footer_page_7_back() {
+  const active_page_1 = document.getElementById("footer_1");
+  const active_page_2 = document.getElementById("footer_2");
+  const active_page_3 = document.getElementById("footer_3");
+  const active_page_4 = document.getElementById("footer_4");
+  const active_page_5 = document.getElementById("footer_5");
+  const active_page_6 = document.getElementById("footer_6");
+  const active_page_7 = document.getElementById("footer_7");
+  active_page_1.style.display = "none";
+  active_page_2.style.display = "none";
+  active_page_3.style.display = "none";
+  active_page_4.style.display = "none";
+  active_page_5.style.display = "none";
+  active_page_6.style.display = "block";
+  active_page_7.style.display = "none";
 }
 
 function numberWithCommas(x) {
