@@ -14,7 +14,7 @@ def post(line_user_id):
     "messages": [
       {
         "type": "flex",
-        "altText": "📮 งานของคุณได้รับการ Revise จากทางแบรนด์",
+        "altText": "📮 โปรดรอการตรวจสอบ Insights",
         "contents": {
           "type": "carousel",
           "contents": [
@@ -147,7 +147,7 @@ def post(line_user_id):
                         "action": {
                           "type": "uri",
                           "label": "Upload เอกสาร",
-                          "uri": "https://linecorp.com"
+                          "uri": "https://shoutsolution.com/shouters/line-login?q=bank-account/"
                         },
                         "color": "#F37324",
                         "style": "primary",
@@ -170,7 +170,7 @@ def post(line_user_id):
                 "contents": [
                   {
                     "type": "text",
-                    "text": "📸 Ref.(ตัวอย่างงานที่ต้องการ)",
+                    "text": "📸 Ref.(ตัวอย่างเอกสาร)",
                     "weight": "bold",
                     "size": "sm",
                     "color": "#002257",
@@ -198,7 +198,7 @@ def post(line_user_id):
                         "contents": [
                           {
                             "type": "image",
-                            "url": "https://shoutsolution.com/media/source/temp/secret_voucher.png",
+                            "url": "https://shoutsolution.com/media/source/ref/id_card.png",
                             "size": "full",
                             "aspectRatio": "1:1",
                             "aspectMode": "fit"
@@ -221,8 +221,83 @@ def post(line_user_id):
                         "type": "button",
                         "action": {
                           "type": "uri",
-                          "label": "ดูรายละเอียดงาน",
-                          "uri": "https://linecorp.com"
+                          "label": "Upload เอกสาร",
+                          "uri": "https://shoutsolution.com/shouters/line-login?q=bank-account/"
+                        },
+                        "color": "#F37324",
+                        "style": "primary",
+                        "gravity": "center"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "type": "bubble",
+              "direction": "ltr",
+              "header": {
+                "type": "box",
+                "layout": "horizontal",
+                "spacing": "xxl",
+                "paddingBottom": "2px",
+                "borderColor": "#4B2828FF",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "📸 Ref.(ตัวอย่างเอกสาร)",
+                    "weight": "bold",
+                    "size": "sm",
+                    "color": "#002257",
+                    "margin": "none",
+                    "contents": []
+                  }
+                ]
+              },
+              "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "separator"
+                  },
+                  {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "none",
+                    "paddingTop": "15px",
+                    "contents": [
+                      {
+                        "type": "box",
+                        "layout": "vertical",
+                        "contents": [
+                          {
+                            "type": "image",
+                            "url": "https://shoutsolution.com/media/source/ref/book_bank.png",
+                            "size": "full",
+                            "aspectRatio": "1:1",
+                            "aspectMode": "fit"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "footer": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "box",
+                    "layout": "vertical",
+                    "contents": [
+                      {
+                        "type": "button",
+                        "action": {
+                          "type": "uri",
+                          "label": "Upload เอกสาร",
+                          "uri": "https://shoutsolution.com/shouters/line-login?q=bank-account/"
                         },
                         "color": "#F37324",
                         "style": "primary",
