@@ -1,4 +1,3 @@
-import re
 import jwt
 import datetime
 
@@ -9,6 +8,7 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from brands.models import BrandProfile
 
+
 # Create your views here.
 def register(request):
   if request.method == 'POST':
@@ -16,7 +16,7 @@ def register(request):
     first_name = request.POST['first_name']
     last_name = request.POST['last_name']
     email = request.POST['email']
-    tel =request.POST['tel']
+    tel = request.POST['tel']
     company = request.POST['company']
     position = request.POST['position']
     password_1 = request.POST['password_1']
@@ -42,7 +42,7 @@ def register(request):
       'exp': datetime.datetime.now() + datetime.timedelta(days=1),
     }
     token = jwt.encode(data, 'U0hPVVRFUl9BQ0NFU1NfVE9LRU5fc2hvdXRzb2x1dGlvbkAyMDIw', algorithm='HS256')
-    confirm_link = 'http://127.0.0.1:8000/accounts/email/confirm/' + token + '/'
+    confirm_link = 'https://shoutsolution.com/accounts/email/confirm/' + token + '/'
     msg_html = render_to_string('emails/confirm_account.html', {'confirm_link': confirm_link})
     send_mail('Email Verification', 'Account Activation', 'noreply@shoutsolution.com', [brand.email], html_message=msg_html)
     redirect_url = '/accounts/email/verification/{}/'.format(token)
@@ -87,7 +87,7 @@ def forget_password(request):
   if request.method == 'POST':
     email = request.POST['email']
     # Check Email is Exist
-    brand= BrandProfile.objects.filter(email=email)
+    brand = BrandProfile.objects.filter(email=email)
     if brand.exists():
       # Send Email + Token Encode
       data = {
@@ -95,7 +95,7 @@ def forget_password(request):
         'exp': datetime.datetime.now() + datetime.timedelta(days=1),
       }
       token = jwt.encode(data, 'U0hPVVRFUl9BQ0NFU1NfVE9LRU5fc2hvdXRzb2x1dGlvbkAyMDIw', algorithm='HS256')
-      confirm_link = 'http://127.0.0.1:8000/accounts/forget_password/change/' + token + '/'
+      confirm_link = 'https://shoutsolution.com/accounts/forget_password/change/' + token + '/'
       msg_html = render_to_string('emails/forget_password.html', {'confirm_link': confirm_link})
       send_mail('Forget Password', 'Forget Password', 'noreply@shoutsolution.com', [email], html_message=msg_html)
       redirect_url = '/accounts/forget_password/email/{}/'.format(token)
@@ -122,6 +122,9 @@ def change_password(request, token):
   decoded_token = jwt.decode(token, 'U0hPVVRFUl9BQ0NFU1NfVE9LRU5fc2hvdXRzb2x1dGlvbkAyMDIw', algorithms='HS256')
   email = decoded_token['email']
   brand = User.objects.filter(email=email)
+  context = {
+    'token': token
+  }
   # Found Brand
   if brand.exists():
     if request.method == 'POST':
@@ -130,6 +133,7 @@ def change_password(request, token):
       if password_1 != password_2:
         # Return with message
         context = {
+          'token': token,
           'message': 'รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่'
         }
         return render(request, 'accounts/change_password.html', context)
@@ -138,13 +142,16 @@ def change_password(request, token):
       brand = brand.first()
       brand.set_password(password_1)
       brand.save()
-      return redirect('change_password_complete')
-    return render(request, 'accounts/change_password.html')
+      return redirect('change_password_complete', token)
+    return render(request, 'accounts/change_password.html', context)
   return HttpResponse('Not Found Brand')
   
 
-def change_password_complete(request):
-  return render(request, 'accounts/change_password_complete.html')
+def change_password_complete(request, token):
+  context = {
+    'token': token
+  }
+  return render(request, 'accounts/change_password_complete.html', context)
 
 
 def email_verification(request, token):

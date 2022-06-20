@@ -12,8 +12,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
   <script src="{% static 'js/brands/settings.js' %}"></script>
+  <script src="{% static 'js/utils/messages.js' %}"></script>
   {% endblock %}
-  {% block title %} Your Campaign {% endblock %}
+  {% block title %} Settings {% endblock %}
 </head>
 <body>
 {% block content %}
@@ -23,9 +24,9 @@
       <div class="campaign__card campaign__card__100h">
         <div class="settings__left__detail">
           <img src="{% static 'img/brands/temp__user__photo.png' %}" alt="">
-          <h5>Jirapath B.</h5>
-          <p>jirapth.bu@shoutsolution.com</p>
-          <button class="w180 settings__button">เปลี่ยนรูปโปรไฟล์</button>
+          <h5>{{ brand.first_name }}</h5>
+          <p>{{ brand.email}}</p>
+{#          <button class="w180 settings__button">เปลี่ยนรูปโปรไฟล์</button>#}
         </div>
       </div>
     </div>
@@ -34,35 +35,36 @@
       <div class="campaign__card campaign__card__100h">
         <h6>ข้อมูลบัญชี</h6>
         <div class="settings__form">
-          <form action="" method="POST" id="change_profile">
+          <form action="{% url 'brand__setttings' %}" method="POST" id="change_profile"> {% csrf_token %}
             <div class="settings__form__2column">
               <div class="settings__form__flexcolumn width50">
                 <!-- First Name -->
                 <label for="first_name">First Name</label>
-                <input class="h48" type="text" id="first_name" name="first_name" value="Jirapath">
+                <input class="h48" type="text" id="first_name" name="first_name" value="{{ brand.first_name }}">
               </div>
               <div class="settings__form__flexcolumn width50">
                 <!-- Last Name -->
                 <label for="last_name">Last Name</label>
-                <input class="h48" type="text" id="last_name" name="last_name" value="Bunyawetcheewin">
+                <input class="h48" type="text" id="last_name" name="last_name" value="{{ brand.last_name }}">
               </div>
             </div>
             <!-- Phone Number -->
             <div class="settings__form__flexcolumn">
               <label for="tel">Phone Number</label>
-              <input class="h48" type="tel" id="tel" name="tel" value="0900000000">
+              <input class="h48" type="tel" id="tel" name="tel" value="{{ brand.tel }}">
             </div>
             <!-- Company -->
             <div class="settings__form__flexcolumn">
               <label for="company">Company</label>
-              <input class="h48" type="text" id="company" name="company" value="Shout P2P">
+              <input class="h48" type="text" id="company" name="company" value="{{ brand.company }}">
             </div>
             <!-- Position -->
             <div class="settings__form__flexcolumn">
               <label for="position">Position</label>
-              <input class="h48" type="text" id="position" name="position" value="CEO">
+              <input class="h48" type="text" id="position" name="position" value="{{ brand.position }}">
             </div>
             <hr>
+            <!-- Change password -->
             <div class="settings__password">
               <p>ต้องการเปลี่ยนรหัสผ่าน</p>
               <a href="{% url 'brand__setttings_change_password' %}">
@@ -70,6 +72,7 @@
               </a>
             </div>
             <hr>
+            {% include 'partials/_alerts.html' %}
             <button class="w100pc btn__orange" type="submit">ยืนยัน</button>
           </form>
         </div>

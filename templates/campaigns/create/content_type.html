@@ -105,34 +105,34 @@
             <!-- Budget -->
             <div class="campaign__create__rightbar__detail__data budget">
               <span class="bold">Budget</span>
-              <h4>{{ campaign.campaign_budget | intcomma }}</h4>
+              <h4 id="budget">{{ campaign.campaign_budget | intcomma }}</h4>
             </div>
             <!-- Social Media -->
             <div class="campaign__create__rightbar__detail__data">
               <span>Social Media</span>
               <div class="campaign__create__rightbar__detail__data__icon">
                 {% if campaign.campaign_is_ig %}
-                  <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
+                  <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="" id="is_ig">
                 {% endif %}
                 {% if campaign.campaign_is_fb %}
-                  <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="">
+                  <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="" id="is_fb">
                 {% endif %}
               </div>
             </div>
             <!-- Shouter Count -->
             <div class="campaign__create__rightbar__detail__data">
               <span>ได้ Shouter</span>
-              <p>{{ campaign.cal_number_shouter_min | intcomma }} - {{ campaign.cal_number_shouter_max | intcomma }} คน</p>
+              <p id="rightbar_shouter">{{ campaign.estimate_min_shouter | intcomma }} - {{ campaign.estimate_max_shouter | intcomma }} คน</p>
             </div>
             <!-- Estimated Reach -->
             <div class="campaign__create__rightbar__detail__data">
               <span>Estimate Reach</span>
-              <p>{{ campaign.cal_estimate_reach_min | intcomma }} - {{ campaign.cal_estimate_reach_max | intcomma }} reach</p>
+              <p id="rightbar_reach">{{ campaign.estimate_min_reach | intcomma }} - {{ campaign.estimate_max_reach | intcomma }} Reach</p>
             </div>
             <!-- Cost Per Reach -->
             <div class="campaign__create__rightbar__detail__data">
               <span>Cost Per Reach</span>
-              <p>{{ campaign.cal_cpr_min | intcomma }} - {{ campaign.cal_cpr_max }} บาท</p>
+              <p id="rightbar_cpr">{{ campaign.estimate_min_cpr | intcomma }} - {{ campaign.estimate_max_cpr | intcomma }} บาท</p>
             </div>
           </div>
           <div class="campaign__create__rightbar__detail__box">
@@ -140,17 +140,23 @@
             <!-- รูปแบบโพส -->
             <div class="campaign__create__rightbar__detail__data">
               <span>รูปแบบโพส</span>
-              <p>-</p>
+              {% if campaign.campaign_work_type == "story" %}
+                <p>Story</p>
+              {% elif campaign.campaign_work_type == "post" %}
+                <p>Post</p>
+              {% else %}
+                <p>Story & Post</p>
+              {% endif %}
             </div>
             <!-- รูปแบบการบอกต่อ -->
             <div class="campaign__create__rightbar__detail__data">
               <span>รูปแบบการบอกต่อ</span>
-              <p>-</p>
+              <p id="rightbar_work_format">-</p>
             </div>
             <!-- จำนวน -->
             <div class="campaign__create__rightbar__detail__data">
               <span>จำนวน</span>
-              <p>-</p>
+              <p id="rightbar_work_quantity">-</p>
             </div>
           </div>
           <div class="campaign__create__rightbar__detail__box">
@@ -187,10 +193,10 @@
             {% else %}
               <div class="campaign__card width_create_campaign">
             {% endif %}
-              <h6 class="campaign__create__content__header">Story</h6>
+              <h6 class="campaign__create__content__header" id="story">Story</h6>
               <div class="campaign__create__content__type">
                 <!-- Prepared Content -->
-                <div class="campaign__create__content__type__box activate" id="pc_box">
+                <div class="campaign__create__content__type__box" id="pc_box">
                   <div class="campaign__create__content__type__box__radio">
                     <input type="radio" id="pc" name="story_type" value="prepared_content">
                     <label for="pc" onclick="story_selected('pc')">
@@ -219,25 +225,26 @@
                           </div>
                           <div class="campaign__create__content__type__box__radio__table__box">
                             <span>Shouter</span>
-                            <p>{{ campaign.cal_number_shouter_min | intcomma }} คน</p>
+                            <p id="pc_shouter">- คน</p>
                           </div>
                           <div class="campaign__create__content__type__box__radio__table__box">
                             <span>Reach</span>
-                            <p>{{ campaign.cal_estimate_reach_min | intcomma}} Reach</p>
+                            <p id="pc_reach">- Reach</p>
                           </div>
                           <div class="campaign__create__content__type__box__radio__table__box">
                             <span>Cost Per Reach</span>
-                            <p>{{ campaign.cal_cpr_min | intcomma }} บาท</p>
+                            <p id="pc_cpr">- บาท</p>
                           </div>
                         </div>
                       </div>
                     </label>
                     <hr>
                   </div>
-                  <div class="campaign__create__content__type__box__number">
+                  <div class="campaign__create__content__type__box__number align-center">
                     <p class="text">จำนวน <span>(มากสุด 3 Story) *</span></p>
-                    <div class="campaign__create__content__type__box__number__custom">
-                      <p>1</p>
+                    <div class="input">
+                      <input type="number" name="campaign_fc_story_count" max="3">
+                      <span>Story</span>
                     </div>
                   </div>
                 </div>
@@ -271,15 +278,15 @@
                           </div>
                           <div class="campaign__create__content__type__box__radio__table__box">
                             <span>Shouter</span>
-                            <p>10 - 20 คน</p>
+                            <p id="ugc_shouter">- คน</p>
                           </div>
                           <div class="campaign__create__content__type__box__radio__table__box">
                             <span>Reach</span>
-                            <p>30,000 Reach</p>
+                            <p id="ugc_reach">- Reach</p>
                           </div>
                           <div class="campaign__create__content__type__box__radio__table__box">
                             <span>Cost Per Reach</span>
-                            <p>1.1 บาท</p>
+                            <p id="ugc_cpr">- บาท</p>
                           </div>
                         </div>
                       </div>
@@ -297,10 +304,10 @@
             {% else %}
               <div class="campaign__card width_create_campaign">
             {% endif %}
-              <h6 class="campaign__create__content__header">Post</h6>
+              <h6 class="campaign__create__content__header" id="post">Post</h6>
               <div class="campaign__create__content__type">
                 <!-- Single Post -->
-                <div class="campaign__create__content__type__box activate" id="single_box">
+                <div class="campaign__create__content__type__box" id="single_box">
                   <div class="campaign__create__content__type__box__radio">
                     <input type="radio" id="single" name="post_type" value="single_post">
                     <label for="single" onclick="post_selected('single')">
@@ -330,15 +337,15 @@
                           </div>
                           <div class="campaign__create__content__type__box__radio__table__box">
                             <span>Shouter</span>
-                            <p>10 - 20 คน</p>
+                            <p id="single_shouter">- คน</p>
                           </div>
                           <div class="campaign__create__content__type__box__radio__table__box">
                             <span>Reach</span>
-                            <p>30,000 Reach</p>
+                            <p id="single_reach">- Reach</p>
                           </div>
                           <div class="campaign__create__content__type__box__radio__table__box">
                             <span>Cost Per Reach</span>
-                            <p>1.1 บาท</p>
+                            <p id="single_cpr">- บาท</p>
                           </div>
                         </div>
                       </div>
@@ -346,9 +353,12 @@
                     <hr>
                   </div>
                   <div class="campaign__create__content__type__box__number">
-                    <p class="text">จำนวน</p>
+                    <div class="text">
+                      <p>จำนวน</p>
+                      <span class="text-small">ไม่สามารถเพิ่มจำนวนได้</span>
+                    </div>
                     <div class="campaign__create__content__type__box__number__custom">
-                      <p>1 โพสต์</p>
+                      <p>1 โพสต์, 1 รูป</p>
                     </div>
                   </div>
                 </div>
@@ -383,19 +393,29 @@
                           </div>
                           <div class="campaign__create__content__type__box__radio__table__box">
                             <span>Shouter</span>
-                            <p>10 - 20 คน</p>
+                            <p id="multi_shouter">- คน</p>
                           </div>
                           <div class="campaign__create__content__type__box__radio__table__box">
                             <span>Reach</span>
-                            <p>30,000 Reach</p>
+                            <p id="multi_reach">- Reach</p>
                           </div>
                           <div class="campaign__create__content__type__box__radio__table__box">
                             <span>Cost Per Reach</span>
-                            <p>1.1 บาท</p>
+                            <p id="multi_cpr">- บาท</p>
                           </div>
                         </div>
                       </div>
                     </label>
+                    <hr>
+                  </div>
+                  <div class="campaign__create__content__type__box__number">
+                    <div class="text">
+                      <p>จำนวน</p>
+                      <span class="text-small">ไม่สามารถเพิ่มจำนวนได้</span>
+                    </div>
+                    <div class="campaign__create__content__type__box__number__custom">
+                      <p>1 โพสต์, 3-5 รูป</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -445,12 +465,16 @@
                     <div class="campaign__create__content__type__modal__content__left__content__type">
                       <span>Content Type</span>
                       <div class="campaign__create__content__type__modal__content__left__content__type__item">
-                        <span>Story</span>
-                        <p>Finished Content x1</p>
-                      </div>
-                      <div class="campaign__create__content__type__modal__content__left__content__type__item">
-                        <span>Post</span>
-                        <p>Single Post x1</p>
+                        {% if campaign.campaign_work_type == "story" %}
+                          <p>Story</p>
+                        {% endif %}
+                        {% if campaign.campaign_work_type == "post" %}
+                          <p>Post</p>
+                        {% endif %}
+                        {% if campaign.campaign_work_type == "post_story" %}
+                          <p>Post + Story</p>
+                        {% endif %}
+                        <p id="modal_content_type"></p>
                       </div>
                     </div>
                   </div>
@@ -476,15 +500,15 @@
                 <div class="campaign__create__content__type__modal__content__right__items">
                   <div class="campaign__create__content__type__modal__content__right__item border_bottom">
                     <span>ได้ Shouter</span>
-                    <p>{{ campaign.cal_number_shouter_min | intcomma }} - {{ campaign.cal_number_shouter_max | intcomma }} คน</p>
+                    <p id="modal_shouter"></p>
                   </div>
                   <div class="campaign__create__content__type__modal__content__right__item border_bottom">
                     <span>Reach</span>
-                    <p>{{ campaign.cal_estimate_reach_min | intcomma }} - {{ campaign.cal_estimate_reach_max | intcomma }} Reach</p>
+                    <p id="modal_reach"></p>
                   </div>
                   <div class="campaign__create__content__type__modal__content__right__item border_bottom">
                     <span>Cost Per Reach</span>
-                    <p>{{ campaign.cal_cpr_min }} - {{ campaign.cal_cpr_max }} บาท</p>
+                    <p id="modal_cpr"></p>
                   </div>
                 </div>
               </div>

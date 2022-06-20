@@ -139,3 +139,6 @@ GitHub.sublime-settings
 
 # SCSS File
 scss
+
+# Node Module
+node_modules

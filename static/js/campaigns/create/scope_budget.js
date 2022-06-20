@@ -114,100 +114,206 @@ function change_button_context(work_type) {
   ///////////////////////////////////////////////////
 }
 ///////////////////////////////////////////////////////////////////
-// Respnosive Value
+// Responsive Value
 ///////////////////////////////////////////////////////////////////
 function change_budget() {
   $("#res_budget").html(numberWithCommas($('#budget').val()));
   $("#budget").val(numberWithCommas($('#budget').val()));
 }
 ///////////////////////////////////////////////////////////////////
-// Respnosive Value
+// Responsive Value
+///////////////////////////////////////////////////////////////////
+function get_factor(price_per_shouter, avg_reach_1_shouter) {
+  return price_per_shouter / avg_reach_1_shouter
+}
+
+function get_reach(budget, factor) {
+  return Math.round((budget / factor) / 100) * 100
+}
+
+function get_shouter(reach, avg_reach_1_shouter) {
+  return Math.round(reach / avg_reach_1_shouter)
+}
+
+function get_cpr(budget, reach) {
+  return Math.round((budget / reach ) * 100) / 100
+}
+
+function fb(number) {
+  return Math.round(number / 1.1)
+}
+
+function fb_100(number) {
+  return Math.round((number / 1.1) / 100) * 100
+}
+
+function fb_2de(number) {
+  return Math.round((number / 1.1) * 100) / 100
+}
+///////////////////////////////////////////////////////////////////
+// Calculate Price
 ///////////////////////////////////////////////////////////////////
 function cal_price() {
   const input = document.getElementById("budget").value;
   const budget = input.replace(',','');
 
   // Constant AVG. Reach
-  min_avg_story_reach_factor = 621
-  max_avg_story_reach_factor = 2300
-  min_avg_post_reach_factor = 3000
-  max_avg_post_reach_factor = 7250
-  min_avg_story_post_reach_factor = 3621
-  max_avg_story_post_reach_factor = 9550
+  const min_avg_story_reach_per_shouter = 621
+  const max_avg_story_reach_per_shouter = 2300
+  const min_avg_post_reach_per_shouter = 3000
+  const max_avg_post_reach_per_shouter = 7250
 
   // Constant Story FC
-  min_fc_story_reach_factor = 0.805
-  max_fc_story_reach_factor = 0.634
+  const min_fc_price_per_shouter = 500
+  const max_fc_price_per_shouter = 1458
 
   // Constant Story UGC
-  min_ugc_story_reach_factor = 1.261
-  max_ugc_story_reach_factor = 1.014
+  const min_ugc_price_per_shouter = 783
+  const max_ugc_price_per_shouter = 2333
 
   // Constant Post Single
-  min_single_post_reach_factor = 0.667
-  max_single_post_reach_factor = 0.506
+  const min_single_price_per_shouter = 2000
+  const max_single_price_per_shouter = 3667
 
-  // Constant Post Multi
-  min_multi_post_reach_factor = 0.833
-  max_multi_post_reach_factor = 0.607
+  // Constant Post Single
+  const min_multi_price_per_shouter = 2500
+  const max_multi_price_per_shouter = 4400
 
-  // Constant Story + Post Lower
-  min_lower_story_post_reach_factor = 0.621
-  max_lower_story_post_reach_factor = 0.483
+  // // Reach
+  // Story
+  let min_fc_story_reach = get_reach(budget, get_factor(min_fc_price_per_shouter, min_avg_story_reach_per_shouter))
+  let max_fc_story_reach = get_reach(budget, get_factor(max_fc_price_per_shouter, max_avg_story_reach_per_shouter))
+  let min_ugc_story_reach = get_reach(budget, get_factor(min_ugc_price_per_shouter, min_avg_story_reach_per_shouter))
+  let max_ugc_story_reach = get_reach(budget, get_factor(max_ugc_price_per_shouter, max_avg_story_reach_per_shouter))
+  // Post
+  let min_single_post_reach = get_reach(budget, get_factor(min_single_price_per_shouter, min_avg_post_reach_per_shouter))
+  let max_single_post_reach = get_reach(budget, get_factor(max_single_price_per_shouter, max_avg_post_reach_per_shouter))
+  let min_multi_post_reach = get_reach(budget, get_factor(min_multi_price_per_shouter, min_avg_post_reach_per_shouter))
+  let max_multi_post_reach = get_reach(budget, get_factor(max_multi_price_per_shouter, max_avg_post_reach_per_shouter))
+  // Story + Post
+  let min_fc_single_reach = get_reach(budget,
+    get_factor((min_fc_price_per_shouter + min_single_price_per_shouter) * 0.9,
+      min_avg_story_reach_per_shouter + min_avg_post_reach_per_shouter
+      )
+  )
+  let max_fc_single_reach = get_reach(budget,
+    get_factor((max_fc_price_per_shouter + max_single_price_per_shouter) * 0.9,
+    max_avg_story_reach_per_shouter + max_avg_post_reach_per_shouter
+    )
+  )
+  let min_ugc_multi_reach = get_reach(budget,
+    get_factor((min_ugc_price_per_shouter + min_multi_price_per_shouter) * 0.9,
+      min_avg_story_reach_per_shouter + min_avg_post_reach_per_shouter
+      )
+  )
+  let max_ugc_multi_reach = get_reach(budget,
+    get_factor((max_ugc_price_per_shouter + max_multi_price_per_shouter) * 0.9,
+    max_avg_story_reach_per_shouter + max_avg_post_reach_per_shouter
+    )
+  )
 
-  // Constant Story + Post Upper
-  min_upper_story_post_reach_factor = 0.816
-  max_upper_story_post_reach_factor = 0.635
+  // Min Max Reach
+  let min_story_reach = Math.min(min_fc_story_reach, max_fc_story_reach, min_ugc_story_reach, max_ugc_story_reach)
+  let max_story_reach = Math.max(min_fc_story_reach, max_fc_story_reach, min_ugc_story_reach, max_ugc_story_reach)
+  let min_post_reach = Math.min(min_single_post_reach, max_single_post_reach, min_multi_post_reach, max_multi_post_reach)
+  let max_post_reach = Math.max(min_single_post_reach, max_single_post_reach, min_multi_post_reach, max_multi_post_reach)
+  let min_story_post_reach = Math.min(min_fc_single_reach, max_fc_single_reach, min_ugc_multi_reach, max_ugc_multi_reach)
+  let max_story_post_reach = Math.max(min_fc_single_reach, max_fc_single_reach, min_ugc_multi_reach, max_ugc_multi_reach)
 
-  // Calculate Story Shouter
-  min_story_shouter = Math.round((budget/max_ugc_story_reach_factor)/max_avg_story_reach_factor)
-  max_story_shouter = Math.round((budget/min_fc_story_reach_factor)/min_avg_story_reach_factor)
 
-  // Calculate Post Shouter
-  min_post_shouter = Math.round((budget/max_multi_post_reach_factor)/max_avg_post_reach_factor)
-  max_post_shouter = Math.round((budget/min_single_post_reach_factor)/min_avg_post_reach_factor)
+  // // Shouter
+  // Story
+  let min_fc_story_shouter = get_shouter(min_fc_story_reach, min_avg_story_reach_per_shouter)
+  let max_fc_story_shouter = get_shouter(max_fc_story_reach, max_avg_story_reach_per_shouter)
+  let min_ugc_story_shouter = get_shouter(min_ugc_story_reach, min_avg_story_reach_per_shouter)
+  let max_ugc_story_shouter = get_shouter(max_ugc_story_reach, max_avg_story_reach_per_shouter)
+  // Post
+  let min_single_post_shouter = get_shouter(min_single_post_reach, min_avg_post_reach_per_shouter)
+  let max_single_post_shouter = get_shouter(max_single_post_reach, max_avg_post_reach_per_shouter)
+  let min_multi_post_shouter = get_shouter(min_multi_post_reach, min_avg_post_reach_per_shouter)
+  let max_multi_post_shouter = get_shouter(max_multi_post_reach, max_avg_post_reach_per_shouter)
+  // Story + Post
+  let min_fc_single_shouter = get_shouter(min_fc_single_reach, min_avg_story_reach_per_shouter + min_avg_post_reach_per_shouter)
+  let max_fc_single_shouter = get_shouter(max_fc_single_reach, max_avg_story_reach_per_shouter + max_avg_post_reach_per_shouter)
+  let min_ugc_multi_shouter = get_shouter(min_ugc_multi_reach, min_avg_story_reach_per_shouter + min_avg_post_reach_per_shouter)
+  let max_ugc_multi_shouter = get_shouter(max_ugc_multi_reach, max_avg_story_reach_per_shouter + max_avg_post_reach_per_shouter)
 
-  // Calculate Story + Post Shouer
-  min_story_post_shouter = Math.round((budget/max_upper_story_post_reach_factor)/max_avg_story_post_reach_factor)
-  max_story_post_shouter = Math.round((budget/min_lower_story_post_reach_factor)/min_avg_story_post_reach_factor)
+  // Min Max Shouter
+  let min_story_shouter = Math.min(min_fc_story_shouter, max_fc_story_shouter, min_ugc_story_shouter, max_ugc_story_shouter)
+  let max_story_shouter = Math.max(min_fc_story_shouter, max_fc_story_shouter, min_ugc_story_shouter, max_ugc_story_shouter)
+  let min_post_shouter = Math.min(min_single_post_shouter, max_single_post_shouter, min_multi_post_shouter, max_multi_post_shouter)
+  let max_post_shouter = Math.max(min_single_post_shouter, max_single_post_shouter, min_multi_post_shouter, max_multi_post_shouter)
+  let min_story_post_shouter = Math.min(min_fc_single_shouter, max_fc_single_shouter, min_ugc_multi_shouter, max_ugc_multi_shouter)
+  let max_story_post_shouter = Math.max(min_fc_single_shouter, max_fc_single_shouter, min_ugc_multi_shouter, max_ugc_multi_shouter)
 
-  // Calculate Story Reach
-  min_story_reach = Math.round((budget/min_ugc_story_reach_factor)/100) * 100
-  max_story_reach = Math.round((budget/max_fc_story_reach_factor)/100) * 100
+  // // CPR
+  // Story
+  let min_fc_story_cpr = get_cpr(budget, min_fc_story_reach)
+  let max_fc_story_cpr = get_cpr(budget, max_fc_story_reach)
+  let min_ugc_story_cpr = get_cpr(budget, min_ugc_story_reach)
+  let max_ugc_story_cpr = get_cpr(budget, max_ugc_story_reach)
+  // Post
+  let min_single_post_cpr = get_cpr(budget, min_single_post_reach)
+  let max_single_post_cpr = get_cpr(budget, max_single_post_reach)
+  let min_multi_post_cpr = get_cpr(budget, min_multi_post_reach)
+  let max_multi_post_cpr = get_cpr(budget, max_multi_post_reach)
+  // Story + Post
+  let min_fc_single_cpr = get_cpr(budget, min_fc_single_reach)
+  let max_fc_single_cpr = get_cpr(budget, max_fc_single_reach)
+  let min_ugc_multi_cpr = get_cpr(budget, min_ugc_multi_reach)
+  let max_ugc_multi_cpr= get_cpr(budget, max_ugc_multi_reach)
 
-  // Calculate Post Reach
-  min_post_reach = Math.round((budget/min_multi_post_reach_factor)/100) * 100
-  max_post_reach = Math.round((budget/max_single_post_reach_factor)/100) * 100
+  // Min Max CPR
+  let min_story_cpr = Math.min(min_fc_story_cpr, max_fc_story_cpr, min_ugc_story_cpr, max_ugc_story_cpr)
+  let max_story_cpr = Math.max(min_fc_story_cpr, max_fc_story_cpr, min_ugc_story_cpr, max_ugc_story_cpr)
+  let min_post_cpr = Math.min(min_single_post_cpr, max_single_post_cpr, min_multi_post_cpr, max_multi_post_cpr)
+  let max_post_cpr = Math.max(min_single_post_cpr, max_single_post_cpr, min_multi_post_cpr, max_multi_post_cpr)
+  let min_story_post_cpr = Math.min(min_fc_single_cpr, max_fc_single_cpr, min_ugc_multi_cpr, max_ugc_multi_cpr)
+  let max_story_post_cpr = Math.max(min_fc_single_cpr, max_fc_single_cpr, min_ugc_multi_cpr, max_ugc_multi_cpr)
 
-  // Calculate Story Post Reach
-  min_story_post_reach = Math.round((budget/min_upper_story_post_reach_factor)/100) * 100
-  max_story_post_reach = Math.round((budget/max_lower_story_post_reach_factor)/100) * 100
+  if (check_facebook()) {
+    // Reach
+    min_story_reach = fb_100(min_story_reach)
+    max_story_reach = fb_100(max_story_reach)
+    min_post_reach = fb_100(min_post_reach)
+    max_post_reach = fb_100(max_post_reach)
+    min_story_post_reach = fb_100(min_story_post_reach)
+    max_story_post_reach = fb_100(max_story_post_reach)
+    // Shouter
+    min_story_shouter = fb(min_story_shouter)
+    max_story_shouter = fb(max_story_shouter)
+    min_post_shouter = fb(min_post_shouter)
+    max_post_shouter = fb(max_post_shouter)
+    min_story_post_shouter = fb(min_story_post_shouter)
+    max_story_post_shouter = fb(max_story_post_shouter)
+    // CPR
+    min_story_cpr = fb_2de(min_story_cpr)
+    max_story_cpr = fb_2de(max_story_cpr)
+    min_post_cpr = fb_2de(min_post_cpr)
+    max_post_cpr = fb_2de(max_post_cpr)
+    min_story_post_cpr = fb_2de(min_story_post_cpr)
+    max_story_post_cpr = fb_2de(max_story_post_cpr)
+  }
 
-  // Calculate CPR Story
-  min_story_cpr = parseFloat((budget/max_story_reach).toFixed(2))
-  max_story_cpr = parseFloat((budget/min_story_reach).toFixed(2))
-
-  // Calculate CPR Post
-  min_post_cpr = parseFloat((budget/max_post_reach).toFixed(2))
-  max_post_cpr = parseFloat((budget/min_post_reach).toFixed(2))
-
-  // Calculate CPR Story + Post
-  min_story_post_cpr = parseFloat((budget/max_story_post_reach).toFixed(2))
-  max_story_post_cpr = parseFloat((budget/min_story_post_reach).toFixed(2))
+  // console.log(min_story_reach, max_story_reach, min_post_reach, max_post_reach, min_story_post_reach, max_story_post_reach)
+  // console.log(min_story_shouter, max_story_shouter, min_post_shouter, max_post_shouter, min_story_post_shouter, max_story_post_shouter)
+  // console.log(min_story_cpr, max_story_cpr, min_post_cpr, max_post_cpr, min_story_post_cpr, max_story_post_cpr)
 
   return {
-    "min_story_shouter": min_story_shouter,
-    "max_story_shouter": max_story_shouter,
-    "min_post_shouter": min_post_shouter,
-    "max_post_shouter": max_post_shouter,
-    "min_story_post_shouter": min_story_post_shouter,
-    "max_story_post_shouter": max_story_post_shouter,
     "min_story_reach": min_story_reach,
     "max_story_reach": max_story_reach,
     "min_post_reach": min_post_reach,
     "max_post_reach": max_post_reach,
     "min_story_post_reach": min_story_post_reach,
     "max_story_post_reach": max_story_post_reach,
+
+    "min_story_shouter": min_story_shouter,
+    "max_story_shouter": max_story_shouter,
+    "min_post_shouter": min_post_shouter,
+    "max_post_shouter": max_post_shouter,
+    "min_story_post_shouter": min_story_post_shouter,
+    "max_story_post_shouter": max_story_post_shouter,
+
     "min_story_cpr": min_story_cpr,
     "max_story_cpr": max_story_cpr,
     "min_post_cpr": min_post_cpr,
@@ -215,24 +321,6 @@ function cal_price() {
     "min_story_post_cpr": min_story_post_cpr,
     "max_story_post_cpr": max_story_post_cpr
   }
-
-  // Change Inner HTML Value
-
-  // // Shouter
-  // document.getElementById("story_shouter").innerHTML = numberWithCommas(min_story_shouter) + " - " + numberWithCommas(max_story_shouter) + " คน"
-  // document.getElementById("post_shouter").innerHTML = numberWithCommas(min_post_shouter) + " - " + numberWithCommas(max_post_shouter) + " คน"
-  // document.getElementById("story_post_shouter").innerHTML = numberWithCommas(min_story_post_shouter) + " - " + numberWithCommas(max_story_post_shouter) + " คน"
-
-  // // Reach
-  // document.getElementById("story_reach").innerHTML = numberWithCommas(min_story_reach) + " - " + numberWithCommas(max_story_reach) + " reach"
-  // document.getElementById("post_reach").innerHTML = numberWithCommas(min_post_reach) + " - " + numberWithCommas(max_post_reach) + " reach"
-  // document.getElementById("story_post_reach").innerHTML = numberWithCommas(min_story_post_reach) + " - " + numberWithCommas(max_story_post_reach) + " reach"
-
-  // // CPR
-  // document.getElementById("story_cpr").innerHTML = min_story_cpr + " - " + max_story_cpr + " บาท"
-  // document.getElementById("post_cpr").innerHTML = min_post_cpr + " - " + max_post_cpr + " บาท"
-  // document.getElementById("story_post_cpr").innerHTML = min_story_post_cpr + " - " + max_story_post_cpr + " บาท"
-
 }
 ///////////////////////////////////////////////////////////////////
 // Set Value

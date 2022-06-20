@@ -420,7 +420,8 @@ def oauth(request):
       # If shouter is already register in registration page but not connect to FB => redirect to connect to FB Page
       if not shouter.fb_is_connect:
         redirect_url = '/shouters/register/info-2/{}/'.format(token)
-      # If shouter is already register in registration page but not choose work selection => redirect to work-selection page
+      # If shouter is already register in registration page but not choose work selection => redirect to work-selection
+      # page
       elif not shouter.is_finished_regis:
         redirect_url = '/shouters/register/work-selection/{}/'.format(token)
       else:
@@ -526,7 +527,6 @@ def oauth2(request):
   access_token = fb_api_authentication.get(code)
   if not access_token:
     # แก้เป็นหน้าให้เปลี่ยน FB with default browser
-    error.log(shouter, 'ไม่สามารถเก็บ Token จาก shouter ได้ => shouter กดปิดไประหว่างการ login (ต้องการเปลี่ยน FB หรือเปล่า?)')
     redirect_url = '/shouters/register/facebook-change/{}/'.format(token)
     return redirect(redirect_url)
   # Save to database

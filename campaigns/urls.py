@@ -13,4 +13,5 @@ urlpatterns = [
   path('create/content_type/', views.create_content_type, name='create_content_type'),
   path('create/product/', views.create_product, name='create_product'),
   path('create/target/', views.create_target, name='create_target'),
+  path('create/shouter_selection/', views.create_shouter_selection, name='create_shouter_selection'),
 ]

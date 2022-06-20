@@ -436,20 +436,20 @@ function cal_price() {
   max_ugc_story_reach_factor = 1.014
 
   // Constant Post Single
-  min_single_post_reach_factor = 0.667
+  min_single_post_reach_factor = 0.607
   max_single_post_reach_factor = 0.506
 
   // Constant Post Multi
   min_multi_post_reach_factor = 0.833
-  max_multi_post_reach_factor = 0.607
+  max_multi_post_reach_factor = 0.667
 
   // Constant Story + Post Lower
-  min_lower_story_post_reach_factor = 0.621
+  min_lower_story_post_reach_factor = 0.635
   max_lower_story_post_reach_factor = 0.483
 
   // Constant Story + Post Upper
   min_upper_story_post_reach_factor = 0.816
-  max_upper_story_post_reach_factor = 0.635
+  max_upper_story_post_reach_factor = 0.621
 
   // Calculate Story Shouter
   min_story_shouter = Math.round((budget/max_ugc_story_reach_factor)/max_avg_story_reach_factor)
@@ -487,23 +487,6 @@ function cal_price() {
   min_story_post_cpr = parseFloat((budget/max_story_post_reach).toFixed(2))
   max_story_post_cpr = parseFloat((budget/min_story_post_reach).toFixed(2))
 
-  // console.log("=========================")
-  // console.log("Number of Shouter")
-  // console.log("=========================")
-  // console.log("Story : ", min_story_shouter, " - ", max_story_shouter)
-  // console.log("Post : ", min_post_shouter, " - ", max_post_shouter)
-  // console.log("Story + Post : ", min_story_post_shouter, " - ", max_story_post_shouter)
-  // console.log("=========================")
-  // console.log("Estimated Reach")
-  // console.log("=========================")
-  // console.log("Story : ", min_story_reach, " - ", max_story_reach)
-  // console.log("Post : ", min_post_reach, " - ", max_post_reach)
-  // console.log("Story + Post : ", min_story_post_reach, " - ", max_story_post_reach)
-  // console.log("=========================")
-  // console.log("Cost Per Reach")
-  // console.log("Story : ", min_story_cpr, " - ", max_story_cpr)
-  // console.log("Post : ", min_post_cpr, " - ", max_post_cpr)
-  // console.log("Story + Post : ", min_story_post_cpr, " - ", max_story_post_cpr)
 
   // Change Inner HTML Value
 
