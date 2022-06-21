@@ -33,7 +33,7 @@
             <a class="user-nav__link" href="#start-now">Contact us</a>
           </li>
           <li class="user-nav__item">
-            <a class="user-nav__link" href="#">
+            <a class="user-nav__link" href="{% url 'login' %}">
               <svg class="user-nav__icon">
                 <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-user"></use>
               </svg>
@@ -305,20 +305,25 @@
         </div>
 
         <div class="footer__social-media">
-          <svg class="footer__icon-white">
-            <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-facebook"></use>
-          </svg>
-          <svg class="footer__icon-white">
-            <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-instagram"></use>
-          </svg>
-          <svg class="footer__icon-white">
-            <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-twitter"></use>
-          </svg>
+          <a href="https://www.facebook.com/shoutsolution">
+            <svg class="footer__icon-white">
+              <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-facebook"></use>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/shoutsolution/">
+            <svg class="footer__icon-white">
+              <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-instagram"></use>
+            </svg>
+          </a>
+          <a href="">
+            <svg class="footer__icon-white">
+              <use xlink:href="{% static 'img/pages/sprite.svg' %}#icon-twitter"></use>
+            </svg>
+          </a>
         </div>
 
         <div class="footer__term-policy">
-          <a href="https://drive.google.com/file/d/1Rm1Te3h2vVEPhnaIbsSrBWNRjj1UA_8U/view?usp=sharing">Terms and
-            Conditions</a>
+          <a href="https://drive.google.com/file/d/1Rm1Te3h2vVEPhnaIbsSrBWNRjj1UA_8U/view?usp=sharing">Terms and Conditions</a>
           <span> | </span>
           <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
         </div>
