@@ -204,7 +204,7 @@ def ig(line_user_id, price, context):
                       },
                       {
                         "type": "text",
-                        "text": "{}".format(price),
+                        "text": "{} บาท".format(price),
                         "weight": "regular",
                         "size": "md",
                         "color": "#202046",
@@ -974,7 +974,7 @@ def ig_fb(line_user_id, price, context):
                       },
                       {
                         "type": "text",
-                        "text": "{}".format(price),
+                        "text": "{} บาท".format(price),
                         "weight": "regular",
                         "size": "md",
                         "color": "#202046",
