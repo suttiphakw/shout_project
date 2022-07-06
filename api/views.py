@@ -78,7 +78,7 @@ def main_campaign_detail_delivery(request):
     else:
       list_line_user_id = [context['list_line_user_id']]
     for line_user_id in list_line_user_id:
-      shouter = Shouter.objects.filter(line_user_id=line_user_id)
+      shouter = Shouter.objects.filter(line_user_id=line_user_id).first()
       ig_username = shouter.ig_username
 
       # IG Only
@@ -164,7 +164,7 @@ def main_campaign_detail_no_delivery(request):
     else:
       list_line_user_id = [context['list_line_user_id']]
     for line_user_id in list_line_user_id:
-      shouter = Shouter.objects.filter(line_user_id=line_user_id)
+      shouter = Shouter.objects.filter(line_user_id=line_user_id).first()
       ig_username = shouter.ig_username
 
       # IG Only
@@ -628,7 +628,7 @@ def add_reject_work(request):
     else:
       list_line_user_id = [context['list_line_user_id']]
     for line_user_id in list_line_user_id:
-      shouter = Shouter.objects.filter(line_user_id=line_user_id)
+      shouter = Shouter.objects.filter(line_user_id=line_user_id).first()
 
       # IG Only
       if context['social_media'] == 'ig' and context['work_type'] == 'story' and context['price'] == 'min':
@@ -704,7 +704,7 @@ def add_cancel_work(request):
     else:
       list_line_user_id = [context['list_line_user_id']]
     for line_user_id in list_line_user_id:
-      shouter = Shouter.objects.filter(line_user_id=line_user_id)
+      shouter = Shouter.objects.filter(line_user_id=line_user_id).first()
 
       # IG Only
       if context['social_media'] == 'ig' and context['work_type'] == 'story' and context['price'] == 'min':
