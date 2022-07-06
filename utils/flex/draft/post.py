@@ -537,7 +537,7 @@ def ig_fb(line_user_id, context):
                     "contents": [
                       {
                         "type": "text",
-                        "text": "{}".format(context['sent_date']),
+                        "text": "{}".format(context['campaign_name']),
                         "weight": "regular",
                         "size": "lg",
                         "color": "#202046",

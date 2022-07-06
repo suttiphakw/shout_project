@@ -20,7 +20,8 @@ from utils.final import \
   wait_check_work, \
   finish, \
   payment, \
-  reject_work
+  reject_work, \
+  cancel_work
 
 
 @login_required(login_url='/api/login/')
@@ -738,9 +739,9 @@ def add_cancel_work(request):
         continue
 
       if context['social_media'] == 'ig':
-        response = reject_work.ig(line_user_id=line_user_id, price=price, context=context)
+        response = cancel_work.ig(line_user_id=line_user_id, price=price, context=context)
       else:
-        response = reject_work.ig_fb(line_user_id=line_user_id, price=price, context=context)
+        response = cancel_work.ig_fb(line_user_id=line_user_id, price=price, context=context)
 
       if not response:
         failed_id.append(line_user_id)

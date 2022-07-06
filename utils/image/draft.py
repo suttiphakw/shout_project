@@ -13,8 +13,8 @@ def post_img(line_user_id):
     "messages": [
       {
         "type": "image",
-        "originalContentUrl": "https://www.shoutsolution.com/media/source/campaign/how_to_do_campaign.png",
-        "previewImageUrl": "https://www.shoutsolution.com/media/source/campaign/how_to_do_campaign.png"
+        "originalContentUrl": "https://www.shoutsolution.com/media/source/campaign/how_to_do_campaign.jpeg",
+        "previewImageUrl": "https://www.shoutsolution.com/media/source/campaign/how_to_do_campaign.jpeg"
       }
     ]
   }
