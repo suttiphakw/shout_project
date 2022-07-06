@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>API | เสนองาน (With Delivery)</title>
+  <style>
+    form {
+        padding: 5rem;
+    }
+    form > h1 {
+        text-align: center;
+        text-decoration: underline;
+        padding-bottom: 1rem;
+    }
+    form > h2 {
+        text-decoration: underline;
+    }
+    .input-box {
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #E4DCCF;
+    }
+    .input-box.text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .input-box.button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .input-box > input[type='text'] {
+        height: 2rem;
+        width: 400px;
+    }
+    .input-box > input[type='radio'] {
+        margin-right: 2rem;
+    }
+    ::placeholder {
+        color: #DDDDDD;
+    }
+    button {
+        width: 400px;
+        height: 50px;
+        background: #FF8C32;
+        color: white;
+        font-weight: 500;
+        font-size: 1.25rem;
+        border: none;
+        border-radius: 6px;
+        text-align: center;
+        cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<form action="{% url 'flex_main_campaign_detail_delivery' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+  <h1>เสนองาน (With Delivery)</h1>
+
+  <!-- Message -->
+  <h2>Message</h2>
+  <div class="input-box text">
+    <label for="accept_date_time">ตอบรับงานภายในวันที่ + เวลา</label>
+    <input type="text" id="accept_date_time" name="accept_date_time" placeholder="Ex. 22/09/2022 เวลา 16:00" required>
+  </div>
+
+  <!-- Flex -->
+  <h2>Flex Page 1 (Campaign Detail)</h2>
+  <!-- Campaign Name -->
+  <div class="input-box text">
+    <label for="campaign_name">Campaign Name</label>
+    <input type="text" id="campaign_name" name="campaign_name" placeholder="Ex. Shopee - Secret Voucher" required>
+  </div>
+  <!-- Campaign Picture -->
+  <div class="input-box text">
+    <label for="campaign_picture">Campaign Picture</label>
+    <input type="text" id="campaign_picture" name="campaign_picture" placeholder="Ex. https://www.shoutsolution.com/media/xxxxx.png" required>
+  </div>
+  <!-- Social Media -->
+  <h4>ช่องทางการโพสต์</h4>
+  <div class="input-box">
+    <label for="ig">Instagram</label>
+    <input type="radio" id="ig" name="social_media" value="ig" checked>
+    <label for="ig_fb">Instagram + Facebook</label>
+    <input type="radio" id="ig_fb" name="social_media" value="ig_fb">
+  </div>
+  <!-- Posting Way -->
+  <h4>รูปแบบการโพสต์</h4>
+  <div class="input-box">
+    <label for="story">Story</label>
+    <input type="radio" id="story" name="work_type" value="story" checked>
+    <label for="post">Post</label>
+    <input type="radio" id="post" name="work_type" value="post">
+    <label for="story_post">Story + Post</label>
+    <input type="radio" id="story_post" name="work_type" value="story_post">
+  </div>
+  <!-- Posting Way -->
+  <h4>ราคาที่ใช้</h4>
+  <div class="input-box">
+    <label for="min">Min Price</label>
+    <input type="radio" id="min" name="price" value="min" checked>
+    <label for="max">Max Price</label>
+    <input type="radio" id="max" name="price" value="max">
+  </div>
+  <!-- รูปแบบการโพสต์ -->
+  <div class="input-box text">
+    <label for="work_type_text">รูปแบบการโพสต์</label>
+    <input type="text" id="work_type_text" name="work_type_text" placeholder="Ex. IG Story" required>
+  </div>
+  <!-- จำนวน Post -->
+  <div class="input-box text">
+    <label for="post_count">จำนวน Post</label>
+    <input type="text" id="post_count" name="post_count" placeholder="Ex. 1 Story" required>
+  </div>
+  <!-- สิ่งที่ต้องทำ -->
+  <div class="input-box text">
+    <label for="text">สื่งที่ต้องทำ</label>
+    <input type="text" id="text" name="text" value="แชร์รูปที่กำหนดให้พร้อมเขียนแคปชั่นบอกต่อตาม Brief ลงใน IG Story" required>
+  </div>
+  <!-- ตอบรับภายใน -->
+  <div class="input-box text">
+    <label for="accept_date">ตอบรับภายใน</label>
+    <input type="text" id="accept_date" name="accept_date" placeholder="Ex. 22/09/2022" required>
+  </div>
+
+  <!-- Timeline -->
+  <h2>Flex Page 2 (Timeline)</h2>
+  <!-- ตอบรับงาน -->
+  <div class="input-box text">
+    <label for="accept_work_date">ตอบรับงาน</label>
+    <input type="text" id="accept_work_date" name="accept_work_date" placeholder="Ex. 26-30 April" required>
+  </div>
+  <!-- รอจัดส่งสินค้า -->
+  <div class="input-box text">
+    <label for="wait_delivery_date">รอจัดส่งสินค้า</label>
+    <input type="text" id="wait_delivery_date" name="wait_delivery_date" placeholder="Ex. 26-30 April" required>
+  </div>
+  <!-- เริ่มงาน -->
+  <div class="input-box text">
+    <label for="start_work_date">ตอบรับงาน</label>
+    <input type="text" id="start_work_date" name="start_work_date" placeholder="Ex. 1-4 May" required>
+  </div>
+  <!-- โพสต์งาน -->
+  <div class="input-box text">
+    <label for="post_date">โพสต์งาน</label>
+    <input type="text" id="post_date" name="post_date" placeholder="Ex. 4-5 May" required>
+  </div>
+  <!-- รอรับเงิน -->
+  <div class="input-box text">
+    <label for="payment_date">ตอบรับงาน</label>
+    <input type="text" id="payment_date" name="payment_date" placeholder="Ex. 6-14 May" required>
+  </div>
+
+  <!-- Reference -->
+  <h2>Flex Page 3 (Reference)</h2>
+  <!-- Reference Picture -->
+  <div class="input-box text">
+    <label for="reference_picture">Reference Picture</label>
+    <input type="text" id="reference_picture" name="reference_picture" placeholder="Ex. https://www.shoutsolution.com/media/xxxxx.png" required>
+  </div>
+
+  <!-- Reference -->
+  <h2>Google Form Link</h2>
+  <!-- Reference Picture -->
+  <div class="input-box text">
+    <label for="google_form_link">Google Form Link</label>
+    <input type="text" id="google_form_link" name="google_form_link" placeholder="Ex. https://form.xxx" required>
+  </div>
+
+  <!-- Line User ID -->
+  <h2>Line User ID</h2>
+  <!-- list id -->
+  <div class="input-box text">
+    <label for="list_line_user_id">List ID</label>
+    <input type="text" id="list_line_user_id" name="list_line_user_id" placeholder="Ex. xxxxxx หรือ xxxxxx,yyyyyy,zzzzzz (ห้ามเว้นวรรค)" required>
+  </div>
+
+  <div class="input-box button">
+    <button type="submit">ส่งข้อความ</button>
+  </div>
+</form>
+</body>
+</html>

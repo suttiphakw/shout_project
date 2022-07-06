@@ -24,5 +24,6 @@ def post(line_user_id):
   try:
     response = requests.post(url=push_message_url, headers=headers, json=data)
     return response
-  except:
-    return None
+  except requests.exceptions.HTTPError as err:
+    return SystemExit(err)
+

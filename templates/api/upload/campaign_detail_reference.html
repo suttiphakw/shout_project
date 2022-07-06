@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>API | Upload Campaign Reference</title>
+  <style>
+    form {
+        padding: 5rem;
+    }
+    form > h1 {
+        text-align: center;
+        text-decoration: underline;
+        padding-bottom: 1rem;
+    }
+    form > h2 {
+        text-decoration: underline;
+    }
+    .input-box {
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #E4DCCF;
+    }
+    .input-box.text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .input-box.button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .input-box > input[type='text'] {
+        height: 2rem;
+        width: 400px;
+    }
+    .input-box > input[type='radio'] {
+        margin-right: 2rem;
+    }
+    ::placeholder {
+        color: #DDDDDD;
+    }
+    button {
+        width: 400px;
+        height: 50px;
+        background: #FF8C32;
+        color: white;
+        font-weight: 500;
+        font-size: 1.25rem;
+        border: none;
+        border-radius: 6px;
+        text-align: center;
+        cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<form action="{% url 'upload_campaign_detail_reference' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+  <h1>Upload Campaign Reference</h1>
+
+  <!-- Campaign Logo -->
+  <div class="input-box text">
+    <label for="reference_file">Campaign Logo</label>
+    <input type="file" id="reference_file" name="reference_file" accept="image/*" required>
+  </div>
+  <!-- Filename -->
+  <div class="input-box text">
+    <label for="filename">Logo Filename</label>
+    <input type="text" id="filename" name="filename" placeholder="Ex. secret_voucher (ห้ามเว้นวรรคหรือใส่ตัวพิเศษใช้ _ ได้)" required>
+  </div>
+
+  <div class="input-box button">
+    <button type="submit">Save File</button>
+  </div>
+</form>
+</body>
+</html>

@@ -1,5 +1,5 @@
-from utils.text.payment import post as post_text
-from utils.flex.payment import post as post_flex
+from utils.text.wait_delivery import post as post_text
+from utils.flex.wait_delivery import post as post_flex
 
 
 def all_social(line_user_id, context):

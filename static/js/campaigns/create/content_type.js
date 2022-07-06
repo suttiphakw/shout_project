@@ -647,7 +647,7 @@ $(document).ready(function() {
       }
       if (check_multi()) {
         modal_dict = set_right_bar_multi(dict_post);
-
+        set_modal(modal_dict);
       }
     }
     if (check_is_story() && check_is_post()) {

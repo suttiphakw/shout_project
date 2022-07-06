@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>API | เสร็จสิ้น</title>
+  <style>
+    form {
+        padding: 5rem;
+    }
+    form > h1 {
+        text-align: center;
+        text-decoration: underline;
+        padding-bottom: 1rem;
+    }
+    form > h2 {
+        text-decoration: underline;
+    }
+    .input-box {
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #E4DCCF;
+    }
+    .input-box.text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .input-box.button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .input-box > input[type='text'] {
+        height: 2rem;
+        width: 400px;
+    }
+    .input-box > input[type='radio'] {
+        margin-right: 2rem;
+    }
+    ::placeholder {
+        color: #DDDDDD;
+    }
+    button {
+        width: 400px;
+        height: 50px;
+        background: #FF8C32;
+        color: white;
+        font-weight: 500;
+        font-size: 1.25rem;
+        border: none;
+        border-radius: 6px;
+        text-align: center;
+        cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<form action="{% url 'flex_main_payment' %}" method="POST">{% csrf_token %}
+  <h1>เสร็จสิ้น</h1>
+
+  <!-- Flex -->
+  <h2>Flex Page 1</h2>
+  <!-- Campaign Name -->
+  <div class="input-box text">
+    <label for="campaign_name">Campaign Name</label>
+    <input type="text" id="campaign_name" name="campaign_name" placeholder="Ex. Shopee - Secret Voucher" required>
+  </div>
+  <!-- ผู้รับเงิน -->
+  <div class="input-box text">
+    <label for="name">ผู้รับเงิน</label>
+    <input type="text" id="name" name="name" placeholder="Ex. manhoolay" required>
+  </div>
+  <!-- จำนวนเงิน -->
+  <div class="input-box text">
+    <label for="price">จำนวนเงิน</label>
+    <input type="text" id="price" name="price" placeholder="Ex. 2,345" required>
+  </div>
+  <!-- ชำระวันที่ -->
+  <div class="input-box text">
+    <label for="payment_date">ชำระวันที่</label>
+    <input type="text" id="payment_date" name="payment_date" placeholder="Ex. 22/09/2022" required>
+  </div>
+
+  <!-- Line User ID -->
+  <h2>Line User ID</h2>
+  <!-- list id -->
+  <div class="input-box text">
+    <label for="list_line_user_id">List ID</label>
+    <input type="text" id="list_line_user_id" name="list_line_user_id" placeholder="Ex. xxxxxx หรือ xxxxxx,yyyyyy,zzzzzz (ห้ามเว้นวรรค)" required>
+  </div>
+
+  <div class="input-box button">
+    <button type="submit">ส่งข้อความ</button>
+  </div>
+</form>
+</body>
+</html>

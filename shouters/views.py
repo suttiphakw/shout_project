@@ -73,6 +73,7 @@ def register__choose_device(request, token):
   }
   return render(request, 'shouters/register__choose-device.html', context=context)
 
+
 def register__facebook_checkbox(request, token):
   context = {
       'token': token

@@ -1,0 +1,128 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="{% static 'img/logo/logo-07.png' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <title>API | Home</title>
+  <style>
+    body {
+        font-family: 'Lato', sans-serif;
+        color: #002257;
+    }
+    .container {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    h4 {
+        font-size: 30px;
+        font-weight: 600;
+    }
+    a {
+        text-decoration: none;
+        margin-bottom: 20px;
+    }
+    button {
+        height: 30px;
+        cursor: pointer;
+    }
+    .main {
+        display: flex;
+        flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="container">
+    <section class="main">
+      <h4>Main Flow</h4>
+      <!-- 1.1 Launch Campaign -->
+      <a href="{% url 'flex_main_campaign_detail_delivery' %}">
+        <button>1.1 เสนองาน (With Delivery)</button>
+      </a>
+      <!-- 1.2. Launch Campaign -->
+      <a href="{% url 'flex_main_campaign_detail_no_delivery' %}">
+        <button>1.2 เสนองาน (Without Delivery)</button>
+      </a>
+      <!-- 2.1 Wait Delivery -->
+      <a href="{% url 'flex_main_wait_delivery' %}">
+        <button>2.1 รอจัดส่ง</button>
+      </a>
+      <!-- 2.2 Delivery Complete -->
+      <a href="{% url 'flex_main_delivery_complete' %}">
+        <button>2.2 จัดส่งแล้ว</button>
+      </a>
+      <!-- 3. Draft -->
+      <a href="{% url 'flex_main_draft' %}">
+        <button>3. กำลังทำงาน</button>
+      </a>
+      <!-- 4.1 Sent Draft -->
+      <a href="{% url 'flex_main_sent_draft' %}">
+        <button>4.1 ส่งดราฟแล้ว</button>
+      </a>
+      <!-- 4.2 Revise Draft -->
+      <a href="{% url 'flex_main_revise_draft' %}">
+        <button>4.2 แก้ไขดราฟ</button>
+      </a>
+      <!-- 4.3 Approve Draft -->
+      <a href="{% url 'flex_main_approve_draft' %}">
+        <button>4.3 อนุมัติดราฟ</button>
+      </a>
+      <!-- 5. Sent Work -->
+      <a href="{% url 'flex_main_sent_work' %}">
+        <button>5. ส่งงานแล้ว</button>
+      </a>
+      <!-- 6. Wait For Check Work -->
+      <a href="{% url 'flex_main_wait_check_work' %}">
+        <button>6. รอตรวจสอบงาน</button>
+      </a>
+      <!-- 7. Finish -->
+      <a href="{% url 'flex_main_finish' %}">
+        <button>7. เสร็จสิ้น</button>
+      </a>
+      <!-- 8. Payment -->
+      <a href="{% url 'flex_main_payment' %}">
+        <button>8. Payment</button>
+      </a>
+    </section>
+
+    <section class="main">
+      <h4>Add-on Flow</h4>
+      <!-- reject_work -->
+      <a href="{% url 'flex_add_reject_work' %}">
+        <button>1. ปฏิเสธการเข้าร่วม</button>
+      </a>
+      <!-- cancel_work -->
+      <a href="{% url 'flex_add_cancel_work' %}">
+        <button>2. ยกเลิกการทำงาน</button>
+      </a>
+      <!-- Re-connect ig -->
+      <a href="{% url 'flex_add_reconnect' %}">
+        <button>3. Reconnect Instagram</button>
+      </a>
+    </section>
+
+    <section class="main">
+      <h4>Upload File</h4>
+      <!-- campaign detail logo -->
+      <a href="{% url 'upload_campaign_detail_logo' %}">
+        <button>1. Campaign Detail Logo</button>
+      </a>
+      <!-- campaign detail reference -->
+      <a href="{% url 'upload_campaign_detail_reference' %}">
+        <button>2. Campaign Detail Reference</button>
+      </a>
+    </section>
+  </section>
+</body>
+</html>
