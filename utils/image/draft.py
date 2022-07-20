@@ -2,6 +2,7 @@ from shout_project.settings import LINE_CHANNEL_ACCESS_TOKEN
 
 import requests
 
+
 def post_img(line_user_id):
   push_message_url = 'https://api.line.me/v2/bot/message/push'
   headers = {
