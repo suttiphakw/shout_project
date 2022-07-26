@@ -15,11 +15,11 @@ line-bot-sdk==2.0.1
 multidict==5.2.0
 numpy==1.21.4
 Pillow==9.0.0
-# psycopg2-binary>=2.7
+psycopg2-binary==2.9.3
 PyJWT==2.3.0
 pytz==2021.3
 requests==2.26.0
 sqlparse==0.4.2
-typing-extensions==4.0.1
+typing_extensions==4.0.1
 urllib3==1.26.7
 yarl==1.7.2
