@@ -79,6 +79,7 @@ def ig(line_user_id, price, context):
                         "align": "start",
                         "gravity": "center",
                         "margin": "md",
+                        "offsetTop": "4px",
                         "offsetBottom": "8px",
                         "contents": []
                       }
@@ -927,6 +928,7 @@ def ig_fb(line_user_id, price, context):
                         "align": "start",
                         "gravity": "center",
                         "margin": "md",
+                        "offsetTop": "4px",
                         "offsetBottom": "8px",
                         "contents": []
                       }

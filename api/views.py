@@ -861,7 +861,7 @@ def insights_post(request):
 
     # Find Post ID
     context_list = get_post_list(business_account_id, access_token)
-    if 'post' not in context_list:
+    if not context_list:
       return render(request, 'api/insights/insights_post.html')
     post_list = context_list['data']['data']
 

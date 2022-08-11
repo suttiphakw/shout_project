@@ -411,7 +411,7 @@ def ig(line_user_id, context):
                     "align": "center",
                     "gravity": "top",
                     "size": "full",
-                    "aspectRatio": "1:1.5",
+                    "aspectRatio": "1:2",
                     "aspectMode": "fit"
                   }
                 ]
@@ -862,7 +862,7 @@ def ig_fb(line_user_id, context):
                     "align": "center",
                     "gravity": "top",
                     "size": "full",
-                    "aspectRatio": "1:1.5",
+                    "aspectRatio": "1:2",
                     "aspectMode": "fit"
                   }
                 ]
