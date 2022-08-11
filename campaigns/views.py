@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Campaign
 from .utils.calculate import cal
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -34,91 +35,60 @@ def campaign_finished(request):
 
 @login_required()
 def create_name(request):
-  print(request.method)
-  if request.method == 'POST':
-    campaign_name = request.POST['campaign_name']
-    campaign = Campaign.objects.create(user=request.user, campaign_name=campaign_name)
-    campaign.save()
-    # Create session => campaign id
-    request.session['campaign_id'] = campaign.id
-
-    return redirect('create_scope_budget')
   return render(request, 'campaigns/create/name.html')
 
 
 @login_required()
-def create_scope_budget(request):
-  try:
-    campaign_id = request.session['campaign_id']
-  except KeyError:
-    campaign_id = None
-
+def create_scope_budget(request, campaign_id):
   if campaign_id is not None:
     campaign = Campaign.objects.filter(id=campaign_id).first()
-    if request.method == "POST":
-      # Get List of Social Media
-      campaign_is_ig = request.POST.getlist('is_check_instagram')
-      campaign_is_fb = request.POST.getlist('is_check_facebook')
+    if request.user == campaign.user:
+      return render(request, 'campaigns/create/scope_budget.html')
 
-      # Get Budget
-      campaign_budget = request.POST['budget']
-      # Replace , from Budget
-      campaign_budget = int(campaign_budget.replace(",", ""))
-      campaign_work_type = request.POST['work_type']
-
-      # Set Data => DOM
-      campaign.campaign_budget = campaign_budget
-      campaign.campaign_work_type = campaign_work_type
-      campaign.campaign_is_ig = False
-      campaign.campaign_is_fb = False
-
-      if len(campaign_is_ig) > 0:
-        campaign.campaign_is_ig = True
-      if len(campaign_is_fb) > 0:
-        campaign.campaign_is_fb = True
-
-      campaign.save()
-
-      return redirect('create_content_type')
-
-    return render(request, 'campaigns/create/scope_budget.html')
-
+    return HttpResponse('Campaign not allowed')
   return HttpResponse('404Error')
 
 
 @login_required()
-def create_content_type(request):
-  try:
-    campaign_id = request.session['campaign_id']
+def create_content_type(request, campaign_id):
+  if campaign_id is not None:
     campaign = Campaign.objects.filter(id=campaign_id).first()
-  # Not Found campaign id in session
-  except KeyError:
-    return HttpResponse('404Error')
+    if request.user == campaign.user:
+      return render(request, 'campaigns/create/content_type.html')
 
-  # Story
-  if request.method == 'POST':
-    if campaign.campaign_work_type == "story":
-      campaign.campaign_content_type_story = request.POST.get('story_type', False)
-      campaign.campaign_fc_story_count = request.POST['campaign_fc_story_count']
-
-      # Cal Price
-      response = cal(campaign.campaign_budget)
-
-    if campaign.campaign_work_type == "post":
-      campaign.campaign_content_type_post = request.POST['post_type']
-    if campaign.campaign_work_type == "post_story":
-      campaign.campaign_content_type_story = request.POST.get('story_type', False)
-      campaign.campaign_content_type_post = request.POST.get('post_type', False)
-      campaign.campaign_fc_story_count = request.POST['campaign_fc_story_count']
-
-    campaign.save()
-
-    return redirect('create_product')
-
-  context = {
-    'campaign': campaign
-  }
-  return render(request, 'campaigns/create/content_type.html', context)
+    return HttpResponse('Campaign not allowed')
+  return HttpResponse('404Error')
+  # try:
+  #   campaign_id = request.session['campaign_id']
+  #   campaign = Campaign.objects.filter(id=campaign_id).first()
+  # # Not Found campaign id in session
+  # except KeyError:
+  #   return HttpRespons2e('404Error')
+  #
+  # # Story
+  # if request.method == 'POST':
+  #   if campaign.campaign_work_type == "story":
+  #     campaign.campaign_content_type_story = request.POST.get('story_type', False)
+  #     campaign.campaign_fc_story_count = request.POST['campaign_fc_story_count']
+  #
+  #     # Cal Price
+  #     response = cal(campaign.campaign_budget)
+  #
+  #   if campaign.campaign_work_type == "post":
+  #     campaign.campaign_content_type_post = request.POST['post_type']
+  #   if campaign.campaign_work_type == "post_story":
+  #     campaign.campaign_content_type_story = request.POST.get('story_type', False)
+  #     campaign.campaign_content_type_post = request.POST.get('post_type', False)
+  #     campaign.campaign_fc_story_count = request.POST['campaign_fc_story_count']
+  #
+  #   campaign.save()
+  #
+  #   return redirect('create_product')
+  #
+  # context = {
+  #   'campaign': campaign
+  # }
+  # return render(request, 'campaigns/create/content_type.html', context)
 
 
 @login_required()
@@ -169,6 +139,8 @@ def create_shouter_selection(request):
   # Not Found campaign id in session
   except KeyError:
     return HttpResponse('404Error')
+
+  # Get Shouter Selection
 
   context = {
     'campaign': campaign

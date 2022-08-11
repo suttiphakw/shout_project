@@ -1,6 +1,7 @@
 import requests
 from shouters.utils import settings
 
+
 def get(business_account_id, access_token):
   params = {
     'access_token': access_token

@@ -8,13 +8,17 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   {% block script %}
-  <!-- J query -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-  <!-- Notify js -->
-  <script src="{% static 'js/notify.js' %}"></script>
-  <!-- Main Script -->
-  <script src="{% static 'js/campaigns/create/scope_budget.js' %}"></script>
+    <!-- J query -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <!-- Axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <!-- Notify js -->
+    <script src="{% static 'js/notify.js' %}"></script>
+    <!-- Page Script -->
+    <script src="{% static 'js/campaigns/create/scope_budget.js' %}"></script>
+    <!-- API Script -->
+    <script src="{% static 'api/campaigns/create/scope_budget.js' %}"></script>
   {% endblock %}
   {% block title %} Create Campaign {% endblock %}
 </head>
@@ -97,7 +101,7 @@
     </section>
 
     <!-- Form -->
-    <form action="{% url 'create_scope_budget' %}" method="POST"> {% csrf_token %}
+    <form id="form">
       <!-- Right Bar -->  
       <section class="campaign__create__rightbar">
         <div class="campaign__create__rightbar__detail">
@@ -413,6 +417,15 @@
         </div>
       </section>
     </form>
+
+    <script>
+      const form = document.getElementById("form")
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        post_data("{{ csrf_token }}");
+      });
+    </script>
+
   {% endblock %}
 </body>
 </html>

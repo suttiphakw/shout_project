@@ -27,5 +27,6 @@ urlpatterns = [
   path('upload/campaign_detail_logo/', views.upload_campaign_detail_logo, name='upload_campaign_detail_logo'),
   path('upload/campaign_detail_reference/', views.upload_campaign_detail_reference, name='upload_campaign_detail_reference'),
 
-  path('insights/', views.insights, name='api_insights'),
+  path('insights/story/', views.insights_story, name='api_insights_story'),
+  path('insights/post/', views.insights_post, name='api_insights_post'),
 ]

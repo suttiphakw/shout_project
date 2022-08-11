@@ -1,0 +1,102 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="{% static 'img/logo/logo-07.png' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <title>API | Insights Post</title>
+  <style>
+    body {
+      font-family: 'Lato', sans-serif;;
+      height: 100vh;
+      width: 100vw;
+      background: black;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      color: white;
+      justify-content: center;
+      align-items: center;
+    }
+    section {
+      display: flex;
+      flex-direction: column;
+      height: 50vh;
+      width: 100vw;
+      align-items: center;
+      justify-content: center;
+    }
+    header {
+      font-size: 20px;
+      padding-bottom: 20px;
+      text-decoration: underline;
+    }
+    input {
+      height: 30px;
+      width: 300px;
+    }
+    label {
+      padding-right: 10px;
+    }
+    .box {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid white;
+      padding: 20px 20px 10px;
+    }
+    .input {
+      padding-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .output {
+      font-size: 20px;
+    }
+    button {
+      height: 50px;
+      font-size: 20px;
+      background: white;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+<section>
+    <header>Input</header>
+    <form action="{% url 'api_insights_post' %}" method="POST"> {% csrf_token %}
+        <div class="box">
+            <div class="input">
+                <label for="url">Instagram URL</label>
+                <input type="text" id="url" name="url">
+            </div>
+            <div class="input">
+                <label for="ig_username">IG Username</label>
+                <input type="text" id="ig_username" name="ig_username">
+            </div>
+            <button>send</button>
+        </div>
+    </form>
+</section>
+<section>
+    <header>Output</header>
+    <div class="box">
+        <div class="output">
+          <p>Like Count : {{ like_count }}</p>
+          <p>Comments Count : {{ comments_count }}</p>
+          <p>Engagement : {{ engagement }}</p>
+          <p>Impressions : {{ impressions }}</p>
+          <p>Reach : {{ reach }}</p>
+          <p>Saved : {{ saved }}</p>
+        </div>
+    </div>
+</section>
+</body>
+</html>

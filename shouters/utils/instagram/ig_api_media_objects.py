@@ -1,6 +1,7 @@
 import requests
 from shouters.utils import settings
 
+
 def get(business_account_id, access_token):
   params = {
     'access_token': access_token
@@ -14,7 +15,7 @@ def get(business_account_id, access_token):
   try:
     items = data['data']
     media_objects = [item['id'] for item in items]
-  except:
+  except KeyError:
     media_objects = []
 
   context = {

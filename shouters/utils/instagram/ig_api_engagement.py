@@ -4,6 +4,7 @@ from shouters.utils import settings
 
 from shouters.utils.function import fn_engagement_outlier
 
+
 def get_like(media_objects, access_token):
   params = {
     'fields': 'like_count',

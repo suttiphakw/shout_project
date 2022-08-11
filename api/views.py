@@ -4,9 +4,14 @@ from django.contrib import messages, auth
 from django.core.files.storage import FileSystemStorage
 
 from shouters.models import Shouter
-from shouters.utils.instagram.ig_api_get_story_list import get as get_list
-from shouters.utils.instagram.ig_api_get_permalink_story import get as get_id
-from shouters.utils.instagram.ig_api_get_story_insights import get as get_insights
+# Story Insights
+from shouters.utils.instagram.ig_api_get_story_list import get as get_story_list
+from shouters.utils.instagram.ig_api_get_permalink_story import get as get_story_id
+from shouters.utils.instagram.ig_api_get_story_insights import get as get_story_insights
+# Post Insights
+from shouters.utils.instagram.ig_api_media_objects import get as get_post_list
+from shouters.utils.instagram.ig_api_get_permalink_post import get as get_post_id
+from shouters.utils.instagram.ig_api_get_post_insights import get as get_post_insights
 from utils.final import \
   campaign_detail_delivery, \
   campaign_detail_no_delivery, \
@@ -811,8 +816,7 @@ def upload_campaign_detail_reference(request):
 
 
 @login_required(login_url='/api/login/')
-# Create your views here.
-def insights(request):
+def insights_story(request):
   if request.method == "POST":
     url = request.POST['url']
     ig_username = request.POST['ig_username']
@@ -822,24 +826,61 @@ def insights(request):
     access_token = shouter.fb_main_access_token
 
     # Find Story ID
-    context_list = get_list(business_account_id, access_token)
+    context_list = get_story_list(business_account_id, access_token)
     if not context_list:
-      return render(request, 'api/insights/insights_form.html')
+      return render(request, 'api/insights/insights_story.html')
     story_list = context_list['data']
 
     # For Loop
-    story_id = get_id(story_list, access_token, url)
+    story_id = get_story_id(story_list, access_token, url)
     if not story_id:
-      return render(request, 'api/insights/insights_form.html')
+      return render(request, 'api/insights/insights_story.html')
 
     # Get Insights
-    insight = get_insights(story_id, access_token)
+    insight = get_story_insights(story_id, access_token)
 
     context = {}
 
     for obj in insight:
       context[obj['name']] = obj['values'][0]['value']
 
-    return render(request, 'api/insights/insights_form.html', context)
+    return render(request, 'api/insights/insights_story.html', context)
 
-  return render(request, 'api/insights/insights_form.html')
+  return render(request, 'api/insights/insights_story.html')
+
+
+@login_required(login_url='/api/login')
+def insights_post(request):
+  if request.method == "POST":
+    url = request.POST['url']
+    ig_username = request.POST['ig_username']
+
+    shouter = Shouter.objects.filter(ig_username=ig_username).first()
+    business_account_id = shouter.ig_business_account_id
+    access_token = shouter.fb_main_access_token
+
+    # Find Post ID
+    context_list = get_post_list(business_account_id, access_token)
+    if 'post' not in context_list:
+      return render(request, 'api/insights/insights_post.html')
+    post_list = context_list['data']['data']
+
+    # For loop
+    post_id, like_count, comments_count = get_post_id(post_list, access_token, url)
+    if not post_id:
+      return render(request, 'api/insights/insights_post.html')
+
+    # Get Insights
+    insight = get_post_insights(post_id, access_token)
+
+    context = {
+      'like_count': like_count,
+      'comments_count': comments_count
+    }
+
+    for obj in insight:
+      context[obj['name']] = obj['values'][0]['value']
+
+    return render(request, 'api/insights/insights_post.html', context)
+
+  return render(request, 'api/insights/insights_post.html')

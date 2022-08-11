@@ -7,7 +7,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block script %}
+    <!-- J query -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <!-- Axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <!-- API script -->
+    <script src="{% static 'api/campaigns/create/name.js' %}"></script>
+  {% endblock %}
   {% block title %} Create Campaign {% endblock %}
+
 </head>
 <body>
   {% block content %}
@@ -88,7 +98,7 @@
     </section>
     <!-- Content -->
     <section class="campaign__create__content">
-      <form action="{% url 'create_name' %}" method="post"> {% csrf_token %}
+      <form id="form">
         <div class="campaign__card campaign__card__with_min_height">
           <div class="campaign__create__name">
             <!-- Header -->
@@ -106,6 +116,16 @@
         </div>
       </form>
     </section>
+
+    <script>
+      const form = document.getElementById("form")
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        post_data("{{ csrf_token }}");
+      });
+    </script>
+
   {% endblock %}
 </body>
+
 </html>

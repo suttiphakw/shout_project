@@ -1,6 +1,7 @@
 import requests
 from shouters.utils import settings
 
+
 def get(story_list, access_token, url):
 
   for story in story_list:
