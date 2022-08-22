@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
+
+from utils import media
 from .models import Campaign
-from .utils.calculate import cal
-from django.http import JsonResponse
 
 
-# Create your views here.
 @login_required()
 def campaign_draft(request):
   user = request.user
@@ -44,105 +44,132 @@ def create_scope_budget(request, campaign_id):
     campaign = Campaign.objects.filter(id=campaign_id).first()
     if request.user == campaign.user:
       return render(request, 'campaigns/create/scope_budget.html')
-
     return HttpResponse('Campaign not allowed')
   return HttpResponse('404Error')
 
 
 @login_required()
 def create_content_type(request, campaign_id):
-  if campaign_id is not None:
-    campaign = Campaign.objects.filter(id=campaign_id).first()
-    if request.user == campaign.user:
-      return render(request, 'campaigns/create/content_type.html')
+  campaign = Campaign.objects.filter(id=campaign_id).first()
 
+  # if campaign is not found
+  if not campaign:
+    return HttpResponse('404Error')
+
+  # if campaign is not created by request.user
+  if request.user != campaign.user:
     return HttpResponse('Campaign not allowed')
+
+  # if method == post
+  if request.method == 'POST':
+    if campaign.campaign_work_type == 'story':
+      campaign.campaign_content_type_story = request.POST.get('story_type', None)
+      campaign.campaign_fc_story_count = request.POST.get('campaign_fc_story_count', None)
+      campaign.save()
+    elif campaign.campaign_work_type == 'post':
+      campaign.campaign_content_type_post = request.POST.get('post_type', None)
+      campaign.save()
+    else:
+      campaign.campaign_content_type_story = request.POST.get('story_type', None)
+      campaign.campaign_fc_story_count = request.POST.get('campaign_fc_story_count', None)
+      campaign.campaign_content_type_post = request.POST.get('post_type', None)
+      campaign.save()
+
+    return redirect('create_product', campaign_id)
+
+  context = {
+    'campaign': campaign,
+  }
+  return render(request, 'campaigns/create/content_type.html', context)
+
+
+@login_required()
+def create_product(request, campaign_id):
+  campaign = Campaign.objects.filter(id=campaign_id).first()
+  if campaign:
+    if request.method == "POST":
+      # File Storage System
+      fs = FileSystemStorage()
+
+      product_name = request.POST['product_name']
+      product_photo_1 = request.FILES["product_photo_1"] if "product_photo_1" in request.FILES else False
+      product_photo_2 = request.FILES["product_photo_2"] if "product_photo_2" in request.FILES else False
+      product_photo_3 = request.FILES["product_photo_3"] if "product_photo_3" in request.FILES else False
+      product_detail = request.POST['product_detail']
+      product_link = request.POST['product_link']
+
+      # Save to DOM
+      campaign.product_name = product_name
+      campaign.product_detail = product_detail
+      campaign.product_link = product_link
+
+      filename_product_photo_1 = fs.save(media.get_unique_name_product('campaign/product/', product_photo_1.name, campaign_id),
+                                         product_photo_1)
+      campaign.product_photo_1 = filename_product_photo_1
+      if product_photo_2:
+        filename_product_photo_2 = fs.save(media.get_unique_name_product('campaign/product/', product_photo_2.name, campaign_id, counter=2),
+                                           product_photo_2)
+        campaign.product_photo_2 = filename_product_photo_2
+      if product_photo_3:
+        filename_product_photo_3 = fs.save(media.get_unique_name_product('campaign/product/', product_photo_3.name, campaign_id, counter=3),
+                                           product_photo_3)
+        campaign.product_photo_3 = filename_product_photo_3
+
+      campaign.save()
+
+      return redirect('create_target', campaign_id)
+
+    context = {
+      'campaign': campaign
+    }
+    return render(request, 'campaigns/create/product.html', context)
   return HttpResponse('404Error')
-  # try:
-  #   campaign_id = request.session['campaign_id']
-  #   campaign = Campaign.objects.filter(id=campaign_id).first()
-  # # Not Found campaign id in session
-  # except KeyError:
-  #   return HttpRespons2e('404Error')
-  #
-  # # Story
-  # if request.method == 'POST':
-  #   if campaign.campaign_work_type == "story":
-  #     campaign.campaign_content_type_story = request.POST.get('story_type', False)
-  #     campaign.campaign_fc_story_count = request.POST['campaign_fc_story_count']
-  #
-  #     # Cal Price
-  #     response = cal(campaign.campaign_budget)
-  #
-  #   if campaign.campaign_work_type == "post":
-  #     campaign.campaign_content_type_post = request.POST['post_type']
-  #   if campaign.campaign_work_type == "post_story":
-  #     campaign.campaign_content_type_story = request.POST.get('story_type', False)
-  #     campaign.campaign_content_type_post = request.POST.get('post_type', False)
-  #     campaign.campaign_fc_story_count = request.POST['campaign_fc_story_count']
-  #
-  #   campaign.save()
-  #
-  #   return redirect('create_product')
-  #
-  # context = {
-  #   'campaign': campaign
-  # }
-  # return render(request, 'campaigns/create/content_type.html', context)
 
 
 @login_required()
-def create_product(request):
-  try:
-    campaign_id = request.session['campaign_id']
-    campaign = Campaign.objects.filter(id=campaign_id).first()
-  # Not Found campaign id in session
-  except KeyError:
-    return HttpResponse('404Error')
+def create_target(request, campaign_id):
+  campaign = Campaign.objects.filter(id=campaign_id).first()
 
-  if request.method == "POST":
-    campaign_product_name = request.POST['product_name']
-    campaign_product_photo_1 = request.FILES["product_photo_1"] if "product_photo_1" in request.FILES else False
-    campaign_product_photo_2 = request.FILES["product_photo_2"] if "product_photo_2" in request.FILES else False
-    campaign_product_photo_3 = request.FILES["product_photo_3"] if "product_photo_3" in request.FILES else False
-    campaign_product_detail =  request.POST['product_detail']
-    campaign_product_link = request.POST['product_link']
+  if campaign:
+    if request.method == 'POST':
+      # Get Input
+      gender = request.POST['gender']
+      age = request.POST.getlist('age')
+      province = request.POST['province']
+      interest = request.POST.getlist('interest')
+      shouter_gender = request.POST.getlist('shouter_gender')
 
-    return redirect('create_target')
+      campaign.campaign_gender = gender
+      campaign.campaign_age = age
+      campaign.campaign_province = province
+      campaign.campaign_interest = interest
+      campaign.shouter_gender = shouter_gender
+      campaign.save()
 
-  context = {
-    'campaign': campaign
-  }
-  return render(request, 'campaigns/create/product.html', context)
+      return redirect('shouter_score', campaign_id)
 
-
-@login_required()
-def create_target(request):
-  try:
-    campaign_id = request.session['campaign_id']
-    campaign = Campaign.objects.filter(id=campaign_id).first()
-  # Not Found campaign id in session
-  except KeyError:
-    return HttpResponse('404Error')
-
-  context = {
-    'campaign': campaign
-  }
-  return render(request, 'campaigns/create/target.html', context)
+    context = {
+      'campaign': campaign
+    }
+    return render(request, 'campaigns/create/target.html', context)
+  return HttpResponse('404Error')
 
 
 @login_required()
-def create_shouter_selection(request):
-  try:
-    campaign_id = request.session['campaign_id']
-    campaign = Campaign.objects.filter(id=campaign_id).first()
-  # Not Found campaign id in session
-  except KeyError:
-    return HttpResponse('404Error')
+def create_shouter_selection(request, campaign_id):
+  campaign = Campaign.objects.filter(id=campaign_id).first()
+  # Create Shouter Selection Database
+  # List of approve shouter => shouters = Shouter.objects.filter(is_approve=True)
+  # for shouter in shouters => shouter_selection.create(shouter = shouter.instagram (def string)
 
-  # Get Shouter Selection
+  if campaign:
+    # if request.method == 'POST':
 
-  context = {
-    'campaign': campaign
-  }
-  return render(request, 'campaigns/create/shouter_selection.html', context)
+    context = {
+      'campaign': campaign
+    }
+    return render(request, 'campaigns/create/shouter_selection.html', context)
+  return HttpResponse('404Error')
+
+
+

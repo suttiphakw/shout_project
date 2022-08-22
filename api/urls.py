@@ -23,10 +23,12 @@ urlpatterns = [
   path('flex/add/reject_work/', views.add_reject_work, name='flex_add_reject_work'),
   path('flex/add/cancel_work/', views.add_cancel_work, name='flex_add_cancel_work'),
   path('flex/add/reconnect/', views.add_reconnect, name='flex_add_reconnect'),
+  path('flex/add/text/', views.add_text_message, name='flex_add_text_message'),
 
   path('upload/campaign_detail_logo/', views.upload_campaign_detail_logo, name='upload_campaign_detail_logo'),
   path('upload/campaign_detail_reference/', views.upload_campaign_detail_reference, name='upload_campaign_detail_reference'),
 
   path('insights/story/', views.insights_story, name='api_insights_story'),
   path('insights/post/', views.insights_post, name='api_insights_post'),
+  path('insights/reel/', views.insights_reel, name='api_insights_reel'),
 ]

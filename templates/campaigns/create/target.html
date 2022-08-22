@@ -1,5 +1,6 @@
 {% extends "campaigns/_base/_base.html" %}
 {% load static %}
+{% load humanize %}
 
 <!doctype html>
 <html lang="en">
@@ -95,7 +96,7 @@
     </section>
 
     <!-- Form -->
-    <form action="" method="POST"> {% csrf_token %}
+    <form method="post" action="{% url 'create_target' campaign.id %}"> {% csrf_token %}
       <!-- Right Bar -->  
       <section class="campaign__create__rightbar">
         <div class="campaign__create__rightbar__detail">
@@ -104,7 +105,7 @@
             <!-- Budget -->
             <div class="campaign__create__rightbar__detail__data budget">
               <span class="bold">Budget</span>
-              <h4>100,000</h4>
+              <h4>{{ campaign.campaign_budget | intcomma}}</h4>
             </div>
             <!-- Social Media -->
             <div class="campaign__create__rightbar__detail__data">
@@ -114,17 +115,17 @@
             <!-- Shouter Count -->
             <div class="campaign__create__rightbar__detail__data">
               <span>ได้ Shouter</span>
-              <p>10 - 20 คน</p>
+              <p>{{ campaign.estimate_min_shouter | intcomma }} - {{ campaign.estimate_max_shouter | intcomma }} คน</p>
             </div>
             <!-- Estimated Reach -->
             <div class="campaign__create__rightbar__detail__data">
               <span>Estimate Reach</span>
-              <p>10,000 - 20,000 reach</p>
+              <p>{{ campaign.estimate_min_reach | intcomma }} - {{ campaign.estimate_max_reach | intcomma }} reach</p>
             </div>
             <!-- Cost Per Reach -->
             <div class="campaign__create__rightbar__detail__data">
-              <span>Social Media</span>
-              <p>3 บาท</p>
+              <span>Cost Per Reach</span>
+              <p>{{ campaign.estimate_min_cpr | intcomma }} - {{ campaign.estimate_max_cpr | intcomma }} บาท</p>
             </div>
           </div>
           <div class="campaign__create__rightbar__detail__box">
@@ -132,15 +133,43 @@
             <!-- รูปแบบโพส -->
             <div class="campaign__create__rightbar__detail__data">
               <span>รูปแบบโพส</span>
-              <p>-</p>
+              {% if campaign.campaign_work_type == 'story' %}
+                <p>Story</p>
+              {% elif campaign.campaign_work_type == 'post' %}
+                <p>Post</p>
+              {% else %}
+                <p>Story + Post</p>
+              {% endif %}
             </div>
             <!-- รูปแบบการบอกต่อ -->
             <div class="campaign__create__rightbar__detail__data">
               <span>รูปแบบการบอกต่อ</span>
-              <p>-</p>
+              {% if campaign.campaign_work_type == 'story' %}
+                {% if campaign.campaign_content_type_story == 'prepared_content' %}
+                  <p>Finished Content</p>
+                {% else %}
+                  <p>User Generated Content</p>
+                {% endif %}
+              {% elif campaign.campaign_work_type == 'post' %}
+                {% if campaign.campaign_content_type_post == 'single_post' %}
+                  <p>Single Post</p>
+                {% else %}
+                  <p>Multi Post</p>
+                {% endif %}
+              {% else %}
+                {% if campaign.campaign_content_type_story == 'prepared_content' and campaign.campaign_content_type_post == 'single_post' %}
+                  <p>FC Story + Single Post</p>
+                {% elif campaign.campaign_content_type_story == 'prepared_content' and campaign.campaign_content_type_post == 'multi_post' %}
+                  <p>FC Story + Multi Post</p>
+                {% elif campaign.campaign_content_type_story == 'user_generated_content' and campaign.campaign_content_type_post == 'single_post' %}
+                  <p>UGC Story + Single Post</p>
+                {% else %}
+                  <p>UGC Story + Multi Post</p>
+                {% endif %}
+              {% endif %}
             </div>
             <!-- จำนวน -->
-            <div class="campaign__create__rightbar__detail__data">
+            <div class="campaign__create__rightbar__detail__data" style="display: none">
               <span>จำนวน</span>
               <p>-</p>
             </div>
@@ -175,8 +204,8 @@
               <p>เพศ <span>*</span></p>
               <div class="campaign__create__content__target__input">
                 <!-- No Gender -->
-                <input type="radio" name="gender" id="no_gender">
-                <label for="no_gender" class="campaign__create__content__target__input__box">
+                <input type="radio" name="gender" id="all" value="all">
+                <label for="all" class="campaign__create__content__target__input__box">
                   <div class="campaign__create__content__target__input__box__left">
                     <svg class="campaign__create__content__target__input__icon">
                       <use xlink:href="{% static 'img/campaigns/sprite.svg' %}#icon-users"></use>
@@ -188,7 +217,7 @@
                   </span>
                 </label>
                 <!-- Female -->
-                <input type="radio" name="gender" id="female">
+                <input type="radio" name="gender" id="female" value="female">
                 <label for="female" class="campaign__create__content__target__input__box">
                   <div class="campaign__create__content__target__input__box__left">
                     <svg class="campaign__create__content__target__input__icon">
@@ -201,7 +230,7 @@
                   </span>
                 </label>
                 <!-- Male -->
-                <input type="radio" name="gender" id="male">
+                <input type="radio" name="gender" id="male" value="male">
                 <label for="male" class="campaign__create__content__target__input__box">
                   <div class="campaign__create__content__target__input__box__left">
                     <svg class="campaign__create__content__target__input__icon">
@@ -221,7 +250,7 @@
               <p>อายุ (มากสุด 3 ช่วงอายุ) <span>*</span></p>
               <div class="campaign__create__content__target__input">
                 <!-- All -->
-                <input type="checkbox" name="age" id="all_age">
+                <input type="checkbox" name="age" id="all_age" value="all_age">
                 <label for="all_age" class="campaign__create__content__target__input__box">
                   <div class="campaign__create__content__target__input__box__left">
                     <p>ไม่จำกัดช่วงอายุ</p>
@@ -233,7 +262,7 @@
                   </span>
                 </label>
                 <!-- 13-17 -->
-                <input type="checkbox" name="age" id="13_17">
+                <input type="checkbox" name="age" id="13_17" value="13_17">
                 <label for="13_17" class="campaign__create__content__target__input__box">
                   <div class="campaign__create__content__target__input__box__left">
                     <p>13-17 ปี</p>
@@ -245,7 +274,7 @@
                   </span>
                 </label>
                 <!-- 18-24 -->
-                <input type="checkbox" name="age" id="18_24">
+                <input type="checkbox" name="age" id="18_24" value="18_24">
                 <label for="18_24" class="campaign__create__content__target__input__box">
                   <div class="campaign__create__content__target__input__box__left">
                     <p>18-24 ปี</p>
@@ -257,7 +286,7 @@
                   </span>
                 </label>
                 <!-- 25-34 -->
-                <input type="checkbox" name="age" id="25_34">
+                <input type="checkbox" name="age" id="25_34" value="25_34">
                 <label for="25_34" class="campaign__create__content__target__input__box">
                   <div class="campaign__create__content__target__input__box__left">
                     <p>25-34 ปี</p>
@@ -269,7 +298,7 @@
                   </span>
                 </label>
                 <!-- 35-44 -->
-                <input type="checkbox" name="age" id="35_44">
+                <input type="checkbox" name="age" id="35_44" value="35_44">
                 <label for="35_44" class="campaign__create__content__target__input__box">
                   <div class="campaign__create__content__target__input__box__left">
                     <p>35-44 ปี</p>
@@ -281,7 +310,7 @@
                   </span>
                 </label>
                 <!-- 45-54 -->
-                <input type="checkbox" name="age" id="45_54">
+                <input type="checkbox" name="age" id="45_54" value="45_54">
                 <label for="45_54" class="campaign__create__content__target__input__box">
                   <div class="campaign__create__content__target__input__box__left">
                     <p>45-54 ปี</p>
@@ -293,7 +322,7 @@
                   </span>
                 </label>
                 <!-- 55-64 -->
-                <input type="checkbox" name="age" id="55_64">
+                <input type="checkbox" name="age" id="55_64" value="55_64">
                 <label for="55_64" class="campaign__create__content__target__input__box">
                   <div class="campaign__create__content__target__input__box__left">
                     <p>55-64 ปี</p>
@@ -312,7 +341,7 @@
               <p>จังหวัด <span>*</span></p>
               <div class="campaign__create__content__target__input">
                 <!-- All -->
-                <input type="radio" name="province" id="all_province">
+                <input type="radio" name="province" id="all_province" value="all_province">
                 <label for="all_province" class="campaign__create__content__target__input__box">
                   <div class="campaign__create__content__target__input__box__left">
                     <p>ทุกจังหวัด</p>
@@ -322,7 +351,7 @@
                   </span>
                 </label>
                 <!-- Bangkok -->
-                <input type="radio" name="province" id="bkk">
+                <input type="radio" name="province" id="bkk" value="bkk">
                 <label for="bkk" class="campaign__create__content__target__input__box">
                   <div class="campaign__create__content__target__input__box__left">
                     <p>กรุงเทพฯ</p>
@@ -332,7 +361,7 @@
                   </span>
                 </label>
                 <!-- Bangkok & Near -->
-                <input type="radio" name="province" id="bkk_nearby">
+                <input type="radio" name="province" id="bkk_nearby" value="bkk_nearby">
                 <label for="bkk_nearby" class="campaign__create__content__target__input__box">
                   <div class="campaign__create__content__target__input__box__left">
                     <p>กรุงเทพและปริมณฑล</p>
@@ -349,62 +378,62 @@
               <p>ความสนใจ (เลือก 1-3 ประเภท) <span>*</span></p>
               <div class="campaign__create__content__target__input">
                 <!-- Lifestyle -->
-                <input type="checkbox" name="interest" id="interest_lifestyle">
+                <input type="checkbox" name="interest" id="interest_lifestyle" value="lifestyle">
                 <label for="interest_lifestyle" class="campaign__create__content__target__input__interest__box">
                   <p>🌻 Lifestyle</p>
                 </label>
                 <!-- Food & Drink -->
-                <input type="checkbox" name="interest" id="interest_food_drink">
+                <input type="checkbox" name="interest" id="interest_food_drink" value="food_drink">
                 <label for="interest_food_drink" class="campaign__create__content__target__input__interest__box">
                   <p>🍔 Food & Drink</p>
                 </label>
                 <!-- Beauty -->
-                <input type="checkbox" name="interest" id="interest_beauty">
+                <input type="checkbox" name="interest" id="interest_beauty" value="beauty">
                 <label for="interest_beauty" class="campaign__create__content__target__input__interest__box">
                   <p>💄 Beauty</p>
                 </label>
                 <!-- Fashion -->
-                <input type="checkbox" name="interest" id="interest_fashion">
+                <input type="checkbox" name="interest" id="interest_fashion" value="fashion">
                 <label for="interest_fashion" class="campaign__create__content__target__input__interest__box">
                   <p>👗 Fashion</p>
                 </label>
                 <!-- Travel -->
-                <input type="checkbox" name="interest" id="interest_travel">
+                <input type="checkbox" name="interest" id="interest_travel" value="travel">
                 <label for="interest_travel" class="campaign__create__content__target__input__interest__box">
                   <p>✈️ Travel</p>
                 </label>
                 <!-- Health & Sport -->
-                <input type="checkbox" name="interest" id="interest_health_sport">
+                <input type="checkbox" name="interest" id="interest_health_sport" value="health_sport">
                 <label for="interest_health_sport" class="campaign__create__content__target__input__interest__box">
                   <p>🏀 Health & Sport</p>
                 </label>
                 <!-- Design & Art -->
-                <input type="checkbox" name="interest" id="interest_design_art">
+                <input type="checkbox" name="interest" id="interest_design_art" value="design_art">
                 <label for="interest_design_art" class="campaign__create__content__target__input__interest__box">
                   <p>🎨 Design & Art</p>
                 </label>
                 <!-- Technology & Gatget -->
-                <input type="checkbox" name="interest" id="interest_tech_gatget">
+                <input type="checkbox" name="interest" id="interest_tech_gatget" value="tech_gatget">
                 <label for="interest_tech_gatget" class="campaign__create__content__target__input__interest__box">
                   <p>📱 Technology & Gadget</p>
                 </label>
                 <!-- Social & CSR -->
-                <input type="checkbox" name="interest" id="interest_social_csr">
+                <input type="checkbox" name="interest" id="interest_social_csr" value="social_csr">
                 <label for="interest_social_csr" class="campaign__create__content__target__input__interest__box">
                   <p>⭐️ Social & CSR</p>
                 </label>
                 <!-- Entertainment -->
-                <input type="checkbox" name="interest" id="interest_entertainment">
+                <input type="checkbox" name="interest" id="interest_entertainment" value="entertainment">
                 <label for="interest_entertainment" class="campaign__create__content__target__input__interest__box">
                   <p>🎸 Entertainment</p>
                 </label>
                 <!-- Automobile -->
-                <input type="checkbox" name="interest" id="interest_automobile">
+                <input type="checkbox" name="interest" id="interest_automobile" value="automobile">
                 <label for="interest_automobile" class="campaign__create__content__target__input__interest__box">
                   <p>🚘 Automobile</p>
                 </label>
                 <!-- Finance & Investment -->
-                <input type="checkbox" name="interest" id="interest_finance_investment">
+                <input type="checkbox" name="interest" id="interest_finance_investment" value="finance_investment">
                 <label for="interest_finance_investment" class="campaign__create__content__target__input__interest__box">
                   <p>💰 Finance & Investment</p>
                 </label>
@@ -430,13 +459,13 @@
             <p>ต่อไปจะเป็นขั้นตอนการคัดเลือก Shouter (KOC) ที่จะมาบอกต่อแคมเปญของคุณ โปรดเลือกเพศ KOC ที่ต้องการ (เลือกได้ 1 - 3 เพศ)</p>
             <div class="campaign__create__content__target__modal__content__detail">
               <!-- Female Shouter -->
-              <input type="checkbox" id="shouter_female" name="shouter_gender">
+              <input type="checkbox" id="shouter_female" name="shouter_gender" value="female">
               <label for="shouter_female">หญิง</label>
               <!-- Male Shouter -->
-              <input type="checkbox" id="shouter_male" name="shouter_gender">
+              <input type="checkbox" id="shouter_male" name="shouter_gender" value="male">
               <label for="shouter_male">ชาย</label>
               <!-- LGBTQ+ Shouter -->
-              <input type="checkbox" id="shouter_lgbtq" name="shouter_gender">
+              <input type="checkbox" id="shouter_lgbtq" name="shouter_gender" value="alternative">
               <label for="shouter_lgbtq">LGBTQ+</label>
             </div>
             <div class="campaign__create__content__target__modal__button">

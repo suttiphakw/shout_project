@@ -96,7 +96,7 @@
     </section>
 
     <!-- Form -->
-    <form action="{% url 'create_product' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+    <form enctype="multipart/form-data" method="post" action="{% url 'create_product' campaign.id %}"> {% csrf_token %}
       <!-- Right Bar -->  
       <section class="campaign__create__rightbar">
         <div class="campaign__create__rightbar__detail">
@@ -115,17 +115,17 @@
             <!-- Shouter Count -->
             <div class="campaign__create__rightbar__detail__data">
               <span>ได้ Shouter</span>
-              <p>{{ campaign.cal_number_shouter_min | intcomma }} - {{ campaign.cal_number_shouter_max | intcomma }} คน</p>
+              <p>{{ campaign.estimate_min_shouter | intcomma }} - {{ campaign.estimate_max_shouter | intcomma }} คน</p>
             </div>
             <!-- Estimated Reach -->
             <div class="campaign__create__rightbar__detail__data">
               <span>Estimate Reach</span>
-              <p>{{ campaign.cal_estimate_reach_min | intcomma }} - {{ campaign.cal_estimate_reach_max | intcomma }} reach</p>
+              <p>{{ campaign.estimate_min_reach | intcomma }} - {{ campaign.estimate_max_reach | intcomma }} reach</p>
             </div>
             <!-- Cost Per Reach -->
             <div class="campaign__create__rightbar__detail__data">
               <span>Cost Per Reach</span>
-              <p>{{ campaign.cal_cpr_min | intcomma }} - {{ campaign.cal_cpr_max | intcomma }} บาท</p>
+              <p>{{ campaign.estimate_min_cpr | intcomma }} - {{ campaign.estimate_max_cpr | intcomma }} บาท</p>
             </div>
           </div>
           <div class="campaign__create__rightbar__detail__box">
@@ -133,15 +133,43 @@
             <!-- รูปแบบโพส -->
             <div class="campaign__create__rightbar__detail__data">
               <span>รูปแบบโพส</span>
-              <p>-</p>
+              {% if campaign.campaign_work_type == 'story' %}
+                <p>Story</p>
+              {% elif campaign.campaign_work_type == 'post' %}
+                <p>Post</p>
+              {% else %}
+                <p>Story + Post</p>
+              {% endif %}
             </div>
             <!-- รูปแบบการบอกต่อ -->
             <div class="campaign__create__rightbar__detail__data">
               <span>รูปแบบการบอกต่อ</span>
-              <p>-</p>
+              {% if campaign.campaign_work_type == 'story' %}
+                {% if campaign.campaign_content_type_story == 'prepared_content' %}
+                  <p>Finished Content</p>
+                {% else %}
+                  <p>User Generated Content</p>
+                {% endif %}
+              {% elif campaign.campaign_work_type == 'post' %}
+                {% if campaign.campaign_content_type_post == 'single_post' %}
+                  <p>Single Post</p>
+                {% else %}
+                  <p>Multi Post</p>
+                {% endif %}
+              {% else %}
+                {% if campaign.campaign_content_type_story == 'prepared_content' and campaign.campaign_content_type_post == 'single_post' %}
+                  <p>FC Story + Single Post</p>
+                {% elif campaign.campaign_content_type_story == 'prepared_content' and campaign.campaign_content_type_post == 'multi_post' %}
+                  <p>FC Story + Multi Post</p>
+                {% elif campaign.campaign_content_type_story == 'user_generated_content' and campaign.campaign_content_type_post == 'single_post' %}
+                  <p>UGC Story + Single Post</p>
+                {% else %}
+                  <p>UGC Story + Multi Post</p>
+                {% endif %}
+              {% endif %}
             </div>
             <!-- จำนวน -->
-            <div class="campaign__create__rightbar__detail__data">
+            <div class="campaign__create__rightbar__detail__data" style="display: none">
               <span>จำนวน</span>
               <p>-</p>
             </div>
@@ -172,7 +200,7 @@
             <!-- Product Name -->
             <div class="campaign__create__content__product__name">
               <label for="product_name" class="margin">ชื่อสินค้าและบริการของคุณ <span>*</span></label>
-              <input type="text" class="h48" id="product_name" name="product_name" placeholder="ชื่อสินค้าหรือบริการ">
+              <input type="text" class="h48" id="product_name" name="product_name" placeholder="ชื่อสินค้าหรือบริการ" required>
             </div>
             <!-- Product Picture-->
             <div class="campaign__create__content__product__picture">
@@ -188,7 +216,7 @@
                     <img id="preview_photo_1" alt="">
                   </div>
                 </label>
-                <input type="file" id="product_photo_1" name="product_photo_1" accept="image/*" onchange="showPreview_1(event);">
+                <input type="file" id="product_photo_1" name="product_photo_1" accept="image/*" onchange="showPreview_1(event);" required>
                 <!-- Product Photo 2 -->
                 <label for="product_photo_2">
                   <div class="campaign__create__content__product__picture__input__upload" id="upload_box_2">
@@ -216,12 +244,12 @@
             <!-- Product Detail-->
             <div class="campaign__create__content__product__detail">
               <label for="product_detail" class="margin">ข้อมูลเกี่ยวกับสินค้าหรือบริการของคุณ <span>*</span></label>
-              <textarea name="product_detail" id="product_detail" cols="30" rows="10" placeholder="ข้อมูลเกี่ยวกับสินค้าบริการ"></textarea>
+              <textarea name="product_detail" id="product_detail" cols="30" rows="10" placeholder="ข้อมูลเกี่ยวกับสินค้าบริการ" required></textarea>
             </div>
             <!-- Product Link -->
             <div class="campaign__create__content__product__link">
               <label for="product_link" class="margin">Link for more detail <span>*</span></label>
-              <input type="text" class="h48" id="product_link" name="product_link" placeholder="www.shoutsolution.com">
+              <input type="text" class="h48" id="product_link" name="product_link" placeholder="www.shoutsolution.com" required>
             </div>
           </div>
         </div>

@@ -395,14 +395,17 @@ function cal_story_post(check_fb, budget) {
 }
 ///////////////////////////////////////////////////////////////////
 // Set Value
+const set_rightBar_value = (shouterMin, shouterMax, reachMin, reachMax, cprMin, cprMax, workFormat, workQuantity) => {
+  document.getElementById("rightbar_shouter").innerHTML = numberWithCommas(shouterMin) + " - " + numberWithCommas(shouterMax) + " คน";
+  document.getElementById("rightbar_reach").innerHTML = numberWithCommas(reachMin) + " - " + numberWithCommas(reachMax) + " reach";
+  document.getElementById("rightbar_cpr").innerHTML = numberWithCommas(cprMin) + " - " + numberWithCommas(cprMax) + " บาท";
+  document.getElementById("rightbar_work_format").innerHTML = workFormat
+  document.getElementById("rightbar_work_quantity").innerHTML = workQuantity
+};
 ///////////////////////////////////////////////////////////////////
 function set_right_bar_pc(dict) {
-  document.getElementById("rightbar_shouter").innerHTML = numberWithCommas(dict["min_fc_story_shouter"]) + " - " + numberWithCommas(dict["max_fc_story_shouter"]) + " คน"
-  document.getElementById("rightbar_reach").innerHTML = numberWithCommas(dict["min_fc_story_reach"]) + " - " + numberWithCommas(dict["max_fc_story_reach"]) + " reach"
-  document.getElementById("rightbar_cpr").innerHTML = numberWithCommas(dict["min_fc_story_cpr"]) + " - " + numberWithCommas(dict["max_fc_story_cpr"]) + " บาท"
-
-  document.getElementById("rightbar_work_format").innerHTML = "Prepared Content"
-  document.getElementById("rightbar_work_quantity").innerHTML = "1 Story"
+  set_rightBar_value(dict["min_fc_story_shouter"], dict["max_fc_story_shouter"], dict["min_fc_story_reach"], dict["max_fc_story_reach"],
+    dict["min_fc_story_cpr"], dict["max_fc_story_cpr"], "Prepared Content", "1 Story");
 
   return {
     "content_type": "Prepared Content",
@@ -413,12 +416,8 @@ function set_right_bar_pc(dict) {
 }
 
 function set_right_bar_ugc(dict) {
-  document.getElementById("rightbar_shouter").innerHTML = numberWithCommas(dict["min_ugc_story_shouter"]) + " - " + numberWithCommas(dict["max_ugc_story_shouter"]) + " คน"
-  document.getElementById("rightbar_reach").innerHTML = numberWithCommas(dict["min_ugc_story_reach"]) + " - " + numberWithCommas(dict["max_ugc_story_reach"]) + " reach"
-  document.getElementById("rightbar_cpr").innerHTML = numberWithCommas(dict["min_ugc_story_cpr"]) + " - " + numberWithCommas(dict["max_ugc_story_cpr"]) + " บาท"
-
-  document.getElementById("rightbar_work_format").innerHTML = "User Generated Content"
-  document.getElementById("rightbar_work_quantity").innerHTML = "1 Story"
+  set_rightBar_value(dict["min_ugc_story_shouter"], dict["max_ugc_story_shouter"], dict["min_ugc_story_reach"], dict["max_ugc_story_reach"],
+    dict["min_ugc_story_cpr"], dict["max_ugc_story_cpr"], "User Generated Content", "1 Story");
 
   return {
     "content_type": "User Generated Content",
@@ -429,12 +428,8 @@ function set_right_bar_ugc(dict) {
 }
 
 function set_right_bar_single(dict) {
-  document.getElementById("rightbar_shouter").innerHTML = numberWithCommas(dict["min_single_post_shouter"]) + " - " + numberWithCommas(dict["max_single_post_shouter"]) + " คน"
-  document.getElementById("rightbar_reach").innerHTML = numberWithCommas(dict["min_single_post_reach"]) + " - " + numberWithCommas(dict["max_single_post_reach"]) + " reach"
-  document.getElementById("rightbar_cpr").innerHTML = numberWithCommas(dict["min_single_post_cpr"]) + " - " + numberWithCommas(dict["max_single_post_cpr"]) + " บาท"
-
-  document.getElementById("rightbar_work_format").innerHTML = "Single Post"
-  document.getElementById("rightbar_work_quantity").innerHTML = "1 Post, 1 รูป"
+  set_rightBar_value(dict["min_single_post_shouter"], dict["max_single_post_shouter"], dict["min_single_post_reach"],
+    dict["max_single_post_reach"], dict["min_single_post_cpr"], dict["max_single_post_cpr"], "Single Post", "1 Post, 1 รูป");
 
   return {
     "content_type": "Single Post",
@@ -445,12 +440,8 @@ function set_right_bar_single(dict) {
 }
 
 function set_right_bar_multi(dict) {
-  document.getElementById("rightbar_shouter").innerHTML = numberWithCommas(dict["min_multi_post_shouter"]) + " - " + numberWithCommas(dict["max_multi_post_shouter"]) + " คน"
-  document.getElementById("rightbar_reach").innerHTML = numberWithCommas(dict["min_multi_post_reach"]) + " - " + numberWithCommas(dict["max_multi_post_reach"]) + " reach"
-  document.getElementById("rightbar_cpr").innerHTML = numberWithCommas(dict["min_multi_post_cpr"]) + " - " + numberWithCommas(dict["max_multi_post_cpr"]) + " บาท"
-
-  document.getElementById("rightbar_work_format").innerHTML = "Multi Post"
-  document.getElementById("rightbar_work_quantity").innerHTML = "1 Post, 3-5 รูป"
+  set_rightBar_value(dict["min_multi_post_shouter"], dict["max_multi_post_shouter"], dict["min_multi_post_reach"],
+    dict["max_multi_post_reach"], dict["min_multi_post_cpr"], dict["max_multi_post_cpr"], "Multi Post", "1 Post, 3-5 รูป\"");
 
   return {
     "content_type": "Multi Post",

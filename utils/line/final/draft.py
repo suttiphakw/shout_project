@@ -1,6 +1,6 @@
-from utils.text.draft import post as post_text
-from utils.image.draft import post_img
-from utils.flex.draft import post as post_flex
+from utils.line.text.draft import post as post_text
+from utils.line.image.draft import post_img
+from utils.line.flex.draft import post as post_flex
 
 
 def ig(line_user_id, context):

@@ -1,5 +1,5 @@
-from utils.text.campaign_detail import post as post_text
-from utils.flex.campaign_detail_delivery import post as post_flex
+from utils.line.text.campaign_detail import post as post_text
+from utils.line.flex.campaign_detail_delivery import post as post_flex
 
 
 def ig(line_user_id, ig_username, price, context):

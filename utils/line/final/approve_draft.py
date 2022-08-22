@@ -1,5 +1,5 @@
-from utils.text.approve_draft import post as post_text
-from utils.flex.approve_draft import post as post_flex
+from utils.line.text.approve_draft import post as post_text
+from utils.line.flex.approve_draft import post as post_flex
 
 
 def ig(line_user_id, context):

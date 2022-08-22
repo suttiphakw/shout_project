@@ -1,5 +1,5 @@
-from utils.text.delivery_complete import post as post_text
-from utils.flex.delivery_complete import post as post_flex
+from utils.line.text.delivery_complete import post as post_text
+from utils.line.flex.delivery_complete import post as post_flex
 
 
 def all_social(line_user_id, context):

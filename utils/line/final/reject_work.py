@@ -1,5 +1,5 @@
-from utils.text.cancel_work import post as post_text
-from utils.flex.cancel_work import post as post_flex
+from utils.line.text.reject_work import post as post_text
+from utils.line.flex.reject_work import post as post_flex
 
 
 def ig(line_user_id, price, context):

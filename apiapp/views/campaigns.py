@@ -1,75 +1,3 @@
-# import json
-#
-# from django.http.response import JsonResponse
-# from rest_framework.decorators import api_view
-#
-# from campaigns.models import Campaign
-#
-#
-# def qdict_to_dict(qdict):
-#   """Convert a Django QueryDict to a Python dict.
-#
-#   Single-value fields are put in directly, and for multi-value fields, a list
-#   of all values is stored at the field's key.
-#
-#   """
-#   return {k: v[0] if len(v) == 1 else v for k, v in qdict.lists()}
-#
-#
-# # Create your views here.
-# @api_view(['POST'])
-# def api_name(request):
-#   # Get Input
-#   campaign_name = request.data.get('campaign_name', None)
-#   # Create campaign
-#   campaign = Campaign.objects.create(user=request.user, campaign_name=campaign_name)
-#   campaign.save()
-#   campaign_id = campaign.id
-#
-#   if campaign_name:
-#     context = {
-#       'status': 'success',
-#       'campaign_id': campaign_id
-#     }
-#     return JsonResponse(context)
-#
-#   context = {
-#     'status': 'Campaign name is not found'
-#   }
-#   return JsonResponse(context)
-#
-#
-# @api_view(['PATCH'])
-# def api_scope_budget(request, campaign_id):
-#   campaign = Campaign.objects.filter(id=campaign_id).first()
-#
-#   # Get Input
-#   campaign_is_ig = request.data.get('is_check_instagram', None)
-#   campaign_is_fb = request.data.get('is_check_facebook', None)
-#   campaign_budget = request.data.get('budget', None)
-#   campaign_work_type = request.data.get('work_type', None)
-#
-#   if campaign_is_ig or campaign_is_fb:
-#     if campaign_budget and campaign_work_type:
-#       campaign.campaign_is_ig = campaign_is_ig
-#       campaign.campaign_is_fb = campaign_is_fb
-#       campaign.campaign_budget = campaign_budget
-#       campaign.campaign_work_type = campaign_work_type
-#       campaign.save()
-#
-#       context = {
-#         'status': 'success',
-#       }
-#       return JsonResponse(context)
-#
-#   context = {
-#     'status': 'Campaign name is not found'
-#   }
-#   return JsonResponse(context)
-#
-#
-#
-
 import json
 from django.http.response import JsonResponse
 
@@ -93,6 +21,8 @@ def api_name(request):
 
 def api_scope_budget(request, campaign_id):
   campaign = Campaign.objects.filter(id=campaign_id).first()
+  if not campaign:
+    return JsonResponse({'status': 'Campaign name is not found'})
 
   # Get Input
   campaign_is_ig = json.loads(request.POST.get('is_check_instagram', None))  # bool
@@ -114,6 +44,44 @@ def api_scope_budget(request, campaign_id):
       return JsonResponse(context)
 
   context = {
-    'status': 'Campaign name is not found'
+    'status': 'failed'
   }
   return JsonResponse(context)
+
+
+def api_content_type(request, campaign_id):
+  campaign = Campaign.objects.filter(id=campaign_id).first()
+  if not campaign:
+    return JsonResponse({'status': 'Campaign name is not found'})
+
+  # Get Input
+  campaign_content_type_story = request.POST.get('content_type_story', None)
+  campaign_fc_story_count = request.POST.get('content_type_story_count', None)
+  campaign_content_type_post = request.POST.get('content_type_post', None)
+
+#   print(campaign_content_type_story, type(campaign_content_type_story_count), campaign_content_type_post)
+  if campaign_content_type_story == 'undefined' and campaign_content_type_post == 'undefined':
+    return JsonResponse({'status': 'failed'})
+
+  if campaign_content_type_story != 'undefined' and campaign_content_type_post == 'undefined':
+    campaign.campaign_content_type_story = campaign_content_type_story
+    campaign.campaign_fc_story_count = int(campaign_fc_story_count)
+
+  if campaign_content_type_story == 'undefined' and campaign_content_type_post != 'undefined':
+    campaign.campaign_content_type_post = campaign_content_type_post
+
+  if campaign_content_type_story != 'undefined' and campaign_content_type_post != 'undefined':
+    campaign.campaign_content_type_story = campaign_content_type_story
+    campaign.campaign_fc_story_count = campaign_fc_story_count
+    campaign.campaign_content_type_post = campaign_content_type_post
+
+  campaign.save()
+
+  context = {
+    'status': 'success'
+  }
+
+  return JsonResponse(context)
+
+
+

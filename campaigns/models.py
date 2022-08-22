@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from django.contrib.postgres.fields import ArrayField
 
 from .utils.calculate import cal, cal_fb
 
@@ -19,7 +20,7 @@ class Campaign(models.Model):
   campaign_budget = models.IntegerField(null=True, blank=True)
   campaign_work_type = models.CharField(max_length=255, null=True, blank=True)
   campaign_content_type_story = models.CharField(max_length=255, null=True, blank=True)
-  campaign_fc_story_count = models.IntegerField(null=True, blank=True)
+  # campaign_fc_story_count = models.IntegerField(null=True, blank=True)
   campaign_content_type_post = models.CharField(max_length=255, null=True, blank=True)
 
   # Campaign Estimate
@@ -29,8 +30,24 @@ class Campaign(models.Model):
   estimate_max_shouter = models.IntegerField(null=True, blank=True)
   estimate_min_cpr = models.FloatField(null=True, blank=True)
   estimate_max_cpr = models.FloatField(null=True, blank=True)
+
+  # Campaign Product
+  product_name = models.CharField(max_length=255, null=True, blank=True)
+  product_photo_1 = models.ImageField(upload_to='campaign/product/', blank=True)
+  product_photo_2 = models.ImageField(upload_to='campaign/product/', blank=True)
+  product_photo_3 = models.ImageField(upload_to='campaign/product/', blank=True)
+  product_detail = models.CharField(max_length=500, null=True, blank=True)
+  product_link = models.URLField(null=True, blank=True)
+
+  # Target
+  campaign_gender = models.CharField(max_length=255, null=True, blank=True)
+  campaign_age = ArrayField(models.CharField(max_length=200, null=True, blank=True), null=True, blank=True)
+  campaign_province = models.CharField(max_length=255, null=True, blank=True)
+  campaign_interest = ArrayField(models.CharField(max_length=200, null=True, blank=True), null=True, blank=True)
+  shouter_gender = ArrayField(models.CharField(max_length=200, null=True, blank=True), null=True, blank=True)
+
   # Estimate Time
-  estimate_time = models.IntegerField(null=True, blank=True)
+  # estimate_time = models.IntegerField(null=True, blank=True)
 
   # Datetime
   campaign_created = models.DateTimeField(default=now, editable=False)

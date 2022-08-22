@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'brands',
     'campaigns',
     'pages',
+    'selections',
     'shouters',
     'rest_framework',
     'rest_framework_simplejwt',

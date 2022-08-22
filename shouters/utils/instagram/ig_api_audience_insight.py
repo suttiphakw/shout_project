@@ -24,6 +24,7 @@ from shouters.utils import settings
 #         value[k] = round(v * 100 / max_total, 1)
 #     return value
 
+
 def get(business_account_id, access_token):
   audience_scope = ['audience_city', 'audience_country', 'audience_gender_age', 'audience_locale', 'online_followers']
   params = {

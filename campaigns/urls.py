@@ -11,7 +11,7 @@ urlpatterns = [
   path('create/name/', views.create_name, name='create_name'),
   path('create/scope_budget/<int:campaign_id>/', views.create_scope_budget, name='create_scope_budget'),
   path('create/content_type/<int:campaign_id>/', views.create_content_type, name='create_content_type'),
-  path('create/product/', views.create_product, name='create_product'),
-  path('create/target/', views.create_target, name='create_target'),
-  path('create/shouter_selection/', views.create_shouter_selection, name='create_shouter_selection'),
+  path('create/product/<int:campaign_id>/', views.create_product, name='create_product'),
+  path('create/target/<int:campaign_id>/', views.create_target, name='create_target'),
+  path('create/shouter_selection/<int:campaign_id>/', views.create_shouter_selection, name='create_shouter_selection'),
 ]

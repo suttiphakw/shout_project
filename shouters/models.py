@@ -7,7 +7,7 @@ from shouters.lineMessagingApi.adminApproveApi import (api__admin_approve_text_m
                                                        api__admin_approve_image_message)
 from shouters.refresh_data import refresh_shouters
 from shouters.utils.refresh.refresh_instagram import ig_photo
-import requests
+
 
 # Create your models here.
 class Shouter(models.Model):
@@ -130,19 +130,24 @@ class Shouter(models.Model):
     error_section = models.CharField(max_length=120, null=True, blank=True, verbose_name="ERROR SECTION")
 
     # # Insight
-    ig_insight = models.JSONField(null=True, blank=True)
-    ig_max_total_people = models.IntegerField(null=True, blank=True)
-    ig_two_most_common_city = models.JSONField(null=True, blank=True)
-    ig_two_most_common_country = models.JSONField(null=True, blank=True)
-    ig_two_most_common_gender_age = models.JSONField(null=True, blank=True)
-    ig_audience_male_percent = models.FloatField(null=True, blank=True)
-    ig_audience_female_percent = models.FloatField(null=True, blank=True)
-    ig_age_range_13_17 = models.FloatField(null=True, blank=True)
-    ig_age_range_18_24 = models.FloatField(null=True, blank=True)
-    ig_age_range_25_34 = models.FloatField(null=True, blank=True)
-    ig_age_range_35_44 = models.FloatField(null=True, blank=True)
-    ig_age_range_45_54 = models.FloatField(null=True, blank=True)
-    ig_age_range_55_64 = models.FloatField(null=True, blank=True)
+    # ig_insight = models.JSONField(null=True, blank=True)
+    # ig_max_total_people = models.IntegerField(null=True, blank=True)
+    # ig_two_most_common_city = models.JSONField(null=True, blank=True)
+    # ig_two_most_common_country = models.JSONField(null=True, blank=True)
+    # ig_two_most_common_gender_age = models.JSONField(null=True, blank=True)
+    ig_audience_male_percent = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE MALE")
+    ig_audience_female_percent = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE FEMALE")
+    ig_audience_undefined_percent = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE UNDEFINED")
+    ig_age_range_13_17 = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE 13-17")
+    ig_age_range_18_24 = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE 18-24")
+    ig_age_range_25_34 = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE 25-34")
+    ig_age_range_35_44 = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE 35-44")
+    ig_age_range_45_54 = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE 45-54")
+    ig_age_range_55_64 = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE 55-64")
+    ig_audience_location_1 = models.CharField(max_length=120, null=True, blank=True, verbose_name="AUDIENCE LOCATION #1")
+    ig_audience_location_1_percent = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE LOCATION #1 PERCENT")
+    ig_audience_location_2 = models.CharField(max_length=120, null=True, blank=True, verbose_name="AUDIENCE LOCATION #2")
+    ig_audience_location_2_percent = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE LOCATION #2 PERCENT")
 
     #
     # # Dashboard
@@ -153,8 +158,11 @@ class Shouter(models.Model):
     #
     # # History Work
 
-    # def __str__(self):
-    #     return self.first_name
+    def __str__(self):
+      if self.ig_username:
+        return f"{self.ig_username}'s Profile"
+      else:
+        return f"ID{self.id} (Not Success)"
 
 
 # Function check before save

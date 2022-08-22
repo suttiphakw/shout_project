@@ -1,4 +1,4 @@
-from utils.text.sent_draft import post as post_text
+from utils.line.text.sent_draft import post as post_text
 
 
 def all_social(line_user_id):

@@ -13,7 +13,10 @@ from .models import Campaign
 #   )
 # admin.site.register(Campaign, CampaignAdmin)
 
+
 # Register your models here.
 class CampaignAdmin(admin.ModelAdmin):
   pass
+
+
 admin.site.register(Campaign, CampaignAdmin)

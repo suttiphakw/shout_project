@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages, auth
+from django.contrib import auth
 from django.core.files.storage import FileSystemStorage
 
 from shouters.models import Shouter
@@ -12,21 +12,10 @@ from shouters.utils.instagram.ig_api_get_story_insights import get as get_story_
 from shouters.utils.instagram.ig_api_media_objects import get as get_post_list
 from shouters.utils.instagram.ig_api_get_permalink_post import get as get_post_id
 from shouters.utils.instagram.ig_api_get_post_insights import get as get_post_insights
-from utils.final import \
-  campaign_detail_delivery, \
-  campaign_detail_no_delivery, \
-  wait_delivery, \
-  delivery_complete, \
-  draft, \
-  sent_draft, \
-  revise_draft, \
-  approve_draft, \
-  sent_work, \
-  wait_check_work, \
-  finish, \
-  payment, \
-  reject_work, \
-  cancel_work
+from shouters.utils.instagram.ig_api_get_reel_insights import get as get_reel_insights
+from utils.line.final import payment, sent_work, draft, wait_check_work, reject_work, revise_draft, finish, sent_draft, campaign_detail_delivery, \
+  campaign_detail_no_delivery, text_message, cancel_work, wait_delivery, approve_draft, delivery_complete
+from utils import media
 
 
 @login_required(login_url='/api/login/')
@@ -769,6 +758,40 @@ def add_reconnect(request):
   return render(request, 'api/flex/add/30_reconnect.html')
 
 
+# 4. Pure Text Message
+@login_required(login_url='/api/login/')
+def add_text_message(request):
+  if request.method == 'POST':
+    context = {
+      "text_message": request.POST['text_message'],
+      'list_line_user_id': request.POST['list_line_user_id'],
+    }
+
+    # Sent Flex
+    success_id = []
+    failed_id = []
+    if "," in context['list_line_user_id']:
+      list_line_user_id = context['list_line_user_id'].split(",")
+    else:
+      list_line_user_id = [context['list_line_user_id']]
+    for line_user_id in list_line_user_id:
+      response = text_message.all_social(line_user_id=line_user_id, context=context)
+
+      if not response:
+        failed_id.append(line_user_id)
+        continue
+
+      success_id.append(line_user_id)
+
+    context = {
+      'success_id': success_id,
+      'failed_id': failed_id
+    }
+    return render(request, 'api/flex/result.html', context=context)
+
+  return render(request, 'api/flex/add/40_text_message.html')
+
+
 # Upload Campaign Detail Logo
 @login_required(login_url='/api/login/')
 def upload_campaign_detail_logo(request):
@@ -884,3 +907,40 @@ def insights_post(request):
     return render(request, 'api/insights/insights_post.html', context)
 
   return render(request, 'api/insights/insights_post.html')
+
+
+@login_required(login_url='/api/login')
+def insights_reel(request):
+  if request.method == "POST":
+    url = request.POST['url']
+    ig_username = request.POST['ig_username']
+
+    shouter = Shouter.objects.filter(ig_username=ig_username).first()
+    business_account_id = shouter.ig_business_account_id
+    access_token = shouter.fb_main_access_token
+
+    # Find Post ID
+    context_list = get_post_list(business_account_id, access_token)
+    if not context_list:
+      return render(request, 'api/insights/insights_reel.html')
+    post_list = context_list['data']['data']
+
+    # For loop
+    post_id, like_count, comments_count = get_post_id(post_list, access_token, url)
+    if not post_id:
+      return render(request, 'api/insights/insights_reel.html')
+
+    # Get Insights
+    insight = get_reel_insights(post_id, access_token)
+
+    context = {
+      'like_count': like_count,
+      'comments_count': comments_count
+    }
+
+    for obj in insight:
+      context[obj['name']] = obj['values'][0]['value']
+
+    return render(request, 'api/insights/insights_reel.html', context)
+
+  return render(request, 'api/insights/insights_reel.html')

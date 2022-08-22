@@ -94,7 +94,7 @@
       </div>
     </section>
 
-    <form action="{% url 'create_shouter_selection' %}" method="POST">
+    <form action="{% url 'create_shouter_selection' campaign.id %}" method="POST"> {% csrf_token %}
       <!-- Content -->
       <section class="campaign__create__content no_left_right_padding">
         <div class="campaign__create__content__shouter">

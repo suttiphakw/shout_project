@@ -1,6 +1,6 @@
-from utils.text.revise_draft import post as post_text
-from utils.text.brand_comment import post as post_comment
-from utils.flex.revise_draft import post as post_flex
+from utils.line.text.revise_draft import post as post_text
+from utils.line.text.brand_comment import post as post_comment
+from utils.line.flex.revise_draft import post as post_flex
 
 
 def ig(line_user_id, context):
