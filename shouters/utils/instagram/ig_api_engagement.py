@@ -7,7 +7,7 @@ from shouters.utils.function import fn_engagement_outlier
 
 def get_like(media_objects, access_token):
   params = {
-    'fields': 'like_count, permalink',
+    'fields': 'like_count, media_url',
     'access_token': access_token
   }
   raw_list = []
@@ -27,7 +27,8 @@ def get_like(media_objects, access_token):
           raw_list.append(data['like_count'])
           id_list.append(item)
           # List Media url
-          media_srcs.append(data['permalink'])
+          if 'media_url' in data:
+            media_srcs.append(data['media_url'])
         except KeyError:
           continue
   # shouter have media < 15 media
@@ -43,7 +44,8 @@ def get_like(media_objects, access_token):
           raw_list.append(data['like_count'])
           id_list.append(item)
           # List Media url
-          media_srcs.append(data['permalink'])
+          if 'media_url' in data:
+            media_srcs.append(data['media_url'])
         except KeyError:
           continue
   
