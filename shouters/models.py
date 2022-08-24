@@ -134,11 +134,6 @@ class Shouter(models.Model):
     error_section = models.CharField(max_length=120, null=True, blank=True, verbose_name="ERROR SECTION")
 
     # # Insight
-    # ig_insight = models.JSONField(null=True, blank=True)
-    # ig_max_total_people = models.IntegerField(null=True, blank=True)
-    # ig_two_most_common_city = models.JSONField(null=True, blank=True)
-    # ig_two_most_common_country = models.JSONField(null=True, blank=True)
-    # ig_two_most_common_gender_age = models.JSONField(null=True, blank=True)
     ig_audience_male_percent = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE MALE")
     ig_audience_female_percent = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE FEMALE")
     ig_audience_undefined_percent = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE UNDEFINED")
@@ -152,6 +147,17 @@ class Shouter(models.Model):
     ig_audience_location_1_percent = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE LOCATION #1 PERCENT")
     ig_audience_location_2 = models.CharField(max_length=120, null=True, blank=True, verbose_name="AUDIENCE LOCATION #2")
     ig_audience_location_2_percent = models.FloatField(null=True, blank=True, verbose_name="AUDIENCE LOCATION #2 PERCENT")
+
+    # # Media
+    ig_media_picture_1 = models.ImageField(upload_to='instagram/media/', null=True, blank=True)
+    ig_media_picture_2 = models.ImageField(upload_to='instagram/media/', null=True, blank=True)
+    ig_media_picture_3 = models.ImageField(upload_to='instagram/media/', null=True, blank=True)
+    ig_media_picture_4 = models.ImageField(upload_to='instagram/media/', null=True, blank=True)
+    ig_media_picture_5 = models.ImageField(upload_to='instagram/media/', null=True, blank=True)
+    ig_media_picture_6 = models.ImageField(upload_to='instagram/media/', null=True, blank=True)
+    ig_media_picture_7 = models.ImageField(upload_to='instagram/media/', null=True, blank=True)
+    ig_media_picture_8 = models.ImageField(upload_to='instagram/media/', null=True, blank=True)
+    ig_media_picture_9 = models.ImageField(upload_to='instagram/media/', null=True, blank=True)
 
     #
     # # Dashboard
@@ -167,6 +173,7 @@ class Shouter(models.Model):
         return f"{self.ig_username}'s Profile"
       else:
         return f"ID{self.id} (Not Success)"
+
 
 # Function check before save
 def shouters_pre_save(sender, instance, *args, **kwargs):

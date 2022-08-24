@@ -7,11 +7,12 @@ from shouters.utils.function import fn_engagement_outlier
 
 def get_like(media_objects, access_token):
   params = {
-    'fields': 'like_count',
+    'fields': 'like_count, permalink',
     'access_token': access_token
   }
   raw_list = []
   id_list = []
+  media_srcs = []
   session = requests.Session()
   # shouter have media >= 15 media
   if len(media_objects) >= 15:
@@ -22,9 +23,12 @@ def get_like(media_objects, access_token):
         try:
           if data['like_count'] < 10:
             continue
+          # List Like and Media ID
           raw_list.append(data['like_count'])
           id_list.append(item)
-        except:
+          # List Media url
+          media_srcs.append(data['permalink'])
+        except KeyError:
           continue
   # shouter have media < 15 media
   else:
@@ -35,9 +39,12 @@ def get_like(media_objects, access_token):
         try:
           if data['like_count'] < 10:
             continue
+          # List Like and Media ID
           raw_list.append(data['like_count'])
           id_list.append(item)
-        except:
+          # List Media url
+          media_srcs.append(data['permalink'])
+        except KeyError:
           continue
   
   context = fn_engagement_outlier.cut(raw_list, id_list)
@@ -46,6 +53,7 @@ def get_like(media_objects, access_token):
   #   'ig_average_total_like': ig_average_total_like,
   # }
   # final_dict = [{id: like_count}, ... ]
+  context['media_srcs'] = media_srcs
   return context
 
 
@@ -66,7 +74,7 @@ def get_reach(final_dict, access_token):
       if post_reach < value:
         continue
       reach_list.append(post_reach)
-    except:
+    except KeyError:
       continue
 
   # Calculate Average Post Reach

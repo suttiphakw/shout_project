@@ -726,6 +726,16 @@ def register__get_ig_data(request, token):
       ig_average_total_like = context__like_engagement['ig_average_total_like']
       ig_story_view = predicted_story_view.get(ig_follower_count=ig_follower_count, ig_average_total_like=ig_average_total_like)
 
+      # Save Media Photo
+      media_srcs = context__like_engagement['media_srcs']
+      if media_srcs:
+        counter_media = 1
+        for media_src in media_srcs:
+          if counter_media > 9:
+            break
+          fn_save_photo.media_picture(shouter, media_src, counter_media)
+          counter_media += 1
+
       # เก็บ POST REACH เพื่อดูว่าเก็บไก้มากกว่า 3 ไหม
       context__post_reach = ig_api_engagement.get_reach(final_dict=final_dict, access_token=access_token)
       if 'ig_average_post_reach' in context__post_reach.keys():
