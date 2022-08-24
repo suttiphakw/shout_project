@@ -24,7 +24,7 @@ class ShouterAdmin(admin.ModelAdmin):
         'fb_page_name',
         # Instagram
         'ig_business_account_id', 'ig_username', 'ig_media_count', 'ig_follower_count', 'ig_following_count',
-        'ig_active_follower', 'ig_active_follower_harmonic', 'ig_active_follower_percent', 'ig_profile_picture',
+        'ig_active_follower', 'ig_active_follower_harmonic', 'ig_active_follower_percent', 'ig_profile_picture', 'ig_profile_picture_file',
         'ig_average_total_like', 'ig_engagement_percent', 'ig_story_view', 'ig_post_reach_guarantee', 'ig_story_view_guarantee',
         'ig_average_post_reach', 'ig_predicted_ad_post_reach', 'ig_ad_post_reach', 'ig_reach_source',
         # Insight
@@ -64,7 +64,7 @@ class ShouterAdmin(admin.ModelAdmin):
         ('Line User Info', {'fields': ('line_username', 'line_profile_picture')}),
         ('Instagram User Info', {'fields': ('ig_username', 'ig_media_count',
                                             'ig_follower_count', 'ig_following_count', 'ig_active_follower',
-                                            'ig_active_follower_percent', 'ig_profile_picture',
+                                            'ig_active_follower_percent', 'ig_profile_picture', 'ig_profile_picture_file',
                                             'ig_average_total_like', 'ig_engagement_percent',
                                             'ig_story_view', 'ig_average_post_reach', 'ig_reach_source', 'ig_predicted_ad_post_reach',
                                             'ig_post_reach_guarantee', 'ig_story_view_guarantee', 'ig_ad_post_reach',)}),
