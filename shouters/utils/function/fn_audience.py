@@ -137,5 +137,6 @@ def get(data, shouter):
   except KeyError:
     return False
 
+  shouter.is_insight = True
   save(gender, age, location, shouter)
   return True

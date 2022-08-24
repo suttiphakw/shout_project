@@ -12,7 +12,7 @@ from shouters.lineMessagingApi.lineMessagingApi import LineApiMessage
 # Import Own Utils
 from .utils import error
 from utils import media, jwt_token
-from .utils.function import fn_work_selection, fn_ad_gaurantee_reach, fn_round_to_five
+from .utils.function import fn_work_selection, fn_ad_gaurantee_reach, fn_round_to_five, fn_audience, fn_save_photo
 from .utils.facebook import fb_api_authentication, fb_api_bio, fb_api_permissions, fb_api_page_id
 from .utils.instagram import ig_api_engagement, ig_api_active_follower, ig_api_business_account_id, ig_api_bio, ig_api_media_objects, ig_api_audience_insight
 from .utils.line import line_api_authentication, line_api_bio
@@ -672,6 +672,10 @@ def register__get_ig_data(request, token):
   shouter.ig_profile_picture = ig_profile_picture
   shouter.save()
 
+  # save profile_picture
+  if ig_profile_picture:
+    fn_save_photo.profile_picture(shouter, ig_profile_picture)
+
   ##########################################################################################################################
   # Get Instagram Active Follower
   if ig_follower_count == 0:
@@ -786,7 +790,11 @@ def register__get_ig_data(request, token):
 
   ##########################################################################################################################
   # IG INSIGHT
-  shouter.ig_response_audience_insight = ig_api_audience_insight.get(business_account_id=ig_business_account_id, access_token=access_token)
+  data = ig_api_audience_insight.get(business_account_id=ig_business_account_id, access_token=access_token)
+  shouter.ig_response_audience_insight = data
+  if data and data['data'] != []:
+    if data['data'][0]['values'][0]['value'] and data['data'][2]['values'][0]['value']:
+      fn_audience.get(data, shouter)
   ##########################################################################################################################
   shouter.fb_is_connect = True
   shouter.save()

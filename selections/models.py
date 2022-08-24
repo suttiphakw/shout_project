@@ -7,6 +7,10 @@ from shouters.models import Shouter
 class Selection(models.Model):
   campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
   shouter = models.ForeignKey(Shouter, on_delete=models.CASCADE)
+  score = models.FloatField(null=True, blank=True)
 
   def __str__(self):
-    return self.shouter
+    if self.shouter:
+      return f"{self.shouter}"
+    else:
+      return "Shouter Profile"

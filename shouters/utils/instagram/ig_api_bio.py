@@ -1,6 +1,7 @@
 import requests
 from shouters.utils import settings
 
+
 def get(business_account_id, access_token):
   params = {
     'fields': ','.join(settings.ig_bio_scope),
@@ -17,7 +18,7 @@ def get(business_account_id, access_token):
     media_count = data['media_count']
     followers_count = data['followers_count']
     followings_count = data['follows_count']
-  except:
+  except KeyError:
     return False
 
   if 'profile_picture_url' in data.keys():

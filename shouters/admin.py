@@ -9,7 +9,7 @@ class ShouterAdmin(admin.ModelAdmin):
 
     readonly_fields = (
         # Status
-        'is_register', 'is_already_approve', 'is_already_fb_connect', 'is_finished_regis',
+        'is_register', 'is_already_approve', 'is_already_fb_connect', 'is_insight', 'is_finished_regis',
         'is_connect_bank',
         # Personal Info
         'nickname', 'first_name', 'last_name', 'email', 'tel', 'gender',
@@ -50,7 +50,7 @@ class ShouterAdmin(admin.ModelAdmin):
     list_filter = ('is_register', 'is_finished_regis', 'is_connect_bank', 'fb_is_connect', 'is_approve')
 
     fieldsets = (
-        ('Status', {'fields': ('is_approve', 'is_refresh_shouters_data', 'is_register', 'fb_is_connect',
+        ('Status', {'fields': ('is_approve', 'is_refresh_shouters_data', 'is_register', 'fb_is_connect', 'is_insight',
                                'is_finished_regis', 'is_connect_bank',)}),
         ('Personal Info', {'fields': ('nickname', 'first_name', 'last_name', 'email', 'tel', 'gender',
                                       'birthday_date', 'birthday_month', 'birthday_year', 'province', 'education',

@@ -1,3 +1,5 @@
+import urllib.request
+
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.utils.timezone import now
@@ -38,6 +40,7 @@ class Shouter(models.Model):
     # # Boolean
     is_register = models.BooleanField(default=False, verbose_name='IS COMPLETE PERSONAL INFO')
     is_finished_regis = models.BooleanField(default=False, verbose_name='IS FINISHED REGISTRATION')
+    is_insight = models.BooleanField(default=False, verbose_name='IS INSIGHT DATA')
     is_approve = models.BooleanField(default=False, verbose_name='IS ADMIN APPROVE')
     is_already_approve = models.BooleanField(default=False)
     is_connect_bank = models.BooleanField(default=False, verbose_name='IS CONNECT TO BANK')
@@ -81,6 +84,7 @@ class Shouter(models.Model):
     ig_active_follower_harmonic = models.IntegerField(null=True, blank=True)
     ig_active_follower_percent = models.FloatField(null=True, blank=True)
     ig_profile_picture = models.URLField(max_length=1000, null=True, blank=True)
+    ig_profile_picture_file = models.ImageField(upload_to='instagram/profile/', null=True, blank=True)
 
     # # Engagement
     ig_average_total_like = models.IntegerField(null=True, blank=True, verbose_name="IG => AVERAGE LIKE")
@@ -163,6 +167,13 @@ class Shouter(models.Model):
         return f"{self.ig_username}'s Profile"
       else:
         return f"ID{self.id} (Not Success)"
+
+    # def get_profile_picture(self):
+    #   if self.ig_profile_picture and not self.ig_profile_picture_file:
+    #     result = urllib.request.urlretrieve(self.ig_profile_picture)
+    #     self.ig_profile_picture_file.save(
+    #
+    #     )
 
 
 # Function check before save
@@ -260,6 +271,7 @@ def shouters_post_save(sender, instance, *args, **kwargs):
                                                         ig_username=ig_username,
                                                         ig_follower_count=ig_follower_count)
         response_image = api__admin_approve_image_message(line_user_id=line_user_id)
+
 
 # Run Pre and Post Save Function
 pre_save.connect(shouters_pre_save, sender=Shouter)
