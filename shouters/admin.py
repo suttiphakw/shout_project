@@ -31,6 +31,9 @@ class ShouterAdmin(admin.ModelAdmin):
         'ig_audience_male_percent', 'ig_audience_female_percent', 'ig_audience_undefined_percent', 'ig_age_range_13_17', 'ig_age_range_18_24',
         'ig_age_range_25_34', 'ig_age_range_35_44', 'ig_age_range_45_54', 'ig_age_range_55_64',
         'ig_audience_location_1', 'ig_audience_location_1_percent', 'ig_audience_location_2', 'ig_audience_location_2_percent',
+        # Media
+        'ig_media_picture_1', 'ig_media_picture_2', 'ig_media_picture_3', 'ig_media_picture_4', 'ig_media_picture_5',
+        'ig_media_picture_6', 'ig_media_picture_7', 'ig_media_picture_8', 'ig_media_picture_9',
         # Pricing
         'ig_price_story_fc', 'ig_price_story_ugc', 'ig_price_post_fc', 'ig_price_post_ugc', 'ig_price_story_post_fc',
         'ig_price_story_post_ugc',
@@ -71,6 +74,8 @@ class ShouterAdmin(admin.ModelAdmin):
                                           'ig_age_range_35_44', 'ig_age_range_45_54', 'ig_age_range_55_64',
                                           'ig_audience_location_1', 'ig_audience_location_1_percent', 'ig_audience_location_2',
                                           'ig_audience_location_2_percent')}),
+        ('Instagram Media', {'fields': ('ig_media_picture_1', 'ig_media_picture_2', 'ig_media_picture_3', 'ig_media_picture_4', 'ig_media_picture_5',
+                                        'ig_media_picture_6', 'ig_media_picture_7', 'ig_media_picture_8', 'ig_media_picture_9')}),
         ('Facebook Info', {'fields': ('fb_page_id', 'fb_name', 'fb_page_name')}),
         ('Work Selection', {'fields': ('is_check_ig', 'is_check_ig_story', 'is_check_ig_post', 'is_check_ig_story_post',
                                        'is_check_ig_fb', 'is_check_ig_fb_story', 'is_check_ig_fb_post',  'is_check_ig_fb_story_post',
