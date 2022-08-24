@@ -168,14 +168,6 @@ class Shouter(models.Model):
       else:
         return f"ID{self.id} (Not Success)"
 
-    # def get_profile_picture(self):
-    #   if self.ig_profile_picture and not self.ig_profile_picture_file:
-    #     result = urllib.request.urlretrieve(self.ig_profile_picture)
-    #     self.ig_profile_picture_file.save(
-    #
-    #     )
-
-
 # Function check before save
 def shouters_pre_save(sender, instance, *args, **kwargs):
     # Admin Approve
