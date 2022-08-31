@@ -121,7 +121,7 @@
                       <img src="{% static 'img/campaigns/shouter_selection/icon_shouter.png' %}" alt="">
                       <p class="detail"><span class="grey">Shouter</span></p>
                     </div>
-                    <p class="detail">50 คน</p>
+                    <p class="detail" id="shouter_count">- คน</p>
                   </div>
                   <!-- Reach -->
                   <div class="item">
@@ -129,14 +129,14 @@
                       <img src="{% static 'img/campaigns/shouter_selection/icon_reach.png' %}" alt="">
                       <p class="detail"><span class="grey">Total Reach</span></p>
                     </div>
-                    <p class="detail">500,000 Reach</p>
+                    <p class="detail" id="total_reach">- Reach</p>
                   </div>
                   <!-- Cost Per Reach -->
                   <div class="item">
                     <div class="caption">
                       <p class="detail"><span class="grey">Cost Per Reach</span></p>
                     </div>
-                    <p class="detail">4.2 บาท</p>
+                    <p class="detail" id="total_cpr">- บาท</p>
                   </div>
                 </div>
                 <div class="right column">
@@ -146,7 +146,7 @@
                       <img src="{% static 'img/campaigns/shouter_selection/icon_follower.png' %}" alt="">
                       <p class="detail"><span class="grey">Total Follower</span></p>
                     </div>
-                    <p class="detail">500,000 Followers</p>
+                    <p class="detail" id="total_follower">- Followers</p>
                   </div>
                   <!-- Engagement -->
                   <div class="item">
@@ -154,14 +154,14 @@
                       <img src="{% static 'img/campaigns/shouter_selection/icon_engagement.png' %}" alt="">
                       <p class="detail"><span class="grey">Total Engagement (Rate)</span></p>
                     </div>
-                    <p class="detail">10,000 (20%)</p>
+                    <p class="detail" id="total_engagement">-</p>
                   </div>
                   <!-- Cost Per Engagement -->
                   <div class="item">
                     <div class="caption">
                       <p class="detail"><span class="grey">Cost Per Engagement</span></p>
                     </div>
-                    <p class="detail">5.1 บาท</p>
+                    <p class="detail">- บาท</p>
                   </div>
                 </div>
               </div>
@@ -187,7 +187,7 @@
                       </div>
                       <img src="{% static 'img/campaigns/shouter_selection/icon_info.png' %}" alt="">
                     </div>
-                    <h5 class="shouter_number"><span class="bold">8,500</span> / 100,000</h5>
+                    <h5 class="shouter_number"><span class="bold" id="total_price">-</span> / <span>{{ brand_selected_price|intcomma }}</span></h5>
                     <img src="{% static 'img/campaigns/shouter_selection/sample_shouter_graph.png' %}" alt="">
                   </div>
                 </div>
@@ -197,1397 +197,232 @@
 
           <!-- Shouter -->
           <section class="campaign__create__content__shouter__section">
-            <div class="campaign__card shouter_selection">
+            <div class="campaign__card shouter_selection_content">
               <!-- Shouter Lists -->
               <div class="lists">
-                <!-- Shouter Card -->
-                <div class="shouter__card">
-                  <input type="checkbox" id="1">
-                  <label for="1">
-                    <div class="box">
-                      <div class="justify_space">
-                        <div class="recommended">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_star.png' %}" alt="">
-                          <span>Recommended</span>
-                        </div>
-                        <span class="tick_box_uncheck"></span>
-                        <span class="tick_box_check">
-                          <svg class="icon_check">
-                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="justify_space">
-                        <div class="price">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_shout_shouter_card.png' %}" alt="">
-                          <span>5,500</span>
-                        </div>
-                        <div class="social">
-                          <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
-                          <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="">
-                        </div>
-                      </div>
-                      <div class="info">
-                        <img class="shouter_img" src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                        <p class="name">Suttiphak Wuttimongkolchai</p>
-                        <p>Male | 25</p>
-                        <p>Chulalongkorn University</p>
-                        <div class="performance_lists">
-                          <!-- Follower -->
-                          <div class="performance">
-                            <span class="grey">Follower</span>
-                            <p>30,000</p>
-                          </div>
-                          <!-- Engagement -->
-                          <div class="performance">
-                            <span class="grey">Engagement %</span>
-                            <p>20%</p>
-                          </div>
-                          <!-- Reach -->
-                          <div class="performance">
-                            <span class="grey">Reach</span>
-                            <p>8,400</p>
-                          </div>
-                          <!-- CPR -->
-                          <div class="performance">
-                            <span class="grey">Cost Per Reach</span>
-                            <p>30 บาท</p>
-                          </div>
-                        </div>
-                      </div>
-                      <span class="insight" onclick="show_modal('modal_1')">View full insights</span>
-                    </div>
-                  </label>
-                  <div class="shouter__modal" id="modal_1">
-                    <div class="backdrop"></div>
-                    <div class="modal_card">
-                      <div class="left">
-                        <div class="bio">
-                          <img src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                          <div class="text">
-                            <p class="username">ppeeraratt</p>
-                            <p class="social">Instagram Business Account</p>
-                            <p class="tooltips">Insight และ Top Target Audience มาจาก Business Account API</p>
-                          </div>
-                        </div>
-                        <div class="box">
-                          <div class="text">
-                            <p class="number">200</p>
-                            <p class="info">Posts</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">2,300</p>
-                            <p class="info">Followers</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">1,200</p>
-                            <p class="info">Followings</p>
-                          </div>
-                        </div>
-                        <div class="images">
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                        </div>
-                        <div class="interests">
-                          <p class="header">Shouter Interests</p>
-                          <div class="interest">
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="right">
-                        <span class="close" onclick="close_modal('modal_1')">X</span>
-                        <div class="insights">
-                          <p class="header">Insights</p>
-                          <div class="justify_space">
-                            <p>Active Follower (Rate)</p>
-                            <p>2,380 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Engagement (Rate)</p>
-                            <p>350 (19.4%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
-                          </div>
-                        </div>
-                        <div class="audiences">
-                          <p class="header">Top Target Audience</p>
-                          <div class="left">
-                            <div class="justify_space">
-                              <p>Women</p>
-                              <p>54.2%</p>
+                {% for order in orders %}
+                  <!-- Shouter Card -->
+                  <div class="shouter__card">
+                    <input type="checkbox" id="{{ order.shouter.id }}" name="{{ order.shouter.id }}"
+                           onclick="set_result_bar({{ order.shouter.id }}, {{ order.ig_ad_post_reach }}, {{ order.cpr }}, {{ order.ig_follower_count}}, {{ order.ig_engagement_percent }}, {{ order.brand_price}})">
+                    <label for="{{ order.shouter.id }}">
+                      <div class="box">
+                        <div class="justify_space">
+                          {% if selection.score >= 80 %}
+                            <div class="recommended">
+                              <img src="{% static 'img/campaigns/shouter_selection/icon_star.png' %}" alt="">
+                              <span>Recommended</span>
                             </div>
-                            <div class="justify_space">
-                              <p>Men</p>
-                              <p>45.8%</p>
+                          {% else %}
+                            <div></div>
+                          {% endif %}
+                          <span class="tick_box_uncheck"></span>
+                          <span class="tick_box_check">
+                            <svg class="icon_check">
+                              <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+                            </svg>
+                          </span>
+                        </div>
+                        <div class="justify_space">
+                          <div class="price">
+                            <img src="{% static 'img/campaigns/shouter_selection/icon_shout_shouter_card.png' %}" alt="">
+                            <span>{{ order.brand_price|intcomma }}</span>
+                          </div>
+                          <div class="social">
+                            <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
+                            <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="">
+                          </div>
+                        </div>
+                        <div class="info">
+                          <img class="shouter_img" src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
+                          <p class="name">{{ order.shouter.first_name }} {{ order.shouter.last_name }}</p>
+                          <p>{{ order.shouter.gender }}</p>
+                          <p>{{ order.shouter.college }}</p>
+                          <div class="performance_lists">
+                            <!-- Follower -->
+                            <div class="performance">
+                              <span class="grey">Follower</span>
+                              <p>{{ order.ig_follower_count|intcomma }}</p>
+                            </div>
+                            <!-- Engagement -->
+                            <div class="performance">
+                              <span class="grey">Engagement %</span>
+                              <p>{{ order.ig_engagement_percent }}%</p>
+                            </div>
+                            <!-- Reach -->
+                            <div class="performance">
+                              <span class="grey">Reach</span>
+                              <p>{{ order.ig_ad_post_reach|intcomma }}</p>
+                            </div>
+                            <!-- CPR -->
+                            <div class="performance">
+                              <span class="grey">CPR</span>
+                              <p>{{ order.cpr }} บาท</p>
                             </div>
                           </div>
-                          <div class="right">
+                        </div>
+                      </div>
+                    </label>
+                    <span class="insight" onclick="show_modal({{ order.id }})">View full insights</span>
 
+                    <div class="shouter__modal" id="{{ order.id }}">
+                      <div class="backdrop" onclick="close_modal({{ order.id }})"></div>
+                      <div class="modal_card">
+                        <div class="left">
+                          <div class="bio">
+                            <img src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
+                            <div class="text">
+                              <p class="username">{{ order.shouter.ig_username }}</p>
+                              <p class="social">Instagram Business Account</p>
+                              <p class="tooltips">Insight และ Top Target Audience มาจาก Business Account API</p>
+                            </div>
                           </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
+                          <div class="box">
+                            <div class="text">
+                              <p class="number">{{ order.ig_media_count|intcomma }}</p>
+                              <p class="info">Posts</p>
+                            </div>
+                            <div class="text">
+                              <p class="number">{{ order.ig_follower_count|intcomma }}</p>
+                              <p class="info">Followers</p>
+                            </div>
+                            <div class="text">
+                              <p class="number">{{ order.ig_following_count|intcomma }}</p>
+                              <p class="info">Followings</p>
+                            </div>
                           </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
+                          <div class="images">
+                            <div class="image">
+                              <img src="{{ order.shouter.ig_media_picture_1 }}" alt="">
+                            </div>
+                            <div class="image">
+                              <img src="{{ order.shouter.ig_media_picture_2 }}" alt="">
+                            </div>
+                            <div class="image">
+                              <img src="{{ order.shouter.ig_media_picture_3 }}" alt="">
+                            </div>
+                            <div class="image">
+                              <img src="{{ order.shouter.ig_media_picture_4 }}" alt="">
+                            </div>
+                            <div class="image">
+                              <img src="{{ order.shouter.ig_media_picture_5 }}" alt="">
+                            </div>
+                            <div class="image">
+                              <img src="{{ order.shouter.ig_media_picture_6 }}" alt="">
+                            </div>
+                            <div class="image">
+                              <img src="{{ order.shouter.ig_media_picture_7 }}" alt="">
+                            </div>
+                            <div class="image">
+                              <img src="{{ order.shouter.ig_media_picture_8 }}" alt="">
+                            </div>
+                            <div class="image">
+                              <img src="{{ order.shouter.ig_media_picture_9 }}" alt="">
+                            </div>
+                          </div>
+                          <div class="interests">
+                            <p class="header">Shouter Interests</p>
+                            <div class="interest">
+                              {% for foo in order.shouter.interest %}
+                                {% if foo == 'technology_gadget' %}
+                                  <span>📱Technology & Gadget</span>
+                                {% elif foo == 'social_csr' %}
+                                  <span>⭐️ Social & CSR</span>
+                                {% elif foo == 'entertainment' %}
+                                  <span>🎸 Entertainment</span>
+                                {% elif foo == 'finance_investment' %}
+                                  <span>💰 Finance & Investment</span>
+                                {% elif foo == 'lifestyle' %}
+                                  <span>🚶🏻 Lifestyle</span>
+                                {% elif foo == 'fashion' %}
+                                  <span>👗 Fashion</span>
+                                {% elif foo == 'automobile' %}
+                                  <span>🚘 Automobile</span>
+                                {% elif foo == 'food_drink' %}
+                                  <span>🍔 Food & Drink</span>
+                                {% elif foo == 'beauty' %}
+                                  <span>💄 Beauty</span>
+                                {% elif foo == 'travel' %}
+                                  <span>✈️ Travel</span>
+                                {% elif foo == 'health_sport' %}
+                                  <span>🏀 Health & Sport</span>
+                                {% elif foo == 'design_art' %}
+                                  <span>🎨 Design & Art</span>
+                                {% elif foo == 'luxury' %}
+                                  <span>👜 Luxury</span>
+                                {% endif %}
+                              {% endfor %}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="right">
+                          <span class="close" onclick="close_modal({{ order.id }})">X</span>
+                          <div class="insights">
+                            <p class="header">Insights</p>
+                            <div class="justify_space">
+                              <p>Active Follower (Rate)</p>
+                              <p>{{ order.ig_active_follower|intcomma }} ({{ selection.shouter.ig_active_follower_percent }}%)</p>
+                            </div>
+                            <div class="justify_space">
+                              <p>Engagement (Rate)</p>
+                              <p>{{ order.ig_average_total_like|intcomma }} ({{ order.ig_engagement_percent }}%)</p>
+                            </div>
+                            <div class="justify_space">
+                              <p>Avg. Story View</p>
+                              <p>{{ order.ig_story_view|intcomma }}</p>
+                            </div>
+                            <div class="justify_space">
+                              <p>Avg. Post Reach</p>
+                              <p>{{ order.ig_ad_post_reach|intcomma }} </p>
+                            </div>
+                          </div>
+                          <div class="audiences">
+                            <p class="header">Top Target Audience</p>
+{#                            <div class="left">#}
+                              <div class="justify_space">
+                                <p>Women</p>
+                                <p>{{ order.ig_audience_female_percent }}%</p>
+                              </div>
+                              <div class="justify_space">
+                                <p>Men</p>
+                                <p>{{ order.ig_audience_male_percent }}%</p>
+                              </div>
+{#                            </div>#}
+{#                            <div class="right">#}
+{##}
+{#                            </div>#}
+                            <p class="header">Top Target Location</p>
+                            <div class="justify_space">
+                              <p>{{ order.ig_audience_location_1 }}</p>
+                              <p>{{ order.ig_audience_location_1_percent }}%</p>
+                            </div>
+                            <div class="justify_space">
+                              <p>{{ order.ig_audience_location_2 }}</p>
+                              <p>{{ order.ig_audience_location_2_percent }}%</p>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <!-- Shouter Card -->
-                <div class="shouter__card">
-                  <input type="checkbox" id="2">
-                  <label for="2">
-                    <div class="box">
-                      <div class="justify_space">
-                        <div class="recommended">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_star.png' %}" alt="">
-                          <span>Recommended</span>
-                        </div>
-                        <span class="tick_box_uncheck"></span>
-                        <span class="tick_box_check">
-                          <svg class="icon_check">
-                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="justify_space">
-                        <div class="price">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_shout_shouter_card.png' %}" alt="">
-                          <span>5,500</span>
-                        </div>
-                        <div class="social">
-                          <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
-                          <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="">
-                        </div>
-                      </div>
-                      <div class="info">
-                        <img class="shouter_img" src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                        <p class="name">Suttiphak Wuttimongkolchai</p>
-                        <p>Male | 25</p>
-                        <p>Chulalongkorn University</p>
-                        <div class="performance_lists">
-                          <!-- Follower -->
-                          <div class="performance">
-                            <span class="grey">Follower</span>
-                            <p>30,000</p>
-                          </div>
-                          <!-- Engagement -->
-                          <div class="performance">
-                            <span class="grey">Engagement %</span>
-                            <p>20%</p>
-                          </div>
-                          <!-- Reach -->
-                          <div class="performance">
-                            <span class="grey">Reach</span>
-                            <p>8,400</p>
-                          </div>
-                          <!-- CPR -->
-                          <div class="performance">
-                            <span class="grey">Cost Per Reach</span>
-                            <p>30 บาท</p>
-                          </div>
-                        </div>
-                      </div>
-                      <span class="insight" onclick="show_modal('modal_2')">View full insights</span>
-                    </div>
-                  </label>
-                  <div class="shouter__modal" id="modal_2">
-                    <div class="backdrop"></div>
-                    <div class="modal_card">
-                      <div class="left">
-                        <div class="bio">
-                          <img src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                          <div class="text">
-                            <p class="username">ppeeraratt</p>
-                            <p class="social">Instagram Business Account</p>
-                            <p class="tooltips">Insight และ Top Target Audience มาจาก Business Account API</p>
-                          </div>
-                        </div>
-                        <div class="box">
-                          <div class="text">
-                            <p class="number">200</p>
-                            <p class="info">Posts</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">2,300</p>
-                            <p class="info">Followers</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">1,200</p>
-                            <p class="info">Followings</p>
-                          </div>
-                        </div>
-                        <div class="images">
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                        </div>
-                        <div class="interests">
-                          <p class="header">Shouter Interests</p>
-                          <div class="interest">
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="right">
-                        <span class="close" onclick="close_modal('modal_2')">X</span>
-                        <div class="insights">
-                          <p class="header">Insights</p>
-                          <div class="justify_space">
-                            <p>Active Follower (Rate)</p>
-                            <p>2,380 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Engagement (Rate)</p>
-                            <p>350 (19.4%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
-                          </div>
-                        </div>
-                        <div class="audiences">
-                          <p class="header">Top Target Audience</p>
-                          <div class="left">
-                            <div class="justify_space">
-                              <p>Women</p>
-                              <p>54.2%</p>
-                            </div>
-                            <div class="justify_space">
-                              <p>Men</p>
-                              <p>45.8%</p>
-                            </div>
-                          </div>
-                          <div class="right">
-
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                {% endfor %}
+              </div>
+              <button class="w448 btn__orange" type="button" id="next_button" style="text-align: center;display: block" onclick="show_confirm_modal()">ขั้นตอนถัดไป</button>
+              <div class="shouter__modal" id="confirm_modal">
+                <div class="backdrop" onclick="close_confirm_modal()"></div>
+                <div class="modal_card confirm">
+                  <div class="top">
+                    <h5>ยืนยัน Shouter Selection (1)</h5>
+                    <span class="close" onclick="close_confirm_modal()">X</span>
                   </div>
-                </div>
-                <!-- Shouter Card -->
-                <div class="shouter__card">
-                  <input type="checkbox" id="3">
-                  <label for="3">
-                    <div class="box">
-                      <div class="justify_space">
-                        <div class="recommended">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_star.png' %}" alt="">
-                          <span>Recommended</span>
-                        </div>
-                        <span class="tick_box_uncheck"></span>
-                        <span class="tick_box_check">
-                          <svg class="icon_check">
-                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="justify_space">
-                        <div class="price">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_shout_shouter_card.png' %}" alt="">
-                          <span>5,500</span>
-                        </div>
-                        <div class="social">
-                          <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
-                          <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="">
-                        </div>
-                      </div>
-                      <div class="info">
-                        <img class="shouter_img" src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                        <p class="name">Suttiphak Wuttimongkolchai</p>
-                        <p>Male | 25</p>
-                        <p>Chulalongkorn University</p>
-                        <div class="performance_lists">
-                          <!-- Follower -->
-                          <div class="performance">
-                            <span class="grey">Follower</span>
-                            <p>30,000</p>
-                          </div>
-                          <!-- Engagement -->
-                          <div class="performance">
-                            <span class="grey">Engagement %</span>
-                            <p>20%</p>
-                          </div>
-                          <!-- Reach -->
-                          <div class="performance">
-                            <span class="grey">Reach</span>
-                            <p>8,400</p>
-                          </div>
-                          <!-- CPR -->
-                          <div class="performance">
-                            <span class="grey">Cost Per Reach</span>
-                            <p>30 บาท</p>
-                          </div>
-                        </div>
-                      </div>
-                      <span class="insight" onclick="show_modal('modal_3')">View full insights</span>
-                    </div>
-                  </label>
-                  <div class="shouter__modal" id="modal_3">
-                    <div class="backdrop"></div>
-                    <div class="modal_card">
-                      <div class="left">
-                        <div class="bio">
-                          <img src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                          <div class="text">
-                            <p class="username">ppeeraratt</p>
-                            <p class="social">Instagram Business Account</p>
-                            <p class="tooltips">Insight และ Top Target Audience มาจาก Business Account API</p>
-                          </div>
-                        </div>
-                        <div class="box">
-                          <div class="text">
-                            <p class="number">200</p>
-                            <p class="info">Posts</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">2,300</p>
-                            <p class="info">Followers</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">1,200</p>
-                            <p class="info">Followings</p>
-                          </div>
-                        </div>
-                        <div class="images">
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                        </div>
-                        <div class="interests">
-                          <p class="header">Shouter Interests</p>
-                          <div class="interest">
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="right">
-                        <span class="close" onclick="close_modal('modal_3')">X</span>
-                        <div class="insights">
-                          <p class="header">Insights</p>
-                          <div class="justify_space">
-                            <p>Active Follower (Rate)</p>
-                            <p>2,380 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Engagement (Rate)</p>
-                            <p>350 (19.4%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
-                          </div>
-                        </div>
-                        <div class="audiences">
-                          <p class="header">Top Target Audience</p>
-                          <div class="left">
-                            <div class="justify_space">
-                              <p>Women</p>
-                              <p>54.2%</p>
-                            </div>
-                            <div class="justify_space">
-                              <p>Men</p>
-                              <p>45.8%</p>
-                            </div>
-                          </div>
-                          <div class="right">
-
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Shouter Card -->
-                <div class="shouter__card">
-                  <input type="checkbox" id="4">
-                  <label for="4">
-                    <div class="box">
-                      <div class="justify_space">
-                        <div class="recommended">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_star.png' %}" alt="">
-                          <span>Recommended</span>
-                        </div>
-                        <span class="tick_box_uncheck"></span>
-                        <span class="tick_box_check">
-                          <svg class="icon_check">
-                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="justify_space">
-                        <div class="price">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_shout_shouter_card.png' %}" alt="">
-                          <span>5,500</span>
-                        </div>
-                        <div class="social">
-                          <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
-                          <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="">
-                        </div>
-                      </div>
-                      <div class="info">
-                        <img class="shouter_img" src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                        <p class="name">Suttiphak Wuttimongkolchai</p>
-                        <p>Male | 25</p>
-                        <p>Chulalongkorn University</p>
-                        <div class="performance_lists">
-                          <!-- Follower -->
-                          <div class="performance">
-                            <span class="grey">Follower</span>
-                            <p>30,000</p>
-                          </div>
-                          <!-- Engagement -->
-                          <div class="performance">
-                            <span class="grey">Engagement %</span>
-                            <p>20%</p>
-                          </div>
-                          <!-- Reach -->
-                          <div class="performance">
-                            <span class="grey">Reach</span>
-                            <p>8,400</p>
-                          </div>
-                          <!-- CPR -->
-                          <div class="performance">
-                            <span class="grey">Cost Per Reach</span>
-                            <p>30 บาท</p>
-                          </div>
-                        </div>
-                      </div>
-                      <span class="insight" onclick="show_modal('modal_4')">View full insights</span>
-                    </div>
-                  </label>
-                  <div class="shouter__modal" id="modal_4">
-                    <div class="backdrop"></div>
-                    <div class="modal_card">
-                      <div class="left">
-                        <div class="bio">
-                          <img src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                          <div class="text">
-                            <p class="username">ppeeraratt</p>
-                            <p class="social">Instagram Business Account</p>
-                            <p class="tooltips">Insight และ Top Target Audience มาจาก Business Account API</p>
-                          </div>
-                        </div>
-                        <div class="box">
-                          <div class="text">
-                            <p class="number">200</p>
-                            <p class="info">Posts</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">2,300</p>
-                            <p class="info">Followers</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">1,200</p>
-                            <p class="info">Followings</p>
-                          </div>
-                        </div>
-                        <div class="images">
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                        </div>
-                        <div class="interests">
-                          <p class="header">Shouter Interests</p>
-                          <div class="interest">
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="right">
-                        <span class="close" onclick="close_modal('modal_4')">X</span>
-                        <div class="insights">
-                          <p class="header">Insights</p>
-                          <div class="justify_space">
-                            <p>Active Follower (Rate)</p>
-                            <p>2,380 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Engagement (Rate)</p>
-                            <p>350 (19.4%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
-                          </div>
-                        </div>
-                        <div class="audiences">
-                          <p class="header">Top Target Audience</p>
-                          <div class="left">
-                            <div class="justify_space">
-                              <p>Women</p>
-                              <p>54.2%</p>
-                            </div>
-                            <div class="justify_space">
-                              <p>Men</p>
-                              <p>45.8%</p>
-                            </div>
-                          </div>
-                          <div class="right">
-
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Shouter Card -->
-                <div class="shouter__card">
-                  <input type="checkbox" id="5">
-                  <label for="5">
-                    <div class="box">
-                      <div class="justify_space">
-                        <div class="recommended">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_star.png' %}" alt="">
-                          <span>Recommended</span>
-                        </div>
-                        <span class="tick_box_uncheck"></span>
-                        <span class="tick_box_check">
-                          <svg class="icon_check">
-                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="justify_space">
-                        <div class="price">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_shout_shouter_card.png' %}" alt="">
-                          <span>5,500</span>
-                        </div>
-                        <div class="social">
-                          <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
-                          <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="">
-                        </div>
-                      </div>
-                      <div class="info">
-                        <img class="shouter_img" src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                        <p class="name">Suttiphak Wuttimongkolchai</p>
-                        <p>Male | 25</p>
-                        <p>Chulalongkorn University</p>
-                        <div class="performance_lists">
-                          <!-- Follower -->
-                          <div class="performance">
-                            <span class="grey">Follower</span>
-                            <p>30,000</p>
-                          </div>
-                          <!-- Engagement -->
-                          <div class="performance">
-                            <span class="grey">Engagement %</span>
-                            <p>20%</p>
-                          </div>
-                          <!-- Reach -->
-                          <div class="performance">
-                            <span class="grey">Reach</span>
-                            <p>8,400</p>
-                          </div>
-                          <!-- CPR -->
-                          <div class="performance">
-                            <span class="grey">Cost Per Reach</span>
-                            <p>30 บาท</p>
-                          </div>
-                        </div>
-                      </div>
-                      <span class="insight" onclick="show_modal('modal_5')">View full insights</span>
-                    </div>
-                  </label>
-                  <div class="shouter__modal" id="modal_5">
-                    <div class="backdrop"></div>
-                    <div class="modal_card">
-                      <div class="left">
-                        <div class="bio">
-                          <img src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                          <div class="text">
-                            <p class="username">ppeeraratt</p>
-                            <p class="social">Instagram Business Account</p>
-                            <p class="tooltips">Insight และ Top Target Audience มาจาก Business Account API</p>
-                          </div>
-                        </div>
-                        <div class="box">
-                          <div class="text">
-                            <p class="number">200</p>
-                            <p class="info">Posts</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">2,300</p>
-                            <p class="info">Followers</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">1,200</p>
-                            <p class="info">Followings</p>
-                          </div>
-                        </div>
-                        <div class="images">
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                        </div>
-                        <div class="interests">
-                          <p class="header">Shouter Interests</p>
-                          <div class="interest">
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="right">
-                        <span class="close" onclick="close_modal('modal_5')">X</span>
-                        <div class="insights">
-                          <p class="header">Insights</p>
-                          <div class="justify_space">
-                            <p>Active Follower (Rate)</p>
-                            <p>2,380 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Engagement (Rate)</p>
-                            <p>350 (19.4%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
-                          </div>
-                        </div>
-                        <div class="audiences">
-                          <p class="header">Top Target Audience</p>
-                          <div class="left">
-                            <div class="justify_space">
-                              <p>Women</p>
-                              <p>54.2%</p>
-                            </div>
-                            <div class="justify_space">
-                              <p>Men</p>
-                              <p>45.8%</p>
-                            </div>
-                          </div>
-                          <div class="right">
-
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Shouter Card -->
-                <div class="shouter__card">
-                  <input type="checkbox" id="6">
-                  <label for="6">
-                    <div class="box">
-                      <div class="justify_space">
-                        <div class="recommended">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_star.png' %}" alt="">
-                          <span>Recommended</span>
-                        </div>
-                        <span class="tick_box_uncheck"></span>
-                        <span class="tick_box_check">
-                          <svg class="icon_check">
-                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="justify_space">
-                        <div class="price">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_shout_shouter_card.png' %}" alt="">
-                          <span>5,500</span>
-                        </div>
-                        <div class="social">
-                          <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
-                          <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="">
-                        </div>
-                      </div>
-                      <div class="info">
-                        <img class="shouter_img" src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                        <p class="name">Suttiphak Wuttimongkolchai</p>
-                        <p>Male | 25</p>
-                        <p>Chulalongkorn University</p>
-                        <div class="performance_lists">
-                          <!-- Follower -->
-                          <div class="performance">
-                            <span class="grey">Follower</span>
-                            <p>30,000</p>
-                          </div>
-                          <!-- Engagement -->
-                          <div class="performance">
-                            <span class="grey">Engagement %</span>
-                            <p>20%</p>
-                          </div>
-                          <!-- Reach -->
-                          <div class="performance">
-                            <span class="grey">Reach</span>
-                            <p>8,400</p>
-                          </div>
-                          <!-- CPR -->
-                          <div class="performance">
-                            <span class="grey">Cost Per Reach</span>
-                            <p>30 บาท</p>
-                          </div>
-                        </div>
-                      </div>
-                      <span class="insight" onclick="show_modal('modal_6')">View full insights</span>
-                    </div>
-                  </label>
-                  <div class="shouter__modal" id="modal_6">
-                    <div class="backdrop"></div>
-                    <div class="modal_card">
-                      <div class="left">
-                        <div class="bio">
-                          <img src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                          <div class="text">
-                            <p class="username">ppeeraratt</p>
-                            <p class="social">Instagram Business Account</p>
-                            <p class="tooltips">Insight และ Top Target Audience มาจาก Business Account API</p>
-                          </div>
-                        </div>
-                        <div class="box">
-                          <div class="text">
-                            <p class="number">200</p>
-                            <p class="info">Posts</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">2,300</p>
-                            <p class="info">Followers</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">1,200</p>
-                            <p class="info">Followings</p>
-                          </div>
-                        </div>
-                        <div class="images">
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                        </div>
-                        <div class="interests">
-                          <p class="header">Shouter Interests</p>
-                          <div class="interest">
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="right">
-                        <span class="close" onclick="close_modal('modal_6')">X</span>
-                        <div class="insights">
-                          <p class="header">Insights</p>
-                          <div class="justify_space">
-                            <p>Active Follower (Rate)</p>
-                            <p>2,380 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Engagement (Rate)</p>
-                            <p>350 (19.4%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
-                          </div>
-                        </div>
-                        <div class="audiences">
-                          <p class="header">Top Target Audience</p>
-                          <div class="left">
-                            <div class="justify_space">
-                              <p>Women</p>
-                              <p>54.2%</p>
-                            </div>
-                            <div class="justify_space">
-                              <p>Men</p>
-                              <p>45.8%</p>
-                            </div>
-                          </div>
-                          <div class="right">
-
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Shouter Card -->
-                <div class="shouter__card">
-                  <input type="checkbox" id="7">
-                  <label for="7">
-                    <div class="box">
-                      <div class="justify_space">
-                        <div class="recommended">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_star.png' %}" alt="">
-                          <span>Recommended</span>
-                        </div>
-                        <span class="tick_box_uncheck"></span>
-                        <span class="tick_box_check">
-                          <svg class="icon_check">
-                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="justify_space">
-                        <div class="price">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_shout_shouter_card.png' %}" alt="">
-                          <span>5,500</span>
-                        </div>
-                        <div class="social">
-                          <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
-                          <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="">
-                        </div>
-                      </div>
-                      <div class="info">
-                        <img class="shouter_img" src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                        <p class="name">Suttiphak Wuttimongkolchai</p>
-                        <p>Male | 25</p>
-                        <p>Chulalongkorn University</p>
-                        <div class="performance_lists">
-                          <!-- Follower -->
-                          <div class="performance">
-                            <span class="grey">Follower</span>
-                            <p>30,000</p>
-                          </div>
-                          <!-- Engagement -->
-                          <div class="performance">
-                            <span class="grey">Engagement %</span>
-                            <p>20%</p>
-                          </div>
-                          <!-- Reach -->
-                          <div class="performance">
-                            <span class="grey">Reach</span>
-                            <p>8,400</p>
-                          </div>
-                          <!-- CPR -->
-                          <div class="performance">
-                            <span class="grey">Cost Per Reach</span>
-                            <p>30 บาท</p>
-                          </div>
-                        </div>
-                      </div>
-                      <span class="insight" onclick="show_modal('modal_7')">View full insights</span>
-                    </div>
-                  </label>
-                  <div class="shouter__modal" id="modal_7">
-                    <div class="backdrop"></div>
-                    <div class="modal_card">
-                      <div class="left">
-                        <div class="bio">
-                          <img src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                          <div class="text">
-                            <p class="username">ppeeraratt</p>
-                            <p class="social">Instagram Business Account</p>
-                            <p class="tooltips">Insight และ Top Target Audience มาจาก Business Account API</p>
-                          </div>
-                        </div>
-                        <div class="box">
-                          <div class="text">
-                            <p class="number">200</p>
-                            <p class="info">Posts</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">2,300</p>
-                            <p class="info">Followers</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">1,200</p>
-                            <p class="info">Followings</p>
-                          </div>
-                        </div>
-                        <div class="images">
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                        </div>
-                        <div class="interests">
-                          <p class="header">Shouter Interests</p>
-                          <div class="interest">
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="right">
-                        <span class="close" onclick="close_modal('modal_7')">X</span>
-                        <div class="insights">
-                          <p class="header">Insights</p>
-                          <div class="justify_space">
-                            <p>Active Follower (Rate)</p>
-                            <p>2,380 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Engagement (Rate)</p>
-                            <p>350 (19.4%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
-                          </div>
-                        </div>
-                        <div class="audiences">
-                          <p class="header">Top Target Audience</p>
-                          <div class="left">
-                            <div class="justify_space">
-                              <p>Women</p>
-                              <p>54.2%</p>
-                            </div>
-                            <div class="justify_space">
-                              <p>Men</p>
-                              <p>45.8%</p>
-                            </div>
-                          </div>
-                          <div class="right">
-
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Shouter Card -->
-                <div class="shouter__card">
-                  <input type="checkbox" id="8">
-                  <label for="8">
-                    <div class="box">
-                      <div class="justify_space">
-                        <div class="recommended">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_star.png' %}" alt="">
-                          <span>Recommended</span>
-                        </div>
-                        <span class="tick_box_uncheck"></span>
-                        <span class="tick_box_check">
-                          <svg class="icon_check">
-                            <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="justify_space">
-                        <div class="price">
-                          <img src="{% static 'img/campaigns/shouter_selection/icon_shout_shouter_card.png' %}" alt="">
-                          <span>5,500</span>
-                        </div>
-                        <div class="social">
-                          <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
-                          <img src="{% static 'img/campaigns/icon_facebook.png' %}" alt="">
-                        </div>
-                      </div>
-                      <div class="info">
-                        <img class="shouter_img" src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                        <p class="name">Suttiphak Wuttimongkolchai</p>
-                        <p>Male | 25</p>
-                        <p>Chulalongkorn University</p>
-                        <div class="performance_lists">
-                          <!-- Follower -->
-                          <div class="performance">
-                            <span class="grey">Follower</span>
-                            <p>30,000</p>
-                          </div>
-                          <!-- Engagement -->
-                          <div class="performance">
-                            <span class="grey">Engagement %</span>
-                            <p>20%</p>
-                          </div>
-                          <!-- Reach -->
-                          <div class="performance">
-                            <span class="grey">Reach</span>
-                            <p>8,400</p>
-                          </div>
-                          <!-- CPR -->
-                          <div class="performance">
-                            <span class="grey">Cost Per Reach</span>
-                            <p>30 บาท</p>
-                          </div>
-                        </div>
-                      </div>
-                      <span class="insight" onclick="show_modal('modal_8')">View full insights</span>
-                    </div>
-                  </label>
-                  <div class="shouter__modal" id="modal_8">
-                    <div class="backdrop"></div>
-                    <div class="modal_card">
-                      <div class="left">
-                        <div class="bio">
-                          <img src="{% static 'img/campaigns/shouter_selection/sample_shouter.png' %}" alt="">
-                          <div class="text">
-                            <p class="username">ppeeraratt</p>
-                            <p class="social">Instagram Business Account</p>
-                            <p class="tooltips">Insight และ Top Target Audience มาจาก Business Account API</p>
-                          </div>
-                        </div>
-                        <div class="box">
-                          <div class="text">
-                            <p class="number">200</p>
-                            <p class="info">Posts</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">2,300</p>
-                            <p class="info">Followers</p>
-                          </div>
-                          <div class="text">
-                            <p class="number">1,200</p>
-                            <p class="info">Followings</p>
-                          </div>
-                        </div>
-                        <div class="images">
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                          <div class="image">
-                            <img src="{% static 'img/campaigns/shouter_selection/sample_photo.png' %}" alt="">
-                          </div>
-                        </div>
-                        <div class="interests">
-                          <p class="header">Shouter Interests</p>
-                          <div class="interest">
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                            <span>Beauty</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="right">
-                        <span class="close" onclick="close_modal('modal_8')">X</span>
-                        <div class="insights">
-                          <p class="header">Insights</p>
-                          <div class="justify_space">
-                            <p>Active Follower (Rate)</p>
-                            <p>2,380 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Engagement (Rate)</p>
-                            <p>350 (19.4%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
-                          </div>
-                        </div>
-                        <div class="audiences">
-                          <p class="header">Top Target Audience</p>
-                          <div class="left">
-                            <div class="justify_space">
-                              <p>Women</p>
-                              <p>54.2%</p>
-                            </div>
-                            <div class="justify_space">
-                              <p>Men</p>
-                              <p>45.8%</p>
-                            </div>
-                          </div>
-                          <div class="right">
-
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Story View</p>
-                            <p>550 (73%)</p>
-                          </div>
-                          <div class="justify_space">
-                            <p>Avg. Post Reach</p>
-                            <p>4,000</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  <div class="detail">
+                    <p>คุณได้เลือก Shouter เป็นจำนวน <span id="shouter_count_2">-</span> คน</p>
+                    <button class="btn__orange w100pc" type="submit" id="submit_button">ขั้นตอนถัดไป</button>
                   </div>
                 </div>
               </div>
             </div>
-          </section>li
+          </section>
         </div>
       </section>
     </form>

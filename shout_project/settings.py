@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'api',
     'brands',
     'campaigns',
+    'orders',
     'pages',
     'selections',
     'shouters',

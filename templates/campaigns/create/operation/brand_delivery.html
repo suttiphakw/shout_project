@@ -1,0 +1,359 @@
+{% extends "campaigns/_base/_base.html" %}
+{% load static %}
+{% load humanize %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block script %}
+  <!-- J query -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+  <!-- Main Script -->
+  <script src="{% static 'js/campaigns/create/operation/brand_delivery.js' %}"></script>
+  {% endblock %}
+  {% block title %} Create Campaign {% endblock %}
+</head>
+<body>
+  {% block content %}
+    <!-- Breadcrumb -->
+    <section class="campaign__create__breadcrumb">
+      <!--1-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Campaign Name</p>
+        </div>
+      </div>
+      <!--2-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Scope & Budget</p>
+        </div>
+      </div>
+      <!--3-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Content Type</p>
+        </div>
+      </div>
+      <!--4-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Product Detail</p>
+        </div>
+      </div>
+      <!--5-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Target Customer</p>
+        </div>
+      </div>
+      <!--6-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Shouter Selection</p>
+        </div>
+      </div>
+      <!--7-->
+      <div class="campaign__create__breadcrumb__active">
+        <div class="campaign__create__breadcrumb__number">
+          <p>7</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Timeline</p>
+        </div>
+      </div>
+      <!--8-->
+      <div class="campaign__create__breadcrumb__inactive">
+        <div class="campaign__create__breadcrumb__number">
+          <p>8</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Brief</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form -->
+    <form enctype="multipart/form-data" method="post" action="{% url 'create_operation_brand_delivery' campaign.id %}"> {% csrf_token %}
+      <!-- Right Bar -->  
+      <section class="campaign__create__rightbar">
+        <div class="campaign__create__rightbar__detail">
+          <div class="campaign__create__rightbar__detail__box">
+            <header>Campaign Name</header>
+            <!-- Budget -->
+            <div class="campaign__create__rightbar__detail__data budget">
+              <span class="bold">Budget</span>
+              <h4>{{ campaign.campaign_budget | intcomma}}</h4>
+            </div>
+            <!-- Social Media -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Social Media</span>
+              <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
+            </div>
+            <!-- Shouter Count -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>ได้ Shouter</span>
+              <p>{{ campaign.estimate_min_shouter | intcomma }} - {{ campaign.estimate_max_shouter | intcomma }} คน</p>
+            </div>
+            <!-- Estimated Reach -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Estimate Reach</span>
+              <p>{{ campaign.estimate_min_reach | intcomma }} - {{ campaign.estimate_max_reach | intcomma }} reach</p>
+            </div>
+            <!-- Cost Per Reach -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Cost Per Reach</span>
+              <p>{{ campaign.estimate_min_cpr | intcomma }} - {{ campaign.estimate_max_cpr | intcomma }} บาท</p>
+            </div>
+          </div>
+          <div class="campaign__create__rightbar__detail__box">
+            <header>Work Format</header>
+            <!-- รูปแบบโพส -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>รูปแบบโพส</span>
+              {% if campaign.campaign_work_type == 'story' %}
+                <p>Story</p>
+              {% elif campaign.campaign_work_type == 'post' %}
+                <p>Post</p>
+              {% else %}
+                <p>Story + Post</p>
+              {% endif %}
+            </div>
+            <!-- รูปแบบการบอกต่อ -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>รูปแบบการบอกต่อ</span>
+              {% if campaign.campaign_work_type == 'story' %}
+                {% if campaign.campaign_content_type_story == 'prepared_content' %}
+                  <p>Finished Content</p>
+                {% else %}
+                  <p>User Generated Content</p>
+                {% endif %}
+              {% elif campaign.campaign_work_type == 'post' %}
+                {% if campaign.campaign_content_type_post == 'single_post' %}
+                  <p>Single Post</p>
+                {% else %}
+                  <p>Multi Post</p>
+                {% endif %}
+              {% else %}
+                {% if campaign.campaign_content_type_story == 'prepared_content' and campaign.campaign_content_type_post == 'single_post' %}
+                  <p>FC Story + Single Post</p>
+                {% elif campaign.campaign_content_type_story == 'prepared_content' and campaign.campaign_content_type_post == 'multi_post' %}
+                  <p>FC Story + Multi Post</p>
+                {% elif campaign.campaign_content_type_story == 'user_generated_content' and campaign.campaign_content_type_post == 'single_post' %}
+                  <p>UGC Story + Single Post</p>
+                {% else %}
+                  <p>UGC Story + Multi Post</p>
+                {% endif %}
+              {% endif %}
+            </div>
+            <!-- จำนวน -->
+            <div class="campaign__create__rightbar__detail__data" style="display: none">
+              <span>จำนวน</span>
+              <p>-</p>
+            </div>
+          </div>
+          <div class="campaign__create__rightbar__detail__box">
+            <header>
+              <img src="{% static 'img/campaigns/icon_kpi_commitment.png' %}" alt="">
+              <span>KPI Commitment</span>
+            </header>
+            <!-- Commit At -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Commit At</span>
+              <p>-</p>
+            </div>
+          </div>
+        </div>
+        <div class="campaign__create__rightbar__button">
+          <button class="w100pc btn__orange btn__grey" type="submit" id="submit_button" disabled>ขั้นตอนถัดไป</button>
+        </div>
+      </section>
+
+      <!-- Content -->
+      <section class="campaign__create__content">
+        <div class="campaign__card width_create_campaign operation">
+          <!-- Header -->
+          <h6 class="campaign__create__content__header">Operation</h6>
+          <p class="campaign__create__content__subheader">รายละเอียดวิธีการและช่วงเวลาการดำเนินการ ตั้งแต่เริ่มต้นแคมเปญ จนจบแคมเปญ โปรดเลือกวิธีการและช่วงเวลาที่ต้องการ</p>
+        </div>
+
+        <div class="campaign__card width_create_campaign">
+          <div class="campaign__create__content__operation">
+            <div class="left">
+              <h6 class="campaign__create__content__header">วิธีการดำเนินงาน</h6>
+              <div class="campaign__create__content__operation__page">
+              
+                <!-- Brand Delivery -->
+                <a href="{% url 'create_operation_brand_delivery' campaign.id %}">
+                  <div class="campaign__create__content__operation__page__box__activate">
+                    <p>Brand Delivery</p>
+                    <span class="radio">
+                      <div class="radio_inside"></div>
+                    </span>
+                  </div>
+                </a>
+
+                <!-- Shout Delivery -->
+                <a href="{% url 'create_operation_shout_delivery' campaign.id %}">
+                  <div class="campaign__create__content__operation__page__box__inactivate">
+                    <p>Shout Delivery</p>
+                    <span class="radio">
+                      <div class="radio_inside"></div>
+                    </span>
+                  </div>
+                </a>
+
+                <!-- Shouter Self-Buy -->
+                <a href="{% url 'create_operation_self_buy' campaign.id %}">
+                  <div class="campaign__create__content__operation__page__box__inactivate">
+                    <p>Shouter Self-Buy</p>
+                    <span class="radio">
+                      <div class="radio_inside"></div>
+                    </span>
+                  </div>
+                </a>
+
+                <!-- Web / App -->
+                <a href="{% url 'create_operation_web_app' campaign.id %}">
+                  <div class="campaign__create__content__operation__page__box__inactivate">
+                    <p>ไม่มีการจัดส่งของ (Web/App)</p>
+                    <span class="radio">
+                      <div class="radio_inside"></div>
+                    </span>
+                  </div>
+                </a>
+
+                <!-- Shouter Go & Review-->
+                <a href="{% url 'create_operation_go_review' campaign.id %}">
+                  <div class="campaign__create__content__operation__page__box__inactivate">
+                    <p>Shouter Go & Review </p>
+                    <span class="radio">
+                      <div class="radio_inside"></div>
+                    </span>
+                  </div>
+                </a>
+               
+              </div>
+            </div>
+            
+            <!-- Brand Delivery -->
+            <div class="right">
+              <h6 class="campaign__create__content__header">Brand Delivery</h6>
+              <p class="campaign__create__content__subheader">
+                ทางแบรนด์จะเป็นคนส่งของให้ Shouters เอง เพื่อให้ทำการรีวิวหรือถ่ายทำ Content 
+                โดยให้แบรนด์จัดส่งหลังจากที่ Shouters ตอบรับงาน (Accept) และแจ้งที่อยู่จัดส่ง เมื่อจัดส่งแล้วให้กรอก Tracking No.
+              </p>
+              <div class="campaign__create__content__operation__input">
+                <!-- Picture -->
+                <div class="campaign__create__content__product__picture__input">
+                  <label for="operation_photo">
+                    <div class="campaign__create__content__product__picture__input__upload" id="upload_box_1">
+                      <img src="{% static 'img/campaigns/create/icon_upload.png' %}" alt="">
+                      <p>Upload Image or Video</p>
+                    </div>
+                    <div class="campaign__create__content__product__picture__input__preview" id="preview_box_1">
+                      <img id="preview_photo_1" alt="">
+                    </div>
+                  </label>
+                  <input type="file" id="operation_photo" name="operation_photo" accept="image/*" onchange="showPreview_1(event);" required>
+
+                  <div class="campaign__create__content__operation__input__text">
+                    <div class="campaign__create__content__operation__input__text__box">
+                      <label for="service_name">ชื่อสินค้าหรือบริการของคุณ <span>*</span></label>
+                      <input type="text" id="service_name" name="service_name" placeholder="ชื่อสินค้าหรือบริการ" required>
+                    </div>
+                    <div class="campaign__create__content__operation__input__text__box">
+                      <label for="service_price">ราคาสินค้า <span>*</span></label>
+                      <input type="number" id="service_price" name="service_price" placeholder="เช่น 1000" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+          <div class="campaign__create__content__operation__work">
+            <p>ขั้นตอนการทำงาน</p>
+            <img src="{% static 'img/campaigns/create/work_brand_delivery.png' %}" alt="">
+          </div>
+        </div>
+
+        <div class="campaign__card width_create_campaign operation">
+          <!-- Header -->
+          <h6 class="campaign__create__content__header">Timeline</h6>
+          <p class="campaign__create__content__subheader">ช่วงระยะเวลาของแคมเปญ ตั้งแต่เริ่มต้น Kick-Off จน Launch และปิดแคมเปญ โดยให้คุณ เลือก Launching Period (ช่วงวันโพสท์)</p>
+       
+          <div class="campaign__create__content__operation__timeline">
+
+            <div class="box">
+              <span class="circle" id="circle1"></span>
+              <img src="{% static 'img/campaigns/create/timeline/campaign_launch.png' %}" alt="" class="inactivate" id="img_1">
+              <label for="campaign_launch_date">เริ่มประกาศ</label>
+              <input type="date" id="campaign_launch_date" name="campaign_launch_date" disabled>
+            </div>
+
+            <div class="box">
+              <span class="circle" id="circle2"></span>
+              <img src="{% static 'img/campaigns/create/timeline/deliver_shouter.png' %}" alt="" class="inactivate" id="img_2">
+              <label for="deliver_shouter_date">ส่งของให้ Shouter</label>
+              <input type="date" id="deliver_shouter_date" name="deliver_shouter_date" disabled>
+            </div>
+
+            <div class="box">
+              <span class="circle" id="circle3"></span>
+              <img src="{% static 'img/campaigns/create/timeline/shouter_pickup.png' %}" alt="" class="inactivate" id="img_3">
+              <label for="shouter_pickup_date">Shouter รับของ</label>
+              <input type="date" id="shouter_pickup_date" name="shouter_pickup_date" disabled>
+            </div>
+
+            <div class="box">
+              <span class="circle" id="circle4"></span>
+              <img src="{% static 'img/campaigns/create/timeline/shouter_sent_draft.png' %}" alt="" class="inactivate" id="img_4">
+              <label for="shouter_sent_draft_date">Shouter ส่งดราฟท์ภายใน</label>
+              <input type="date" id="shouter_sent_draft_date" name="shouter_sent_draft_date" disabled>
+            </div>
+
+            <div class="box activate">
+              <img src="{% static 'img/campaigns/icon_rocket.png' %}" alt="">
+              <label for="shouter_post_date">เลือกวันที่ต้องการให้ Shouters โพสต์ <span>*</span></label>
+              <input type="date" id="shouter_post_date" name="shouter_post_date" required>
+            </div>
+
+            <div class="box">
+              <span class="circle" id="circle5"></span>
+              <img src="{% static 'img/campaigns/create/timeline/campaign_end.png' %}" alt="" class="inactivate" id="img_5">
+              <label for="campaign_end_date">จบแคมเปญ</label>
+              <input type="date" id="campaign_end_date" name="campaign_end_date" disabled>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    </form>
+  {% endblock %}
+</body>
+</html>

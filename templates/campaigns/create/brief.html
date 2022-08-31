@@ -1,0 +1,303 @@
+{% extends "campaigns/_base/_base.html" %}
+{% load static %}
+{% load humanize %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block script %}
+  <!-- J query -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+  <!-- Main Script -->
+  <script src="{% static 'js/campaigns/create/brief.js' %}"></script>
+  {% endblock %}
+  {% block title %} Create Campaign {% endblock %}
+</head>
+<body>
+  {% block content %}
+    <!-- Breadcrumb -->
+    <section class="campaign__create__breadcrumb">
+      <!--1-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Campaign Name</p>
+        </div>
+      </div>
+      <!--2-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Scope & Budget</p>
+        </div>
+      </div>
+      <!--3-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Content Type</p>
+        </div>
+      </div>
+      <!--4-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Product Detail</p>
+        </div>
+      </div>
+      <!--5-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Target Customer</p>
+        </div>
+      </div>
+      <!--6-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Shouter Selection</p>
+        </div>
+      </div>
+      <!--7-->
+      <div class="campaign__create__breadcrumb__finished">
+        <svg class="campaign__create__breadcrumb__icon">
+          <use xlink:href="{% static 'img/shouters/sprite.svg' %}#icon-checkmark"></use>
+        </svg>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Timeline</p>
+        </div>
+      </div>
+      <!--8-->
+      <div class="campaign__create__breadcrumb__active">
+        <div class="campaign__create__breadcrumb__number">
+          <p>8</p>
+        </div>
+        <div class="campaign__create__breadcrumb__text">
+          <p>Brief</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form -->
+    <form enctype="multipart/form-data" method="post" action="{% url 'create_brief' campaign.id %}"> {% csrf_token %}
+      <!-- Right Bar -->  
+      <section class="campaign__create__rightbar">
+        <div class="campaign__create__rightbar__detail">
+          <div class="campaign__create__rightbar__detail__box">
+            <header>Campaign Name</header>
+            <!-- Budget -->
+            <div class="campaign__create__rightbar__detail__data budget">
+              <span class="bold">Budget</span>
+              <h4>{{ campaign.campaign_budget | intcomma}}</h4>
+            </div>
+            <!-- Social Media -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Social Media</span>
+              <img src="{% static 'img/campaigns/icon_instagram.png' %}" alt="">
+            </div>
+            <!-- Shouter Count -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>ได้ Shouter</span>
+              <p>{{ campaign.estimate_min_shouter | intcomma }} - {{ campaign.estimate_max_shouter | intcomma }} คน</p>
+            </div>
+            <!-- Estimated Reach -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Estimate Reach</span>
+              <p>{{ campaign.estimate_min_reach | intcomma }} - {{ campaign.estimate_max_reach | intcomma }} reach</p>
+            </div>
+            <!-- Cost Per Reach -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Cost Per Reach</span>
+              <p>{{ campaign.estimate_min_cpr | intcomma }} - {{ campaign.estimate_max_cpr | intcomma }} บาท</p>
+            </div>
+          </div>
+          <div class="campaign__create__rightbar__detail__box">
+            <header>Work Format</header>
+            <!-- รูปแบบโพส -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>รูปแบบโพส</span>
+              {% if campaign.campaign_work_type == 'story' %}
+                <p>Story</p>
+              {% elif campaign.campaign_work_type == 'post' %}
+                <p>Post</p>
+              {% else %}
+                <p>Story + Post</p>
+              {% endif %}
+            </div>
+            <!-- รูปแบบการบอกต่อ -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>รูปแบบการบอกต่อ</span>
+              {% if campaign.campaign_work_type == 'story' %}
+                {% if campaign.campaign_content_type_story == 'prepared_content' %}
+                  <p>Finished Content</p>
+                {% else %}
+                  <p>User Generated Content</p>
+                {% endif %}
+              {% elif campaign.campaign_work_type == 'post' %}
+                {% if campaign.campaign_content_type_post == 'single_post' %}
+                  <p>Single Post</p>
+                {% else %}
+                  <p>Multi Post</p>
+                {% endif %}
+              {% else %}
+                {% if campaign.campaign_content_type_story == 'prepared_content' and campaign.campaign_content_type_post == 'single_post' %}
+                  <p>FC Story + Single Post</p>
+                {% elif campaign.campaign_content_type_story == 'prepared_content' and campaign.campaign_content_type_post == 'multi_post' %}
+                  <p>FC Story + Multi Post</p>
+                {% elif campaign.campaign_content_type_story == 'user_generated_content' and campaign.campaign_content_type_post == 'single_post' %}
+                  <p>UGC Story + Single Post</p>
+                {% else %}
+                  <p>UGC Story + Multi Post</p>
+                {% endif %}
+              {% endif %}
+            </div>
+            <!-- จำนวน -->
+            <div class="campaign__create__rightbar__detail__data" style="display: none">
+              <span>จำนวน</span>
+              <p>-</p>
+            </div>
+          </div>
+          <div class="campaign__create__rightbar__detail__box">
+            <header>
+              <img src="{% static 'img/campaigns/icon_kpi_commitment.png' %}" alt="">
+              <span>KPI Commitment</span>
+            </header>
+            <!-- Commit At -->
+            <div class="campaign__create__rightbar__detail__data">
+              <span>Commit At</span>
+              <p>-</p>
+            </div>
+          </div>
+        </div>
+        <div class="campaign__create__rightbar__button">
+          <button class="w100pc btn__orange btn__grey" type="submit" id="submit_button" disabled>ขั้นตอนถัดไป</button>
+        </div>
+      </section>
+
+      <!-- Content -->
+      <section class="campaign__create__content">
+        <!-- Brief -->
+        <div class="campaign__card width_create_campaign campaign__create__content__target">
+          <!-- Header -->
+          <h6 class="campaign__create__content__header">Brief</h6>
+          <p class="campaign__create__content__subheader">โปรดกรอก Brief รายละเอียดงานที่คุณต้องการ ให้ Shouters (ผู้บอกต่อ) ทำตาม</p>
+        </div>
+
+
+        <div class="campaign__card width_create_campaign campaign__create__content__target">
+          <div class="campaign__create__content__brief__detail">
+            <h6 class="campaign__create__content__header">รายละเอียดการทำงาน <span>*</span></h6>
+            <p class="campaign__create__content__subheader">อธิบายสิ่งที่ต้องการให้ Shouter (ผู้รับงาน) ทำในแคมเปญนี้ พร้อมอธิบายแนวทางการถ่ายรูป/วีดีโอที่ต้องการ</p>
+            <textarea class="brief" id="brief_detail" name="brief_detail"
+            placeholder="เช่น
+    - IG Prepared Story
+        - เลือกรูป จากรูปประกอบการทำงาน (ด้านล่าง) มา 1 รูป และนำไปโพสต์ลง IG Story 
+        พร้อมเขียนบอกต่อและแท็ก @Shoutsolution และใส่ Sticker Link : www.shoutsolution.com 
+            
+    - POST (เช่น IG Single Post, IG Multi Post, Facebook, Twitter) 
+        - ถ่ายรูป หรือวีดีโอการใช้งาน Product พร้อมเขียนบอกเล่าความรู้สึกหลังใช้ ลง 
+        IG Muli-Post และ IG Story และแชร์คอนเทนท์นั้นลง FB Post และ FB Story
+        และแท็ก @Shoutsolution 
+            - โดยรูป 3-4 รูป ประกอบไปด้วย
+                - รูปหน้าปก ถ่ายรูปคู่สินค้า และ/หรือ สินค้าเดี่ยวๆ
+                - รูปการใช้งานผลิตภัณฑ์
+                - รูปอื่นๆ ตามสไตล์ของแต่ละคนเลย
+            - เดินทางไปทานอาหารที่ร้าน ShoutSolution พร้อมรีวิวอาหารที่ทาน และบรรยากาศรอบๆ 
+            ลง IG Post 3-4รูป และ Tag @Shoutsolution 
+            
+    - VIDEO (เช่น IG Story, IG Reels, Tiktok)
+        - ทำคลิป Unbox รีวิวสินค้าสั้นๆ หรือ คลิปตอนใส่สินค้าไปคาเฟ่  ความยาวไม่เกิน 1 นาที 
+        พร้อมใส่เพลงประกอบ และ Filter ที่เข้ากับวีดีโอที่ลง โดยถ่ายให้เห็นสินค้าชัดเจน
+            - Mood & Tone : ให้ดู Minimal คุมโทน เป็นลุคสายคาเฟ่ สดใส (ไม่บังคับ)
+        - รีวิวแอป Shout ลง Tiktok ความยาวไม่เกิน 1 นาที โดยเป็นการเปิดแอป และอธิบาย
+        วิธีการใช้งานไปด้วยพร้อมแท็ก @Shoutsolution และเชิญชวนให้คนมาโหลด
+            "></textarea>
+          </div>
+        </div>
+
+        <!-- Picture -->
+        <div class="campaign__card width_create_campaign campaign__create__content__target">
+          <!-- Header -->
+          <h6 class="campaign__create__content__header">รูปประกอบการทำงาน</h6>
+          <p class="campaign__create__content__subheader">อัปโหลดรูปภาพ/วีดีโอตัวอย่างการทำงานที่ต้องการ (หากมี)</p>
+          <div class="campaign__create__content__brief__preview">
+            <!-- Preview Picture -->
+            <div class="campaign__create__content__product__picture__input">
+              <label for="brief_photo">
+                <div class="campaign__create__content__product__picture__input__upload" id="upload_box_1">
+                  <img src="{% static 'img/campaigns/create/icon_upload.png' %}" alt="">
+                  <p>Upload Image or Video</p>
+                </div>
+                <div class="campaign__create__content__product__picture__input__preview" id="preview_box_1">
+                  <img id="preview_photo_1" alt="">
+                </div>
+              </label>
+              <input type="file" id="brief_photo" name="brief_photo" accept="image/*" onchange="showPreview_1(event);">
+            </div>
+          </div>
+        </div>
+
+        <!-- Caption -->
+        <div class="campaign__card width_create_campaign campaign__create__content__target">
+          <div class="campaign__create__content__brief__detail">
+            <h6 class="campaign__create__content__header">รายละเอียดการทำงาน <span>*</span></h6>
+            <p class="campaign__create__content__subheader">อธิบายสิ่งที่ต้องการให้ Shouter (ผู้รับงาน) ทำในแคมเปญนี้ พร้อมอธิบายแนวทางการถ่ายรูป/วีดีโอที่ต้องการ</p>            
+            <textarea class="caption" id="brief_caption" name="brief_caption"
+            placeholder="เช่น 
+    - เขียนเชิญชวนให้คนคลิกซื้อ ในรูปเเบบไหนก็ได้ เช่น ใส่สรรพคุณ รีวิวการใช้งาน บอกราคา 
+    ข้อดีของสินค้า และปิดท้ายว่าหาซื้อได้ที่ไหน พร้อมติด Hashtag : #shoutsolution
+
+    - ตัวอย่างแคปชั่น (สามารถปรับได้) เช่น
+      - ผลิตภัณฑ์นี้สูตร Organic เหมาะกับคนผิวแห้ง และโดนแดดบ่อย 
+      เพราะให้ความชุ่นชื้นผิวได้ดีมาก ใครที่สนใจ ตอนนี้มีโปรโมชั่นซื้อ 2 แถม 1 อยู่นะ 
+      สามารถสั่งซื้อได้เลยที่ Shopee/ Lazada/ Line my shop ได้เลย 
+      #shoutsolution      
+            "></textarea>
+          </div>
+        </div>
+
+        <!-- Ref -->
+        <div class="campaign__card width_create_campaign campaign__create__content__target">
+          <div class="campaign__create__content__brief__detail">
+            <h6 class="campaign__create__content__header">รูปตัวอย่าง (Ref.) <span>*</span></h6>
+            <p class="campaign__create__content__subheader">รูปภาพตัวอย่างผลงานที่ต้องการ</p>            
+            <div class="campaign__create__content__brief__preview">
+              <!-- Preview Picture -->
+              <div class="campaign__create__content__product__picture__input">
+                <label for="brief_ref_photo">
+                  <div class="campaign__create__content__product__picture__input__upload" id="upload_box_2">
+                    <img src="{% static 'img/campaigns/create/icon_upload.png' %}" alt="">
+                    <p>Upload Image or Video</p>
+                  </div>
+                  <div class="campaign__create__content__product__picture__input__preview" id="preview_box_2">
+                    <img id="preview_photo_2" alt="">
+                  </div>
+                </label>
+                <input type="file" id="brief_ref_photo" name="brief_ref_photo" accept="image/*" onchange="showPreview_2(event);" required>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </form>
+  {% endblock %}
+</body>
+</html>

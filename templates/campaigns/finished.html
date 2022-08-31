@@ -1,5 +1,6 @@
 {% extends "brands/_base/_base.html" %}
 {% load static %}
+{% load humanize %}
 
 <!doctype html>
 <html lang="en">
@@ -75,102 +76,142 @@
     <!-- Draft -->
     <a href="{% url 'campaign_draft' %}">
       <div class="campaign__breadcrumb__box">
-        <p>แบบร่าง (1)</p>
+        <p>แบบร่าง ({{ campaign_draft_count|intcomma }})</p>
       </div>
     </a>
     <!-- In Progress -->
-    <a href="{% url 'campaign_in_progress' %}">
-      <div class="campaign__breadcrumb__box">
-        <p>ดำเนินการ (1)</p>
+    <a href="{% url 'campaign_in_progress' %}" class="activate">
+      <div class="campaign__breadcrumb__box activate">
+        <p>ดำเนินการ ({{ campaign_in_progress_count|intcomma }})</p>
       </div>
     </a>
     <!-- Finished -->
-    <a href="{% url 'campaign_finished' %}" class="activate">
-      <div class="campaign__breadcrumb__box activate">
-        <p>เสร็จสิ้น (0)</p>
+    <a href="{% url 'campaign_finished' %}">
+      <div class="campaign__breadcrumb__box">
+        <p>เสร็จสิ้น ({{ campaign_finished_count|intcomma }})</p>
       </div>
     </a>
   </section>
 
   <!-- Campaign Content -->
-  <!-- Test
-  <section class="campaign__content">
-    <div class="campaign__content__header">
-      <h6>Serb Product Launching</h6>
-      <span class="campaign__content__header__tag finished">เสร็จสิ้น</span>
-    </div>
-    <div class="campaign__content__detail">
-      <img src="{% static 'img/campaigns/serb_photo.png' %}" alt="">
-      <div class="campaign__content__detail__data">
-        <div class="campaign__content__detail__data__top">
-          <div class="campaign__content__detail__data__top__left">
-            <div class="campaign__content__detail__data__box">
-              <p class="header">Social Media</p>
-              <p>Social Media</p>
+  {% if campaigns.count == 0 %}
+    <!-- No Campaign -->
+    <section class="campaign__content__empty">
+      <img src="{% static 'img/campaigns/icon_campaign_empty.png' %}" alt="">
+      <p>ไม่มีแคมเปญที่กำลังดำเนินการอยู่</p>
+      <a href="{% url 'create_name' %}" class="none">
+        <button class="w300 btn__orange">สร้างแคมเปญเลย +</button>
+      </a>
+    </section>
+  {% endif %}
+  {% for campaign in campaigns %}
+    <section class="campaign__content">
+      <div class="campaign__content__header">
+        <h6>Serb Product Launching</h6>
+        <span class="campaign__content__header__tag finished">เสร็จสิ้น</span>
+      </div>
+      <div class="campaign__content__detail">
+        <img src="{% static 'img/campaigns/serb_photo.png' %}" alt="">
+        <div class="campaign__content__detail__data">
+            <div class="campaign__content__detail__data__top">
+              <div class="campaign__content__detail__data__top__left">
+                <div class="campaign__content__detail__data__box">
+                  <p class="header">Social Media</p>
+                  <div class="campaign__content__detail__data__box__icon">
+                    {% if campaign.campaign_is_fb %}
+                      <img src="{% static 'img/brands/icon_instagram.png' %}" alt="">
+                      <img src="{% static 'img/brands/icon_facebook.png' %}" alt="">
+                    {% else %}
+                      <img src="{% static 'img/brands/icon_instagram.png' %}" alt="">
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="campaign__content__detail__data__box">
+                  <p class="header">Work Format</p>
+                  {% if campaign.campaign_work_type == 'story' %}
+                    <p>Story Only</p>
+                  {% elif campaign.campaign_work_type == 'post' %}
+                    <p>Post Only</p>
+                  {% else %}
+                    <p>Story and Post</p>
+                  {% endif %}
+                </div>
+                <div class="campaign__content__detail__data__box">
+                  <p class="header">Content Type</p>
+                  {% if campaign.campaign_work_type == 'story' %}
+                    {% if campaign.campaign_content_type_story == 'prepared_content' %}
+                      <p>Finished Content</p>
+                    {% else %}
+                      <p>User Generated Content</p>
+                    {% endif %}
+                  {% elif campaign.campaign_work_type == 'post' %}
+                    {% if campaign.campaign_content_type_post == 'single_post' %}
+                      <p>Single Post</p>
+                    {% else %}
+                      <p>Multi Post</p>
+                    {% endif %}
+                  {% else %}
+                    {% if campaign.campaign_content_type_story == 'prepared_content' %}
+                      {% if campaign.campaign_content_type_post == 'single_post' %}
+                        <p>FC + Single Post</p>
+                      {% else %}
+                        <p>FC + Multi Post</p>
+                      {% endif %}
+                    {% else %}
+                      {% if campaign.campaign_content_type_post == 'single_post' %}
+                        <p>UGC + Single Post</p>
+                      {% else %}
+                        <p>UGC + Multi Post</p>
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="campaign__content__detail__data__top__right">
+                <div class="campaign__content__detail__data__box">
+                  <p class="header">Budget</p>
+                  <p>{{ campaign.campaign_budget|intcomma }} บาท</p>
+                </div>
+                <div class="campaign__content__detail__data__box">
+                  <p class="header">Shouters</p>
+                  <p>{{ campaign.estimate_min_shouter|intcomma }} - {{ campaign.estimate_max_shouter|intcomma }} คน</p>
+                </div>
+                <div class="campaign__content__detail__data__box">
+                  <p class="header">Est. Reach</p>
+                  <p>{{ campaign.estimate_min_reach|intcomma }} - {{ campaign.estimate_max_reach|intcomma }} reach</p>
+                </div>
+              </div>
             </div>
-            <div class="campaign__content__detail__data__box">
-              <p class="header">Work Format</p>
-              <p>Story Only</p>
-            </div>
-            <div class="campaign__content__detail__data__box">
-              <p class="header">Content Type</p>
-              <p>UGC Story</p>
+            <div class="campaign__content__detail__data__bottom">
+              <p>สถานะการจัดการแคมเปญ (Shouter Status)</p>
+              <div class="campaign__content__detail__data__bottom__status">
+                <div class="campaign__content__detail__data__bottom__status__box">
+                  <p>รอการตอบรับ</p>
+                  <span>0</span>
+                </div>
+                <div class="campaign__content__detail__data__bottom__status__box">
+                  <p>กำลังทำงาน</p>
+                  <span>0</span>
+                </div>
+                <div class="campaign__content__detail__data__bottom__status__box">
+                  <p>ตรวจงาน</p>
+                  <span>0</span>
+                </div>
+                <div class="campaign__content__detail__data__bottom__status__box">
+                  <p>เสร็จสิ้น</p>
+                  <span>0</span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="campaign__content__detail__data__top__right">
-            <div class="campaign__content__detail__data__box">
-              <p class="header">Budget</p>
-              <p>100,000 บาท</p>
-            </div>
-            <div class="campaign__content__detail__data__box">
-              <p class="header">Shouters</p>
-              <p>35 - 36 คน</p>
-            </div>
-            <div class="campaign__content__detail__data__box">
-              <p class="header">Est. Reach</p>
-              <p>200,000 - 300,000 reach</p>
-            </div>
-          </div>
-        </div>
-        <div class="campaign__content__detail__data__bottom">
-          <p>สถานะการจัดการแคมเปญ (Shouter Status)</p>
-          <div class="campaign__content__detail__data__bottom__status">
-            <div class="campaign__content__detail__data__bottom__status__box">
-              <p>รอการตอบรับ</p>
-              <span>0</span>
-            </div>
-            <div class="campaign__content__detail__data__bottom__status__box">
-              <p>กำลังทำงาน</p>
-              <span>20</span>
-            </div>
-            <div class="campaign__content__detail__data__bottom__status__box">
-              <p>ตรวจงาน</p>
-              <span>0</span>
-            </div>
-            <div class="campaign__content__detail__data__bottom__status__box">
-              <p>เสร็จสิ้น</p>
-              <span>0</span>
-            </div>
-          </div>
+        <div class="campaign__content__detail__summary">
+          <a href="" class="none">
+            <img src="{% static 'img/campaigns/icon_insight.png' %}" alt="">
+          </a>
         </div>
       </div>
-      <div class="campaign__content__detail__summary">
-        <a href="">
-          <img src="{% static 'img/campaigns/serb_graph.png' %}" alt="">
-        </a>
-      </div>
-    </div>
-  </section>
-  -->
-
-  <!-- No Campaign -->
-  <section class="campaign__content__empty">
-    <img src="{% static 'img/campaigns/icon_campaign_empty.png' %}" alt="">
-    <p>ไม่มีแคมเปญที่กำลังดำเนินการอยู่</p>
-    <a href="" class="none">
-      <button class="w300 btn__orange">สร้างแคมเปญเลย +</button>
-    </a>
-  </section>
+    </section>
+  {% endfor %}
 
 {% endblock %}
 </body>

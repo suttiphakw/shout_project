@@ -7,6 +7,7 @@ from campaigns.models import Campaign
 def api_name(request):
   campaign_name = request.POST.get('campaign_name', None)
   campaign = Campaign.objects.create(user=request.user, campaign_name=campaign_name)
+  campaign.campaign_phase = 1
   campaign.save()
   # Get ID
   campaign_id = campaign.id
@@ -36,6 +37,7 @@ def api_scope_budget(request, campaign_id):
       campaign.campaign_is_fb = campaign_is_fb
       campaign.campaign_budget = int(campaign_budget)
       campaign.campaign_work_type = campaign_work_type
+      campaign.campaign_phase = 2
       campaign.save()
 
       context = {
@@ -75,6 +77,7 @@ def api_content_type(request, campaign_id):
     campaign.campaign_fc_story_count = campaign_fc_story_count
     campaign.campaign_content_type_post = campaign_content_type_post
 
+  campaign.campaign_phase = 3
   campaign.save()
 
   context = {

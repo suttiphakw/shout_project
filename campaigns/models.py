@@ -46,11 +46,28 @@ class Campaign(models.Model):
   campaign_interest = ArrayField(models.CharField(max_length=200, null=True, blank=True), null=True, blank=True)
   shouter_gender = ArrayField(models.CharField(max_length=200, null=True, blank=True), null=True, blank=True)
 
+  # Operation
+  service_type = models.CharField(max_length=255, null=True, blank=True)
+  service_name = models.CharField(max_length=255, null=True, blank=True)
+  operation_photo = models.ImageField(upload_to='campaign/operation/', null=True, blank=True)
+  service_detail = models.JSONField(null=True, blank=True)
+  shouter_post_date = models.DateField(null=True, blank=True)
+
+  # Brief
+  brief_detail = models.CharField(max_length=1000, null=True, blank=True)
+  brief_photo = models.ImageField(upload_to='campaign/brief/photo/', null=True, blank=True)
+  brief_caption = models.CharField(max_length=1000, null=True, blank=True)
+  brief_ref_photo = models.ImageField(upload_to='campaign/brief/photo/', null=True, blank=True)
+
   # Estimate Time
   # estimate_time = models.IntegerField(null=True, blank=True)
 
   # Datetime
   campaign_created = models.DateTimeField(default=now, editable=False)
+
+  # status (draft, in_progress, finished)
+  campaign_status = models.CharField(max_length=255, null=True, blank=True, default='draft')
+  campaign_phase = models.IntegerField(null=True, blank=True)
 
   def __str__(self):
     return self.campaign_name
