@@ -238,6 +238,19 @@ def shouters_pre_save(sender, instance, *args, **kwargs):
             instance.ig_fb_price_story_post_ugc = response.get("ig_fb_price_story_post_ugc", None)
             # Audience Insight
             instance.ig_response_audience_insight = response.get("ig_response_audience_insight",  None)
+            instance.ig_audience_male_percent = response.get("ig_audience_male_percent",  None)
+            instance.ig_audience_female_percent = response.get("ig_audience_female_percent",  None)
+            instance.ig_audience_undefined_percent = response.get("ig_audience_undefined_percent",  None)
+            instance.ig_age_range_13_17 = response.get("ig_age_range_13_17",  None)
+            instance.ig_age_range_18_24 = response.get("ig_age_range_18_24",  None)
+            instance.ig_age_range_25_34 = response.get("ig_age_range_25_34",  None)
+            instance.ig_age_range_35_44 = response.get("ig_age_range_35_44",  None)
+            instance.ig_age_range_45_54 = response.get("ig_age_range_45_54",  None)
+            instance.ig_age_range_55_64 = response.get("ig_age_range_55_64",  None)
+            instance.ig_audience_location_1 = response.get("ig_audience_location_1",  None)
+            instance.ig_audience_location_1_percent = response.get("ig_audience_location_1_percent",  None)
+            instance.ig_audience_location_2 = response.get("ig_audience_location_2",  None)
+            instance.ig_audience_location_2_percent = response.get("ig_audience_location_2_percent",  None)
             # Save
             instance.is_refresh_shouters_data = False
             instance.save()

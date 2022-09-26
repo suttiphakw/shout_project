@@ -140,3 +140,28 @@ def get(data, shouter):
   shouter.is_insight = True
   save(gender, age, location, shouter)
   return True
+
+
+def get_refresh(data):
+  # gender
+  try:
+    gender_objects = data['data'][2]['values'][0]['value']
+    gender = get_gender(gender_objects)  # {'male': 29.02, 'female': 53.47, 'undefined': 17.51}
+  except KeyError:
+    return False
+
+  # age
+  try:
+    age_objects = data['data'][2]['values'][0]['value']
+    age = get_age(age_objects)  # {'age_13_17': 0.93, 'age_18_24': 64.18, 'age_25_34': 28.95, 'age_35_44': 3.37, 'age_45_54': 1.39, 'age_55_64': 1.19}
+  except KeyError:
+    return False
+
+  # location
+  try:
+    location_objects = data['data'][0]['values'][0]['value']
+    location = get_location(location_objects)  # {'location_1': {'Bangkok, Bangkok': 57.55}, 'location_2': {'Hat Yai, Songkhla': 22.34}}
+  except KeyError:
+    return False
+
+  return gender, age, location

@@ -7,6 +7,7 @@ from .utils.facebook import fb_api_bio, fb_api_permissions
 from .utils.instagram import ig_api_engagement, ig_api_active_follower, ig_api_bio, ig_api_media_objects, ig_api_audience_insight
 from .utils.predicted import predicted_post_reach, predicted_story_view
 from .utils.pricing.calculate_price import IGStoryFc, IGStoryUgc, IGPostFc, IGPostUgc
+from .utils.function import fn_audience
 
 
 def refresh_shouters(access_token, business_account_id):
@@ -141,7 +142,36 @@ def refresh_shouters(access_token, business_account_id):
 
   ##########################################################################################################################
   # IG INSIGHT
-  ig_response_audience_insight = ig_api_audience_insight.get(business_account_id=business_account_id, access_token=access_token)
+  data = ig_api_audience_insight.get(business_account_id=business_account_id, access_token=access_token)
+  ig_response_audience_insight = data
+  if data and data['data'] != []:
+    if data['data'][0]['values'][0]['value'] and data['data'][2]['values'][0]['value']:
+      gender, age, location = fn_audience.get_refresh(data)
+      ig_audience_male_percent = gender['male']
+      ig_audience_female_percent = gender['female']
+      ig_audience_undefined_percent = gender['undefined']
+
+      # age
+      ig_age_range_13_17 = age['age_13_17']
+      ig_age_range_18_24 = age['age_18_24']
+      ig_age_range_25_34 = age['age_25_34']
+      ig_age_range_35_44 = age['age_35_44']
+      ig_age_range_45_54 = age['age_45_54']
+      ig_age_range_55_64 = age['age_55_64']
+
+      # location
+      ig_audience_location_1 = list(location['location_1'].keys())[0]
+      ig_audience_location_1_percent = list(location['location_1'].values())[0]
+      ig_audience_location_2 = list(location['location_2'].keys())[0]
+      ig_audience_location_2_percent = list(location['location_2'].values())[0]
+    else:
+      ig_audience_male_percent = ig_audience_female_percent = ig_audience_undefined_percent = None
+      ig_age_range_13_17 = ig_age_range_18_24 = ig_age_range_25_34 = ig_age_range_35_44 = ig_age_range_45_54 = ig_age_range_55_64 = None
+      ig_audience_location_1 = ig_audience_location_1_percent = ig_audience_location_2 = ig_audience_location_2_percent = None
+  else:
+    ig_audience_male_percent = ig_audience_female_percent = ig_audience_undefined_percent = None
+    ig_age_range_13_17 = ig_age_range_18_24 = ig_age_range_25_34 = ig_age_range_35_44 = ig_age_range_45_54 = ig_age_range_55_64 = None
+    ig_audience_location_1 = ig_audience_location_1_percent = ig_audience_location_2 = ig_audience_location_2_percent = None
   ##########################################################################################################################
 
   response = {
@@ -194,9 +224,21 @@ def refresh_shouters(access_token, business_account_id):
     "ig_fb_price_story_post_ugc": ig_fb_price_story_post_ugc,
     ##########################################################################################################################
     # Audience Insight
-    "ig_response_audience_insight": ig_response_audience_insight
+    "ig_response_audience_insight": ig_response_audience_insight,
+    "ig_audience_male_percent": ig_audience_male_percent,
+    "ig_audience_female_percent": ig_audience_female_percent,
+    "ig_audience_undefined_percent": ig_audience_undefined_percent,
+    "ig_age_range_13_17": ig_age_range_13_17,
+    "ig_age_range_18_24": ig_age_range_18_24,
+    "ig_age_range_25_34": ig_age_range_25_34,
+    "ig_age_range_35_44": ig_age_range_35_44,
+    "ig_age_range_45_54": ig_age_range_45_54,
+    "ig_age_range_55_64": ig_age_range_55_64,
+    "ig_audience_location_1": ig_audience_location_1,
+    "ig_audience_location_1_percent": ig_audience_location_1_percent,
+    "ig_audience_location_2": ig_audience_location_2,
+    "ig_audience_location_2_percent": ig_audience_location_2_percent
     ##########################################################################################################################
   }
   # print(response)
   return response
-
